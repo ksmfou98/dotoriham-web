@@ -1,46 +1,16 @@
 import Logo from "components/common/Logo";
+import useResizeWidth from "hooks/common/useResizeWidth";
 import { palette } from "lib/styles/palette";
-import React, { useCallback, useRef, useState } from "react";
+import React from "react";
 import styled from "styled-components";
 
 function Sidebar() {
-  const sidebarRef = useRef<HTMLDivElement>(null);
-  const [isResizing, setIsResizing] = useState(false);
-  const [sidebarWidth, setSidebarWidth] = useState(250);
-
-  const startResizing = useCallback((mouseDownEvent) => {
-    setIsResizing(true);
-  }, []);
-
-  const stopResizing = useCallback(() => {
-    setIsResizing(false);
-  }, []);
-
-  const resize = useCallback(
-    (mouseMoveEvent) => {
-      if (isResizing && sidebarRef.current) {
-        setSidebarWidth(
-          mouseMoveEvent.clientX -
-            sidebarRef.current.getBoundingClientRect().left
-        );
-      }
-    },
-    [isResizing]
-  );
-
-  React.useEffect(() => {
-    window.addEventListener("mousemove", resize);
-    window.addEventListener("mouseup", stopResizing);
-    return () => {
-      window.removeEventListener("mousemove", resize);
-      window.removeEventListener("mouseup", stopResizing);
-    };
-  }, [resize, stopResizing]);
+  const { resizeRef, resizingWidth, startResizing } = useResizeWidth(250);
 
   return (
     <SidebarBlock
-      ref={sidebarRef}
-      width={sidebarWidth}
+      ref={resizeRef}
+      width={resizingWidth}
       onMouseDown={(e) => e.preventDefault()}
     >
       <Logo />
