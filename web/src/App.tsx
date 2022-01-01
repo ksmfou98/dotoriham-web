@@ -4,8 +4,7 @@ import Routing from "./routes/routing";
 
 function App() {
   return (
-    <div className="App">
-      App
+    <div>
       <GlobalStyles />
       <Routing />
     </div>
