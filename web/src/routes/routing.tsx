@@ -1,13 +1,13 @@
 import React from "react";
+import DotoriPage from "pages/DotoriPage";
+import LandingPage from "pages/LandingPage";
+import LoginPage from "pages/LoginPage";
+import MyPage from "pages/MyPage";
+import NotFoundPage from "pages/NotFoundPage";
+import SearchPage from "pages/SearchPage";
+import SignUpPage from "pages/SignUpPage";
+import TrashPage from "pages/TrashPage";
 import { Routes, Route } from "react-router-dom";
-import DotoriPage from "../pages/DotoriPage";
-import LandingPage from "../pages/LandingPage";
-import LoginPage from "../pages/LoginPage";
-import MyPage from "../pages/MyPage";
-import NotFoundPage from "../pages/NotFoundPage";
-import SearchPage from "../pages/SearchPage";
-import SignUpPage from "../pages/SignUpPage";
-import TrashPage from "../pages/TrashPage";
 import Path from "./path";
 
 const routingComponents = [
