@@ -1,14 +1,14 @@
 {
-  "name": "dotoriham",
+  "name": "web",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.1",
     "@testing-library/react": "^12.1.2",
     "@testing-library/user-event": "^13.5.0",
-    "@types/jest": "^27.0.3",
-    "@types/node": "^16.11.15",
-    "@types/react": "^17.0.37",
+    "@types/jest": "^27.4.0",
+    "@types/node": "^16.11.17",
+    "@types/react": "^17.0.38",
     "@types/react-dom": "^17.0.11",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
