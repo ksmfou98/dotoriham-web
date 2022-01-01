@@ -14,6 +14,7 @@ const routingComponents = [
   { path: "*", element: <NotFoundPage /> },
   { path: Path.HomePage, element: <LandingPage /> },
   { path: Path.DotoriPage, element: <DotoriPage /> },
+  { path: Path.DotoriFolderPage, element: <DotoriPage /> },
   { path: Path.TrashPage, element: <TrashPage /> },
   { path: Path.SearchPage, element: <SearchPage /> },
   { path: Path.MyPage, element: <MyPage /> },

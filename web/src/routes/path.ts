@@ -1,6 +1,7 @@
 enum Path {
   HomePage = "/",
-  DotoriPage = "/dotori/:folderId",
+  DotoriPage = "/dotori",
+  DotoriFolderPage = "/dotori/:folderId",
   TrashPage = "/trash",
   SearchPage = "/search",
   MyPage = "/my",
