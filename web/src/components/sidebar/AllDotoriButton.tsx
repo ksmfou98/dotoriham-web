@@ -19,7 +19,7 @@ const AllDotoriButtonBlock = styled.button`
   display: flex;
   height: 21px;
   width: 166px;
-  margin-bottom: 12px;
+  margin-bottom: 2px;
 `;
 
 const AllDotoriButtonIcon = styled.div`
@@ -34,7 +34,6 @@ const AllDotoriButtonText = styled.span<{ active: boolean }>`
   color: ${({ active }) => (active ? palette.primary : palette.grayDarker)};
   ${({ active }) => active && "font-weight: 500;"}
   font-size: 14px;
-  line-height: 1.5;
 `;
 
 export default AllDotoriButton;

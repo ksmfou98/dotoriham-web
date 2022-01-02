@@ -115,7 +115,7 @@ const FolderItemBlock = styled.div`
   min-width: 105px;
   max-width: 166px;
   height: 28px;
-  font-size: 12px;
+  font-size: 14px;
   padding: 5px 2px;
   border-radius: 4px;
   &:hover {
@@ -136,7 +136,7 @@ const FolderLeftBox = styled.div`
 const FolderTitle = styled.span`
   cursor: pointer;
   height: 28px;
-  line-height: 25px;
+  line-height: 28px;
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;

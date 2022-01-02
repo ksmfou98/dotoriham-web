@@ -46,6 +46,7 @@ const FolderListBox = styled.div`
   overflow: hidden auto;
   overflow-x: auto;
   margin-bottom: 24px;
+  margin-top: 8px;
   ${scrollbar}
 `;
 
