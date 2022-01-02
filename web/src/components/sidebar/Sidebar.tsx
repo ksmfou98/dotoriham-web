@@ -59,7 +59,7 @@ const LogoBox = styled.div`
 
 const FolderListBox = styled.div`
   flex: 1 auto;
-  height: 100%;
+  height: 0%;
   overflow: hidden auto;
   overflow-x: auto;
   margin-bottom: 24px;
