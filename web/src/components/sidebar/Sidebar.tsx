@@ -16,11 +16,12 @@ function Sidebar() {
 
   return (
     <SidebarBlock ref={resizeRef} width={resizingWidth}>
-      <Logo />
-      <SidebarMenuBox>
+      <LogoBox>
+        <Logo />
         <UserButton />
-        <SearchBar />
-      </SidebarMenuBox>
+      </LogoBox>
+
+      <SearchBar />
 
       <Divider />
 
@@ -49,9 +50,10 @@ const SidebarBlock = styled.aside<{ width: number }>`
   padding: 20px;
 `;
 
-const SidebarMenuBox = styled.div`
-  margin-top: 20px;
-  padding: 4px 8px;
+const LogoBox = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 `;
 
 const FolderListBox = styled.div`
