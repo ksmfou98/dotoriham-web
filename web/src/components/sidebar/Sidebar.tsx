@@ -22,9 +22,7 @@ function Sidebar() {
 const SidebarBlock = styled.aside<{ width: number }>`
   display: flex;
   flex-direction: column;
-  position: fixed;
-  left: 0;
-  top: 0;
+  position: relative;
   min-width: 150px;
   max-width: 40%;
   width: ${({ width }) => width}px;

@@ -4,10 +4,10 @@ import Routing from "./routes/Routing";
 
 function App() {
   return (
-    <div>
+    <>
       <GlobalStyles />
       <Routing />
-    </div>
+    </>
   );
 }
 
