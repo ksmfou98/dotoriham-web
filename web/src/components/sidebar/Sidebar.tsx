@@ -7,6 +7,7 @@ import AllDotoriButton from "./AllDotoriButton";
 import FolderList from "./FolderList";
 import { scrollbar } from "lib/styles/utilStyles";
 import AddFolderButton from "./AddFolderButton";
+import UserButton from "./UserButton";
 
 function Sidebar() {
   const { resizeRef, resizingWidth, startResizing } = useResizeWidth(250);
@@ -18,6 +19,11 @@ function Sidebar() {
       onMouseDown={(e) => e.preventDefault()}
     >
       <Logo />
+
+      <SidebarMenuBox>
+        <UserButton />
+      </SidebarMenuBox>
+
       <FolderListBox>
         <AllDotoriButton />
         <FolderList />
@@ -39,7 +45,13 @@ const SidebarBlock = styled.aside<{ width: number }>`
   background-color: ${palette.white};
   border-right: 1px solid ${palette.grayLight};
   z-index: 2;
-  padding: 20px 10px 40px 20px;
+  padding: 20px 10px 20px 20px;
+`;
+
+const SidebarMenuBox = styled.div`
+  margin-top: 10px;
+  margin-bottom: 4px;
+  padding: 4px 12px;
 `;
 
 const FolderListBox = styled.div`
