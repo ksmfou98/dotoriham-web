@@ -4,6 +4,8 @@ import useResizeWidth from "hooks/common/useResizeWidth";
 import { palette } from "lib/styles/palette";
 import styled from "styled-components";
 import AllDotoriButton from "./AllDotoriButton";
+import FolderList from "./FolderList";
+import { scrollbar } from "lib/styles/utilStyles";
 
 function Sidebar() {
   const { resizeRef, resizingWidth, startResizing } = useResizeWidth(250);
@@ -15,7 +17,10 @@ function Sidebar() {
       onMouseDown={(e) => e.preventDefault()}
     >
       <Logo />
-      <AllDotoriButton />
+      <FolderListBox>
+        <AllDotoriButton />
+        <FolderList />
+      </FolderListBox>
       <SidebarResizer onMouseDown={startResizing} />
     </SidebarBlock>
   );
@@ -33,6 +38,15 @@ const SidebarBlock = styled.aside<{ width: number }>`
   border-right: 1px solid ${palette.grayLight};
   z-index: 2;
   padding: 20px 10px 40px 20px;
+`;
+
+const FolderListBox = styled.div`
+  flex: 1 auto;
+  max-height: 100%;
+  overflow: hidden auto;
+  overflow-x: auto;
+  margin-bottom: 24px;
+  ${scrollbar}
 `;
 
 const SidebarResizer = styled.div`
