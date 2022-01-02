@@ -14,6 +14,14 @@ function UserButton() {
 const UserButtonStyled = styled.button`
   display: flex;
   align-items: center;
+  margin-bottom: 16px;
+  width: 100%;
+  height: 32px;
+  padding: 4px;
+  border-radius: 6px;
+  &:hover {
+    background-color: ${palette.hover0};
+  }
 `;
 
 const UserImage = styled.img`
