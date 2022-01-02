@@ -29,7 +29,7 @@ const SidebarIconNameStyled = styled.button`
   display: flex;
   height: 21px;
   width: 166px;
-  margin-bottom: 6px;
+  margin-bottom: 8px;
 `;
 
 const IconBox = styled.div`
