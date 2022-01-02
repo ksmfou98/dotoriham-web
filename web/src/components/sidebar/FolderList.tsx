@@ -69,7 +69,7 @@ function FolderList() {
                 onCollapse={onCollapse}
                 onExpand={onExpand}
               />
-              <FolderTitle>{item.data.title}</FolderTitle>
+              <FolderTitle>{item.data.name}</FolderTitle>
             </FolderLeftBox>
           </FolderItemBlock>
         </FolderItemWrapper>
