@@ -19,7 +19,7 @@ const AllDotoriButtonBlock = styled.button`
   display: flex;
   height: 21px;
   width: 166px;
-  margin-bottom: 2px;
+  margin-bottom: 4px;
 `;
 
 const AllDotoriButtonIcon = styled.div`

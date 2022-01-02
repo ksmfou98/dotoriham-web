@@ -6,6 +6,7 @@ import styled from "styled-components";
 import AllDotoriButton from "./AllDotoriButton";
 import FolderList from "./FolderList";
 import { scrollbar } from "lib/styles/utilStyles";
+import AddFolderButton from "./AddFolderButton";
 
 function Sidebar() {
   const { resizeRef, resizingWidth, startResizing } = useResizeWidth(250);
@@ -21,6 +22,7 @@ function Sidebar() {
         <AllDotoriButton />
         <FolderList />
       </FolderListBox>
+      <AddFolderButton />
       <SidebarResizer onMouseDown={startResizing} />
     </SidebarBlock>
   );
