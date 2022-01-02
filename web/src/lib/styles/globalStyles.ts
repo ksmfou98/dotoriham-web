@@ -109,6 +109,7 @@ video {
   border: 0;
   font-size: 100%;
   vertical-align: baseline;
+  font-family: "Noto Sans KR", sans-serif;
 }
 /* HTML5 display-role reset for older browsers */
 article,

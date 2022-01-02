@@ -1,8 +1,9 @@
+import React from "react";
 import Logo from "components/common/Logo";
 import useResizeWidth from "hooks/common/useResizeWidth";
 import { palette } from "lib/styles/palette";
-import React from "react";
 import styled from "styled-components";
+import AllDotoriButton from "./AllDotoriButton";
 
 function Sidebar() {
   const { resizeRef, resizingWidth, startResizing } = useResizeWidth(250);
@@ -14,6 +15,7 @@ function Sidebar() {
       onMouseDown={(e) => e.preventDefault()}
     >
       <Logo />
+      <AllDotoriButton />
       <SidebarResizer onMouseDown={startResizing} />
     </SidebarBlock>
   );

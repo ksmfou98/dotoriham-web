@@ -16,7 +16,6 @@ function Routing() {
     <Routes>
       <Route path={Path.LoginPage} element={<LoginPage />} />
       <Route path={Path.SignUpPage} element={<SignUpPage />} />
-      <Route path={Path.MyPage} element={<MyPage />} />
       <Route path={Path.HomePage} element={<LandingPage />} />
 
       <Route path={Path.HomePage} element={<SidebarRouteLayout />}>
@@ -24,6 +23,7 @@ function Routing() {
         <Route path={Path.DotoriFolderPage} element={<DotoriPage />} />
         <Route path={Path.TrashPage} element={<TrashPage />} />
         <Route path={Path.SearchPage} element={<SearchPage />} />
+        <Route path={Path.MyPage} element={<MyPage />} />
       </Route>
       <Route path="*" element={<NotFoundPage />} />
     </Routes>
