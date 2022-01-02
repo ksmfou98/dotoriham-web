@@ -1,4 +1,5 @@
 import Sidebar from "components/sidebar/Sidebar";
+import { scrollbar } from "lib/styles/utilStyles";
 import React from "react";
 import { Outlet } from "react-router-dom";
 import styled from "styled-components";
@@ -22,6 +23,7 @@ const SidebarRouteLayoutBlock = styled.div`
 const MainContent = styled.div`
   flex: 1 auto;
   overflow: auto;
+  ${scrollbar}
 `;
 
 export default SidebarRouteLayout;

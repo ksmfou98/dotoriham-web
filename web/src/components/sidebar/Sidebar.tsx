@@ -3,14 +3,19 @@ import Logo from "components/common/Logo";
 import useResizeWidth from "hooks/common/useResizeWidth";
 import { palette } from "lib/styles/palette";
 import styled from "styled-components";
-import AllDotoriButton from "./AllDotoriButton";
 import FolderList from "./FolderList";
 import { scrollbar } from "lib/styles/utilStyles";
 import AddFolderButton from "./AddFolderButton";
 import UserButton from "./UserButton";
 import SearchBar from "./SearchBar";
 import DividerLine from "components/common/DividerLine";
-import TrashBoxButton from "./TrashBoxButton";
+import SidebarIconName from "./SidebarIconName";
+import {
+  ListSelectedIcon,
+  ListUnSelectedIcon,
+  SelectedTrashIcon,
+  UnselectedTrashIcon,
+} from "assets/icons";
 
 function Sidebar() {
   const { resizeRef, resizingWidth, startResizing } = useResizeWidth(250);
@@ -24,9 +29,18 @@ function Sidebar() {
 
       <SearchBar />
       <Divider />
+      <SidebarIconName
+        name="휴지통"
+        activeIcon={<SelectedTrashIcon />}
+        unActiveIcon={<UnselectedTrashIcon />}
+      />
 
-      <TrashBoxButton />
-      <AllDotoriButton />
+      <SidebarIconName
+        isActive
+        name="모든 도토리"
+        activeIcon={<ListSelectedIcon />}
+        unActiveIcon={<ListUnSelectedIcon />}
+      />
       <FolderListBox>
         <FolderList />
       </FolderListBox>
