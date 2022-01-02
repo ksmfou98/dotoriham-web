@@ -1,7 +1,7 @@
 import { ListSelectedIcon, ListUnSelectedIcon } from "assets/icons";
 import { palette } from "lib/styles/palette";
 import React from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 function AllDotoriButton() {
   const isActive = true;
@@ -19,7 +19,7 @@ const AllDotoriButtonBlock = styled.button`
   display: flex;
   height: 21px;
   width: 166px;
-  margin-bottom: 4px;
+  margin-bottom: 6px;
 `;
 
 const AllDotoriButtonIcon = styled.div`
@@ -31,9 +31,18 @@ const AllDotoriButtonIcon = styled.div`
 
 const AllDotoriButtonText = styled.span<{ active: boolean }>`
   height: 100%;
-  color: ${({ active }) => (active ? palette.primary : palette.grayDarker)};
-  ${({ active }) => active && "font-weight: 500;"}
   font-size: 14px;
+  line-height: 21px;
+  ${({ active }) =>
+    active
+      ? css`
+          color: ${palette.primary};
+          font-weight: 500;
+        `
+      : css`
+          color: #9d9c9c;
+          font-weight: 400;
+        `}
 `;
 
 export default AllDotoriButton;

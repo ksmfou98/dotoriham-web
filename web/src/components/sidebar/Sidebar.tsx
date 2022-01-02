@@ -10,6 +10,7 @@ import AddFolderButton from "./AddFolderButton";
 import UserButton from "./UserButton";
 import SearchBar from "./SearchBar";
 import DividerLine from "components/common/DividerLine";
+import TrashBoxButton from "./TrashBoxButton";
 
 function Sidebar() {
   const { resizeRef, resizingWidth, startResizing } = useResizeWidth(250);
@@ -22,11 +23,11 @@ function Sidebar() {
       </LogoBox>
 
       <SearchBar />
-
       <Divider />
 
+      <TrashBoxButton />
+      <AllDotoriButton />
       <FolderListBox>
-        <AllDotoriButton />
         <FolderList />
       </FolderListBox>
 
@@ -58,7 +59,7 @@ const LogoBox = styled.div`
 
 const FolderListBox = styled.div`
   flex: 1 auto;
-  max-height: 100%;
+  height: 100%;
   overflow: hidden auto;
   overflow-x: auto;
   margin-bottom: 24px;
