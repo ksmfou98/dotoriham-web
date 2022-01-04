@@ -32,6 +32,7 @@ const SearchInput = styled.input`
   border: none;
   background-color: transparent;
   height: 100%;
+  width: 100%;
 `;
 
 export default SearchBar;
