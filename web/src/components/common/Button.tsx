@@ -12,15 +12,15 @@ interface ButtonStyledProps {
 interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,
     ButtonStyledProps {
-  label: string;
+  children: React.ReactNode;
 }
 
 function Button({
-  label,
   variant,
   width,
   height,
   borderRadius = "6px",
+  children,
   ...rest
 }: ButtonProps) {
   return (
@@ -31,7 +31,7 @@ function Button({
       borderRadius={borderRadius}
       {...rest}
     >
-      {label}
+      {children}
     </ButtonStyled>
   );
 }
@@ -40,7 +40,6 @@ const ButtonStyled = styled.button<ButtonStyledProps>`
   width: ${({ width }) => width};
   height: ${({ height }) => height};
   border-radius: ${({ borderRadius }) => borderRadius};
-  line-height: 1.5;
   font-size: 14px;
   ${({ variant }) => {
     switch (variant) {
@@ -60,7 +59,7 @@ const ButtonStyled = styled.button<ButtonStyledProps>`
           color: ${palette.primaryDark};
           border: 1px solid ${palette.primary};
           &:hover {
-            background-color: #f8f8f8;
+            background-color: ${palette.hover1};
           }
         `;
       case "tertiary":

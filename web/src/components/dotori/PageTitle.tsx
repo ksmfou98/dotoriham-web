@@ -1,18 +1,18 @@
 import React from "react";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import PagePath from "./PagePath";
-import { palette } from "lib/styles/palette";
 import { Peoples20Icon, Symbol20Icon } from "assets/icons";
+import Button from "components/common/Button";
 
 function PageTitle() {
   return (
     <PageTitleBlock>
       <PagePath />
       <TitleRightBox>
-        <TitleButton variant="primary">
+        <TitleButton width="75px" height="30px" variant="primary">
           <Peoples20Icon /> 초대
         </TitleButton>
-        <TitleButton variant="secondary">
+        <TitleButton width="75px" height="30px" variant="secondary">
           <Symbol20Icon /> 추가
         </TitleButton>
       </TitleRightBox>
@@ -31,43 +31,14 @@ const TitleRightBox = styled.div`
   align-items: center;
 `;
 
-const TitleButton = styled.button<{ variant: "primary" | "secondary" }>`
-  width: 75px;
-  height: 30px;
+const TitleButton = styled(Button)`
   padding-right: 5px;
-  border-radius: 6px;
   margin-right: 8px;
-  background-color: ${palette.primary};
-  color: ${palette.white};
   display: flex;
   align-items: center;
   justify-content: center;
   font-weight: 700;
-  ${({ variant }) => {
-    switch (variant) {
-      case "primary":
-        return css`
-          background-color: ${palette.primary};
-          color: ${palette.white};
-          font-weight: 500;
-          border: none;
-          &:hover {
-            background-color: ${palette.primaryDark};
-          }
-        `;
-      case "secondary":
-        return css`
-          background-color: ${palette.white};
-          color: ${palette.primaryDark};
-          border: 1px solid ${palette.primary};
-          &:hover {
-            background-color: #f8f8f8;
-          }
-        `;
-      default:
-        return css``;
-    }
-  }}
+  font-size: 12px;
 `;
 
 export default PageTitle;

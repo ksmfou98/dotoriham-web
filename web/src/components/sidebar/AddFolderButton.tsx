@@ -4,12 +4,9 @@ import styled from "styled-components";
 
 function AddFolderButton() {
   return (
-    <AddFolderButtonStyled
-      variant="primary"
-      label="폴더 추가"
-      width="100%"
-      height="40px"
-    />
+    <AddFolderButtonStyled variant="primary" width="100%" height="40px">
+      폴더 추가
+    </AddFolderButtonStyled>
   );
 }
 
