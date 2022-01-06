@@ -24,6 +24,7 @@ const PageTitleBlock = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  margin-bottom: 28px;
 `;
 
 const TitleRightBox = styled.div`
