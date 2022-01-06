@@ -23,7 +23,7 @@ const SidebarRouteLayoutBlock = styled.div`
 const MainContent = styled.div`
   flex: 1 auto;
   overflow: auto;
-  padding: 20px;
+  padding: 10px 25px;
   ${scrollbar}
 `;
 

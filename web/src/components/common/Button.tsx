@@ -3,7 +3,7 @@ import React from "react";
 import styled, { css } from "styled-components";
 
 interface ButtonStyledProps {
-  variant: "primary" | "secondary" | "tertiary";
+  variant: "primary" | "secondary" | "tertiary" | "quaternary";
   width: string;
   height: string;
   borderRadius?: string;
@@ -57,10 +57,19 @@ const ButtonStyled = styled.button<ButtonStyledProps>`
       case "secondary":
         return css`
           background-color: ${palette.white};
+          color: ${palette.primaryDark};
+          border: 1px solid ${palette.primary};
+          &:hover {
+            background-color: #f8f8f8;
+          }
+        `;
+      case "tertiary":
+        return css`
+          background-color: ${palette.white};
           color: ${palette.grayDarkest};
           border: 1px solid ${palette.gray};
         `;
-      case "tertiary":
+      case "quaternary":
         return css`
           background-color: ${palette.white};
           color: ${palette.grayDarkest};
