@@ -1,7 +1,8 @@
+import AuthTemplate from "components/auth/AuthTemplate";
 import React from "react";
 
 function LoginPage() {
-  return <div>LoginPage</div>;
+  return <AuthTemplate AuthType="login">LoginPage</AuthTemplate>;
 }
 
 export default LoginPage;
