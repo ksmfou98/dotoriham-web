@@ -7,7 +7,7 @@ export interface ILoginRequest {
   image: string;
   name: string;
   socialType: ISocialType;
-  fcmToken: string | null;
+  fcmToken: string;
 }
 
 export interface ILoginResponse {
@@ -21,5 +21,5 @@ export interface ILoginResponse {
   accessToken: string;
   refreshToken: string;
   isRegisterd: boolean;
-  fcmToken: string | null;
+  fcmToken: string;
 }
