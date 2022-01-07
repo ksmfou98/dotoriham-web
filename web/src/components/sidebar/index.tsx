@@ -28,7 +28,7 @@ function Sidebar() {
       </LogoBox>
 
       <SearchBar />
-      <Divider />
+      <Divider width="100%" color={palette.border0} />
       <SidebarIconName
         name="휴지통"
         activeIcon={<SelectedTrashIcon />}

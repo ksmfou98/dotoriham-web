@@ -1,15 +1,19 @@
-import { palette } from "lib/styles/palette";
 import React from "react";
 import styled from "styled-components";
 
-function DividerLine({ ...rest }) {
-  return <DividerLineStyled {...rest} />;
+interface DividerLineProps {
+  width: string;
+  color: string;
 }
 
-const DividerLineStyled = styled.div`
-  width: 100%;
+function DividerLine({ color, width, ...rest }: DividerLineProps) {
+  return <DividerLineStyled color={color} width={width} {...rest} />;
+}
+
+const DividerLineStyled = styled.div<DividerLineProps>`
+  width: ${({ width }) => width};
   height: 1px;
-  background-color: ${palette.border0};
+  background-color: ${({ color }) => color};
 `;
 
 export default DividerLine;
