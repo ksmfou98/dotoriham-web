@@ -1,12 +1,13 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { rootState } from "stores";
+import { ISocialType } from "types/auth";
 
 export interface IUserState {
   name: string;
   nickname: string;
   email: string;
-  profileImg: string;
-  socialType: "google" | null;
+  image: string;
+  socialType: ISocialType;
   remindCycle: number;
   remindToggle: boolean;
   accessToken: string;
@@ -18,7 +19,7 @@ const initialState: IUserState = {
   name: "",
   nickname: "",
   email: "",
-  profileImg: "",
+  image: "",
   socialType: null,
   remindCycle: 7,
   remindToggle: false,
