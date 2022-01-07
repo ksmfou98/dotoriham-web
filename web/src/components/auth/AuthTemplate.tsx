@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { AuthType } from "types/auth";
 import AuthTitle from "./AuthTitle";
+import GoogleLoginButton from "./GoogleLoginButton";
 
 interface AuthTemplateProps {
   children: React.ReactNode;
@@ -12,7 +13,10 @@ function AuthTemplate({ children, AuthType }: AuthTemplateProps) {
   return (
     <>
       <AuthTitle AuthType={AuthType} />
-      <AuthInner>{children}</AuthInner>
+      <AuthInner>
+        <GoogleLoginButton />
+        {children}
+      </AuthInner>
     </>
   );
 }
