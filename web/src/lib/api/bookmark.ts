@@ -1,3 +1,4 @@
+import { ItemId } from "@atlaskit/tree";
 import { IBookmarkGetResponse } from "types/bookmark";
 import client from "./client";
 
@@ -28,15 +29,16 @@ export const getSearchBookmarkAPI = async (
   return response.data;
 };
 
-// 모든 도토리 북마크 조회
-export const getAllBookmarkAPI = async (
+// 북마크 조회  folderId가 main 이면 모든 북마크 조회
+export const getBookmarkAPI = async (
+  folderId: ItemId,
   page: number,
   size: number,
   sort: string,
   remind: boolean
 ) => {
   const response = await client.get<IBookmarkGetResponse>(
-    `/api/v1/page/main?page=${page}&size=${size}&sort=${sort}&remind=${remind}`
+    `/api/v1/page/${folderId}?page=${page}&size=${size}&sort=${sort}&remind=${remind}`
   );
   return response.data;
 };
