@@ -15,9 +15,12 @@ export interface IBookmark {
   title: string;
   userId: number;
   image: string;
-  checked: boolean;
   folderName: string;
   folderEmoji: string;
+}
+
+export interface IBookmarkItem extends IBookmark {
+  checked: boolean;
 }
 
 export type BookmarkSortType = {
@@ -35,7 +38,7 @@ export type BookmarkPageableType = {
   unpaged: boolean;
 };
 
-export interface IBookmarkGetResponse {
+export interface IBookmarkListResponse {
   content: IBookmark[];
   empty: boolean;
   first: true;

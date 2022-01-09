@@ -1,5 +1,5 @@
 import { ItemId } from "@atlaskit/tree";
-import { IBookmarkGetResponse } from "types/bookmark";
+import { IBookmarkListResponse } from "types/bookmark";
 import client from "./client";
 
 // 휴지통 북마크 조회
@@ -9,7 +9,7 @@ export const getTrashBookmarkAPI = async (
   sort: string,
   remind: boolean
 ) => {
-  const response = await client.get<IBookmarkGetResponse>(
+  const response = await client.get<IBookmarkListResponse>(
     `/api/v1/page/trash?page=${page}&size=${size}&sort=${sort}&remind=${remind}`
   );
   return response.data;
@@ -23,7 +23,7 @@ export const getSearchBookmarkAPI = async (
   sort: string,
   remind: boolean
 ) => {
-  const response = await client.get<IBookmarkGetResponse>(
+  const response = await client.get<IBookmarkListResponse>(
     `/api/v1/page/search/${keyword}?page=${page}&size=${size}&sort=${sort}&remind=${remind}`
   );
   return response.data;
@@ -37,7 +37,7 @@ export const getBookmarkAPI = async (
   sort: string,
   remind: boolean
 ) => {
-  const response = await client.get<IBookmarkGetResponse>(
+  const response = await client.get<IBookmarkListResponse>(
     `/api/v1/page/${folderId}?page=${page}&size=${size}&sort=${sort}&remind=${remind}`
   );
   return response.data;
