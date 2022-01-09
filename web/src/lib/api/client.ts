@@ -6,7 +6,7 @@ const client = axios.create({
   withCredentials: true,
 });
 
-client.defaults.baseURL = `${SERVER_URL}/api/`;
+client.defaults.baseURL = `${SERVER_URL}`;
 
 client.interceptors.request.use(
   (config) => {
