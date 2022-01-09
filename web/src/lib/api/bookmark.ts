@@ -13,3 +13,17 @@ export const getTrashBookmarkAPI = async (
   );
   return response.data;
 };
+
+// 검색 결과 북마크 조회
+export const getSearchBookmarkAPI = async (
+  keyword: string,
+  page: number,
+  size: number,
+  sort: string,
+  remind: boolean
+) => {
+  const response = await client.get<IBookmarkGetResponse>(
+    `/api/v1/page/search/${keyword}?page=${page}&size=${size}&sort=${sort}&remind=${remind}`
+  );
+  return response.data;
+};
