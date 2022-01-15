@@ -68,6 +68,7 @@ function FolderList() {
         >
           <FolderItemBlock
             onMouseDown={onMouseDownFolder}
+            onMouseUp={() => setIsDragging(false)}
             onClick={() =>
               item.children.length > 0 && item.isExpanded
                 ? onCollapse(item.id)
@@ -80,9 +81,7 @@ function FolderList() {
                 onCollapse={onCollapse}
                 onExpand={onExpand}
               />
-              <FolderTitle onMouseDown={(e) => e.stopPropagation()}>
-                {item.data.name}
-              </FolderTitle>
+              <FolderTitle>{item.data.name}</FolderTitle>
             </FolderLeftBox>
           </FolderItemBlock>
         </FolderItemWrapper>
