@@ -1,4 +1,4 @@
-import React, { ReactElement, useState } from "react";
+import React, { ReactElement, useRef, useState } from "react";
 import Tree, {
   ItemId,
   moveItemOnTree,
@@ -12,9 +12,18 @@ import styled from "styled-components";
 import FolderItemIcon from "components/sidebar/FolderItemIcon";
 import initialFolderState from "./mockData.json";
 import { palette } from "lib/styles/palette";
+import { scrollbar } from "lib/styles/utilStyles";
 
 function FolderList() {
   const [folders, setFolders] = useState<TreeData>(initialFolderState);
+  const folderBoxRef = useRef<HTMLDivElement>(null);
+  const [isDragging, setIsDragging] = useState(false);
+  const [folderBoxHeight, setFolderBoxHeight] = useState(0);
+
+  const onMouseDownFolder = () => {
+    setIsDragging(true);
+    setFolderBoxHeight(folderBoxRef.current?.clientHeight || 0);
+  };
 
   // 폴더 확장
   const onExpandFolder = (itemId: ItemId) => {
@@ -37,6 +46,7 @@ function FolderList() {
   ) => {
     if (!destination) return;
     const newTree = moveItemOnTree(folders, source, destination);
+    setIsDragging(false);
     // console.log('새로운 부모Id', destination);
     // console.log('기존 부모Id', source);
     setFolders(newTree);
@@ -57,6 +67,7 @@ function FolderList() {
           {...provided.dragHandleProps}
         >
           <FolderItemBlock
+            onMouseDown={onMouseDownFolder}
             onClick={() =>
               item.children.length > 0 && item.isExpanded
                 ? onCollapse(item.id)
@@ -69,7 +80,9 @@ function FolderList() {
                 onCollapse={onCollapse}
                 onExpand={onExpand}
               />
-              <FolderTitle>{item.data.name}</FolderTitle>
+              <FolderTitle onMouseDown={(e) => e.stopPropagation()}>
+                {item.data.name}
+              </FolderTitle>
             </FolderLeftBox>
           </FolderItemBlock>
         </FolderItemWrapper>
@@ -78,7 +91,11 @@ function FolderList() {
   };
 
   return (
-    <FolderListWrapper>
+    <FolderListWrapper
+      folderBoxHeight={folderBoxHeight}
+      isDragging={isDragging}
+      ref={folderBoxRef}
+    >
       <Tree
         tree={folders}
         renderItem={renderFolderItem}
@@ -94,8 +111,16 @@ function FolderList() {
   );
 }
 
-const FolderListWrapper = styled.div`
+const FolderListWrapper = styled.div<{
+  folderBoxHeight: number;
+  isDragging: boolean;
+}>`
+  ${(props) => props.isDragging && `height: ${props.folderBoxHeight}px;`}
   position: relative;
+  max-height: 540px;
+  overflow: hidden auto;
+  overflow-x: auto;
+  ${scrollbar}
 `;
 
 const FolderItemWrapper = styled.div`

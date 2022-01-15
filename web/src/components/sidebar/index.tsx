@@ -2,7 +2,6 @@ import React from "react";
 import { palette } from "lib/styles/palette";
 import styled from "styled-components";
 import FolderList from "./FolderList";
-import { scrollbar } from "lib/styles/utilStyles";
 import AddFolderButton from "./AddFolderButton";
 import SidebarIconName from "./SidebarIconName";
 import {
@@ -46,11 +45,7 @@ const SidebarBlock = styled.aside`
 
 const FolderListBox = styled.div`
   flex: 1 auto;
-  height: 540px;
-  overflow: hidden auto;
-  overflow-x: auto;
   margin-bottom: 24px;
-  ${scrollbar}
 `;
 
 export default Sidebar;
