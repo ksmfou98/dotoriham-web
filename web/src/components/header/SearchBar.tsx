@@ -13,13 +13,13 @@ function SearchBar() {
   );
 }
 
-const SearchBarStyled = styled.div`
+const SearchBarStyled = styled.form`
   display: flex;
   align-items: center;
   background-color: rgba(72, 191, 145, 0.1);
   border-radius: 6px;
+  width: 570px;
   height: 32px;
-  margin-top: 16px;
   padding: 4px 8px;
 `;
 
@@ -33,6 +33,7 @@ const SearchInput = styled.input`
   background-color: transparent;
   height: 100%;
   width: 100%;
+  font-size: 12px;
 `;
 
 export default SearchBar;

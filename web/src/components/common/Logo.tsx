@@ -21,10 +21,11 @@ const LogoBlock = styled.div`
 const LogoText = styled.span`
   font-family: Cafe24Ssurround;
   color: ${palette.link0};
-  font-size: 17px;
+  font-size: 16px;
   margin-left: 3.5px;
-  line-height: 22px;
+  line-height: 23px;
   height: 20px;
+  transform: skew(-0.1deg);
 `;
 
 export default Logo;

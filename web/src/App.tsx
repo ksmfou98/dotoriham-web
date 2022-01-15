@@ -1,3 +1,4 @@
+import Header from "components/header";
 import { mediaSize } from "lib/styles/media";
 import React from "react";
 import styled from "styled-components";
@@ -8,6 +9,7 @@ function App() {
   return (
     <AppWrapper>
       <GlobalStyles />
+      <Header />
       <MainLayout>
         <Routing />
       </MainLayout>
