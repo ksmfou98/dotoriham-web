@@ -26,6 +26,7 @@ const SearchBarStyled = styled.form`
 
 const SearchIcon = styled.div`
   cursor: pointer;
+  margin-right: 6px;
 `;
 
 const SearchInput = styled.input`
@@ -35,6 +36,7 @@ const SearchInput = styled.input`
   height: 100%;
   width: 100%;
   font-size: 12px;
+  padding-top: 2px;
 `;
 
 export default SearchBar;
