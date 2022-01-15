@@ -21,6 +21,7 @@ const SearchBarStyled = styled.form`
   width: 570px;
   height: 32px;
   padding: 4px 8px;
+  margin-right: 27px;
 `;
 
 const SearchIcon = styled.div`

@@ -4,6 +4,7 @@ import React from "react";
 import Logo from "components/common/Logo";
 import styled from "styled-components";
 import SearchBar from "./SearchBar";
+import RemindInfoButton from "./RemindInfoButton";
 
 function Header() {
   return (
@@ -13,6 +14,7 @@ function Header() {
 
         <HeaderRightBox>
           <SearchBar />
+          <RemindInfoButton />
         </HeaderRightBox>
       </HeaderInner>
     </HeaderBlock>

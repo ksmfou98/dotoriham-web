@@ -10,3 +10,4 @@ export { ReactComponent as ListUnSelectedIcon } from "./List_unselected_16.svg";
 export { ReactComponent as LogoIcon } from "./logoIcon.svg";
 export { ReactComponent as Peoples20Icon } from "./Peoples_20.svg";
 export { ReactComponent as Symbol20Icon } from "./Symbol_character_20.svg";
+export { ReactComponent as Bell24Icon } from "./Icons_Bell_24.svg";
