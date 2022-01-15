@@ -25,13 +25,13 @@ function Sidebar() {
         <FolderList />
       </FolderListBox>
 
+      <AddFolderButton />
+
       <SidebarIconName
         name="휴지통"
         activeIcon={<SelectedTrashIcon />}
         unActiveIcon={<UnselectedTrashIcon />}
       />
-
-      <AddFolderButton />
     </SidebarBlock>
   );
 }
@@ -46,6 +46,7 @@ const SidebarBlock = styled.aside`
 
 const FolderListBox = styled.div`
   flex: 1 auto;
+  height: 540px;
   overflow: hidden auto;
   overflow-x: auto;
   margin-bottom: 24px;

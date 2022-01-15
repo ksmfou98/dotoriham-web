@@ -5,8 +5,8 @@ import React from "react";
 function DotoriPage() {
   return (
     <>
-      <PagePath />
       <Reminder />
+      <PagePath />
     </>
   );
 }

@@ -13,7 +13,7 @@ function PagePath({ isModal }: PagePathProps) {
 const PagePathBlock = styled.div<{ isModal?: boolean }>`
   font-size: ${({ isModal }) => (isModal ? "14px" : "16px")};
   margin-bottom: 28px;
-  color: ${palette.grayDarker};
+  color: ${palette.grayDarkest};
 `;
 
 export default PagePath;
