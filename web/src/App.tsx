@@ -21,7 +21,7 @@ const AppWrapper = styled.div`
   min-height: 100%;
 `;
 
-const MainLayout = styled.div`
+const MainLayout = styled.main`
   width: ${mediaSize.desktop}px;
   margin: 0 auto;
   flex: 1 auto;

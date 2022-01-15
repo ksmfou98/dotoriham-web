@@ -18,6 +18,7 @@ function SidebarRouteLayout() {
 const SidebarRouteLayoutBlock = styled.div`
   display: flex;
   height: 100%;
+  flex: 1 auto;
 `;
 
 const MainContent = styled.div`
