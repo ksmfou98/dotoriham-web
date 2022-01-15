@@ -10,6 +10,9 @@ function RemindInfoButton() {
   );
 }
 
-const RemindInfoButtonStyled = styled.div``;
+const RemindInfoButtonStyled = styled.div`
+  margin-right: 24px;
+  cursor: pointer;
+`;
 
 export default RemindInfoButton;

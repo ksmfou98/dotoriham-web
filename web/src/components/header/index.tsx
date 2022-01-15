@@ -15,6 +15,7 @@ function Header() {
         <HeaderRightBox>
           <SearchBar />
           <RemindInfoButton />
+          <ProfileImg src="https://lh3.googleusercontent.com/a/AATXAJy6jltxS8Vjh9imZ5GO_S22eGWNrZq230lNgTc1wg=s96-c" />
         </HeaderRightBox>
       </HeaderInner>
     </HeaderBlock>
@@ -39,6 +40,15 @@ const HeaderInner = styled.div`
 const HeaderRightBox = styled.div`
   display: flex;
   align-items: center;
+`;
+
+const ProfileImg = styled.img`
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 export default Header;
