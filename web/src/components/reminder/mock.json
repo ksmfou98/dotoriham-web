@@ -1,0 +1,40 @@
+{
+  "reminds": [
+    {
+      "id": 1,
+      "title": "asd",
+      "image": null,
+      "link": "https://www.google.com"
+    },
+    {
+      "id": 2,
+      "title": "asd",
+      "image": null,
+      "link": "https://www.google.com"
+    },
+    {
+      "id": 3,
+      "title": "asd",
+      "image": null,
+      "link": "https://www.google.com"
+    },
+    {
+      "id": 4,
+      "title": "asd",
+      "image": null,
+      "link": "https://www.google.com"
+    },
+    {
+      "id": 5,
+      "title": "asd",
+      "image": null,
+      "link": "https://www.google.com"
+    },
+    {
+      "id": 6,
+      "title": "asd",
+      "image": null,
+      "link": "https://www.google.com"
+    }
+  ]
+}

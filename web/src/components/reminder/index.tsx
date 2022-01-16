@@ -4,6 +4,7 @@ import useToggle from "hooks/common/useToggle";
 import { palette } from "lib/styles/palette";
 import React from "react";
 import styled from "styled-components";
+import RemindList from "./RemindList";
 
 function Reminder() {
   const [isOpenReminder, onToggleReminder] = useToggle(true);
@@ -20,6 +21,7 @@ function Reminder() {
         </ReminderToggleButton>
       </ReminderTitle>
 
+      {isOpenReminder && <RemindList />}
       <DividerLine color={palette.grayLightest} width="100%" />
     </ReminderBlock>
   );
