@@ -1,5 +1,7 @@
 import { ItemId } from "@atlaskit/tree";
 
+// @TODO 북마크 -> 도토리로 이름 변경 해야함
+
 export interface IBookmark {
   clickCount: number;
   deleteTime: string;
