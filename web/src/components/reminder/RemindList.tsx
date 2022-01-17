@@ -14,7 +14,7 @@ function RemindList() {
       <RemindListBox>
         <div className="box-inner">
           {reminds.reminds.map((remind) => (
-            <RemindListItem key={remind.id} />
+            <RemindListItem key={remind.id} remindData={remind} />
           ))}
         </div>
       </RemindListBox>
@@ -33,17 +33,17 @@ const RemindListBlock = styled.div`
 `;
 
 const commonButtonStyled = css<{ isHidden: boolean }>`
-  width: 24px;
-  height: 100%;
   z-index: 100;
   position: absolute;
+  top: 50%;
+  margin: -16px 0px;
+  cursor: pointer;
   ${({ isHidden }) => isHidden && "display: none"};
 `;
 
 const BackButton = styled.div`
   ${commonButtonStyled}
   left: 0px;
-  margin-right: 24px;
 `;
 
 const NextButton = styled.div`

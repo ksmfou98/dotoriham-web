@@ -14,3 +14,5 @@ export { ReactComponent as Symbol20Icon } from "./Symbol_character_20.svg";
 export { ReactComponent as Bell24Icon } from "./Icons_Bell_24.svg";
 export { ReactComponent as Next24Icon } from "./Next_24.svg";
 export { ReactComponent as Back24Icon } from "./Back_24.svg";
+export { ReactComponent as Symbol36Icon } from "./Icons_Symbol_36.svg";
+export { ReactComponent as X16Icon } from "./Icons_x_16.svg";
