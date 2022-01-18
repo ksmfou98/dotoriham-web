@@ -16,3 +16,7 @@ export { ReactComponent as Next24Icon } from "./Next_24.svg";
 export { ReactComponent as Back24Icon } from "./Back_24.svg";
 export { ReactComponent as Symbol36Icon } from "./Icons_Symbol_36.svg";
 export { ReactComponent as X16Icon } from "./Icons_x_16.svg";
+export { ReactComponent as CheckBox24Icon } from "./Icons_Checkbox_24.svg";
+export { ReactComponent as CheckBoxSelected24Icon } from "./Icons_Checkbox_selected_24.svg";
+export { ReactComponent as CheckBox36Icon } from "./Icons_Checkbox_36.svg";
+export { ReactComponent as CheckBoxSelected36Icon } from "./Icons_Checkbox_selected_36.svg";
