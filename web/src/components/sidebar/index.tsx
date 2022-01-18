@@ -46,6 +46,7 @@ const SidebarBlock = styled.aside`
 const FolderListBox = styled.div`
   flex: 1 auto;
   margin-bottom: 24px;
+  width: 170px;
 `;
 
 export default Sidebar;

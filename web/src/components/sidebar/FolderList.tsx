@@ -22,7 +22,9 @@ function FolderList() {
 
   const onMouseDownFolder = () => {
     setIsDragging(true);
-    setFolderBoxHeight(folderBoxRef.current?.clientHeight || 0);
+    if (folderBoxRef.current) {
+      setFolderBoxHeight(folderBoxRef.current.clientHeight + 10);
+    }
   };
 
   // 폴더 확장
@@ -116,7 +118,7 @@ const FolderListWrapper = styled.div<{
 }>`
   ${(props) => props.isDragging && `height: ${props.folderBoxHeight}px;`}
   position: relative;
-  max-height: 540px;
+  max-height: 530px;
   overflow: hidden auto;
   overflow-x: auto;
   ${scrollbar}
