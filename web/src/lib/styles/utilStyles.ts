@@ -16,3 +16,9 @@ export const scrollbar = css`
     border: 1px solid transparent;
   }
 `;
+
+export const ellipsis = css`
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+`;

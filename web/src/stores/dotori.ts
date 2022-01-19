@@ -2,27 +2,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { rootState } from "stores";
 import { IDotoriItem } from "types/dotori";
 
-const initialState: IDotoriItem[] = [
-  {
-    clickCount: 0,
-    deleteTime: "",
-    deleted: false,
-    description: "",
-    folder: "",
-    folderId: "",
-    id: "",
-    link: "",
-    remindTime: "",
-    saveTime: "",
-    title: "",
-    userId: 0,
-    image: "",
-    folderName: "",
-    folderEmoji: "",
-    checked: false,
-    nickname: "",
-  },
-];
+const initialState: IDotoriItem[] = [];
 
 const dotori = createSlice({
   name: "dotoriReducer",
