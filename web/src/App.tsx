@@ -1,19 +1,24 @@
 import Header from "components/header";
 import { mediaSize } from "lib/styles/media";
 import React from "react";
+import { QueryClient, QueryClientProvider } from "react-query";
 import styled from "styled-components";
 import GlobalStyles from "./lib/styles/globalStyles";
 import Routing from "./routes/Routing";
 
 function App() {
+  const queryClient = new QueryClient();
+
   return (
-    <AppWrapper>
-      <GlobalStyles />
-      <Header />
-      <MainLayout>
-        <Routing />
-      </MainLayout>
-    </AppWrapper>
+    <QueryClientProvider client={queryClient}>
+      <AppWrapper>
+        <GlobalStyles />
+        <Header />
+        <MainLayout>
+          <Routing />
+        </MainLayout>
+      </AppWrapper>
+    </QueryClientProvider>
   );
 }
 

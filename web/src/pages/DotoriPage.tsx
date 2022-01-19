@@ -6,15 +6,12 @@ import { useParams } from "react-router-dom";
 
 function DotoriPage() {
   const { folderId } = useParams();
-  const folder = folderId || "main";
-
-  console.log(folder);
-
+  const path = folderId ? "folder" : "main";
   return (
     <>
       <Reminder />
       <PagePath />
-      <DotoriTemplate />
+      <DotoriTemplate path={path} folderId={folderId} />
     </>
   );
 }
