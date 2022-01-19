@@ -26,6 +26,7 @@ function DotoriTemplate({ path, keyword, folderId }: DotoriTemplateProps) {
     folderId
   );
   const dispatch = useDispatch();
+
   useEffect(() => {
     if (!data) return;
     dispatch(
