@@ -23,18 +23,16 @@ export interface IDotoriItem extends IDotori {
   checked: boolean;
 }
 
-export type DotoriSortType = {
-  empty: boolean;
-  sorted: boolean;
-  unsorted: boolean;
-};
-
 export type DotoriPageableType = {
   offset: number;
   pageNumber: number;
   pageSize: number;
   paged: boolean;
-  sort: DotoriSortType;
+  sort: {
+    empty: boolean;
+    sorted: boolean;
+    unsorted: boolean;
+  };
   unpaged: boolean;
 };
 
@@ -51,3 +49,9 @@ export interface IDotoriListResponse {
   totalElements: number;
   totalPages: number;
 }
+
+export type DotoriSortType =
+  | "saveTime,desc"
+  | "saveTime,asc"
+  | "clickCount,desc"
+  | "clickCount,asc";

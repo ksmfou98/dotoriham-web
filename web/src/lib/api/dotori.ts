@@ -1,12 +1,12 @@
 import { ItemId } from "@atlaskit/tree";
-import { IDotoriListResponse } from "types/dotori";
+import { DotoriSortType, IDotoriListResponse } from "types/dotori";
 import client from "./client";
 
 // 휴지통 북마크 조회
-export const getTrashBookmarkAPI = async (
+export const getTrashDotorisAPI = async (
   page: number,
   size: number,
-  sort: string,
+  sort: DotoriSortType,
   remind: boolean
 ) => {
   const response = await client.get<IDotoriListResponse>(
@@ -16,11 +16,11 @@ export const getTrashBookmarkAPI = async (
 };
 
 // 검색 결과 북마크 조회
-export const getSearchBookmarkAPI = async (
+export const getSearchDotorisAPI = async (
   keyword: string,
   page: number,
   size: number,
-  sort: string,
+  sort: DotoriSortType,
   remind: boolean
 ) => {
   const response = await client.get<IDotoriListResponse>(
@@ -34,7 +34,7 @@ export const getDotorisAPI = async (
   folderId: ItemId,
   page: number,
   size: number,
-  sort: string,
+  sort: DotoriSortType,
   remind: boolean
 ) => {
   const response = await client.get<IDotoriListResponse>(
