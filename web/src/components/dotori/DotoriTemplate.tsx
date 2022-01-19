@@ -16,7 +16,7 @@ interface DotoriTemplateProps {
 }
 
 function DotoriTemplate({ path, keyword, folderId }: DotoriTemplateProps) {
-  const { data } = useDotoriQuery(
+  const { data, isError, isFetching } = useDotoriQuery(
     path,
     0,
     12,
@@ -26,13 +26,15 @@ function DotoriTemplate({ path, keyword, folderId }: DotoriTemplateProps) {
     folderId
   );
   const dispatch = useDispatch();
-
   useEffect(() => {
     if (!data) return;
     dispatch(
       setDotoris(data.content.map((dotori) => ({ ...dotori, checked: false })))
     );
   }, [data, dispatch]);
+
+  if (isFetching) return <div> ...loading</div>;
+  if (isError) return <div>컨텐츠가 존재하지 않습니다.</div>;
 
   return (
     <div>

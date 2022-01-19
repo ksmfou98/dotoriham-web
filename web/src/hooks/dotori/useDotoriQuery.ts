@@ -44,7 +44,7 @@ export default function useDotoriQuery(
     {
       cacheTime: 5 * 60 * 1000,
       staleTime: 5 * 60 * 1000,
-      retry: true,
+      retry: false,
     }
   );
 
