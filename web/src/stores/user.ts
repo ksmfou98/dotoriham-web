@@ -38,30 +38,7 @@ const user = createSlice({
   name: "userReducer",
   initialState,
   reducers: {
-    setUser: (state: IUserState, action: PayloadAction<IUserState>) => {
-      const {
-        email,
-        name,
-        image,
-        isRegisterd,
-        remindCycle,
-        remindToggle,
-        socialType,
-        nickname,
-        accessToken,
-        refreshToken,
-      } = action.payload;
-      state.accessToken = accessToken;
-      state.refreshToken = refreshToken;
-      state.email = email;
-      state.image = image;
-      state.isRegisterd = isRegisterd;
-      state.name = name;
-      state.nickname = nickname;
-      state.remindCycle = remindCycle;
-      state.remindToggle = remindToggle;
-      state.socialType = socialType;
-    },
+    setUser: (_, action: PayloadAction<IUserState>) => action.payload,
     removeUser: () => initialState,
   },
 });
