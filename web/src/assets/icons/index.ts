@@ -20,3 +20,5 @@ export { ReactComponent as CheckBox24Icon } from "./Icons_Checkbox_24.svg";
 export { ReactComponent as CheckBoxSelected24Icon } from "./Icons_Checkbox_selected_24.svg";
 export { ReactComponent as CheckBox36Icon } from "./Icons_Checkbox_36.svg";
 export { ReactComponent as CheckBoxSelected36Icon } from "./Icons_Checkbox_selected_36.svg";
+export { ReactComponent as ToggleOffIcon } from "./Icons_Toggle_off.svg";
+export { ReactComponent as ToggleOnIcon } from "./Icons_Toggle_on.svg";

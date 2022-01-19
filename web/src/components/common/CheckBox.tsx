@@ -25,9 +25,9 @@ function SecondaryCheckBox({ isChecked }: IChecked) {
   return <>{isChecked ? <CheckBoxSelected24Icon /> : <CheckBox24Icon />}</>;
 }
 
-function CheckBox({ isChecked, variant }: CheckBoxProps) {
+function CheckBox({ isChecked, variant, ...rest }: CheckBoxProps) {
   return (
-    <CheckBoxStyled>
+    <CheckBoxStyled {...rest}>
       {variant === "primary" ? (
         <PrimaryCheckBox isChecked={isChecked} />
       ) : (
