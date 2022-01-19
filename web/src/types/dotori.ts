@@ -1,8 +1,6 @@
 import { ItemId } from "@atlaskit/tree";
 
-// @TODO 북마크 -> 도토리로 이름 변경 해야함
-
-export interface IBookmark {
+export interface IDotori {
   clickCount: number;
   deleteTime: string;
   deleted: boolean;
@@ -21,35 +19,35 @@ export interface IBookmark {
   folderEmoji: string;
 }
 
-export interface IBookmarkItem extends IBookmark {
+export interface IDotoriItem extends IDotori {
   checked: boolean;
 }
 
-export type BookmarkSortType = {
+export type DotoriSortType = {
   empty: boolean;
   sorted: boolean;
   unsorted: boolean;
 };
 
-export type BookmarkPageableType = {
+export type DotoriPageableType = {
   offset: number;
   pageNumber: number;
   pageSize: number;
   paged: boolean;
-  sort: BookmarkSortType;
+  sort: DotoriSortType;
   unpaged: boolean;
 };
 
-export interface IBookmarkListResponse {
-  content: IBookmark[];
+export interface IDotoriListResponse {
+  content: IDotori[];
   empty: boolean;
   first: true;
   last: boolean;
   number: number;
   numberOfElements: number;
-  pageable: BookmarkPageableType;
+  pageable: DotoriPageableType;
   size: number;
-  sort: BookmarkSortType;
+  sort: DotoriSortType;
   totalElements: number;
   totalPages: number;
 }

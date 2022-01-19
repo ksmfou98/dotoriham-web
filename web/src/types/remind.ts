@@ -1,5 +1,5 @@
-import { IBookmark } from "./bookmark";
+import { IDotori } from "./dotori";
 
 export interface IRemindListResponse {
-  remindBookmarkList: IBookmark[];
+  remindBookmarkList: IDotori[];
 }
