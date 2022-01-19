@@ -1,6 +1,6 @@
 import axios from "axios";
 import { SERVER_URL } from "lib/const";
-import getTokens from "lib/getTokens";
+import getTokens from "lib/utils/getTokens";
 
 const client = axios.create({
   withCredentials: true,
@@ -15,7 +15,10 @@ client.interceptors.request.use(
         `Expected 'config' and 'config.headers' not to be undefined`
       );
     }
-    const { accessToken, refreshToken } = getTokens();
+    const tokens = getTokens();
+    if (!tokens) throw new Error("No tokens found");
+
+    const { accessToken, refreshToken } = tokens;
     config.headers.accessToken = `Bearer ${accessToken}`;
     config.headers.refreshToken = `Bearer ${refreshToken}`;
     return config;
