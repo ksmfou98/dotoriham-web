@@ -1,4 +1,4 @@
-import React, { ReactElement, useRef, useState } from "react";
+import React, { ReactElement, useEffect, useRef, useState } from "react";
 import Tree, {
   ItemId,
   moveItemOnTree,
@@ -10,12 +10,29 @@ import Tree, {
 } from "@atlaskit/tree";
 import styled from "styled-components";
 import FolderItemIcon from "components/sidebar/FolderItemIcon";
-import initialFolderState from "./mockData.json";
 import { palette } from "lib/styles/palette";
 import { scrollbar } from "lib/styles/utilStyles";
+import useFolderListQuery from "hooks/folder/useFolderListQuery";
 
 function FolderList() {
-  const [folders, setFolders] = useState<TreeData>(initialFolderState);
+  const [folders, setFolders] = useState<TreeData>({
+    rootId: "",
+    items: {
+      "": {
+        id: "",
+        children: [],
+        data: "",
+      },
+    },
+  });
+
+  const { data } = useFolderListQuery("sidebar");
+
+  useEffect(() => {
+    if (!data) return;
+    setFolders(data);
+  }, [data]);
+
   const folderBoxRef = useRef<HTMLDivElement>(null);
   const [isDragging, setIsDragging] = useState(false);
   const [folderBoxHeight, setFolderBoxHeight] = useState(0);
@@ -141,7 +158,7 @@ const FolderItemBlock = styled.div`
   min-width: 105px;
   max-width: 166px;
   height: 28px;
-  font-size: 14px;
+  font-size: 12px;
   padding: 5px 2px;
   border-radius: 4px;
   &:hover {
