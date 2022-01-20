@@ -1,6 +1,11 @@
+import { BellSelectedIcon, Copy24Icon, More24Icon } from "assets/icons";
+import DividerLine from "components/common/DividerLine";
+import FolderEmoji from "components/common/FolderEmoji";
 import { palette } from "lib/styles/palette";
 import { ellipsis } from "lib/styles/utilStyles";
 import React from "react";
+import { Link } from "react-router-dom";
+import Path from "routes/Path";
 import styled from "styled-components";
 import { IDotoriItem } from "types/dotori";
 
@@ -34,6 +39,33 @@ function DotoriListItem({ dotori }: DotoriListItemProps) {
             <div className="title">{title}</div>
             <div className="description">{description}</div>
           </InnerContent>
+
+          <DotoriFolderInfo>
+            <FolderEmoji emoji={folderEmoji} />
+            <DotoriFolderName to={`${Path.DotoriPage}/${folderId}`}>
+              {folderName}
+            </DotoriFolderName>
+          </DotoriFolderInfo>
+
+          <DividerLine color={palette.grayLightest} width="100%" />
+
+          <DotoriBottomArea>
+            <DotoriLinkBox>
+              <DotoriLink>{link}</DotoriLink>
+            </DotoriLinkBox>
+
+            <DotoriOption>
+              <OptionButton>
+                <BellSelectedIcon />
+              </OptionButton>
+              <OptionButton>
+                <Copy24Icon />
+              </OptionButton>
+              <OptionButton>
+                <More24Icon />
+              </OptionButton>
+            </DotoriOption>
+          </DotoriBottomArea>
         </DotoriContent>
       </DotoriItemInner>
     </DotoriItemBlock>
@@ -119,6 +151,52 @@ const InnerContent = styled.a`
   }
 `;
 
-const DotoriFolderInfo = styled.div``;
+const DotoriFolderInfo = styled.div`
+  margin-bottom: 11px;
+  display: flex;
+  align-items: center;
+`;
+
+const DotoriFolderName = styled(Link)`
+  font-size: 10px;
+  color: ${palette.gray};
+  height: 16px;
+  line-height: 16px;
+  display: inline-block;
+  max-width: 135px;
+  ${ellipsis}
+  &:hover {
+    text-decoration: underline;
+  }
+`;
+
+const DotoriBottomArea = styled.div`
+  display: flex;
+  justify-content: space-between;
+  margin-top: 13px;
+`;
+
+const DotoriLinkBox = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
+const DotoriLink = styled.a`
+  width: 110px;
+  font-size: 12px;
+  line-height: 1.42;
+  color: ${palette.gray};
+  ${ellipsis}
+`;
+
+const DotoriOption = styled.div`
+  display: flex;
+  justify-content: space-between;
+  width: 90px;
+`;
+
+const OptionButton = styled.button`
+  position: relative;
+`;
 
 export default DotoriListItem;
