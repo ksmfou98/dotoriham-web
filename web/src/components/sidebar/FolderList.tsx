@@ -4,7 +4,6 @@ import Tree, {
   moveItemOnTree,
   mutateTree,
   RenderItemParams,
-  TreeData,
   TreeDestinationPosition,
   TreeSourcePosition,
 } from "@atlaskit/tree";
@@ -13,25 +12,19 @@ import FolderItemIcon from "components/sidebar/FolderItemIcon";
 import { palette } from "lib/styles/palette";
 import { scrollbar } from "lib/styles/utilStyles";
 import useFolderListQuery from "hooks/folder/useFolderListQuery";
+import { useDispatch, useSelector } from "react-redux";
+import { folderSelector, setFolders } from "stores/folder";
 
 function FolderList() {
-  const [folders, setFolders] = useState<TreeData>({
-    rootId: "",
-    items: {
-      "": {
-        id: "",
-        children: [],
-        data: "",
-      },
-    },
-  });
+  const folders = useSelector(folderSelector);
+  const dispatch = useDispatch();
 
   const { data } = useFolderListQuery("sidebar");
 
   useEffect(() => {
     if (!data) return;
-    setFolders(data);
-  }, [data]);
+    dispatch(setFolders(data));
+  }, [data, dispatch]);
 
   const folderBoxRef = useRef<HTMLDivElement>(null);
   const [isDragging, setIsDragging] = useState(false);
@@ -46,16 +39,15 @@ function FolderList() {
 
   // 폴더 확장
   const onExpandFolder = (itemId: ItemId) => {
-    setFolders(mutateTree(folders, itemId, { isExpanded: true }));
+    dispatch(setFolders(mutateTree(folders, itemId, { isExpanded: true })));
   };
 
   // 폴더 접기
   const onCollapseFolder = (itemId: ItemId) => {
-    setFolders(mutateTree(folders, itemId, { isExpanded: false }));
+    dispatch(setFolders(mutateTree(folders, itemId, { isExpanded: false })));
   };
 
   const onDragStartFolder = (itemId: ItemId) => {
-    // eslint-disable-next-line no-console
     console.log(itemId);
   };
 
@@ -68,7 +60,7 @@ function FolderList() {
     setIsDragging(false);
     // console.log('새로운 부모Id', destination);
     // console.log('기존 부모Id', source);
-    setFolders(newTree);
+    dispatch(setFolders(newTree));
   };
 
   // 각 폴더 아이템
@@ -80,6 +72,9 @@ function FolderList() {
   }: RenderItemParams): ReactElement => {
     return (
       <>
+        
+
+
         <FolderItemWrapper
           ref={provided.innerRef}
           {...provided.draggableProps}
