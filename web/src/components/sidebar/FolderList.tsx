@@ -14,6 +14,7 @@ import { scrollbar } from "lib/styles/utilStyles";
 import useFolderListQuery from "hooks/folder/useFolderListQuery";
 import { useDispatch, useSelector } from "react-redux";
 import { folderSelector, setFolders } from "stores/folder";
+import { More16Icon, PlusIcon } from "assets/icons";
 
 function FolderList() {
   const folders = useSelector(folderSelector);
@@ -72,9 +73,6 @@ function FolderList() {
   }: RenderItemParams): ReactElement => {
     return (
       <>
-        
-
-
         <FolderItemWrapper
           ref={provided.innerRef}
           {...provided.draggableProps}
@@ -97,6 +95,16 @@ function FolderList() {
               />
               <FolderTitle>{item.data.name}</FolderTitle>
             </FolderLeftBox>
+
+            <FolderRightBox className="right">
+              <FolderETCButton>
+                <PlusIcon />
+              </FolderETCButton>
+
+              <FolderETCButton>
+                <More16Icon />
+              </FolderETCButton>
+            </FolderRightBox>
           </FolderItemBlock>
         </FolderItemWrapper>
       </>
@@ -140,11 +148,6 @@ const FolderItemWrapper = styled.div`
   width: 166px;
 `;
 
-const FolderRightBox = styled.div`
-  display: none;
-  align-items: center;
-`;
-
 const FolderItemBlock = styled.div`
   display: flex;
   align-items: center;
@@ -159,7 +162,7 @@ const FolderItemBlock = styled.div`
   &:hover {
     background-color: ${palette.hover0};
     font-weight: 500;
-    ${FolderRightBox} {
+    .right {
       display: flex;
     }
   }
@@ -180,6 +183,21 @@ const FolderTitle = styled.span`
   white-space: nowrap;
   &:hover {
     text-decoration: underline;
+  }
+`;
+
+const FolderRightBox = styled.div`
+  display: none;
+  align-items: center;
+`;
+
+const FolderETCButton = styled.button`
+  margin-right: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  &:last-child {
+    margin-right: 1px;
   }
 `;
 

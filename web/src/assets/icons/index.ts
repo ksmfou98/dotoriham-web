@@ -27,3 +27,5 @@ export { ReactComponent as BellSelectedIcon } from "./Icons_Bell_selected.svg";
 export { ReactComponent as BellUnSelectedIcon } from "./Icons_Bell_unselected.svg";
 export { ReactComponent as Copy24Icon } from "./Icons_Copy_24.svg";
 export { ReactComponent as More24Icon } from "./Icons_More_24.svg";
+export { ReactComponent as More16Icon } from "./More_16.svg";
+export { ReactComponent as PlusIcon } from "./Plus.svg";
