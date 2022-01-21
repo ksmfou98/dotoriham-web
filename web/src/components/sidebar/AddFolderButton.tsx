@@ -1,10 +1,18 @@
 import Button from "components/common/Button";
+import useHandleFolder from "hooks/folder/useHandleFolder";
 import React from "react";
 import styled from "styled-components";
 
 function AddFolderButton() {
+  const { onCreateCabinet } = useHandleFolder();
+
   return (
-    <AddFolderButtonStyled variant="primary" width="100%" height="40px">
+    <AddFolderButtonStyled
+      variant="primary"
+      width="100%"
+      height="40px"
+      onClick={onCreateCabinet}
+    >
       보관함 추가
     </AddFolderButtonStyled>
   );
