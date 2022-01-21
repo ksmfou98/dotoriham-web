@@ -16,23 +16,41 @@ import { useDispatch, useSelector } from "react-redux";
 import { folderSelector, setFolders } from "stores/folder";
 import { More16Icon, PlusIcon } from "assets/icons";
 import useHandleFolder from "hooks/folder/useHandleFolder";
+import FolderMenu from "./FolderMenu";
+
+export interface IFolderMenuPosition {
+  top: number;
+  left: number;
+}
 
 function FolderList() {
   const folders = useSelector(folderSelector);
   const dispatch = useDispatch();
-
   const { data } = useFolderListQuery("sidebar");
+  const { onCreateFolder } = useHandleFolder();
+
+  const folderBoxRef = useRef<HTMLDivElement>(null);
+  const [isDragging, setIsDragging] = useState(false);
+  const [folderBoxHeight, setFolderBoxHeight] = useState(0);
+  const [isFolderMenu, setIsFolderMenu] = useState(false);
+  const [folderMenuPosition, setFolderMenuPosition] =
+    useState<IFolderMenuPosition>({
+      top: 0,
+      left: 0,
+    });
 
   useEffect(() => {
     if (!data) return;
     dispatch(setFolders(data));
   }, [data, dispatch]);
 
-  const folderBoxRef = useRef<HTMLDivElement>(null);
-  const [isDragging, setIsDragging] = useState(false);
-  const [folderBoxHeight, setFolderBoxHeight] = useState(0);
-
-  const { onCreateFolder } = useHandleFolder();
+  const onToggleFolderMenu = (e: React.MouseEvent) => {
+    setIsFolderMenu(!isFolderMenu);
+    setFolderMenuPosition({
+      top: e.currentTarget.getBoundingClientRect().top,
+      left: e.currentTarget.getBoundingClientRect().left,
+    });
+  };
 
   const onMouseDownFolder = () => {
     setIsDragging(true);
@@ -108,7 +126,7 @@ function FolderList() {
                 <PlusIcon />
               </FolderETCButton>
 
-              <FolderETCButton>
+              <FolderETCButton onClick={(e) => onToggleFolderMenu(e)}>
                 <More16Icon />
               </FolderETCButton>
             </FolderRightBox>
@@ -135,6 +153,13 @@ function FolderList() {
         isNestingEnabled
         isDragEnabled
       />
+
+      {isFolderMenu && (
+        <FolderMenu
+          position={folderMenuPosition}
+          onToggleFolderMenu={onToggleFolderMenu}
+        />
+      )}
     </FolderListWrapper>
   );
 }
@@ -204,7 +229,7 @@ const FolderETCButton = styled.button`
   align-items: center;
   justify-content: center;
   &:last-child {
-    margin-right: 1px;
+    margin-right: 8px;
   }
 `;
 
