@@ -4,14 +4,14 @@ import React from "react";
 import styled from "styled-components";
 
 function AddFolderButton() {
-  const { onCreateCabinet } = useHandleFolder();
+  const { onCreateFolder } = useHandleFolder();
 
   return (
     <AddFolderButtonStyled
       variant="primary"
       width="100%"
       height="40px"
-      onClick={onCreateCabinet}
+      onClick={() => onCreateFolder()}
     >
       보관함 추가
     </AddFolderButtonStyled>

@@ -20,33 +20,17 @@ export default function useHandleFolder() {
     };
   };
 
-  // 보관함 생성
-  const onCreateCabinet = async () => {
-    const folderChildrenLength = findChildrenLengthById(folders, "root");
-    const requestBody: ICreateFolderRequest = {
-      parentId: 0,
-      name: `보관함${folderChildrenLength + 1}`,
-      index: folderChildrenLength,
-    };
-
-    try {
-      const { folderId } = await createFolderAPI(requestBody);
-      const newFolderData = createNewFolderData(folderId, requestBody.name);
-      dispatch(addFolder({ folderId, parentId: "root", newFolderData }));
-    } catch (e) {
-      console.error(e);
-    }
-  };
-
-  // 폴더 생성
-  const onCreateFolder = async (parentId: ItemId) => {
+  // 폴더 생성 (parentId가 없으면(root) 보관함 생성)
+  const onCreateFolder = async (parentId: ItemId = "root") => {
     const folderChildrenLength = findChildrenLengthById(folders, parentId);
+    const folderName =
+      parentId === "root" ? `보관함${folderChildrenLength + 1}` : "제목없음";
+
     const requestBody: ICreateFolderRequest = {
-      parentId,
-      name: "제목없음",
+      parentId: parentId === "root" ? 0 : parentId,
+      name: folderName,
       index: folderChildrenLength,
     };
-
     try {
       const { folderId } = await createFolderAPI(requestBody);
       const newFolderData = createNewFolderData(folderId, requestBody.name);
@@ -57,7 +41,6 @@ export default function useHandleFolder() {
   };
 
   return {
-    onCreateCabinet,
     onCreateFolder,
   };
 }
