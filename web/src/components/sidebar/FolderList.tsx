@@ -15,6 +15,7 @@ import useFolderListQuery from "hooks/folder/useFolderListQuery";
 import { useDispatch, useSelector } from "react-redux";
 import { folderSelector, setFolders } from "stores/folder";
 import { More16Icon, PlusIcon } from "assets/icons";
+import useHandleFolder from "hooks/folder/useHandleFolder";
 
 function FolderList() {
   const folders = useSelector(folderSelector);
@@ -30,6 +31,8 @@ function FolderList() {
   const folderBoxRef = useRef<HTMLDivElement>(null);
   const [isDragging, setIsDragging] = useState(false);
   const [folderBoxHeight, setFolderBoxHeight] = useState(0);
+
+  const { onCreateFolder } = useHandleFolder();
 
   const onMouseDownFolder = () => {
     setIsDragging(true);
@@ -101,7 +104,7 @@ function FolderList() {
               onMouseDown={(e) => e.stopPropagation()}
               onClick={(e) => e.stopPropagation()}
             >
-              <FolderETCButton>
+              <FolderETCButton onClick={() => onCreateFolder(item.id)}>
                 <PlusIcon />
               </FolderETCButton>
 
