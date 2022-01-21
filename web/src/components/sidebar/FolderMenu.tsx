@@ -5,21 +5,35 @@ import { IFolderMenuPosition } from "./FolderList";
 
 interface FolderMenuProps {
   position: IFolderMenuPosition;
-  onToggleFolderMenu: (e: React.MouseEvent) => void;
+  onToggleModal: {
+    onToggleFolderMenu: (e: React.MouseEvent) => void;
+    onToggleRenameModal: () => void;
+    onToggleMoveModal: () => void;
+    onToggleDeleteModal: () => void;
+  };
 }
 
-function FolderMenu({ position, onToggleFolderMenu }: FolderMenuProps) {
+function FolderMenu({ position, onToggleModal }: FolderMenuProps) {
   const { left, top } = position;
+  const {
+    onToggleDeleteModal,
+    onToggleFolderMenu,
+    onToggleMoveModal,
+    onToggleRenameModal,
+  } = onToggleModal;
 
   const folderMenus = [
     {
       name: "이름 변경",
+      onToggle: onToggleRenameModal,
     },
     {
       name: "이동",
+      onToggle: onToggleMoveModal,
     },
     {
       name: "삭제",
+      onToggle: onToggleDeleteModal,
     },
   ];
 
@@ -31,8 +45,12 @@ function FolderMenu({ position, onToggleFolderMenu }: FolderMenuProps) {
         onClick={(e) => e.stopPropagation()}
       >
         {folderMenus.map((menu) => {
-          const { name } = menu;
-          return <FolderMenuItem key={name}>{name}</FolderMenuItem>;
+          const { name, onToggle } = menu;
+          return (
+            <FolderMenuItem key={name} onClick={onToggle}>
+              {name}
+            </FolderMenuItem>
+          );
         })}
       </FolderMenuInner>
     </FolderMenuBlock>

@@ -17,6 +17,7 @@ import { folderSelector, setFolders } from "stores/folder";
 import { More16Icon, PlusIcon } from "assets/icons";
 import useHandleFolder from "hooks/folder/useHandleFolder";
 import FolderMenu from "./FolderMenu";
+import useToggle from "hooks/common/useToggle";
 
 export interface IFolderMenuPosition {
   top: number;
@@ -32,7 +33,13 @@ function FolderList() {
   const folderBoxRef = useRef<HTMLDivElement>(null);
   const [isDragging, setIsDragging] = useState(false);
   const [folderBoxHeight, setFolderBoxHeight] = useState(0);
+
+  // modal state
   const [isFolderMenu, setIsFolderMenu] = useState(false);
+  const [isRenameModal, onToggleRenameModal] = useToggle();
+  const [isMoveModal, onToggleMoveModal] = useToggle();
+  const [isDeleteModal, onToggleDeleteModal] = useToggle();
+
   const [folderMenuPosition, setFolderMenuPosition] =
     useState<IFolderMenuPosition>({
       top: 0,
@@ -50,6 +57,13 @@ function FolderList() {
       top: e.currentTarget.getBoundingClientRect().top,
       left: e.currentTarget.getBoundingClientRect().left,
     });
+  };
+
+  const onToggleModal = {
+    onToggleFolderMenu,
+    onToggleRenameModal,
+    onToggleMoveModal,
+    onToggleDeleteModal,
   };
 
   const onMouseDownFolder = () => {
@@ -157,7 +171,7 @@ function FolderList() {
       {isFolderMenu && (
         <FolderMenu
           position={folderMenuPosition}
-          onToggleFolderMenu={onToggleFolderMenu}
+          onToggleModal={onToggleModal}
         />
       )}
     </FolderListWrapper>
