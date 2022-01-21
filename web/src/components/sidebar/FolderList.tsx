@@ -96,7 +96,11 @@ function FolderList() {
               <FolderTitle>{item.data.name}</FolderTitle>
             </FolderLeftBox>
 
-            <FolderRightBox className="right">
+            <FolderRightBox
+              className="right"
+              onMouseDown={(e) => e.stopPropagation()}
+              onClick={(e) => e.stopPropagation()}
+            >
               <FolderETCButton>
                 <PlusIcon />
               </FolderETCButton>
