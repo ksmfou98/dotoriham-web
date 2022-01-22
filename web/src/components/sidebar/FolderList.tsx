@@ -18,6 +18,7 @@ import { More16Icon, PlusIcon } from "assets/icons";
 import useHandleFolder from "hooks/folder/useHandleFolder";
 import FolderMenu from "./FolderMenu";
 import useToggle from "hooks/common/useToggle";
+import FolderRenameModal from "./FolderRenameModal";
 
 export interface IFolderMenuPosition {
   top: number;
@@ -172,6 +173,13 @@ function FolderList() {
         <FolderMenu
           position={folderMenuPosition}
           onToggleModal={onToggleModal}
+        />
+      )}
+
+      {isRenameModal && (
+        <FolderRenameModal
+          position={folderMenuPosition}
+          onToggleModal={onToggleRenameModal}
         />
       )}
     </FolderListWrapper>

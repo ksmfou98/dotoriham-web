@@ -47,7 +47,13 @@ function FolderMenu({ position, onToggleModal }: FolderMenuProps) {
         {folderMenus.map((menu) => {
           const { name, onToggle } = menu;
           return (
-            <FolderMenuItem key={name} onClick={onToggle}>
+            <FolderMenuItem
+              key={name}
+              onClick={(e) => {
+                onToggleFolderMenu(e);
+                onToggle();
+              }}
+            >
               {name}
             </FolderMenuItem>
           );
