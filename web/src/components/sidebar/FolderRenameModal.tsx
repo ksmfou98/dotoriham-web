@@ -1,18 +1,15 @@
-import { ItemId, mutateTree } from "@atlaskit/tree";
-import { FolderIcon, X16Icon } from "assets/icons";
+import { ItemId } from "@atlaskit/tree";
+import { X16Icon } from "assets/icons";
 import Button from "components/common/Button";
 import Input from "components/common/Input";
 import { palette } from "lib/styles/palette";
 import React, { useState } from "react";
 import EmojiData from "react-twemoji-picker/data/twemoji.json";
 import "react-twemoji-picker/dist/EmojiPicker.css";
-import { useDispatch, useSelector } from "react-redux";
-import { Emoji, EmojiObject, EmojiPicker } from "react-twemoji-picker";
-import { folderSelector, setFolders } from "stores/folder";
+import { EmojiObject, EmojiPicker } from "react-twemoji-picker";
 import styled from "styled-components";
 import { IFolderMenuPosition } from "./FolderList";
 import FolderEmoji from "components/common/FolderEmoji";
-import { updateFolderAPI } from "lib/api/folder";
 import useRenameFolder from "hooks/folder/useRenameFolder";
 
 interface FolderRenameModalProps {
@@ -159,11 +156,6 @@ const EmojiBox = styled.div`
   border: 1px solid ${palette.grayLight};
   cursor: pointer;
   margin-right: 4px;
-`;
-
-const EmojiIcon = styled(Emoji)`
-  width: 18px;
-  height: 18px;
 `;
 
 const FolderNameInput = styled(Input)`

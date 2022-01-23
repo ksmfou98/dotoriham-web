@@ -19,6 +19,7 @@ import FolderMenu from "./FolderMenu";
 import useToggle from "hooks/common/useToggle";
 import FolderRenameModal from "./FolderRenameModal";
 import useCreateFolder from "hooks/folder/useCreateFolder";
+import SmallModal from "components/common/SmallModal";
 
 export interface IFolderMenuPosition {
   top: number;
@@ -191,6 +192,17 @@ function FolderList() {
           position={folderMenuPosition}
           onToggleModal={onToggleRenameModal}
           isSelectedFolderId={isSelectedFolderId}
+        />
+      )}
+
+      {isDeleteModal && (
+        <SmallModal
+          isModal={isDeleteModal}
+          onToggleModal={onToggleDeleteModal}
+          title="이 폴더를 삭제할까요?"
+          content="폴더에 있는 모든 내용들이 <br /> 휴지통으로 들어가요!"
+          buttonName="삭제"
+          onClick={() => console.log("삭제")}
         />
       )}
     </FolderListWrapper>
