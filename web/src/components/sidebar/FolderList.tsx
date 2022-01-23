@@ -34,6 +34,7 @@ function FolderList() {
   const folderBoxRef = useRef<HTMLDivElement>(null);
   const [isDragging, setIsDragging] = useState(false);
   const [folderBoxHeight, setFolderBoxHeight] = useState(0);
+  const [isSelectedFolderId, setIsSelectedFolderId] = useState<ItemId>(0);
 
   // modal state
   const [isFolderMenu, setIsFolderMenu] = useState(false);
@@ -51,6 +52,10 @@ function FolderList() {
     if (!data) return;
     dispatch(setFolders(data));
   }, [data, dispatch]);
+
+  const onChangeSelectedFolderId = (id: ItemId) => {
+    setIsSelectedFolderId(id);
+  };
 
   const onToggleFolderMenu = (e: React.MouseEvent) => {
     setIsFolderMenu(!isFolderMenu);
@@ -141,7 +146,12 @@ function FolderList() {
                 <PlusIcon />
               </FolderETCButton>
 
-              <FolderETCButton onClick={(e) => onToggleFolderMenu(e)}>
+              <FolderETCButton
+                onClick={(e) => {
+                  onToggleFolderMenu(e);
+                  onChangeSelectedFolderId(item.id);
+                }}
+              >
                 <More16Icon />
               </FolderETCButton>
             </FolderRightBox>
@@ -180,6 +190,7 @@ function FolderList() {
         <FolderRenameModal
           position={folderMenuPosition}
           onToggleModal={onToggleRenameModal}
+          isSelectedFolderId={isSelectedFolderId}
         />
       )}
     </FolderListWrapper>
@@ -230,6 +241,7 @@ const FolderLeftBox = styled.div`
 
 const FolderTitle = styled.span`
   cursor: pointer;
+  margin-left: 4px;
   height: 28px;
   line-height: 28px;
   text-overflow: ellipsis;

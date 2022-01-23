@@ -1,36 +1,74 @@
-import { X16Icon } from "assets/icons";
+import { ItemId } from "@atlaskit/tree";
+import { FolderIcon, X16Icon } from "assets/icons";
 import Button from "components/common/Button";
 import Input from "components/common/Input";
 import { palette } from "lib/styles/palette";
-import React from "react";
-import { Emoji } from "react-twemoji-picker";
+import React, { useState } from "react";
+import EmojiData from "react-twemoji-picker/data/twemoji.json";
+import "react-twemoji-picker/dist/EmojiPicker.css";
+import { useSelector } from "react-redux";
+import { Emoji, EmojiObject, EmojiPicker } from "react-twemoji-picker";
+import { folderSelector } from "stores/folder";
 import styled from "styled-components";
 import { IFolderMenuPosition } from "./FolderList";
+import FolderEmoji from "components/common/FolderEmoji";
 
 interface FolderRenameModalProps {
   position: IFolderMenuPosition;
   onToggleModal: () => void;
+  isSelectedFolderId: ItemId;
 }
 
 function FolderRenameModal({
   onToggleModal,
   position,
+  isSelectedFolderId,
 }: FolderRenameModalProps) {
   const { left, top } = position;
+  const folder = useSelector(folderSelector);
+  const { name, emoji } = folder.items[isSelectedFolderId].data;
+
+  const [emojiPickerVisible, setEmojiPickerVisible] = useState(false);
+  const [newFolderName, setNewFolderName] = useState(name);
+  const [newFolderEmoji, setNewFolderEmoji] = useState({
+    unicode: emoji,
+    name: "emoji",
+  });
+
+  const emojiData = Object.freeze(EmojiData);
+
+  const onEmojiSelect = (emoji: EmojiObject) => {
+    setEmojiPickerVisible(!emojiPickerVisible);
+    setNewFolderEmoji(emoji);
+  };
+
+  const onToggleEmojiPicker = (
+    e: React.MouseEvent<HTMLDivElement>,
+    isEmojiPickerVisible: boolean
+  ) => {
+    e.stopPropagation();
+    setEmojiPickerVisible(isEmojiPickerVisible);
+  };
+
+  console.log(folder.items[isSelectedFolderId].data);
 
   return (
     <FolderRenameModalBlock onClick={onToggleModal}>
       <RenameModalInner
         top={top}
         left={left}
-        onClick={(e) => e.stopPropagation()}
+        onClick={(e) => onToggleEmojiPicker(e, false)}
       >
         <CloseButtonBox>
           <X16Icon onClick={onToggleModal} />
         </CloseButtonBox>
 
         <RenameForm>
-          <EmojiBox></EmojiBox>
+          <EmojiBox
+            onClick={(e) => onToggleEmojiPicker(e, !emojiPickerVisible)}
+          >
+            <FolderEmoji emoji={newFolderEmoji.unicode} />
+          </EmojiBox>
 
           <FolderNameInput type="text" width="192px" height="28px" />
 
@@ -43,6 +81,10 @@ function FolderRenameModal({
             변경
           </Button>
         </RenameForm>
+
+        {emojiPickerVisible && (
+          <EmojiPicker emojiData={emojiData} onEmojiSelect={onEmojiSelect} />
+        )}
       </RenameModalInner>
     </FolderRenameModalBlock>
   );
@@ -108,7 +150,10 @@ const EmojiBox = styled.div`
   margin-right: 4px;
 `;
 
-const EmojiIcon = styled(Emoji)``;
+const EmojiIcon = styled(Emoji)`
+  width: 18px;
+  height: 18px;
+`;
 
 const FolderNameInput = styled(Input)`
   font-size: 12px;

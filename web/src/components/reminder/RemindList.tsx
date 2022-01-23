@@ -29,6 +29,7 @@ function RemindList() {
 const RemindListBlock = styled.div`
   display: flex;
   margin-bottom: 17px;
+  z-index: 1;
   position: relative;
 `;
 
