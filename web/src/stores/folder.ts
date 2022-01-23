@@ -1,5 +1,6 @@
 import { ItemId, TreeData } from "@atlaskit/tree";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { findParentIdById } from "lib/utils/atlaskitTreeFinder";
 import { rootState } from "stores";
 
 export interface IFolderItem {
@@ -41,9 +42,22 @@ const folder = createSlice({
         state.items[parentId].isExpanded = true;
       }
     },
+    deleteFolder: (
+      state: TreeData,
+      action: PayloadAction<{ folderId: ItemId }>
+    ) => {
+      const { folderId } = action.payload;
+      const parentId = findParentIdById(state, folderId);
+      if (!parentId) return;
+      state.items[parentId].children = state.items[parentId].children.filter(
+        (id) => id !== folderId
+      );
+
+      delete state.items[folderId];
+    },
   },
 });
 
-export const { setFolders, addFolder } = folder.actions;
+export const { setFolders, addFolder, deleteFolder } = folder.actions;
 export const folderSelector = (state: rootState) => state.folder;
 export default folder;

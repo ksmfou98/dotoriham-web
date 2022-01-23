@@ -20,6 +20,7 @@ import useToggle from "hooks/common/useToggle";
 import FolderRenameModal from "./FolderRenameModal";
 import useCreateFolder from "hooks/folder/useCreateFolder";
 import SmallModal from "components/common/SmallModal";
+import useDeleteFolder from "hooks/folder/useDeleteFolder";
 
 export interface IFolderMenuPosition {
   top: number;
@@ -30,7 +31,6 @@ function FolderList() {
   const folders = useSelector(folderSelector);
   const dispatch = useDispatch();
   const { data } = useFolderListQuery("sidebar");
-  const { onCreateFolder } = useCreateFolder();
 
   const folderBoxRef = useRef<HTMLDivElement>(null);
   const [isDragging, setIsDragging] = useState(false);
@@ -48,6 +48,9 @@ function FolderList() {
       top: 0,
       left: 0,
     });
+
+  const { onCreateFolder } = useCreateFolder();
+  const { mutateDeleteFolder } = useDeleteFolder(isSelectedFolderId);
 
   useEffect(() => {
     if (!data) return;
@@ -202,7 +205,7 @@ function FolderList() {
           title="이 폴더를 삭제할까요?"
           content="폴더에 있는 모든 내용들이 <br /> 휴지통으로 들어가요!"
           buttonName="삭제"
-          onClick={() => console.log("삭제")}
+          onClick={() => mutateDeleteFolder()}
         />
       )}
     </FolderListWrapper>

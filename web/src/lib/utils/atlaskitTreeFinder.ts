@@ -4,3 +4,14 @@ import { ItemId, TreeData } from "@atlaskit/tree";
 export const findChildrenLengthById = (folders: TreeData, itemId: ItemId) => {
   return folders.items[itemId].children.length;
 };
+
+// id로 parent id 구하기
+export const findParentIdById = (folders: TreeData, itemId: ItemId) => {
+  const folderItems = Object.keys(folders.items);
+  for (let item = 0; item < folderItems.length; item++) {
+    if (folders.items[folderItems[item]].children.includes(itemId)) {
+      return folderItems[item];
+    }
+  }
+  return null;
+};

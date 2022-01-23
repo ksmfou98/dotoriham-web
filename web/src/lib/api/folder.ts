@@ -29,3 +29,9 @@ export const updateFolderAPI = async (
   });
   return response;
 };
+
+// 폴더 삭제
+export const deleteFolderAPI = async (folderId: ItemId) => {
+  const response = await client.delete(`/api/v1/folder/${folderId}`);
+  return response;
+};
