@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { addFolder, folderSelector } from "stores/folder";
 import { ICreateFolderRequest } from "types/folder";
 
-export default function useHandleFolder() {
+export default function useCreateFolder() {
   const folders = useSelector(folderSelector);
   const dispatch = useDispatch();
 

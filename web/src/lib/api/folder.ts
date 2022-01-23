@@ -1,4 +1,4 @@
-import { TreeData } from "@atlaskit/tree";
+import { ItemId, TreeData } from "@atlaskit/tree";
 import { ICreateFolderRequest, ICreateFolderResponse } from "types/folder";
 import client from "./client";
 
@@ -15,4 +15,17 @@ export const createFolderAPI = async (body: ICreateFolderRequest) => {
     body
   );
   return response.data;
+};
+
+// 폴더 정보 수정
+export const updateFolderAPI = async (
+  folderId: ItemId,
+  name: string,
+  emoji: string
+) => {
+  const response = await client.patch(`/api/v1/folder/${folderId}`, {
+    name,
+    emoji,
+  });
+  return response;
 };

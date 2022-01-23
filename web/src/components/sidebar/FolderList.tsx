@@ -15,10 +15,10 @@ import useFolderListQuery from "hooks/folder/useFolderListQuery";
 import { useDispatch, useSelector } from "react-redux";
 import { folderSelector, setFolders } from "stores/folder";
 import { More16Icon, PlusIcon } from "assets/icons";
-import useHandleFolder from "hooks/folder/useHandleFolder";
 import FolderMenu from "./FolderMenu";
 import useToggle from "hooks/common/useToggle";
 import FolderRenameModal from "./FolderRenameModal";
+import useCreateFolder from "hooks/folder/useCreateFolder";
 
 export interface IFolderMenuPosition {
   top: number;
@@ -29,7 +29,7 @@ function FolderList() {
   const folders = useSelector(folderSelector);
   const dispatch = useDispatch();
   const { data } = useFolderListQuery("sidebar");
-  const { onCreateFolder } = useHandleFolder();
+  const { onCreateFolder } = useCreateFolder();
 
   const folderBoxRef = useRef<HTMLDivElement>(null);
   const [isDragging, setIsDragging] = useState(false);
