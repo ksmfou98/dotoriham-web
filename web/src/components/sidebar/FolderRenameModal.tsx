@@ -42,6 +42,10 @@ function FolderRenameModal({
     setNewFolderEmoji(emoji);
   };
 
+  const onChangeFolderName = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setNewFolderName(e.target.value);
+  };
+
   const onToggleEmojiPicker = (
     e: React.MouseEvent<HTMLDivElement>,
     isEmojiPickerVisible: boolean
@@ -70,7 +74,13 @@ function FolderRenameModal({
             <FolderEmoji emoji={newFolderEmoji.unicode} />
           </EmojiBox>
 
-          <FolderNameInput type="text" width="192px" height="28px" />
+          <FolderNameInput
+            type="text"
+            width="192px"
+            height="28px"
+            value={newFolderName}
+            onChange={onChangeFolderName}
+          />
 
           <Button
             variant="primary"
