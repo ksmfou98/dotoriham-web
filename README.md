@@ -1,7 +1,7 @@
 # <div align="center"> dotoriham</div>
 
 <div align="center">
-    <img src="/docs/og-image.png" />
+    <img src="/docs/og-image.jpg" />
 </div>
 
 ### <div align="center">흩어진 북마크를 보관하고 공유하고 알림을 받아보세요!⚡</div>
