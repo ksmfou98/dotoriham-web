@@ -21,6 +21,8 @@ import FolderRenameModal from "./FolderRenameModal";
 import useCreateFolder from "hooks/folder/useCreateFolder";
 import SmallModal from "components/common/SmallModal";
 import useDeleteFolder from "hooks/folder/useDeleteFolder";
+import { findChildrenLengthById } from "lib/utils/atlaskitTreeFinder";
+import { moveFolderAPI } from "lib/api/folder";
 
 export interface IFolderMenuPosition {
   top: number;
@@ -33,6 +35,7 @@ function FolderList() {
   const { data } = useFolderListQuery("sidebar");
 
   const folderBoxRef = useRef<HTMLDivElement>(null);
+  const [draggingFolderId, setDraggingFolderId] = useState<ItemId | null>(null);
   const [isDragging, setIsDragging] = useState(false);
   const [folderBoxHeight, setFolderBoxHeight] = useState(0);
   const [isSelectedFolderId, setIsSelectedFolderId] = useState<ItemId>(0);
@@ -94,19 +97,43 @@ function FolderList() {
   };
 
   const onDragStartFolder = (itemId: ItemId) => {
-    console.log(itemId);
+    setDraggingFolderId(itemId);
   };
 
-  const onDragEndFolder = (
+  // @Note destination: 새로운 부모, source: 이전 부모
+  const onDragEndFolder = async (
     source: TreeSourcePosition,
     destination?: TreeDestinationPosition
   ) => {
     if (!destination) return;
+    if (!draggingFolderId) return;
+
     const newTree = moveItemOnTree(folders, source, destination);
     setIsDragging(false);
-    // console.log('새로운 부모Id', destination);
-    // console.log('기존 부모Id', source);
+
+    const prevParentId = source.parentId;
+    const prevIndex = source.index;
+    const nextParentId = destination.parentId;
+    const nextIndex =
+      destination.index === undefined
+        ? findChildrenLengthById(folders, nextParentId)
+        : destination.index;
+
+    const body = {
+      moveFolderId: draggingFolderId,
+      prevParentId,
+      nextParentId,
+      prevIndex,
+      nextIndex,
+    };
+
     dispatch(setFolders(newTree));
+    try {
+      await moveFolderAPI(body);
+      console.log("폴더 이동에 성공했습니다. 서브 폴더 갱신 invalid 추가 예정");
+    } catch (e) {
+      console.log("폴더 이동에 실패했습니다.");
+    }
   };
 
   // 각 폴더 아이템

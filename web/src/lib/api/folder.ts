@@ -1,5 +1,9 @@
 import { ItemId, TreeData } from "@atlaskit/tree";
-import { ICreateFolderRequest, ICreateFolderResponse } from "types/folder";
+import {
+  ICreateFolderRequest,
+  ICreateFolderResponse,
+  IMoveFolderRequest,
+} from "types/folder";
 import client from "./client";
 
 // 폴더 리스트 조회
@@ -27,11 +31,20 @@ export const updateFolderAPI = async (
     name,
     emoji,
   });
-  return response;
+  return response.data;
 };
 
 // 폴더 삭제
 export const deleteFolderAPI = async (folderId: ItemId) => {
   const response = await client.delete(`/api/v1/folder/${folderId}`);
-  return response;
+  return response.data;
+};
+
+// 폴더 이동
+export const moveFolderAPI = async (body: IMoveFolderRequest) => {
+  const response = await client.patch(
+    `/api/v1/folder/${body.moveFolderId}/move`,
+    body
+  );
+  return response.data;
 };

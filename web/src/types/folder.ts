@@ -9,3 +9,11 @@ export interface ICreateFolderRequest {
   name: string;
   index: number;
 }
+
+export interface IMoveFolderRequest {
+  moveFolderId: ItemId;
+  prevParentId: ItemId;
+  nextParentId: ItemId;
+  prevIndex: ItemId;
+  nextIndex: ItemId;
+}
