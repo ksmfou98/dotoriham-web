@@ -1,18 +1,19 @@
 import { LogoIcon } from "assets/icons";
 import { palette } from "lib/styles/palette";
 import React from "react";
+import Path from "routes/Path";
 import styled from "styled-components";
 
 function Logo() {
   return (
-    <LogoBlock>
+    <LogoBlock href={Path.HomePage}>
       <LogoIcon />
       <LogoText>도토리함</LogoText>
     </LogoBlock>
   );
 }
 
-const LogoBlock = styled.div`
+const LogoBlock = styled.a`
   display: flex;
   align-items: center;
   height: 20px;

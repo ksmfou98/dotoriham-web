@@ -5,17 +5,20 @@ import Logo from "components/common/Logo";
 import styled from "styled-components";
 import SearchBar from "./SearchBar";
 import RemindInfoButton from "./RemindInfoButton";
+import { Link } from "react-router-dom";
+import Path from "routes/Path";
 
 function Header() {
   return (
     <HeaderBlock>
       <HeaderInner>
         <Logo />
-
         <HeaderRightBox>
           <SearchBar />
           <RemindInfoButton />
-          <ProfileImg src="https://lh3.googleusercontent.com/a/AATXAJy6jltxS8Vjh9imZ5GO_S22eGWNrZq230lNgTc1wg=s96-c" />
+          <Link to={Path.MyPage}>
+            <ProfileImg src="https://lh3.googleusercontent.com/a/AATXAJy6jltxS8Vjh9imZ5GO_S22eGWNrZq230lNgTc1wg=s96-c" />
+          </Link>
         </HeaderRightBox>
       </HeaderInner>
     </HeaderBlock>
