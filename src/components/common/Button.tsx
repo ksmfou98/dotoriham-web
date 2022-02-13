@@ -39,9 +39,9 @@ function Button({
 const ButtonStyled = styled.button<ButtonStyledProps>`
   width: ${({ width }) => width};
   height: ${({ height }) => height};
-  line-height: ${({ height }) => height};
   border-radius: ${({ borderRadius }) => borderRadius};
   font-size: 14px;
+  line-height: 1.5;
   ${({ variant }) => {
     switch (variant) {
       case "primary":
