@@ -1,10 +1,14 @@
 import { Back24Icon, Next24Icon } from "assets/icons";
 import React from "react";
 import styled, { css } from "styled-components";
-import reminds from "./mock.json";
+import useRemindQuery from "./hooks/useRemindQuery";
 import RemindListItem from "./RemindListItem";
 
 function RemindList() {
+  const { data } = useRemindQuery();
+
+  if (!data) return null;
+
   return (
     <RemindListBlock>
       <BackButton isHidden={false}>
@@ -13,7 +17,7 @@ function RemindList() {
 
       <RemindListBox>
         <div className="box-inner">
-          {reminds.reminds.map((remind) => (
+          {data.remindBookmarkList.map((remind) => (
             <RemindListItem key={remind.id} remindData={remind} />
           ))}
         </div>

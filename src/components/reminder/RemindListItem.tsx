@@ -2,15 +2,18 @@ import { Symbol36Icon, X16Icon } from "assets/icons";
 import { palette } from "lib/styles/palette";
 import React from "react";
 import styled from "styled-components";
+import { IDotori } from "types/dotori";
+import useDeleteRemind from "./hooks/useDeleteRemind";
 
 interface RemindListItemProps {
-  remindData: any; // 나중에 백앤드랑 연동할 때 IBookmarkItem 으로 교체해야함
+  remindData: IDotori;
 }
 
 function RemindListItem({ remindData }: RemindListItemProps) {
-  const { title, description, image, link } = remindData;
+  const { title, description, image, link, id } = remindData;
+  const remindText = title || description;
 
-  const remindText = title | description;
+  const { mutateDeleteRemind } = useDeleteRemind();
 
   return (
     <RemindListItemBlock href={link} target="_blank" rel="noopener noreferrer">
@@ -27,6 +30,7 @@ function RemindListItem({ remindData }: RemindListItemProps) {
         <DeleteButton
           onClick={(e) => {
             e.preventDefault(); // @Note Delete 버튼은 a태그의 새창 열기를 막기 위해
+            mutateDeleteRemind(id);
           }}
         />
         <RightBoxText>{remindText}</RightBoxText>

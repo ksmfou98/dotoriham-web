@@ -2,7 +2,9 @@ import React, { useEffect } from "react";
 import DotoriNav from "components/dotori/DotoriNav";
 import DotoriList from "./DotoriList";
 import DotoriPagination from "./DotoriPagination";
-import useDotoriQuery, { DotoriPathTypes } from "components/dotori/hooks/useDotoriQuery";
+import useDotoriQuery, {
+  DotoriPathTypes,
+} from "components/dotori/hooks/useDotoriQuery";
 import { useDispatch } from "react-redux";
 import { setDotoris } from "stores/dotori";
 import { ItemId } from "@atlaskit/tree";

@@ -6,3 +6,9 @@ export const getRemindListAPI = async () => {
   const response = await client.get<IRemindListResponse>("/api/v1/page/today");
   return response.data;
 };
+
+// 리마인드 삭제
+export const deleteRemindAPI = async (bookmarkId: string) => {
+  const response = await client.delete(`/api/v1/remind/${bookmarkId}`);
+  return response.data;
+};
