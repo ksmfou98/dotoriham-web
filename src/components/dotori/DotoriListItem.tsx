@@ -1,4 +1,9 @@
-import { BellSelectedIcon, Copy24Icon, More24Icon } from "assets/icons";
+import {
+  BellSelectedIcon,
+  BellUnSelectedIcon,
+  Copy24Icon,
+  More24Icon,
+} from "assets/icons";
 import DividerLine from "components/common/DividerLine";
 import FolderEmoji from "components/common/FolderEmoji";
 import { palette } from "lib/styles/palette";
@@ -56,7 +61,7 @@ function DotoriListItem({ dotori }: DotoriListItemProps) {
 
             <DotoriOption>
               <OptionButton>
-                <BellSelectedIcon />
+                {remindTime ? <BellSelectedIcon /> : <BellUnSelectedIcon />}
               </OptionButton>
               <OptionButton>
                 <Copy24Icon />
