@@ -15,6 +15,7 @@ import Path from "routes/Path";
 import styled from "styled-components";
 import { IDotoriItem } from "types/dotori";
 import { toast } from "react-toastify";
+import useToast from "hooks/useToast";
 
 interface DotoriListItemProps {
   dotori: IDotoriItem;
@@ -35,10 +36,7 @@ function DotoriListItem({ dotori }: DotoriListItemProps) {
   } = dotori;
 
   const { copyUrlRef, onCopyUrl } = useCopyUrl();
-  const copyToast = () =>
-    toast("😀 링크를 복사했어요! 😀", {
-      className: "big-toast",
-    });
+  const { copyToast } = useToast();
 
   return (
     <DotoriItemBlock>
