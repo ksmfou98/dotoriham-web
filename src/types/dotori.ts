@@ -55,3 +55,9 @@ export type DotoriSortType =
   | "saveTime,asc"
   | "clickCount,desc"
   | "clickCount,asc";
+
+export interface DotoriUpdateRequest {
+  bookmarkId: string;
+  title: string;
+  remind: boolean;
+}

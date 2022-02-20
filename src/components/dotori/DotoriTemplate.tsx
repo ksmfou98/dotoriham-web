@@ -20,7 +20,7 @@ interface DotoriTemplateProps {
 
 function DotoriTemplate({ path, keyword, folderId }: DotoriTemplateProps) {
   const [isRemind, onToggleRemind] = useToggle(false);
-  const { data, isError, isFetching } = useDotoriQuery(
+  const { data } = useDotoriQuery(
     path,
     0,
     12,
@@ -37,9 +37,6 @@ function DotoriTemplate({ path, keyword, folderId }: DotoriTemplateProps) {
       setDotoris(data.content.map((dotori) => ({ ...dotori, checked: false })))
     );
   }, [data, dispatch]);
-
-  if (isFetching) return <div> ...loading</div>;
-  if (isError) return <div>컨텐츠가 존재하지 않습니다.</div>;
 
   return (
     <>

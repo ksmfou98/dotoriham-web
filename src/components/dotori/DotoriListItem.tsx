@@ -16,6 +16,7 @@ import styled from "styled-components";
 import { IDotoriItem } from "types/dotori";
 import { toast } from "react-toastify";
 import useToast from "hooks/useToast";
+import useUpdateDotori from "./hooks/useUpdateDotori";
 
 interface DotoriListItemProps {
   dotori: IDotoriItem;
@@ -36,7 +37,18 @@ function DotoriListItem({ dotori }: DotoriListItemProps) {
   } = dotori;
 
   const { copyUrlRef, onCopyUrl } = useCopyUrl();
-  const { copyToast } = useToast();
+  const { copyToast, remindSettingToast, remindDisabledToast } = useToast();
+  const { mutateEditDotori } = useUpdateDotori();
+
+  const onRemindToggle = () => {
+    const requestData = {
+      bookmarkId: id,
+      title,
+      remind: !remindTime,
+    };
+    mutateEditDotori(requestData);
+    remindTime ? remindDisabledToast() : remindSettingToast();
+  };
 
   return (
     <DotoriItemBlock>
@@ -66,7 +78,7 @@ function DotoriListItem({ dotori }: DotoriListItemProps) {
             </DotoriLinkBox>
 
             <DotoriOption>
-              <OptionButton>
+              <OptionButton onClick={onRemindToggle}>
                 {remindTime ? <BellSelectedIcon /> : <BellUnSelectedIcon />}
               </OptionButton>
               <OptionButton

@@ -1,5 +1,9 @@
 import { ItemId } from "@atlaskit/tree";
-import { DotoriSortType, IDotoriListResponse } from "types/dotori";
+import {
+  DotoriSortType,
+  DotoriUpdateRequest,
+  IDotoriListResponse,
+} from "types/dotori";
 import client from "./client";
 
 // 휴지통 북마크 조회
@@ -40,5 +44,16 @@ export const getDotorisAPI = async (
   const response = await client.get<IDotoriListResponse>(
     `/api/v1/page/${folderId}?page=${page}&size=${size}&sort=${sort}&remind=${remind}`
   );
+  return response.data;
+};
+
+// 북마크 정보 수정
+export const updateDotoriAPI = async (requestData: DotoriUpdateRequest) => {
+  const { bookmarkId } = requestData;
+  const response = await client.patch(
+    `/api/v1/bookmark/${bookmarkId}`,
+    requestData
+  );
+
   return response.data;
 };
