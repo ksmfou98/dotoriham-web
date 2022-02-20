@@ -13,7 +13,7 @@ function DotoriFilterNav({ isRemind, onToggleRemind }: DotoriFilterNavProps) {
     <DotoriFilterNavBlock>
       <RemindToggleStyled>
         <RemindToggleText>리마인드 도토리</RemindToggleText>
-        <SwitchButton isToggled={isRemind} onClick={onToggleRemind} />
+        <SwitchButton isChecked={isRemind} onToggle={onToggleRemind} />
       </RemindToggleStyled>
 
       <FilterMenuButton>
