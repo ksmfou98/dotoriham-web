@@ -2,6 +2,7 @@ import Header from "components/header";
 import { mediaSize } from "lib/styles/media";
 import React from "react";
 import { QueryClient, QueryClientProvider } from "react-query";
+import { ReactQueryDevtools } from "react-query/devtools";
 import styled from "styled-components";
 import GlobalStyles from "./lib/styles/globalStyles";
 import Routing from "./routes/Routing";
@@ -18,6 +19,7 @@ function App() {
           <Routing />
         </MainLayout>
       </AppWrapper>
+      <ReactQueryDevtools />
     </QueryClientProvider>
   );
 }
