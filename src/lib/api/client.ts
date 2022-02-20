@@ -2,7 +2,6 @@ import axios from "axios";
 import { SERVER_URL } from "lib/const";
 import getTokens from "lib/utils/getTokens";
 import userStorage from "lib/utils/userStorage";
-import { IUserState } from "stores/user";
 
 const client = axios.create({
   withCredentials: true,
@@ -37,7 +36,7 @@ client.interceptors.response.use(
   async (error) => {
     const {
       config,
-      response: { status, data },
+      response: { status },
     } = error;
 
     switch (status) {
