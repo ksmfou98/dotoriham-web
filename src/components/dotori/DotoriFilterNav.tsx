@@ -3,12 +3,17 @@ import SwitchButton from "components/common/SwitchButton";
 import React from "react";
 import styled from "styled-components";
 
-function DotoriFilterNav() {
+interface DotoriFilterNavProps {
+  onToggleRemind: () => void;
+  isRemind: boolean;
+}
+
+function DotoriFilterNav({ isRemind, onToggleRemind }: DotoriFilterNavProps) {
   return (
     <DotoriFilterNavBlock>
       <RemindToggleStyled>
         <RemindToggleText>리마인드 도토리</RemindToggleText>
-        <SwitchButton isToggled={true} />
+        <SwitchButton isToggled={isRemind} onClick={onToggleRemind} />
       </RemindToggleStyled>
 
       <FilterMenuButton>

@@ -4,11 +4,16 @@ import styled from "styled-components";
 import DotoriFilterNav from "./DotoriFilterNav";
 import DotoriSelectNav from "./DotoriSelectNav";
 
-function DotoriNav() {
+interface DotoriNavProps {
+  onToggleRemind: () => void;
+  isRemind: boolean;
+}
+
+function DotoriNav({ isRemind, onToggleRemind }: DotoriNavProps) {
   return (
     <DotoriNavBlock>
       <DotoriSelectNav />
-      <DotoriFilterNav />
+      <DotoriFilterNav isRemind={isRemind} onToggleRemind={onToggleRemind} />
     </DotoriNavBlock>
   );
 }

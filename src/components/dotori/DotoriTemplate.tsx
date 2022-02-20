@@ -8,6 +8,7 @@ import useDotoriQuery, {
 import { useDispatch } from "react-redux";
 import { setDotoris } from "stores/dotori";
 import { ItemId } from "@atlaskit/tree";
+import useToggle from "hooks/useToggle";
 
 // TODO: Props로 trash인지 serach인지 폴더id 인지 받아와야 함
 
@@ -18,12 +19,13 @@ interface DotoriTemplateProps {
 }
 
 function DotoriTemplate({ path, keyword, folderId }: DotoriTemplateProps) {
+  const [isRemind, onToggleRemind] = useToggle(false);
   const { data, isError, isFetching } = useDotoriQuery(
     path,
     0,
     12,
     "saveTime,desc",
-    true,
+    isRemind,
     keyword,
     folderId
   );
@@ -40,11 +42,11 @@ function DotoriTemplate({ path, keyword, folderId }: DotoriTemplateProps) {
   if (isError) return <div>컨텐츠가 존재하지 않습니다.</div>;
 
   return (
-    <div>
-      <DotoriNav />
+    <>
+      <DotoriNav isRemind={isRemind} onToggleRemind={onToggleRemind} />
       <DotoriList />
       <DotoriPagination />
-    </div>
+    </>
   );
 }
 
