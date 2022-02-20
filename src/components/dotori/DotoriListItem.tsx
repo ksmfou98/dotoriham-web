@@ -14,6 +14,7 @@ import { Link } from "react-router-dom";
 import Path from "routes/Path";
 import styled from "styled-components";
 import { IDotoriItem } from "types/dotori";
+import { toast } from "react-toastify";
 
 interface DotoriListItemProps {
   dotori: IDotoriItem;
@@ -34,6 +35,10 @@ function DotoriListItem({ dotori }: DotoriListItemProps) {
   } = dotori;
 
   const { copyUrlRef, onCopyUrl } = useCopyUrl();
+  const copyToast = () =>
+    toast("😀 링크를 복사했어요! 😀", {
+      className: "big-toast",
+    });
 
   return (
     <DotoriItemBlock>
@@ -66,7 +71,12 @@ function DotoriListItem({ dotori }: DotoriListItemProps) {
               <OptionButton>
                 {remindTime ? <BellSelectedIcon /> : <BellUnSelectedIcon />}
               </OptionButton>
-              <OptionButton onClick={() => onCopyUrl(link)}>
+              <OptionButton
+                onClick={() => {
+                  onCopyUrl(link);
+                  copyToast();
+                }}
+              >
                 <Copy24Icon />
               </OptionButton>
               <OptionButton>
@@ -76,7 +86,7 @@ function DotoriListItem({ dotori }: DotoriListItemProps) {
           </DotoriBottomArea>
         </DotoriContent>
       </DotoriItemInner>
-      <UrlCopyInput ref={copyUrlRef} value={link} />
+      <UrlCopyInput ref={copyUrlRef} readOnly value={link} />
     </DotoriItemBlock>
   );
 }
