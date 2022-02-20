@@ -6,6 +6,7 @@ import {
 } from "assets/icons";
 import DividerLine from "components/common/DividerLine";
 import FolderEmoji from "components/common/FolderEmoji";
+import useCopyUrl from "hooks/useCopyUrl";
 import { palette } from "lib/styles/palette";
 import { ellipsis } from "lib/styles/utilStyles";
 import React from "react";
@@ -31,6 +32,8 @@ function DotoriListItem({ dotori }: DotoriListItemProps) {
     folderName,
     folderEmoji,
   } = dotori;
+
+  const { copyUrlRef, onCopyUrl } = useCopyUrl();
 
   return (
     <DotoriItemBlock>
@@ -63,7 +66,7 @@ function DotoriListItem({ dotori }: DotoriListItemProps) {
               <OptionButton>
                 {remindTime ? <BellSelectedIcon /> : <BellUnSelectedIcon />}
               </OptionButton>
-              <OptionButton>
+              <OptionButton onClick={() => onCopyUrl(link)}>
                 <Copy24Icon />
               </OptionButton>
               <OptionButton>
@@ -73,6 +76,7 @@ function DotoriListItem({ dotori }: DotoriListItemProps) {
           </DotoriBottomArea>
         </DotoriContent>
       </DotoriItemInner>
+      <UrlCopyInput ref={copyUrlRef} value={link} />
     </DotoriItemBlock>
   );
 }
@@ -202,6 +206,10 @@ const DotoriOption = styled.div`
 
 const OptionButton = styled.button`
   position: relative;
+`;
+
+const UrlCopyInput = styled.input`
+  display: none;
 `;
 
 export default DotoriListItem;
