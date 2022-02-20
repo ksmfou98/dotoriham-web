@@ -1,6 +1,8 @@
 import axios from "axios";
 import { SERVER_URL } from "lib/const";
 import getTokens from "lib/utils/getTokens";
+import userStorage from "lib/utils/userStorage";
+import { IUserState } from "stores/user";
 
 const client = axios.create({
   withCredentials: true,
@@ -34,30 +36,45 @@ client.interceptors.response.use(
   },
   async (error) => {
     const {
+      config,
       response: { status, data },
     } = error;
 
-    console.log(data);
-    // @TODO 지환님이 에러 메세지 형식 다 맞춰주시면 이쪽
-    // switch 문을 data로 바꿔서 각 에러메세지 별로 처리하도록 해야함.
-    // accessToken이 만료되었을 때, refreshToken이 만료되었을 때 등등
     switch (status) {
       case 401:
-        // window.location.replace("/login");
-        // const tokens = getTokens();
-        // if (!tokens) throw new Error("No tokens found");
-        // const { accessToken, refreshToken } = tokens;
-        // console.log(tokens);
-        // const { data } = await axios.get(
-        //   `${SERVER_URL}/api/v1/user/reIssuanceAccessToken`,
-        //   {
-        //     headers: {
-        //       accessToken: `Bearer ${accessToken}`,
-        //       refreshToken: `Bearer ${refreshToken}`,
-        //     },
-        //   }
-        // );
+        const originalRequest = config;
+        const tokens = getTokens();
+        if (!tokens) throw new Error("No tokens found");
+        const { accessToken, refreshToken } = tokens;
+        try {
+          const { data } = await axios.get(
+            `${SERVER_URL}/api/v1/user/reIssuanceAccessToken`,
+            {
+              headers: {
+                accessToken: `Bearer ${accessToken}`,
+                refreshToken: `Bearer ${refreshToken}`,
+              },
+            }
+          );
 
+          const user = userStorage.get();
+          if (!user) throw new Error("No user found");
+          const newUser = {
+            ...user,
+            accessToken: data.accessToken,
+            refreshToken: data.refreshToken,
+          };
+          userStorage.set(newUser);
+          axios.defaults.headers.common.accessToken = `Bearer ${data.accessToken}`;
+          axios.defaults.headers.common.refreshToken = `Bearer ${data.refreshToken}`;
+          originalRequest.headers.accessToken = `Bearer ${data.accessToken}`;
+          originalRequest.headers.refreshToken = `Bearer ${data.refreshToken}`;
+          // 401로 요청 실패했던 요청 새로운 accessToken으로 재요청
+          return axios(originalRequest);
+        } catch (e) {
+          console.log(e, "dsadsad");
+          window.location.replace("/login");
+        }
         break;
 
       default:
