@@ -1,5 +1,5 @@
 import Button from "components/common/Button";
-import useHandleFolder from "hooks/folder/useCreateFolder";
+import useHandleFolder from "components/sidebar/hooks/useCreateFolder";
 import React from "react";
 import styled from "styled-components";
 

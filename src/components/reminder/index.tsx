@@ -1,6 +1,6 @@
 import { ArrowUp16Icon } from "assets/icons";
 import DividerLine from "components/common/DividerLine";
-import useToggle from "hooks/common/useToggle";
+import useToggle from "hooks/useToggle";
 import { palette } from "lib/styles/palette";
 import React from "react";
 import styled from "styled-components";

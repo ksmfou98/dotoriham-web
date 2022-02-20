@@ -1,5 +1,5 @@
-import { DotoriPathTypes } from "hooks/dotori/useDotoriQuery";
-import { FolderQueryKindTypes } from "hooks/folder/useFolderListQuery";
+import { DotoriPathTypes } from "components/dotori/hooks/useDotoriQuery";
+import { FolderQueryKindTypes } from "components/sidebar/hooks/useFolderListQuery";
 import { DotoriSortType } from "types/dotori";
 
 export enum QueryKey {
