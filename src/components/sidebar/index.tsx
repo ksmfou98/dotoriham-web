@@ -10,12 +10,18 @@ import {
   SelectedTrashIcon,
   UnselectedTrashIcon,
 } from "assets/icons";
+import { useLocation, useNavigate } from "react-router-dom";
+import Path from "routes/Path";
 
 function Sidebar() {
+  const { pathname } = useLocation();
+  const navigate = useNavigate();
+
   return (
     <SidebarBlock>
       <SidebarIconName
-        isActive
+        isActive={pathname === Path.DotoriPage}
+        onClick={() => navigate(Path.DotoriPage)}
         name="모든 도토리"
         activeIcon={<ListSelectedIcon />}
         unActiveIcon={<ListUnSelectedIcon />}
@@ -27,6 +33,8 @@ function Sidebar() {
       <AddFolderButton />
 
       <SidebarIconName
+        isActive={pathname === Path.TrashPage}
+        onClick={() => navigate(Path.TrashPage)}
         name="휴지통"
         activeIcon={<SelectedTrashIcon />}
         unActiveIcon={<UnselectedTrashIcon />}
