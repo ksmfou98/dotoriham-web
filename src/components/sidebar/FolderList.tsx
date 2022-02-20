@@ -23,7 +23,7 @@ import SmallModal from "components/common/SmallModal";
 import useDeleteFolder from "hooks/folder/useDeleteFolder";
 import { findChildrenLengthById } from "lib/utils/atlaskitTreeFinder";
 import { moveFolderAPI } from "lib/api/folder";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import Path from "routes/Path";
 
 export interface IFolderMenuPosition {
@@ -35,6 +35,7 @@ function FolderList() {
   const folders = useSelector(folderSelector);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { pathname } = useLocation();
   const { data } = useFolderListQuery("sidebar");
 
   const folderBoxRef = useRef<HTMLDivElement>(null);
@@ -169,6 +170,7 @@ function FolderList() {
                 onExpand={onExpand}
               />
               <FolderTitle
+                active={pathname === `${Path.DotoriPage}/${item.id}`}
                 onClick={() => navigate(`${Path.DotoriPage}/${item.id}`)}
               >
                 {item.data.name}
@@ -288,8 +290,9 @@ const FolderLeftBox = styled.div`
   min-width: 65px;
 `;
 
-const FolderTitle = styled.span`
+const FolderTitle = styled.span<{ active: boolean }>`
   cursor: pointer;
+  color: ${({ active }) => (active ? palette.primary : palette.black)};
   margin-left: 4px;
   height: 28px;
   line-height: 28px;
