@@ -1,5 +1,5 @@
 import axios from "axios";
-import { SERVER_URL } from "lib/const";
+import { SERVER_URL } from "lib/constants";
 import getTokens from "lib/utils/getTokens";
 import userStorage from "lib/utils/userStorage";
 

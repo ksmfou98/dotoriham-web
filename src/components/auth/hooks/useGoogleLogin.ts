@@ -1,5 +1,5 @@
 import { loginAPI } from "lib/api/auth";
-import { GOOGLE_CLIENT_ID } from "lib/const";
+import { GOOGLE_CLIENT_ID } from "lib/constants";
 import userStorage from "lib/utils/userStorage";
 import { useCallback } from "react";
 import { useDispatch } from "react-redux";

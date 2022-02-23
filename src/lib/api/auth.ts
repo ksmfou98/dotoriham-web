@@ -1,5 +1,5 @@
 import axios from "axios";
-import { SERVER_URL } from "lib/const";
+import { SERVER_URL } from "lib/constants";
 import { ILoginRequest, ILoginResponse } from "types/auth";
 
 export const loginAPI = async (loginRequest: ILoginRequest) => {
