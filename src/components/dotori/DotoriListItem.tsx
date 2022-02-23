@@ -14,7 +14,6 @@ import { Link } from "react-router-dom";
 import Path from "routes/Path";
 import styled from "styled-components";
 import { IDotoriItem } from "types/dotori";
-import { toast } from "react-toastify";
 import useToast from "hooks/useToast";
 import useUpdateDotori from "./hooks/useUpdateDotori";
 
@@ -31,7 +30,6 @@ function DotoriListItem({ dotori }: DotoriListItemProps) {
     remindTime,
     folderId,
     image,
-    checked,
     folderName,
     folderEmoji,
   } = dotori;
@@ -143,8 +141,6 @@ const DotoriOGImage = styled.img`
   object-fit: cover;
   border-radius: 8px 8px 0 0;
 `;
-
-const DotoriDefaultImage = styled.image``;
 
 const DotoriContent = styled.div`
   padding: 14px 20px 15px;
