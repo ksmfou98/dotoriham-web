@@ -47,6 +47,7 @@ function FolderList() {
   // modal state
   const [isFolderMenu, setIsFolderMenu] = useState(false);
   const [isRenameModal, onToggleRenameModal] = useToggle();
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [isMoveModal, onToggleMoveModal] = useToggle();
   const [isDeleteModal, onToggleDeleteModal] = useToggle();
 
@@ -157,11 +158,11 @@ function FolderList() {
           <FolderItemBlock
             onMouseDown={onMouseDownFolder}
             onMouseUp={() => setIsDragging(false)}
-            onClick={() =>
-              item.children.length > 0 && item.isExpanded
-                ? onCollapse(item.id)
-                : onExpand(item.id)
-            }
+            // onClick={() =>
+            //   item.children.length > 0 && item.isExpanded
+            //     ? onCollapse(item.id)
+            //     : onExpand(item.id)
+            // }
           >
             <FolderLeftBox>
               <FolderItemIcon
