@@ -49,7 +49,7 @@ const CheckBox = styled.input`
       display: block;
       width: 20px;
       height: 20px;
-      left: 12px;
+      left: 14px;
       border-radius: 50%;
       background: ${palette.primary};
       transition: all 0.2s ease-in-out;
