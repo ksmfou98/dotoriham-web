@@ -13,7 +13,7 @@ function DotoriPage() {
   return (
     <>
       {location.pathname === Path.DotoriPage && <Reminder />}
-      <PagePath />
+      <PagePath path={path} />
       <DotoriTemplate path={path} folderId={folderId} />
     </>
   );

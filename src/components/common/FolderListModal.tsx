@@ -99,7 +99,7 @@ function FolderListModal({
       <ModalInner>
         <ModalTitle>위치 선택</ModalTitle>
         <PathBox>
-          <PagePath isModal />
+          <PagePath isModal path="folder" />
         </PathBox>
         <FolderListBox>
           <FolderListBlock>

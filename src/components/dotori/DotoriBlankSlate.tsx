@@ -3,7 +3,7 @@ import { palette } from "lib/styles/palette";
 import getBlankSlateText from "lib/utils/getBlankSlateText";
 import React from "react";
 import styled from "styled-components";
-import { DotoriPathTypes } from "./hooks/useDotoriQuery";
+import { DotoriPathTypes } from "types/dotori";
 
 function DotoriBlankSlate({ path }: { path: DotoriPathTypes }) {
   const text = getBlankSlateText(path);

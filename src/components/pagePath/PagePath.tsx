@@ -1,17 +1,24 @@
 import { palette } from "lib/styles/palette";
 import React from "react";
 import styled from "styled-components";
+import { DotoriPathTypes } from "types/dotori";
+import GlobalPath from "./GlobalPath";
 
 interface PagePathProps {
   isModal?: boolean;
+  path: DotoriPathTypes;
 }
 
-function PagePath({ isModal }: PagePathProps) {
-  return <PagePathBlock isModal={isModal}>모든 도토리</PagePathBlock>;
+function PagePath({ isModal, path }: PagePathProps) {
+  return (
+    <PagePathBlock isModal={isModal}>
+      {path === "folder" ? <div>폴더</div> : <GlobalPath path={path} />}
+    </PagePathBlock>
+  );
 }
 
 const PagePathBlock = styled.div<{ isModal?: boolean }>`
-  font-size: ${({ isModal }) => (isModal ? "14px" : "16px")};
+  font-size: ${({ isModal }) => (isModal ? "12px" : "16px")};
   margin-bottom: 28px;
   color: ${palette.grayDarkest};
 `;

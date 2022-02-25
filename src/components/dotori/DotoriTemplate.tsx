@@ -1,14 +1,12 @@
 import React, { useEffect, useState } from "react";
 import DotoriList from "./DotoriList";
 import DotoriPagination from "./DotoriPagination";
-import useDotoriQuery, {
-  DotoriPathTypes,
-} from "components/dotori/hooks/useDotoriQuery";
+import useDotoriQuery from "components/dotori/hooks/useDotoriQuery";
 import { useDispatch } from "react-redux";
 import { setDotoris } from "stores/dotori";
 import { ItemId } from "@atlaskit/tree";
 import useToggle from "hooks/useToggle";
-import { FilterMenu } from "types/dotori";
+import { DotoriPathTypes, FilterMenu } from "types/dotori";
 import styled from "styled-components";
 import { palette } from "lib/styles/palette";
 import DotoriSelectNav from "./DotoriSelectNav";

@@ -5,7 +5,7 @@ import React from "react";
 function TrashPage() {
   return (
     <>
-      <PagePath />
+      <PagePath path="trash" />
       <DotoriTemplate path="trash" />
     </>
   );

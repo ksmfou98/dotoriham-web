@@ -72,3 +72,5 @@ export interface FilterMenu {
   text: FilterMenuTextType;
   label: DotoriSortType;
 }
+
+export type DotoriPathTypes = "main" | "trash" | "search" | "folder";

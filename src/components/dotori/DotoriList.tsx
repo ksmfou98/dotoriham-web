@@ -5,10 +5,10 @@ import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { dotoriSelector } from "stores/dotori";
 import styled from "styled-components";
+import { DotoriPathTypes } from "types/dotori";
 import DotoriBlankSlate from "./DotoriBlankSlate";
 import DotoriEditModal from "./DotoriEditModal";
 import DotoriListItem from "./DotoriListItem";
-import { DotoriPathTypes } from "./hooks/useDotoriQuery";
 
 export interface ToggleModal {
   onToggleDeleteModal: () => void;
