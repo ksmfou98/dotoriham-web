@@ -1,3 +1,4 @@
+import FolderListModal from "components/common/FolderListModal";
 import SmallModal from "components/common/SmallModal";
 import useToggle from "hooks/useToggle";
 import React, { useState } from "react";
@@ -12,7 +13,7 @@ function DotoriList() {
 
   const [isDeleteModal, onToggleDeleteModal] = useToggle();
   const [isEditModal, onToggleEditModal] = useToggle();
-  const [isMoveModal, onToggleMoveModal] = useToggle();
+  const [isMoveModal, onToggleMoveModal] = useToggle(true);
 
   const onToggleModal = {
     onToggleDeleteModal,
@@ -51,6 +52,14 @@ function DotoriList() {
           content="삭제된 도토리는 모두 <br /> 휴지통으로 들어가요!"
           buttonName="삭제"
           onClick={() => console.log("삭제")}
+        />
+      )}
+
+      {isMoveModal && (
+        <FolderListModal
+          isModal={isMoveModal}
+          onToggleModal={onToggleMoveModal}
+          onMove={() => console.log("옮기기")}
         />
       )}
     </DotoriListBlock>
