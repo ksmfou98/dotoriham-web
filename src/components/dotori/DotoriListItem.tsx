@@ -18,12 +18,19 @@ import useToast from "hooks/useToast";
 import useDotoriSelect from "./hooks/useDotoriSelect";
 import CheckBox from "components/common/CheckBox";
 import useDotoriMutation from "./hooks/useDotoriMutation";
+import DotoriItemMenu from "./DotoriItemMenu";
 
 interface DotoriListItemProps {
   dotori: IDotoriItem;
+  isActiveDotoriMenuId: string;
+  onActiveDotoriMenu: (dotoriId: string) => void;
 }
 
-function DotoriListItem({ dotori }: DotoriListItemProps) {
+function DotoriListItem({
+  dotori,
+  isActiveDotoriMenuId,
+  onActiveDotoriMenu,
+}: DotoriListItemProps) {
   const {
     id,
     title,
@@ -111,6 +118,7 @@ function DotoriListItem({ dotori }: DotoriListItemProps) {
               <OptionButton onClick={onRemindToggle}>
                 {remindTime ? <BellSelectedIcon /> : <BellUnSelectedIcon />}
               </OptionButton>
+
               <OptionButton
                 onClick={() => {
                   onCopyUrl(link);
@@ -119,8 +127,15 @@ function DotoriListItem({ dotori }: DotoriListItemProps) {
               >
                 <Copy24Icon />
               </OptionButton>
-              <OptionButton>
+
+              <OptionButton
+                onClick={(e) => {
+                  onActiveDotoriMenu(id);
+                  e.stopPropagation();
+                }}
+              >
                 <More24Icon />
+                {isActiveDotoriMenuId === id && <DotoriItemMenu />}
               </OptionButton>
             </DotoriOption>
           </DotoriBottomArea>

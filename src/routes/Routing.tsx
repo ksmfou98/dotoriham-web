@@ -8,7 +8,7 @@ import SignUpPage from "pages/SignUpPage";
 import TrashPage from "pages/TrashPage";
 import { Routes, Route, Navigate } from "react-router-dom";
 import Path from "./Path";
-import SidebarRouteLayout from "./SidebarRouteLayout";
+import SidebarRouteLayout from "../components/common/SidebarRouteLayout";
 
 function Routing() {
   return (

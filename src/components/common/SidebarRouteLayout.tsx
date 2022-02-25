@@ -9,7 +9,9 @@ function SidebarRouteLayout() {
     <SidebarRouteLayoutBlock>
       <Sidebar />
       <MainContent>
-        <Outlet />
+        <ContentInner>
+          <Outlet />
+        </ContentInner>
       </MainContent>
     </SidebarRouteLayoutBlock>
   );
@@ -23,9 +25,12 @@ const SidebarRouteLayoutBlock = styled.div`
 
 const MainContent = styled.div`
   flex: 1 auto;
-  overflow: hidden;
   padding: 20px 0px 0px 20px;
   ${scrollbar}
+`;
+
+const ContentInner = styled.div`
+  width: 867px;
 `;
 
 export default SidebarRouteLayout;
