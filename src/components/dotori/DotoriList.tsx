@@ -5,8 +5,10 @@ import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { dotoriSelector } from "stores/dotori";
 import styled from "styled-components";
+import DotoriBlankSlate from "./DotoriBlankSlate";
 import DotoriEditModal from "./DotoriEditModal";
 import DotoriListItem from "./DotoriListItem";
+import { DotoriPathTypes } from "./hooks/useDotoriQuery";
 
 export interface ToggleModal {
   onToggleDeleteModal: () => void;
@@ -14,7 +16,7 @@ export interface ToggleModal {
   onToggleMoveModal: () => void;
 }
 
-function DotoriList() {
+function DotoriList({ path }: { path: DotoriPathTypes }) {
   const dotoris = useSelector(dotoriSelector);
 
   const [isDeleteModal, onToggleDeleteModal] = useToggle();
@@ -34,6 +36,8 @@ function DotoriList() {
 
   return (
     <DotoriListBlock>
+      {dotoris.length === 0 && <DotoriBlankSlate path={path} />}
+
       {dotoris.map((dotori) => (
         <DotoriListItem
           key={dotori.id}

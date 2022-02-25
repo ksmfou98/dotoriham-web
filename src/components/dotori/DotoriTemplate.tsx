@@ -65,7 +65,7 @@ function DotoriTemplate({ path, keyword, folderId }: DotoriTemplateProps) {
           onChangeFilterType={onChangeFilterType}
         />
       </DotoriNavBlock>
-      <DotoriList />
+      <DotoriList path={path} />
       <DotoriPagination />
     </>
   );

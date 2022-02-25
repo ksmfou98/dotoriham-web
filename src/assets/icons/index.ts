@@ -29,3 +29,4 @@ export { ReactComponent as Copy24Icon } from "./Icons_Copy_24.svg";
 export { ReactComponent as More24Icon } from "./Icons_More_24.svg";
 export { ReactComponent as More16Icon } from "./More_16.svg";
 export { ReactComponent as PlusIcon } from "./Plus.svg";
+export { ReactComponent as SymbolGray96Icon } from "./Icons_Symbol_gray_96.svg";
