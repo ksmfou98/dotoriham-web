@@ -1,13 +1,20 @@
 import CheckBox from "components/common/CheckBox";
 import React from "react";
 import styled from "styled-components";
+import useDotoriSelect from "./hooks/useDotoriSelect";
 
 function DotoriSelectNav() {
+  const { isDotoriAllChecked, onToggleDotoriAllChecked } = useDotoriSelect();
+
   return (
     <DotoriSelectNavBlock>
       <SelectForm>
         <SelectText>선택</SelectText>
-        <CheckBox variant="secondary" isChecked />
+        <CheckBox
+          variant="secondary"
+          isChecked={isDotoriAllChecked}
+          onClick={onToggleDotoriAllChecked}
+        />
       </SelectForm>
 
       <SelectOption>

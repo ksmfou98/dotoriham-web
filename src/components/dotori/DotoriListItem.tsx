@@ -16,6 +16,8 @@ import styled from "styled-components";
 import { IDotoriItem } from "types/dotori";
 import useToast from "hooks/useToast";
 import useUpdateDotori from "./hooks/useUpdateDotori";
+import useDotoriSelect from "./hooks/useDotoriSelect";
+import CheckBox from "components/common/CheckBox";
 
 interface DotoriListItemProps {
   dotori: IDotoriItem;
@@ -32,11 +34,13 @@ function DotoriListItem({ dotori }: DotoriListItemProps) {
     image,
     folderName,
     folderEmoji,
+    checked,
   } = dotori;
 
   const { copyUrlRef, onCopyUrl } = useCopyUrl();
   const { copyToast, remindSettingToast, remindDisabledToast } = useToast();
   const { mutateEditDotori } = useUpdateDotori();
+  const { isActiveSelectBox, onToggleDotoriChecked } = useDotoriSelect();
 
   const onRemindToggle = () => {
     const requestData = {
@@ -51,12 +55,23 @@ function DotoriListItem({ dotori }: DotoriListItemProps) {
   return (
     <DotoriItemBlock>
       <DotoriItemInner>
-        <DotoriThumbnail>
+        <DotoriThumbnail href={link} target="_blank" rel="noopener noreferrer">
           <DotoriOGImage src={image} alt="og-image" />
+
+          {isActiveSelectBox && (
+            <SelectButton
+              onClick={(e) => {
+                e.preventDefault();
+                onToggleDotoriChecked(id);
+              }}
+              variant="primary"
+              isChecked={checked}
+            />
+          )}
         </DotoriThumbnail>
 
         <DotoriContent>
-          <InnerContent>
+          <InnerContent href={link} target="_blank" rel="noopener noreferrer">
             <div className="title">{title}</div>
             <div className="description">{description}</div>
           </InnerContent>
@@ -72,7 +87,9 @@ function DotoriListItem({ dotori }: DotoriListItemProps) {
 
           <DotoriBottomArea>
             <DotoriLinkBox>
-              <DotoriLink>{link}</DotoriLink>
+              <DotoriLink href={link} target="_blank" rel="noopener noreferrer">
+                {link}
+              </DotoriLink>
             </DotoriLinkBox>
 
             <DotoriOption>
@@ -93,8 +110,9 @@ function DotoriListItem({ dotori }: DotoriListItemProps) {
             </DotoriOption>
           </DotoriBottomArea>
         </DotoriContent>
+        {checked && <SelectedStyled />}
+        <UrlCopyInput ref={copyUrlRef} readOnly value={link} />
       </DotoriItemInner>
-      <UrlCopyInput ref={copyUrlRef} readOnly value={link} />
     </DotoriItemBlock>
   );
 }
@@ -103,6 +121,7 @@ const DotoriItemBlock = styled.div`
   margin: 0 24px 40px 0;
   display: flex;
   flex-direction: column;
+  position: relative;
   &:nth-child(3n) {
     margin-right: 0;
   }
@@ -140,6 +159,13 @@ const DotoriOGImage = styled.img`
   left: 0px;
   object-fit: cover;
   border-radius: 8px 8px 0 0;
+`;
+
+const SelectButton = styled(CheckBox)`
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  z-index: 100;
 `;
 
 const DotoriContent = styled.div`
@@ -226,6 +252,19 @@ const OptionButton = styled.button`
 
 const UrlCopyInput = styled.input`
   display: none;
+`;
+
+const SelectedStyled = styled.div`
+  width: 100%;
+  height: 100%;
+  border: solid 1px ${palette.primary};
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: ${palette.shadow1};
+  border-radius: 8px;
 `;
 
 export default DotoriListItem;

@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import DotoriNav from "components/dotori/DotoriNav";
 import DotoriList from "./DotoriList";
 import DotoriPagination from "./DotoriPagination";
 import useDotoriQuery, {
@@ -10,6 +9,10 @@ import { setDotoris } from "stores/dotori";
 import { ItemId } from "@atlaskit/tree";
 import useToggle from "hooks/useToggle";
 import { FilterMenu } from "types/dotori";
+import styled from "styled-components";
+import { palette } from "lib/styles/palette";
+import DotoriSelectNav from "./DotoriSelectNav";
+import DotoriFilterNav from "./DotoriFilterNav";
 
 // TODO: Props로 trash인지 serach인지 폴더id 인지 받아와야 함
 
@@ -51,18 +54,31 @@ function DotoriTemplate({ path, keyword, folderId }: DotoriTemplateProps) {
 
   return (
     <>
-      <DotoriNav
-        isRemind={isRemind}
-        onToggleRemind={onToggleRemind}
-        isOpenFilterMenu={isOpenFilterMenu}
-        onToggleFilterMenu={onToggleFilterMenu}
-        filterType={filterType}
-        onChangeFilterType={onChangeFilterType}
-      />
+      <DotoriNavBlock>
+        <DotoriSelectNav />
+        <DotoriFilterNav
+          isRemind={isRemind}
+          onToggleRemind={onToggleRemind}
+          isOpenFilterMenu={isOpenFilterMenu}
+          onToggleFilterMenu={onToggleFilterMenu}
+          filterType={filterType}
+          onChangeFilterType={onChangeFilterType}
+        />
+      </DotoriNavBlock>
       <DotoriList />
       <DotoriPagination />
     </>
   );
 }
+
+const DotoriNavBlock = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 24px;
+  margin-bottom: 28px;
+  font-size: 12px;
+  color: ${palette.grayDarkest};
+`;
 
 export default DotoriTemplate;
