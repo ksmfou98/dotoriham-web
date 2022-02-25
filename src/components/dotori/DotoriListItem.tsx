@@ -135,7 +135,12 @@ function DotoriListItem({
                 }}
               >
                 <More24Icon />
-                {isActiveDotoriMenuId === id && <DotoriItemMenu />}
+                {isActiveDotoriMenuId === id && (
+                  <DotoriItemMenu
+                    isOpen={isActiveDotoriMenuId === id}
+                    onActiveDotoriMenu={onActiveDotoriMenu}
+                  />
+                )}
               </OptionButton>
             </DotoriOption>
           </DotoriBottomArea>

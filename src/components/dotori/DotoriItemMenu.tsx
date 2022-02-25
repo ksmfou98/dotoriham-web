@@ -1,10 +1,19 @@
+import useOutSideClick from "hooks/useOutSideClick";
 import { palette } from "lib/styles/palette";
 import React from "react";
 import styled from "styled-components";
 
-function DotoriItemMenu() {
+interface DotoriItemMenuProps {
+  isOpen: boolean;
+  onActiveDotoriMenu: (dotoriId: string) => void;
+}
+
+function DotoriItemMenu({ isOpen, onActiveDotoriMenu }: DotoriItemMenuProps) {
+  const onCloseMenu = () => onActiveDotoriMenu("");
+  const { targetEl } = useOutSideClick(isOpen, onCloseMenu);
+
   return (
-    <DotoriItemMenuBlock>
+    <DotoriItemMenuBlock ref={targetEl}>
       <DotoriMenuInner>asdsadasd</DotoriMenuInner>
     </DotoriItemMenuBlock>
   );
