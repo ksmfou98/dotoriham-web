@@ -61,3 +61,14 @@ export interface DotoriUpdateRequest {
   title: string;
   remind: boolean;
 }
+
+export type FilterMenuTextType =
+  | "최신순"
+  | "오래된 순"
+  | "자주 방문한 순"
+  | "적게 방문한 순";
+
+export interface FilterMenu {
+  text: FilterMenuTextType;
+  label: DotoriSortType;
+}

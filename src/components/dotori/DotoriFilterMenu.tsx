@@ -1,13 +1,34 @@
+import { palette } from "lib/styles/palette";
+import useOutSideClick from "hooks/useOutSideClick";
 import React from "react";
 import styled from "styled-components";
-import dotoriFilterMenus from "./DotoriFilterMenus";
+import { DOTORI_FILTER_MENUS } from "./constants";
+import { FilterMenu } from "types/dotori";
 
-function DotoriFilterMenu() {
+interface DotoriFilterMenuProps {
+  isOpenFilterMenu: boolean;
+  onToggleFilterMenu: () => void;
+  filterType: FilterMenu;
+  onChangeFilterType: (filterType: FilterMenu) => void;
+}
+
+function DotoriFilterMenu({
+  isOpenFilterMenu,
+  onToggleFilterMenu,
+  filterType,
+  onChangeFilterType,
+}: DotoriFilterMenuProps) {
+  const { targetEl } = useOutSideClick(isOpenFilterMenu, onToggleFilterMenu);
+
   return (
-    <DotoriFilterMenuBlock>
+    <DotoriFilterMenuBlock ref={targetEl}>
       <MenuInner>
-        {dotoriFilterMenus.map(({ label, text }) => (
-          <MenuItem key={`MenuItem_${text}`}>
+        {DOTORI_FILTER_MENUS.map(({ label, text }) => (
+          <MenuItem
+            key={`MenuItem_${text}`}
+            isSelected={filterType.text === text}
+            onClick={() => onChangeFilterType({ text, label })}
+          >
             <ItemText>{text}</ItemText>
           </MenuItem>
         ))}
@@ -16,11 +37,33 @@ function DotoriFilterMenu() {
   );
 }
 
-const DotoriFilterMenuBlock = styled.div``;
+const DotoriFilterMenuBlock = styled.div`
+  position: absolute;
+  top: 24px;
+  right: 5px;
+  z-index: 101;
+`;
 
-const MenuInner = styled.div``;
+const MenuInner = styled.div`
+  border-radius: 4px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1);
+  background-color: ${palette.white};
+  z-index: 9999;
+`;
 
-const MenuItem = styled.div``;
+const MenuItem = styled.div<{ isSelected: boolean }>`
+  width: 88px;
+  height: 34px;
+  padding: 7px 2px 9px 8px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  &:hover {
+    background-color: ${palette.grayLightest};
+    cursor: pointer;
+  }
+  background-color: ${({ isSelected }) => isSelected && palette.grayLightest};
+`;
 
 const ItemText = styled.span``;
 

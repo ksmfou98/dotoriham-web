@@ -1,6 +1,13 @@
-import { DOTORI_FILTER_TYPES } from "lib/constants";
+import { FilterMenu } from "types/dotori";
 
-const dotoriFilterMenus = [
+export const DOTORI_FILTER_TYPES = {
+  LATEST_ORDER: "saveTime,desc" as const,
+  OLDEST_ORDER: "saveTime,asc" as const,
+  FREQUENTLY_VISITED: "clickCount,desc" as const,
+  LESS_VISITED: "clickCount,asc" as const,
+};
+
+export const DOTORI_FILTER_MENUS: FilterMenu[] = [
   {
     text: "최신순",
     label: DOTORI_FILTER_TYPES.LATEST_ORDER,
@@ -18,5 +25,3 @@ const dotoriFilterMenus = [
     label: DOTORI_FILTER_TYPES.LESS_VISITED,
   },
 ];
-
-export default dotoriFilterMenus;
