@@ -21,6 +21,7 @@ function SwitchButton({ isChecked, onToggle, ...rest }: SwitchButtonProps) {
 
 const CheckBox = styled.input`
   all: unset;
+  cursor: pointer;
   width: 32px;
   height: 14px;
   border-radius: 2em;
