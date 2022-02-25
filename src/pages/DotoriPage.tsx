@@ -1,4 +1,4 @@
-import PagePath from "components/common/PagePath";
+import PagePath from "components/pagePath/PagePath";
 import DotoriTemplate from "components/dotori/DotoriTemplate";
 import Reminder from "components/reminder";
 import React from "react";

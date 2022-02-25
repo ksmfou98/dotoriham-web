@@ -13,7 +13,7 @@ import { initialFolderState } from "stores/folder";
 import styled, { css } from "styled-components";
 import Button from "./Button";
 import ModalTemplate from "./ModalTemplate";
-import PagePath from "./PagePath";
+import PagePath from "../pagePath/PagePath";
 
 interface FolderListModalProps {
   isModal: boolean;
