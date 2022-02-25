@@ -15,9 +15,9 @@ import Path from "routes/Path";
 import styled from "styled-components";
 import { IDotoriItem } from "types/dotori";
 import useToast from "hooks/useToast";
-import useUpdateDotori from "./hooks/useUpdateDotori";
 import useDotoriSelect from "./hooks/useDotoriSelect";
 import CheckBox from "components/common/CheckBox";
+import useDotoriMutation from "./hooks/useDotoriMutation";
 
 interface DotoriListItemProps {
   dotori: IDotoriItem;
@@ -39,7 +39,7 @@ function DotoriListItem({ dotori }: DotoriListItemProps) {
 
   const { copyUrlRef, onCopyUrl } = useCopyUrl();
   const { copyToast, remindSettingToast, remindDisabledToast } = useToast();
-  const { mutateEditDotori } = useUpdateDotori();
+  const { mutateEditDotori, mutateClickCountDotori } = useDotoriMutation();
   const { isActiveSelectBox, onToggleDotoriChecked } = useDotoriSelect();
 
   const onRemindToggle = () => {
@@ -55,7 +55,12 @@ function DotoriListItem({ dotori }: DotoriListItemProps) {
   return (
     <DotoriItemBlock>
       <DotoriItemInner>
-        <DotoriThumbnail href={link} target="_blank" rel="noopener noreferrer">
+        <DotoriThumbnail
+          href={link}
+          target="_blank"
+          rel="noopener noreferrer"
+          onClick={() => mutateClickCountDotori(id)}
+        >
           <DotoriOGImage src={image} alt="og-image" />
 
           {isActiveSelectBox && (
@@ -71,7 +76,12 @@ function DotoriListItem({ dotori }: DotoriListItemProps) {
         </DotoriThumbnail>
 
         <DotoriContent>
-          <InnerContent href={link} target="_blank" rel="noopener noreferrer">
+          <InnerContent
+            href={link}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={() => mutateClickCountDotori(id)}
+          >
             <div className="title">{title}</div>
             <div className="description">{description}</div>
           </InnerContent>
@@ -87,7 +97,12 @@ function DotoriListItem({ dotori }: DotoriListItemProps) {
 
           <DotoriBottomArea>
             <DotoriLinkBox>
-              <DotoriLink href={link} target="_blank" rel="noopener noreferrer">
+              <DotoriLink
+                href={link}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => mutateClickCountDotori(id)}
+              >
                 {link}
               </DotoriLink>
             </DotoriLinkBox>

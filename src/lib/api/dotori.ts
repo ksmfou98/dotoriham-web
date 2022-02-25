@@ -57,3 +57,9 @@ export const updateDotoriAPI = async (requestData: DotoriUpdateRequest) => {
 
   return response.data;
 };
+
+// 북마크 클릭 수
+export const clickCountDotoriAPI = async (dotoriId: string) => {
+  const response = await client.get(`/api/v1/bookmark/click/${dotoriId}`);
+  return response.data;
+};
