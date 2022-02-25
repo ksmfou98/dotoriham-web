@@ -4,7 +4,8 @@ import styled from "styled-components";
 import useDotoriSelect from "./hooks/useDotoriSelect";
 
 function DotoriSelectNav() {
-  const { isDotoriAllChecked, onToggleDotoriAllChecked } = useDotoriSelect();
+  const { isDotoriAllChecked, onToggleDotoriAllChecked, isActiveSelectBox } =
+    useDotoriSelect();
 
   return (
     <DotoriSelectNavBlock>
@@ -17,10 +18,12 @@ function DotoriSelectNav() {
         />
       </SelectForm>
 
-      <SelectOption>
-        <div className="option">이동</div>
-        <div className="option">삭제</div>
-      </SelectOption>
+      {isActiveSelectBox && (
+        <SelectOption>
+          <div className="option">이동</div>
+          <div className="option">삭제</div>
+        </SelectOption>
+      )}
     </DotoriSelectNavBlock>
   );
 }
