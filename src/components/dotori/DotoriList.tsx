@@ -1,3 +1,4 @@
+import SmallModal from "components/common/SmallModal";
 import useToggle from "hooks/useToggle";
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
@@ -10,7 +11,7 @@ function DotoriList() {
   const dotoris = useSelector(dotoriSelector);
 
   const [isDeleteModal, onToggleDeleteModal] = useToggle();
-  const [isEditModal, onToggleEditModal] = useToggle(true);
+  const [isEditModal, onToggleEditModal] = useToggle();
   const [isMoveModal, onToggleMoveModal] = useToggle();
 
   const onToggleModal = {
@@ -39,6 +40,17 @@ function DotoriList() {
         <DotoriEditModal
           isOpen={isEditModal}
           onToggleModal={onToggleEditModal}
+        />
+      )}
+
+      {isDeleteModal && (
+        <SmallModal
+          isModal={isDeleteModal}
+          onToggleModal={onToggleDeleteModal}
+          title="선택한 도토리를 삭제할까요?"
+          content="삭제된 도토리는 모두 <br /> 휴지통으로 들어가요!"
+          buttonName="삭제"
+          onClick={() => console.log("삭제")}
         />
       )}
     </DotoriListBlock>
