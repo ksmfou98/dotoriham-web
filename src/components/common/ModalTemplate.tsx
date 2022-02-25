@@ -11,6 +11,7 @@ interface IModalInnerStyled {
 
 interface ModalTemplateProps extends IModalInnerStyled {
   children: React.ReactNode;
+  className?: string;
   onToggleModal: () => void;
 }
 
@@ -19,6 +20,7 @@ function ModalTemplate({
   height,
   isModal,
   children,
+  className,
   onToggleModal,
   ...rest
 }: ModalTemplateProps) {
@@ -28,6 +30,7 @@ function ModalTemplate({
         width={width}
         height={height}
         isModal={isModal}
+        className={className}
         onMouseDown={(e) => e.stopPropagation()}
       >
         {children}
