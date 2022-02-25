@@ -27,7 +27,12 @@ function FolderListModal({
   onMove,
 }: FolderListModalProps) {
   const [folders, setFolders] = useState<TreeData>(initialFolderState);
+  const [selectedFolderId, setSelectedFolderId] = useState<ItemId | null>();
   const { data } = useFolderListQuery("modal");
+
+  const onSelectFolderId = (folderId: ItemId) => {
+    setSelectedFolderId(folderId);
+  };
 
   useEffect(() => {
     if (!data) return;
@@ -68,7 +73,15 @@ function FolderListModal({
                 onCollapse={onCollapse}
                 onExpand={onExpand}
               />
-              <FolderTitle active>{item.data.name}</FolderTitle>
+              <FolderTitle
+                active={selectedFolderId === item.id}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  onSelectFolderId(item.id);
+                }}
+              >
+                {item.data.name}
+              </FolderTitle>
             </FolderItemLeftBox>
           </FolderItemBlock>
         </FolderItemWrapper>
@@ -221,10 +234,12 @@ const ButtonGroup = styled.div`
 
 const CancelButton = styled(Button)`
   margin-right: 12px;
+  font-size: 12px;
 `;
 
 const MoveButton = styled(Button)`
   font-weight: 400;
+  font-size: 12px;
 `;
 
 export default FolderListModal;

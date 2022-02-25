@@ -8,12 +8,18 @@ import styled from "styled-components";
 import DotoriEditModal from "./DotoriEditModal";
 import DotoriListItem from "./DotoriListItem";
 
+export interface ToggleModal {
+  onToggleDeleteModal: () => void;
+  onToggleEditModal: () => void;
+  onToggleMoveModal: () => void;
+}
+
 function DotoriList() {
   const dotoris = useSelector(dotoriSelector);
 
   const [isDeleteModal, onToggleDeleteModal] = useToggle();
   const [isEditModal, onToggleEditModal] = useToggle();
-  const [isMoveModal, onToggleMoveModal] = useToggle(true);
+  const [isMoveModal, onToggleMoveModal] = useToggle();
 
   const onToggleModal = {
     onToggleDeleteModal,
@@ -34,6 +40,7 @@ function DotoriList() {
           dotori={dotori}
           isActiveDotoriMenuId={isActiveDotoriMenuId}
           onActiveDotoriMenu={onActiveDotoriMenu}
+          onToggleModal={onToggleModal}
         />
       ))}
 
