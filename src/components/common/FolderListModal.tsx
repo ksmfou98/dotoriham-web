@@ -1,7 +1,16 @@
+import Tree, {
+  ItemId,
+  mutateTree,
+  RenderItemParams,
+  TreeData,
+} from "@atlaskit/tree";
+import FolderItemIcon from "components/sidebar/FolderItemIcon";
+import useFolderListQuery from "components/sidebar/hooks/useFolderListQuery";
 import { palette } from "lib/styles/palette";
 import { scrollbar } from "lib/styles/utilStyles";
-import React from "react";
-import styled from "styled-components";
+import React, { useEffect, useState } from "react";
+import { initialFolderState } from "stores/folder";
+import styled, { css } from "styled-components";
 import Button from "./Button";
 import ModalTemplate from "./ModalTemplate";
 import PagePath from "./PagePath";
@@ -17,6 +26,56 @@ function FolderListModal({
   onToggleModal,
   onMove,
 }: FolderListModalProps) {
+  const [folders, setFolders] = useState<TreeData>(initialFolderState);
+  const { data } = useFolderListQuery("modal");
+
+  useEffect(() => {
+    if (!data) return;
+    setFolders(data);
+  }, [data]);
+
+  const onExpandFolder = (itemId: ItemId) => {
+    setFolders(mutateTree(folders, itemId, { isExpanded: true }));
+  };
+
+  const onCollapseFolder = (itemId: ItemId) => {
+    setFolders(mutateTree(folders, itemId, { isExpanded: false }));
+  };
+
+  const renderFolderItem = ({
+    item,
+    onExpand,
+    onCollapse,
+    provided,
+  }: RenderItemParams) => {
+    return (
+      <>
+        <FolderItemWrapper
+          ref={provided.innerRef}
+          {...provided.draggableProps}
+          {...provided.dragHandleProps}
+        >
+          <FolderItemBlock
+            onClick={() =>
+              item.children.length > 0 && item.isExpanded
+                ? onCollapse(item.id)
+                : onExpand(item.id)
+            }
+          >
+            <FolderItemLeftBox>
+              <FolderItemIcon
+                item={item}
+                onCollapse={onCollapse}
+                onExpand={onExpand}
+              />
+              <FolderTitle active>{item.data.name}</FolderTitle>
+            </FolderItemLeftBox>
+          </FolderItemBlock>
+        </FolderItemWrapper>
+      </>
+    );
+  };
+
   return (
     <ModalTemplate
       isModal={isModal}
@@ -29,7 +88,18 @@ function FolderListModal({
         <PathBox>
           <PagePath isModal />
         </PathBox>
-        <FolderListBox></FolderListBox>
+        <FolderListBox>
+          <FolderListBlock>
+            <Tree
+              tree={folders}
+              renderItem={renderFolderItem}
+              onExpand={onExpandFolder}
+              onCollapse={onCollapseFolder}
+              offsetPerLevel={16} // 한 깊이당 padding 값
+              isNestingEnabled
+            />
+          </FolderListBlock>
+        </FolderListBox>
         <ButtonGroup>
           <CancelButton
             variant="tertiary"
@@ -82,6 +152,63 @@ const FolderListBox = styled.div`
   margin-top: 8px;
   margin-bottom: 18px;
   ${scrollbar}
+`;
+
+const FolderListBlock = styled.div`
+  position: relative;
+`;
+
+const FolderItemWrapper = styled.div`
+  width: 166px;
+`;
+
+const FolderItemRigthBox = styled.div`
+  display: none;
+  align-items: center;
+`;
+
+const FolderItemBlock = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  min-width: 105px;
+  max-width: 166px;
+  height: 28px;
+  font-size: 12px;
+  padding: 5px 2px;
+  border-radius: 4px;
+  &:hover {
+    background-color: ${palette.hover0};
+    font-weight: 500;
+    ${FolderItemRigthBox} {
+      display: flex;
+    }
+  }
+`;
+
+const FolderItemLeftBox = styled.div`
+  display: flex;
+  align-items: center;
+  min-width: 65px;
+`;
+
+const FolderTitle = styled.span<{ active: boolean }>`
+  cursor: pointer;
+  height: 28px;
+  line-height: 25px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  &:hover {
+    text-decoration: underline;
+  }
+  ${(props) =>
+    props.active &&
+    css`
+      font-weight: 500;
+      color: ${palette.primary};
+    `}
 `;
 
 const ButtonGroup = styled.div`

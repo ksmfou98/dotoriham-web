@@ -73,6 +73,7 @@ function DotoriListItem({
           {isActiveSelectBox && (
             <SelectButton
               onClick={(e) => {
+                e.stopPropagation();
                 e.preventDefault();
                 onToggleDotoriChecked(id);
               }}

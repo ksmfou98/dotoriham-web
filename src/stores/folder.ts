@@ -17,7 +17,7 @@ export interface IAddFolderPayload {
   newFolderData: IFolderItem;
 }
 
-const initialState: TreeData = {
+export const initialFolderState: TreeData = {
   rootId: "",
   items: {
     "": {
@@ -30,7 +30,7 @@ const initialState: TreeData = {
 
 const folder = createSlice({
   name: "folderReducer",
-  initialState,
+  initialState: initialFolderState,
   reducers: {
     setFolders: (_, action: PayloadAction<TreeData>) => action.payload,
     addFolder: (state: TreeData, action: PayloadAction<IAddFolderPayload>) => {
