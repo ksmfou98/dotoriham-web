@@ -3,6 +3,7 @@ import {
   BellUnSelectedIcon,
   Copy24Icon,
   More24Icon,
+  Symbol36Icon,
 } from "assets/icons";
 import DividerLine from "components/common/DividerLine";
 import FolderEmoji from "components/common/FolderEmoji";
@@ -71,7 +72,13 @@ function DotoriListItem({
           rel="noopener noreferrer"
           onClick={() => mutateClickCountDotori(id)}
         >
-          <DotoriOGImage src={image} alt="og-image" />
+          {image ? (
+            <DotoriOGImage src={image} alt="og-image" />
+          ) : (
+            <DotoriDefaultImage>
+              <SymbolIcon />
+            </DotoriDefaultImage>
+          )}
 
           {isActiveSelectBox && (
             <SelectButton
@@ -199,6 +206,20 @@ const DotoriOGImage = styled.img`
   left: 0px;
   object-fit: cover;
   border-radius: 8px 8px 0 0;
+`;
+
+const DotoriDefaultImage = styled.div`
+  width: 100%;
+  height: 100%;
+  background-color: ${palette.primaryLight};
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+const SymbolIcon = styled(Symbol36Icon)`
+  width: 60px;
+  height: 60px;
 `;
 
 const SelectButton = styled(CheckBox)`
