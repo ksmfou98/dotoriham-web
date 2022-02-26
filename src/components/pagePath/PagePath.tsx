@@ -2,6 +2,7 @@ import { palette } from "lib/styles/palette";
 import React from "react";
 import styled from "styled-components";
 import { DotoriPathTypes } from "types/dotori";
+import FolderPath from "./FolderPath";
 import GlobalPath from "./GlobalPath";
 
 interface PagePathProps {
@@ -12,7 +13,7 @@ interface PagePathProps {
 function PagePath({ isModal, path }: PagePathProps) {
   return (
     <PagePathBlock isModal={isModal}>
-      {path === "folder" ? <div>폴더</div> : <GlobalPath path={path} />}
+      {path === "folder" ? <FolderPath /> : <GlobalPath path={path} />}
     </PagePathBlock>
   );
 }

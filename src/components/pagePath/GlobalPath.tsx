@@ -5,7 +5,6 @@ import PathText from "./PathText";
 
 function GlobalPath({ path }: { path: DotoriPathTypes }) {
   const pathName = getGlobalPagePath(path);
-
   if (!pathName) return null;
 
   return <PathText pathType="global">{pathName}</PathText>;

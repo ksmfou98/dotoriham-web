@@ -1,11 +1,13 @@
+import { ItemId } from "@atlaskit/tree";
 import { FolderQueryKindTypes } from "components/sidebar/hooks/useFolderListQuery";
 import { DotoriPathTypes, DotoriSortType } from "types/dotori";
 
-export enum QueryKey {
-  DOTORI_CONTENTS = "dotoriContents",
-  FOLDER_LIST = "folderList",
-  REMIND_LIST = "remindList",
-}
+export const QueryKey = {
+  DOTORI_CONTENTS: "dotoriContents" as const,
+  FOLDER_LIST: "folderList" as const,
+  REMIND_LIST: "remindList" as const,
+  PATH_PATH_LIST: "pathPathList" as const,
+};
 
 export const ReactQueryKey = {
   dotoriContents: (
@@ -19,4 +21,6 @@ export const ReactQueryKey = {
   folderList: (kind: FolderQueryKindTypes) =>
     [QueryKey.FOLDER_LIST, kind] as const,
   remindList: () => [QueryKey.REMIND_LIST] as const,
+  pathPathList: (folderId: ItemId) =>
+    [QueryKey.PATH_PATH_LIST, folderId] as const,
 };
