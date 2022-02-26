@@ -12,14 +12,17 @@ interface PagePathProps {
 
 function PagePath({ isModal, path }: PagePathProps) {
   return (
-    <PagePathBlock isModal={isModal}>
-      {path === "folder" ? <FolderPath /> : <GlobalPath path={path} />}
+    <PagePathBlock>
+      {path === "folder" ? (
+        <FolderPath />
+      ) : (
+        <GlobalPath path={path} isModal={isModal} />
+      )}
     </PagePathBlock>
   );
 }
 
-const PagePathBlock = styled.div<{ isModal?: boolean }>`
-  font-size: ${({ isModal }) => (isModal ? "12px" : "16px")};
+const PagePathBlock = styled.div`
   margin-bottom: 28px;
   color: ${palette.grayDarkest};
 `;

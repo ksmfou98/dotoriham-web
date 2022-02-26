@@ -14,17 +14,20 @@ import styled, { css } from "styled-components";
 import Button from "./Button";
 import ModalTemplate from "./ModalTemplate";
 import PagePath from "../pagePath/PagePath";
+import { DotoriPathTypes } from "types/dotori";
 
 interface FolderListModalProps {
   isModal: boolean;
   onToggleModal: () => void;
   onMove: () => void;
+  path: DotoriPathTypes;
 }
 
 function FolderListModal({
   isModal,
   onToggleModal,
   onMove,
+  path,
 }: FolderListModalProps) {
   const [folders, setFolders] = useState<TreeData>(initialFolderState);
   const [selectedFolderId, setSelectedFolderId] = useState<ItemId | null>();
@@ -99,7 +102,7 @@ function FolderListModal({
       <ModalInner>
         <ModalTitle>위치 선택</ModalTitle>
         <PathBox>
-          <PagePath isModal path="folder" />
+          <PagePath isModal path={path} />
         </PathBox>
         <FolderListBox>
           <FolderListBlock>

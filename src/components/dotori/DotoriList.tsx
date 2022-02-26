@@ -71,6 +71,7 @@ function DotoriList({ path }: { path: DotoriPathTypes }) {
           isModal={isMoveModal}
           onToggleModal={onToggleMoveModal}
           onMove={() => console.log("옮기기")}
+          path={path}
         />
       )}
     </DotoriListBlock>

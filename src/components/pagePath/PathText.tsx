@@ -7,13 +7,18 @@ type PathTypes = "global" | "folder";
 interface PathTextProps {
   pathType: PathTypes;
   children: ReactNode;
+  isModal?: boolean;
 }
 
-function PathText({ pathType, children }: PathTextProps) {
-  return <PathTextStyled pathType={pathType}>{children}</PathTextStyled>;
+function PathText({ pathType, children, isModal }: PathTextProps) {
+  return (
+    <PathTextStyled pathType={pathType} isModal={isModal}>
+      {children}
+    </PathTextStyled>
+  );
 }
 
-const PathTextStyled = styled.span<{ pathType: PathTypes }>`
+const PathTextStyled = styled.span<{ pathType: PathTypes; isModal?: boolean }>`
   ${(props) =>
     props.pathType === "global"
       ? css`
@@ -26,6 +31,14 @@ const PathTextStyled = styled.span<{ pathType: PathTypes }>`
           font-weight: 500;
           color: ${palette.black};
         `}
+
+  ${({ isModal }) =>
+    isModal &&
+    css`
+      font-size: 12px;
+    `}
+
+    
   line-height: 1.5;
   display: flex;
   align-items: center;
