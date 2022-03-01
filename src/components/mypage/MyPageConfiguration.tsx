@@ -13,6 +13,7 @@ import RemindChipButton from "./RemindChipButton";
 function MyPageConfiguration() {
   const { remindToggle, remindCycle } = useSelector(userSelector);
   const [isRemind, onToggleRemind] = useToggle(remindToggle);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [selectedCycle, setSelectedCycle] = useState(remindCycle);
 
   return (
