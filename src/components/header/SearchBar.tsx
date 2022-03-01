@@ -1,17 +1,37 @@
 import { Search24Icon } from "assets/icons";
+import useInput from "hooks/useInput";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import Path from "routes/Path";
+import { toast } from "react-toastify";
+import { ToastSize } from "hooks/useToast";
 
 function SearchBar() {
   const navigate = useNavigate();
+  const [searchForm, onChangeSearchForm] = useInput("");
+
+  const onSearch = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (searchForm.length === 0) {
+      toast(" ❗ 검색어를 입력해주세요 ❗", {
+        className: ToastSize.small,
+      });
+      return;
+    }
+    navigate(`${Path.SearchPage}?q=${searchForm}`);
+  };
 
   return (
-    <SearchBarStyled>
+    <SearchBarStyled onSubmit={onSearch}>
       <SearchIcon>
         <Search24Icon />
       </SearchIcon>
-      <SearchInput placeholder="도토리 검색 ..." />
+      <SearchInput
+        placeholder="도토리 검색 ..."
+        value={searchForm}
+        onChange={onChangeSearchForm}
+      />
     </SearchBarStyled>
   );
 }
