@@ -1,14 +1,15 @@
+import { DOTORI_PAGE_SIZE } from "components/dotori/constants";
 import { DotoriPathTypes } from "types/dotori";
 
 export default function getDotoriPageSize(path: DotoriPathTypes) {
   switch (path) {
     case "main":
-      return 9;
+      return DOTORI_PAGE_SIZE.main;
     case "folder":
-      return 9;
+      return DOTORI_PAGE_SIZE.folder;
     case "trash":
-      return 12;
+      return DOTORI_PAGE_SIZE.trash;
     case "search":
-      return 12;
+      return DOTORI_PAGE_SIZE.search;
   }
 }

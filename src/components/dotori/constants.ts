@@ -26,4 +26,9 @@ export const DOTORI_FILTER_MENUS: FilterMenu[] = [
   },
 ];
 
-
+export const DOTORI_PAGE_SIZE = {
+  main: 9,
+  folder: 9,
+  trash: 12,
+  search: 12,
+};

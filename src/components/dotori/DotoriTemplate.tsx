@@ -30,6 +30,8 @@ function DotoriTemplate({ path, keyword, folderId }: DotoriTemplateProps) {
     label: "saveTime,desc",
   });
 
+  const pageSize = getDotoriPageSize(path);
+
   const onChangeFilterType = (filterType: FilterMenu) => {
     setFilterType(filterType);
   };
@@ -39,7 +41,7 @@ function DotoriTemplate({ path, keyword, folderId }: DotoriTemplateProps) {
   const { data } = useDotoriQuery(
     path,
     page - 1,
-    9,
+    pageSize,
     filterType.label,
     isRemind,
     keyword,
@@ -74,7 +76,7 @@ function DotoriTemplate({ path, keyword, folderId }: DotoriTemplateProps) {
         page={page}
         onChangePage={onChangePage}
         totalElements={data.totalElements}
-        pageSize={getDotoriPageSize(path)}
+        pageSize={pageSize}
       />
     </>
   );
