@@ -1,4 +1,4 @@
-import getGlobalPagePath from "lib/utils/getGlobalPagePath";
+import { getGlobalPagePath } from "lib/utils/dotori";
 import React from "react";
 import { DotoriPathTypes } from "types/dotori";
 import PathText from "./PathText";

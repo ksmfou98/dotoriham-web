@@ -11,7 +11,7 @@ import styled from "styled-components";
 import { palette } from "lib/styles/palette";
 import DotoriSelectNav from "./DotoriSelectNav";
 import DotoriFilterNav from "./DotoriFilterNav";
-import getDotoriPageSize from "lib/utils/getDotoriPageSize";
+import { getDotoriPageSize } from "lib/utils/dotori";
 
 // TODO: Props로 trash인지 serach인지 폴더id 인지 받아와야 함
 
