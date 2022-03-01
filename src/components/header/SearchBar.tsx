@@ -1,8 +1,11 @@
 import { Search24Icon } from "assets/icons";
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 function SearchBar() {
+  const navigate = useNavigate();
+
   return (
     <SearchBarStyled>
       <SearchIcon>
