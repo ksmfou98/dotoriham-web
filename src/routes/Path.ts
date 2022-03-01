@@ -5,6 +5,7 @@ enum Path {
   TrashPage = "/trash",
   SearchPage = "/search",
   MyPage = "/my",
+  ProfileEditPage = "/my/profile",
 
   // no Logged In
   LoginPage = "/login",

@@ -1,4 +1,5 @@
 import Button from "components/common/Button";
+import SmallBlackText from "components/common/SmallBlackText";
 import { palette } from "lib/styles/palette";
 import React from "react";
 import { useSelector } from "react-redux";
@@ -14,12 +15,12 @@ function MyPageAccountSetting() {
       <MyPageHead headText="계정 설정" />
       <AccountSettingBlock>
         <AccountInfoBox>
-          <AccountLabel>이메일</AccountLabel>
+          <SmallBlackText width="297px" label="이메일" />
           <AccountText>{email}</AccountText>
         </AccountInfoBox>
 
         <AccountInfoBox>
-          <AccountLabel>비밀번호</AccountLabel>
+          <SmallBlackText width="297px" label="비밀번호" />
           {/* @TODO(dohyun) 일반계정이면 ? 비밀번호 변경 구글계정이면 ? 비밀번호 변경 불가 */}
           <Button variant="secondary" width="174px" height="36px" disabled>
             비밀번호 변경
@@ -43,10 +44,6 @@ const AccountInfoBox = styled.div`
   display: flex;
   align-items: center;
   margin-bottom: 28px;
-`;
-
-const AccountLabel = styled.div`
-  width: 297px;
 `;
 
 const AccountText = styled.span`

@@ -9,6 +9,7 @@ import TrashPage from "pages/TrashPage";
 import { Routes, Route, Navigate } from "react-router-dom";
 import Path from "./Path";
 import SidebarRouteLayout from "components/common/SidebarRouteLayout";
+import ProfileEditPage from "pages/ProfileEditPage";
 
 function Routing() {
   return (
@@ -20,6 +21,7 @@ function Routing() {
         element={<Navigate replace to={Path.DotoriPage} />}
       />
       <Route path={Path.MyPage} element={<MyPage />} />
+      <Route path={Path.ProfileEditPage} element={<ProfileEditPage />} />
 
       <Route path={Path.HomePage} element={<SidebarRouteLayout />}>
         <Route path={Path.DotoriPage} element={<DotoriPage />} />
