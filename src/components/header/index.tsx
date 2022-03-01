@@ -7,8 +7,12 @@ import SearchBar from "./SearchBar";
 import RemindInfoButton from "./RemindInfoButton";
 import { Link } from "react-router-dom";
 import Path from "routes/Path";
+import { useSelector } from "react-redux";
+import { userSelector } from "stores/user";
 
 function Header() {
+  const { image } = useSelector(userSelector);
+
   return (
     <HeaderBlock>
       <HeaderInner>
@@ -17,7 +21,7 @@ function Header() {
           <SearchBar />
           <RemindInfoButton />
           <Link to={Path.MyPage}>
-            <ProfileImg src="https://lh3.googleusercontent.com/a/AATXAJy6jltxS8Vjh9imZ5GO_S22eGWNrZq230lNgTc1wg=s96-c" />
+            <ProfileImg src={image} alt="프로필 이미지" />
           </Link>
         </HeaderRightBox>
       </HeaderInner>
