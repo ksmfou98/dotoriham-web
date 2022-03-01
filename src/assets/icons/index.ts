@@ -1,4 +1,5 @@
 export { ReactComponent as ArrowDownIcon } from "./Arrow_down.svg";
+export { ReactComponent as ArrowLeft16Icon } from "./Arrow_left_16.svg";
 export { ReactComponent as ArrowSideIcon } from "./Arrow_side.svg";
 export { ReactComponent as ArrowSide16Icon } from "./Arrow_side_16.svg";
 export { ReactComponent as ArrowUp16Icon } from "./Icons_Arrow_up_16.svg";

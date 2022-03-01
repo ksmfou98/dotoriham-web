@@ -11,6 +11,7 @@ import styled from "styled-components";
 import { palette } from "lib/styles/palette";
 import DotoriSelectNav from "./DotoriSelectNav";
 import DotoriFilterNav from "./DotoriFilterNav";
+import getDotoriPageSize from "lib/utils/getDotoriPageSize";
 
 // TODO: Props로 trash인지 serach인지 폴더id 인지 받아와야 함
 
@@ -22,6 +23,7 @@ interface DotoriTemplateProps {
 
 function DotoriTemplate({ path, keyword, folderId }: DotoriTemplateProps) {
   const [isRemind, onToggleRemind] = useToggle(false);
+  const [page, setPage] = useState(1);
   const [isOpenFilterMenu, onToggleFilterMenu] = useToggle(false);
   const [filterType, setFilterType] = useState<FilterMenu>({
     text: "최신순",
@@ -32,10 +34,12 @@ function DotoriTemplate({ path, keyword, folderId }: DotoriTemplateProps) {
     setFilterType(filterType);
   };
 
+  const onChangePage = (page: number) => setPage(page);
+
   const { data } = useDotoriQuery(
     path,
-    0,
-    12,
+    page - 1,
+    9,
     filterType.label,
     isRemind,
     keyword,
@@ -49,6 +53,8 @@ function DotoriTemplate({ path, keyword, folderId }: DotoriTemplateProps) {
       setDotoris(data.content.map((dotori) => ({ ...dotori, checked: false })))
     );
   }, [data, dispatch]);
+
+  if (!data) return null;
 
   return (
     <>
@@ -64,7 +70,12 @@ function DotoriTemplate({ path, keyword, folderId }: DotoriTemplateProps) {
         />
       </DotoriNavBlock>
       <DotoriList path={path} />
-      <DotoriPagination />
+      <DotoriPagination
+        page={page}
+        onChangePage={onChangePage}
+        totalElements={data.totalElements}
+        pageSize={getDotoriPageSize(path)}
+      />
     </>
   );
 }
