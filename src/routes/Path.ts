@@ -8,7 +8,7 @@ enum Path {
 
   // no Logged In
   LoginPage = "/login",
-  SignUpPage = "/signup",
+  RegisterPage = "/register",
 }
 
 export default Path;
