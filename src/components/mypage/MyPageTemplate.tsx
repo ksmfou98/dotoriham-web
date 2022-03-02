@@ -3,11 +3,12 @@ import styled from "styled-components";
 
 interface MyPageTemplateProps {
   children: ReactNode;
+  className?: string;
 }
 
-function MyPageTemplate({ children }: MyPageTemplateProps) {
+function MyPageTemplate({ children, className }: MyPageTemplateProps) {
   return (
-    <MyPageBlock>
+    <MyPageBlock className={className}>
       <MyPageInner>{children}</MyPageInner>
     </MyPageBlock>
   );
