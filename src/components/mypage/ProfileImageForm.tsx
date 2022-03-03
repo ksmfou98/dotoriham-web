@@ -1,4 +1,4 @@
-import { ColorizeIcon } from "assets/icons";
+import { ColorizeIcon, X16BigIcon } from "assets/icons";
 import SmallBlackText from "components/common/SmallBlackText";
 import useToggle from "hooks/useToggle";
 import { palette } from "lib/styles/palette";
@@ -31,6 +31,20 @@ function ProfileImageForm({
         <ProfileImage src={profileImage} />
         <ProfileColorsButton onClick={onTogglePaletteOpen} />
       </ProfileImageBox>
+
+      <UploadContent>
+        <UploadRow>
+          <UploadButton htmlFor="profile-image-upload">파일 선택</UploadButton>
+          <FileInputStyled
+            type="file"
+            id="profile-image-upload"
+            onChange={onImageUpload}
+          />
+          <UploadFileName>{imageFileName}</UploadFileName>
+          <DeleteButton onClick={onDeleteImage} />
+        </UploadRow>
+        <UploadRow>최대 10MB의 이미지 파일</UploadRow>
+      </UploadContent>
     </ProfileImageFormBlock>
   );
 }
@@ -62,6 +76,55 @@ const ProfileColorsButton = styled(ColorizeIcon)`
   bottom: -2px;
   right: -11px;
   cursor: pointer;
+`;
+
+const UploadContent = styled.div`
+  margin-left: 27px;
+`;
+
+const UploadRow = styled.div`
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  color: ${palette.grayDark};
+  font-weight: 300;
+  &:first-child {
+    margin-bottom: 8px;
+    padding-top: 14px;
+  }
+  &:last-child {
+    font-size: 12px;
+  }
+`;
+
+const UploadButton = styled.label`
+  width: 75px;
+  height: 31px;
+  border-radius: 6px;
+  font-weight: 400;
+  line-height: 1.5;
+  font-size: 14px;
+  background-color: ${palette.white};
+  color: #323232;
+  border: 1px solid ${palette.gray};
+  margin-right: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+`;
+
+const DeleteButton = styled(X16BigIcon)`
+  cursor: pointer;
+`;
+
+const FileInputStyled = styled.input`
+  display: none; ;
+`;
+
+const UploadFileName = styled.span`
+  line-height: 1.5;
+  margin-right: 4px;
 `;
 
 export default ProfileImageForm;

@@ -13,7 +13,6 @@ export const uploadProfileImageAPI = async (image: FormData) => {
       "Content-Type": "multipart/form-data",
     },
   });
-
   return response.data;
 };
 
