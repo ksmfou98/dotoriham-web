@@ -1,4 +1,3 @@
-import getTokens from "lib/utils/getTokens";
 import client from "./client";
 
 export const nicknameCheckAPI = async (nickname: string) => {
@@ -15,5 +14,14 @@ export const uploadProfileImageAPI = async (image: FormData) => {
     },
   });
 
+  return response.data;
+};
+
+export const changeProfileAPI = async (
+  profileImageUrl: string,
+  nickname: string
+) => {
+  const body = { profileImageUrl, name: nickname };
+  const response = await client.post("/api/v1/user/changeProfile", body);
   return response.data;
 };
