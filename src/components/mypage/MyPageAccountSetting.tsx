@@ -1,6 +1,7 @@
 import Button from "components/common/Button";
 import SmallBlackText from "components/common/SmallBlackText";
 import { palette } from "lib/styles/palette";
+import { logout } from "lib/utils/auth";
 import React from "react";
 import { useSelector } from "react-redux";
 import { userSelector } from "stores/user";
@@ -27,7 +28,7 @@ function MyPageAccountSetting() {
           </Button>
         </AccountInfoBox>
 
-        <LogoutText>로그아웃 하시겠어요?</LogoutText>
+        <LogoutText onClick={logout}>로그아웃 하시겠어요?</LogoutText>
       </AccountSettingBlock>
     </>
   );

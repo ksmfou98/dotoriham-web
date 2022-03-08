@@ -1,6 +1,6 @@
 import axios from "axios";
 import { SERVER_URL } from "lib/constants";
-import getTokens from "lib/utils/getTokens";
+import { getTokens, logout } from "lib/utils/auth";
 import userStorage from "lib/utils/userStorage";
 
 const client = axios.create({
@@ -71,8 +71,7 @@ client.interceptors.response.use(
           // 401로 요청 실패했던 요청 새로운 accessToken으로 재요청
           return axios(originalRequest);
         } catch (e) {
-          userStorage.remove();
-          window.location.replace("/login");
+          logout();
         }
         break;
 

@@ -1,6 +1,6 @@
 import userStorage from "./userStorage";
 
-export default function getTokens() {
+export function getTokens() {
   const user = userStorage.get();
   if (!user) return null;
 
@@ -9,6 +9,10 @@ export default function getTokens() {
     accessToken,
     refreshToken,
   };
-
   return tokens;
+}
+
+export function logout() {
+  userStorage.remove();
+  window.location.replace("/login");
 }
