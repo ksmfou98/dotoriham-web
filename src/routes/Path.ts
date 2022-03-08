@@ -10,6 +10,7 @@ enum Path {
   // no Logged In
   LoginPage = "/login",
   RegisterPage = "/register",
+  LandingPage = "https://dotoriham.kr/",
 }
 
 export default Path;
