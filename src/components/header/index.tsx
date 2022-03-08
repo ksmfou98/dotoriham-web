@@ -11,19 +11,21 @@ import { useSelector } from "react-redux";
 import { userSelector } from "stores/user";
 
 function Header() {
-  const { image } = useSelector(userSelector);
+  const { image, accessToken } = useSelector(userSelector);
 
   return (
     <HeaderBlock>
       <HeaderInner>
         <Logo />
-        <HeaderRightBox>
-          <SearchBar />
-          <RemindInfoButton />
-          <Link to={Path.MyPage}>
-            <ProfileImg src={image} alt="프로필 이미지" />
-          </Link>
-        </HeaderRightBox>
+        {accessToken && (
+          <HeaderRightBox>
+            <SearchBar />
+            <RemindInfoButton />
+            <Link to={Path.MyPage}>
+              <ProfileImg src={image} alt="프로필 이미지" />
+            </Link>
+          </HeaderRightBox>
+        )}
       </HeaderInner>
     </HeaderBlock>
   );
