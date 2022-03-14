@@ -3,6 +3,7 @@ import {
   BellUnSelectedIcon,
   Copy24Icon,
   More24Icon,
+  Symbol36Icon,
 } from "assets/icons";
 import DividerLine from "components/common/DividerLine";
 import FolderEmoji from "components/common/FolderEmoji";
@@ -15,13 +16,25 @@ import Path from "routes/Path";
 import styled from "styled-components";
 import { IDotoriItem } from "types/dotori";
 import useToast from "hooks/useToast";
-import useUpdateDotori from "./hooks/useUpdateDotori";
+import useDotoriSelect from "./hooks/useDotoriSelect";
+import CheckBox from "components/common/CheckBox";
+import useDotoriMutation from "./hooks/useDotoriMutation";
+import DotoriItemMenu from "./DotoriItemMenu";
+import { ToggleModal } from "./DotoriList";
 
 interface DotoriListItemProps {
   dotori: IDotoriItem;
+  isActiveDotoriMenuId: string;
+  onActiveDotoriMenu: (dotoriId: string) => void;
+  onToggleModal: ToggleModal;
 }
 
-function DotoriListItem({ dotori }: DotoriListItemProps) {
+function DotoriListItem({
+  dotori,
+  isActiveDotoriMenuId,
+  onActiveDotoriMenu,
+  onToggleModal,
+}: DotoriListItemProps) {
   const {
     id,
     title,
@@ -32,11 +45,13 @@ function DotoriListItem({ dotori }: DotoriListItemProps) {
     image,
     folderName,
     folderEmoji,
+    checked,
   } = dotori;
 
   const { copyUrlRef, onCopyUrl } = useCopyUrl();
   const { copyToast, remindSettingToast, remindDisabledToast } = useToast();
-  const { mutateEditDotori } = useUpdateDotori();
+  const { mutateEditDotori, mutateClickCountDotori } = useDotoriMutation();
+  const { isActiveSelectBox, onToggleDotoriChecked } = useDotoriSelect();
 
   const onRemindToggle = () => {
     const requestData = {
@@ -51,12 +66,40 @@ function DotoriListItem({ dotori }: DotoriListItemProps) {
   return (
     <DotoriItemBlock>
       <DotoriItemInner>
-        <DotoriThumbnail>
-          <DotoriOGImage src={image} alt="og-image" />
+        <DotoriThumbnail
+          href={link}
+          target="_blank"
+          rel="noopener noreferrer"
+          onClick={() => mutateClickCountDotori(id)}
+        >
+          {image ? (
+            <DotoriOGImage src={image} alt="og-image" />
+          ) : (
+            <DotoriDefaultImage>
+              <SymbolIcon />
+            </DotoriDefaultImage>
+          )}
+
+          {isActiveSelectBox && (
+            <SelectButton
+              onClick={(e) => {
+                e.stopPropagation();
+                e.preventDefault();
+                onToggleDotoriChecked(id);
+              }}
+              variant="primary"
+              isChecked={checked}
+            />
+          )}
         </DotoriThumbnail>
 
         <DotoriContent>
-          <InnerContent>
+          <InnerContent
+            href={link}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={() => mutateClickCountDotori(id)}
+          >
             <div className="title">{title}</div>
             <div className="description">{description}</div>
           </InnerContent>
@@ -72,13 +115,21 @@ function DotoriListItem({ dotori }: DotoriListItemProps) {
 
           <DotoriBottomArea>
             <DotoriLinkBox>
-              <DotoriLink>{link}</DotoriLink>
+              <DotoriLink
+                href={link}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => mutateClickCountDotori(id)}
+              >
+                {link}
+              </DotoriLink>
             </DotoriLinkBox>
 
             <DotoriOption>
               <OptionButton onClick={onRemindToggle}>
                 {remindTime ? <BellSelectedIcon /> : <BellUnSelectedIcon />}
               </OptionButton>
+
               <OptionButton
                 onClick={() => {
                   onCopyUrl(link);
@@ -87,14 +138,28 @@ function DotoriListItem({ dotori }: DotoriListItemProps) {
               >
                 <Copy24Icon />
               </OptionButton>
-              <OptionButton>
+
+              <OptionButton
+                onClick={(e) => {
+                  onActiveDotoriMenu(id);
+                  e.stopPropagation();
+                }}
+              >
                 <More24Icon />
+                {isActiveDotoriMenuId === id && (
+                  <DotoriItemMenu
+                    isOpen={isActiveDotoriMenuId === id}
+                    onActiveDotoriMenu={onActiveDotoriMenu}
+                    onToggleModal={onToggleModal}
+                  />
+                )}
               </OptionButton>
             </DotoriOption>
           </DotoriBottomArea>
         </DotoriContent>
+        {checked && <SelectedStyled />}
+        <UrlCopyInput ref={copyUrlRef} readOnly value={link} />
       </DotoriItemInner>
-      <UrlCopyInput ref={copyUrlRef} readOnly value={link} />
     </DotoriItemBlock>
   );
 }
@@ -103,6 +168,7 @@ const DotoriItemBlock = styled.div`
   margin: 0 24px 40px 0;
   display: flex;
   flex-direction: column;
+  position: relative;
   &:nth-child(3n) {
     margin-right: 0;
   }
@@ -140,6 +206,27 @@ const DotoriOGImage = styled.img`
   left: 0px;
   object-fit: cover;
   border-radius: 8px 8px 0 0;
+`;
+
+const DotoriDefaultImage = styled.div`
+  width: 100%;
+  height: 100%;
+  background-color: ${palette.primaryLight};
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+const SymbolIcon = styled(Symbol36Icon)`
+  width: 60px;
+  height: 60px;
+`;
+
+const SelectButton = styled(CheckBox)`
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  z-index: 100;
 `;
 
 const DotoriContent = styled.div`
@@ -226,6 +313,19 @@ const OptionButton = styled.button`
 
 const UrlCopyInput = styled.input`
   display: none;
+`;
+
+const SelectedStyled = styled.div`
+  width: 100%;
+  height: 100%;
+  border: solid 1px ${palette.primary};
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: ${palette.shadow1};
+  border-radius: 8px;
 `;
 
 export default DotoriListItem;

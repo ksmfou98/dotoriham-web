@@ -3,6 +3,7 @@ import {
   ICreateFolderRequest,
   ICreateFolderResponse,
   IMoveFolderRequest,
+  ParentFoldersGetResponse,
 } from "types/folder";
 import client from "./client";
 
@@ -45,6 +46,14 @@ export const moveFolderAPI = async (body: IMoveFolderRequest) => {
   const response = await client.patch(
     `/api/v1/folder/${body.moveFolderId}/move`,
     body
+  );
+  return response.data;
+};
+
+// 부모 폴더 리스트 조회
+export const getParentFolderListAPI = async (folderId: ItemId) => {
+  const response = await client.get<ParentFoldersGetResponse>(
+    `/api/v1/folder/${folderId}/parent`
   );
   return response.data;
 };

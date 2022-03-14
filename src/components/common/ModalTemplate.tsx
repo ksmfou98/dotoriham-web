@@ -1,6 +1,6 @@
 import { palette } from "lib/styles/palette";
 import transitions from "lib/styles/transitions";
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 
 interface IModalInnerStyled {
@@ -11,6 +11,7 @@ interface IModalInnerStyled {
 
 interface ModalTemplateProps extends IModalInnerStyled {
   children: React.ReactNode;
+  className?: string;
   onToggleModal: () => void;
 }
 
@@ -19,15 +20,24 @@ function ModalTemplate({
   height,
   isModal,
   children,
+  className,
   onToggleModal,
   ...rest
 }: ModalTemplateProps) {
+  useEffect(() => {
+    if (isModal) window.document.body.style.overflow = "hidden";
+    return () => {
+      window.document.body.style.overflow = "unset";
+    };
+  }, [isModal]);
+
   return (
     <ModalTemplateBlock onMouseDown={onToggleModal} {...rest}>
       <ModalInner
         width={width}
         height={height}
         isModal={isModal}
+        className={className}
         onMouseDown={(e) => e.stopPropagation()}
       >
         {children}

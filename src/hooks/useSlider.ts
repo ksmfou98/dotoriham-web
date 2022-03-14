@@ -32,5 +32,12 @@ export default function useSlider(options: SlideOptions) {
     }
   }, [SHOW_SLIDES_COUNT, currentSlide, slideItemWidth]);
 
-  return {}; // button들 isShow 구현하고 이쪽 작성 예정
+  return {
+    currentSlide,
+    slideRef,
+    onClickNext,
+    onClickPrev,
+    TOTAL_SLIDES_COUNT,
+    SHOW_SLIDES_COUNT,
+  }; // button들 isShow 구현하고 이쪽 작성 예정
 }

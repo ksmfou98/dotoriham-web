@@ -37,6 +37,9 @@ function Button({
 }
 
 const ButtonStyled = styled.button<ButtonStyledProps>`
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
   width: ${({ width }) => width};
   height: ${({ height }) => height};
   border-radius: ${({ borderRadius }) => borderRadius};

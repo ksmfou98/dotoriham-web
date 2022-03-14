@@ -1,9 +1,9 @@
-import { updateDotoriAPI } from "lib/api/dotori";
+import { clickCountDotoriAPI, updateDotoriAPI } from "lib/api/dotori";
 import { QueryKey } from "lib/queryKey";
 import { useMutation, useQueryClient } from "react-query";
 import { DotoriUpdateRequest } from "types/dotori";
 
-export default function useUpdateDotori() {
+export default function useDotoriMutation() {
   const queryClient = useQueryClient();
 
   const { mutate: mutateEditDotori } = useMutation(
@@ -19,5 +19,17 @@ export default function useUpdateDotori() {
     }
   );
 
-  return { mutateEditDotori };
+  const { mutate: mutateClickCountDotori } = useMutation(
+    (dotoriId: string) => clickCountDotoriAPI(dotoriId),
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries(QueryKey.DOTORI_CONTENTS);
+      },
+      onError: () => {
+        alert("도토리 조회수 증가를 실패했습니다. 잠시 후 다시 시도해 주세요");
+      },
+    }
+  );
+
+  return { mutateEditDotori, mutateClickCountDotori };
 }

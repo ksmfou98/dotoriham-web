@@ -5,10 +5,12 @@ enum Path {
   TrashPage = "/trash",
   SearchPage = "/search",
   MyPage = "/my",
+  ProfileEditPage = "/my/profile",
 
   // no Logged In
   LoginPage = "/login",
-  SignUpPage = "/signup",
+  RegisterPage = "/register",
+  LandingPage = "https://dotoriham.kr/",
 }
 
 export default Path;

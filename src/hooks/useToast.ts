@@ -1,9 +1,9 @@
 import { toast } from "react-toastify";
 
-enum ToastSize {
-  big = "big-toast",
-  small = "small-toast",
-}
+export const ToastSize = {
+  big: "big-toast" as const,
+  small: "small-toast" as const,
+};
 
 export default function useToast() {
   const { big, small } = ToastSize;

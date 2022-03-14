@@ -17,3 +17,11 @@ export interface IMoveFolderRequest {
   prevIndex: ItemId;
   nextIndex: ItemId;
 }
+
+export interface ChildFolderItem {
+  folderId: ItemId;
+  name: string;
+  emoji: string;
+}
+
+export type ParentFoldersGetResponse = ChildFolderItem[];

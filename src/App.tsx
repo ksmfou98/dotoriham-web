@@ -8,9 +8,11 @@ import GlobalStyles from "./lib/styles/globalStyles";
 import Routing from "./routes/Routing";
 import "react-toastify/dist/ReactToastify.css";
 import ToastContainerStyled from "lib/styles/toastStyle";
+import useCheckLogin from "hooks/useCheckLogin";
 
 function App() {
   const queryClient = new QueryClient();
+  useCheckLogin();
 
   return (
     <QueryClientProvider client={queryClient}>

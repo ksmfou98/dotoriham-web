@@ -1,12 +1,16 @@
 import { LogoIcon } from "assets/icons";
 import { palette } from "lib/styles/palette";
 import React from "react";
+import { useSelector } from "react-redux";
 import Path from "routes/Path";
+import { userSelector } from "stores/user";
 import styled from "styled-components";
 
 function Logo() {
+  const { accessToken } = useSelector(userSelector);
+
   return (
-    <LogoBlock href={Path.HomePage}>
+    <LogoBlock href={accessToken ? Path.HomePage : Path.LandingPage}>
       <LogoIcon />
       <LogoText>도토리함</LogoText>
     </LogoBlock>

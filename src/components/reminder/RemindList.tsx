@@ -1,4 +1,5 @@
 import { Back24Icon, Next24Icon } from "assets/icons";
+import useSlider from "hooks/useSlider";
 import React from "react";
 import styled, { css } from "styled-components";
 import useRemindQuery from "./hooks/useRemindQuery";
@@ -7,23 +8,42 @@ import RemindListItem from "./RemindListItem";
 function RemindList() {
   const { data } = useRemindQuery();
 
-  if (!data) return null;
+  const sliderOptions = {
+    data: data?.remindBookmarkList || [],
+    slideItemWidth: 198,
+    slideCount: 2,
+  };
+  const {
+    SHOW_SLIDES_COUNT,
+    TOTAL_SLIDES_COUNT,
+    currentSlide,
+    onClickNext,
+    onClickPrev,
+    slideRef,
+  } = useSlider(sliderOptions);
 
+  if (!data) return null;
   return (
     <RemindListBlock>
-      <BackButton isHidden={false}>
+      <BackButton
+        isShow={currentSlide !== SHOW_SLIDES_COUNT}
+        onClick={onClickPrev}
+      >
         <Back24Icon />
       </BackButton>
 
       <RemindListBox>
-        <div className="box-inner">
+        <div className="box-inner" ref={slideRef}>
           {data.remindBookmarkList.map((remind) => (
             <RemindListItem key={remind.id} remindData={remind} />
           ))}
         </div>
       </RemindListBox>
 
-      <NextButton isHidden={false}>
+      <NextButton
+        isShow={TOTAL_SLIDES_COUNT - currentSlide > SHOW_SLIDES_COUNT}
+        onClick={onClickNext}
+      >
         <Next24Icon />
       </NextButton>
     </RemindListBlock>
@@ -37,13 +57,13 @@ const RemindListBlock = styled.div`
   position: relative;
 `;
 
-const commonButtonStyled = css<{ isHidden: boolean }>`
+const commonButtonStyled = css<{ isShow: boolean }>`
   z-index: 100;
   position: absolute;
   top: 50%;
   margin: -16px 0px;
   cursor: pointer;
-  ${({ isHidden }) => isHidden && "display: none"};
+  ${({ isShow }) => !isShow && "display: none"};
 `;
 
 const BackButton = styled.div`

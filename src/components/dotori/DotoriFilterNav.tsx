@@ -2,13 +2,26 @@ import { DropDownIcon } from "assets/icons";
 import SwitchButton from "components/common/SwitchButton";
 import React from "react";
 import styled from "styled-components";
+import { FilterMenu } from "types/dotori";
+import DotoriFilterMenu from "./DotoriFilterMenu";
 
 interface DotoriFilterNavProps {
   onToggleRemind: () => void;
   isRemind: boolean;
+  onToggleFilterMenu: () => void;
+  isOpenFilterMenu: boolean;
+  filterType: FilterMenu;
+  onChangeFilterType: (filterType: FilterMenu) => void;
 }
 
-function DotoriFilterNav({ isRemind, onToggleRemind }: DotoriFilterNavProps) {
+function DotoriFilterNav({
+  isRemind,
+  onToggleRemind,
+  isOpenFilterMenu,
+  onToggleFilterMenu,
+  filterType,
+  onChangeFilterType,
+}: DotoriFilterNavProps) {
   return (
     <DotoriFilterNavBlock>
       <RemindToggleStyled>
@@ -16,9 +29,17 @@ function DotoriFilterNav({ isRemind, onToggleRemind }: DotoriFilterNavProps) {
         <SwitchButton isChecked={isRemind} onToggle={onToggleRemind} />
       </RemindToggleStyled>
 
-      <FilterMenuButton>
-        <FilterMenuText>최신순</FilterMenuText>
+      <FilterMenuButton onClick={onToggleFilterMenu}>
+        <FilterMenuText>{filterType.text}</FilterMenuText>
         <DropDownIcon />
+        {isOpenFilterMenu && (
+          <DotoriFilterMenu
+            filterType={filterType}
+            onChangeFilterType={onChangeFilterType}
+            isOpenFilterMenu={isOpenFilterMenu}
+            onToggleFilterMenu={onToggleFilterMenu}
+          />
+        )}
       </FilterMenuButton>
     </DotoriFilterNavBlock>
   );

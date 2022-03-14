@@ -1,4 +1,4 @@
-import { USER_STORAGE_KEY } from "lib/const";
+import { USER_STORAGE_KEY } from "lib/constants";
 import { IUserState } from "stores/user";
 
 const userStorage = {

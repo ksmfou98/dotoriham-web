@@ -39,7 +39,7 @@
 
 - React
 - React-Router
-- Recoil
+- Redux-toolkit
 - Styled-components
 - React-Query
 - Typescript

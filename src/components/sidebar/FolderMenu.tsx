@@ -15,22 +15,18 @@ interface FolderMenuProps {
 
 function FolderMenu({ position, onToggleModal }: FolderMenuProps) {
   const { left, top } = position;
-  const {
-    onToggleDeleteModal,
-    onToggleFolderMenu,
-    onToggleMoveModal,
-    onToggleRenameModal,
-  } = onToggleModal;
+  const { onToggleDeleteModal, onToggleFolderMenu, onToggleRenameModal } =
+    onToggleModal;
 
   const folderMenus = [
     {
       name: "이름 변경",
       onToggle: onToggleRenameModal,
     },
-    {
-      name: "이동",
-      onToggle: onToggleMoveModal,
-    },
+    // {
+    //   name: "이동",
+    //   onToggle: onToggleMoveModal,
+    // },
     {
       name: "삭제",
       onToggle: onToggleDeleteModal,

@@ -6,9 +6,7 @@ import {
 } from "lib/api/dotori";
 import { ReactQueryKey } from "lib/queryKey";
 import { useQuery } from "react-query";
-import { DotoriSortType } from "types/dotori";
-
-export type DotoriPathTypes = "main" | "trash" | "search" | "folder";
+import { DotoriPathTypes, DotoriSortType } from "types/dotori";
 
 export default function useDotoriQuery(
   path: DotoriPathTypes,
