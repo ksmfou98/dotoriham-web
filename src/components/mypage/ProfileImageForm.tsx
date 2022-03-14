@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { ColorizeIcon, X16BigIcon } from "assets/icons";
 import SmallBlackText from "components/common/SmallBlackText";
 import useToggle from "hooks/useToggle";
