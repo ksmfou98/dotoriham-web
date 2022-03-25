@@ -11,12 +11,12 @@ import { useNavigate } from "react-router-dom";
 import { userSelector } from "stores/user";
 import styled from "styled-components";
 import { DEFAULT_IMAGE_FILE_NAME } from "./constants";
-import ProfileEditButtonGroup from "./ProfileEditButtonGroup";
 import ProfileImageForm from "./ProfileImageForm";
 import ProfileNicknameForm from "./ProfileNicknameForm";
 import { setUser } from "stores/user";
 import userStorage from "lib/utils/userStorage";
 import Path from "routes/Path";
+import Button from "components/common/Button";
 
 function ProfileEditForm() {
   const navigate = useNavigate();
@@ -112,7 +112,26 @@ function ProfileEditForm() {
         onImageUpload={onImageUpload}
       />
       <ProfileNicknameForm />
-      <ProfileEditButtonGroup />
+
+      <EditButtonGroups>
+        <Button
+          width="174px"
+          height="40px"
+          variant="tertiary"
+          onClick={() => navigate(-1)}
+        >
+          뒤로 가기
+        </Button>
+
+        <Button
+          width="174px"
+          height="40px"
+          variant="primary"
+          className="saveBtn"
+        >
+          변경 내용 저장
+        </Button>
+      </EditButtonGroups>
     </ProfileEditFormBlock>
   );
 }
@@ -120,6 +139,16 @@ function ProfileEditForm() {
 const ProfileEditFormBlock = styled.div`
   padding-top: 24px;
   color: ${palette.grayDarkest};
+`;
+
+const EditButtonGroups = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  .saveBtn {
+    font-weight: 300;
+    margin-left: 24px;
+  }
 `;
 
 export default ProfileEditForm;

@@ -14,6 +14,9 @@ function ProfileNicknameForm() {
 
 const NicknameFormBlock = styled.div`
   display: flex;
+  font-size: 14px;
+  height: 57px;
+  margin-bottom: 88px;
 `;
 
 const FormLabel = styled(SmallBlackText)`
