@@ -5,6 +5,7 @@ import useToggle from "hooks/useToggle";
 import { palette } from "lib/styles/palette";
 import React from "react";
 import styled from "styled-components";
+import ProfileColorPalette from "./ProfileColorPalette";
 
 interface ProfileImageFormProps {
   form: {
@@ -31,6 +32,13 @@ function ProfileImageForm({
       <ProfileImageBox>
         <ProfileImage src={profileImage} />
         <ProfileColorsButton onClick={onTogglePaletteOpen} />
+        {isPaletteOpen && (
+          <ProfileColorPalette
+            isOpen={isPaletteOpen}
+            onToggleOpen={onTogglePaletteOpen}
+            onChangeProfileImage={onChangeProfileImage}
+          />
+        )}
       </ProfileImageBox>
 
       <UploadContent>
