@@ -1,3 +1,4 @@
+import { QuestionIcon } from "assets/icons";
 import useToggle from "hooks/useToggle";
 import React from "react";
 import { useSelector } from "react-redux";
@@ -8,7 +9,11 @@ function QuestionButton() {
   const { isAlarm, isGuide } = useSelector(tutorialSelector);
   const [isTutorialModal, setIsTutorialModal] = useToggle();
 
-  return <QuestionButtonStyled>QuestionButton</QuestionButtonStyled>;
+  return (
+    <QuestionButtonStyled>
+      <QuestionIcon />
+    </QuestionButtonStyled>
+  );
 }
 
 const QuestionButtonStyled = styled.button`
