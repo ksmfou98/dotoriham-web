@@ -1,9 +1,10 @@
+import React from "react";
 import { Back24Icon, Next24Icon } from "assets/icons";
 import useSlider from "hooks/useSlider";
-import React from "react";
 import styled, { css } from "styled-components";
 import useRemindQuery from "./hooks/useRemindQuery";
 import RemindListItem from "./RemindListItem";
+import RemindSettingMessage from "./RemindSettingMessage";
 
 function RemindList() {
   const { data } = useRemindQuery();
@@ -23,6 +24,7 @@ function RemindList() {
   } = useSlider(sliderOptions);
 
   if (!data) return null;
+  if (data.remindBookmarkList.length === 0) return <RemindSettingMessage />;
   return (
     <RemindListBlock>
       <BackButton
