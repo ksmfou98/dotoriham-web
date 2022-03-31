@@ -36,3 +36,6 @@ export { ReactComponent as PlusIcon } from "./Plus.svg";
 export { ReactComponent as SymbolGray96Icon } from "./Icons_Symbol_gray_96.svg";
 export { ReactComponent as QuestionActiveIcon } from "./Question_active.svg";
 export { ReactComponent as QuestionIcon } from "./Icons_Question_60.svg";
+export { ReactComponent as X32Icon } from "./Icons_x_32.svg";
+export { ReactComponent as ArrowBackBigIcon } from "./Arrow_back_big_60.svg";
+export { ReactComponent as ArrowBigIcon } from "./Arrow_big_60.svg";
