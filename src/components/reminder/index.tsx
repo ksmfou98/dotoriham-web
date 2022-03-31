@@ -12,7 +12,7 @@ function Reminder() {
   return (
     <ReminderBlock>
       <ReminderTitle>
-        <ReminderTitleText>리마인더</ReminderTitleText>
+        <ReminderTitleText>리마인드</ReminderTitleText>
         <ReminderToggleButton onClick={onToggleReminder}>
           <div className="text">{isOpenReminder ? "접기" : "펼치기"}</div>
           <ArrowIconBox isOpen={isOpenReminder}>
