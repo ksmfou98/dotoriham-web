@@ -2,6 +2,11 @@ import { renderHook } from "@testing-library/react-hooks";
 import useToggle from "hooks/useToggle";
 
 describe("useToggle", () => {
+  test("useToggle은 길이가 3인 배열을 리턴한다. (state, onToggle, setState)", () => {
+    const { result } = renderHook(() => useToggle(false));
+    expect(result.current).toHaveLength(3);
+  });
+
   test("initialValue 값을 넣지 않으면 value의 초기 값은 false 이다.", () => {
     const { result } = renderHook(() => useToggle());
     expect(result.current[0]).toBe(false);
