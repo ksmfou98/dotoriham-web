@@ -1,4 +1,4 @@
-import { renderHook } from "@testing-library/react-hooks";
+import { act, renderHook } from "@testing-library/react-hooks";
 import useToggle from "hooks/useToggle";
 
 describe("useToggle", () => {
@@ -19,13 +19,17 @@ describe("useToggle", () => {
 
   test("onToggle 함수를 실행하면 value의 값이 바뀐다.", () => {
     const { result } = renderHook(() => useToggle(false));
-    result.current[1]();
+    act(() => {
+      result.current[1]();
+    });
     expect(result.current[0]).toBe(true);
   });
 
   test("setValue를 이용해서 직접 value의 값을 바꿀 수 있다.", () => {
     const { result } = renderHook(() => useToggle(false));
-    result.current[2](true);
+    act(() => {
+      result.current[2](true);
+    });
     expect(result.current[0]).toBe(true);
   });
 });
