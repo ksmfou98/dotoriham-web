@@ -41,7 +41,7 @@ const SearchBarStyled = styled.form`
   align-items: center;
   background-color: #f3f3f3;
   border-radius: 6px;
-  width: 570px;
+  width: 480px;
   height: 32px;
   padding: 4px 8px;
   margin-right: 27px;
