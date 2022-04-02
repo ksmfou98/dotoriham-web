@@ -275,6 +275,7 @@ const DotoriFolderName = styled(Link)`
   height: 16px;
   line-height: 16px;
   display: inline-block;
+  margin-left: 4px;
   max-width: 135px;
   ${ellipsis}
   &:hover {
