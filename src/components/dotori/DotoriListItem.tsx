@@ -55,7 +55,7 @@ function DotoriListItem({
 
   const onRemindToggle = () => {
     const requestData = {
-      bookmarkId: id,
+      dotoriId: id,
       title,
       remind: !remindTime,
     };
