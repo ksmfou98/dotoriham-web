@@ -5,15 +5,21 @@ import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { dotoriSelector } from "stores/dotori";
 import styled from "styled-components";
-import { DotoriPathTypes } from "types/dotori";
+import { DotoriPathTypes, IDotoriItem } from "types/dotori";
+import { initialDotoriState } from "./constants";
 import DotoriBlankSlate from "./DotoriBlankSlate";
 import DotoriEditModal from "./DotoriEditModal";
 import DotoriListItem from "./DotoriListItem";
+import useDotoriMutation from "./hooks/useDotoriMutation";
 
 export interface ToggleModal {
   onToggleDeleteModal: () => void;
   onToggleEditModal: () => void;
   onToggleMoveModal: () => void;
+}
+
+export interface ActiveDotori extends IDotoriItem {
+  isOpen: boolean;
 }
 
 function DotoriList({ path }: { path: DotoriPathTypes }) {
@@ -22,6 +28,7 @@ function DotoriList({ path }: { path: DotoriPathTypes }) {
   const [isDeleteModal, onToggleDeleteModal] = useToggle();
   const [isEditModal, onToggleEditModal] = useToggle();
   const [isMoveModal, onToggleMoveModal] = useToggle();
+  const { mutateDeleteDotori } = useDotoriMutation();
 
   const onToggleModal = {
     onToggleDeleteModal,
@@ -29,10 +36,16 @@ function DotoriList({ path }: { path: DotoriPathTypes }) {
     onToggleMoveModal,
   };
 
-  const [isActiveDotoriMenuId, setIsActiveDotoriMenuId] = useState<string>("");
-  const onActiveDotoriMenu = (dotoriId: string) => {
-    setIsActiveDotoriMenuId(dotoriId);
+  const [isActiveDotoriMenu, setIsActiveDotoriMenu] = useState<ActiveDotori>({
+    ...initialDotoriState,
+    isOpen: false,
+  });
+
+  const onActiveDotoriMenu = (dotori: IDotoriItem, isOpen: boolean) => {
+    setIsActiveDotoriMenu({ ...dotori, isOpen });
   };
+
+  const onDeleteDotori = () => mutateDeleteDotori([isActiveDotoriMenu.id]);
 
   return (
     <DotoriListBlock>
@@ -42,7 +55,7 @@ function DotoriList({ path }: { path: DotoriPathTypes }) {
         <DotoriListItem
           key={dotori.id}
           dotori={dotori}
-          isActiveDotoriMenuId={isActiveDotoriMenuId}
+          isActiveDotoriMenu={isActiveDotoriMenu}
           onActiveDotoriMenu={onActiveDotoriMenu}
           onToggleModal={onToggleModal}
         />
@@ -62,7 +75,7 @@ function DotoriList({ path }: { path: DotoriPathTypes }) {
           title="선택한 도토리를 삭제할까요?"
           content="삭제된 도토리는 모두 <br /> 휴지통으로 들어가요!"
           buttonName="삭제"
-          onClick={() => console.log("삭제")}
+          onClick={onDeleteDotori}
         />
       )}
 

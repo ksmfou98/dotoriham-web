@@ -6,20 +6,19 @@ import { ToggleModal } from "./DotoriList";
 
 interface DotoriItemMenuProps {
   isOpen: boolean;
-  onActiveDotoriMenu: (dotoriId: string) => void;
+  onClose: () => void;
   onToggleModal: ToggleModal;
 }
 
 function DotoriItemMenu({
   isOpen,
-  onActiveDotoriMenu,
+  onClose,
   onToggleModal,
 }: DotoriItemMenuProps) {
   const { onToggleDeleteModal, onToggleEditModal, onToggleMoveModal } =
     onToggleModal;
 
-  const onCloseMenu = () => onActiveDotoriMenu("");
-  const { targetEl } = useOutSideClick(isOpen, onCloseMenu);
+  const { targetEl } = useOutSideClick(isOpen, onClose);
 
   const dotoriMenus = [
     { name: "이동", onClick: onToggleMoveModal },
@@ -35,7 +34,7 @@ function DotoriItemMenu({
             key={name}
             onClick={(e) => {
               e.stopPropagation();
-              onCloseMenu();
+              onClose();
               onClick();
             }}
           >

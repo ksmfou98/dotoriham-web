@@ -1,4 +1,8 @@
-import { clickCountDotoriAPI, updateDotoriAPI } from "lib/api/dotori";
+import {
+  clickCountDotoriAPI,
+  deleteDotoriAPI,
+  updateDotoriAPI,
+} from "lib/api/dotori";
 import { QueryKey } from "lib/queryKey";
 import { useMutation, useQueryClient } from "react-query";
 import { DotoriUpdateRequest } from "types/dotori";
@@ -19,6 +23,18 @@ export default function useDotoriMutation() {
     }
   );
 
+  const { mutate: mutateDeleteDotori } = useMutation(
+    (dotoriIdList: string[]) => deleteDotoriAPI(dotoriIdList),
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries(QueryKey.DOTORI_CONTENTS);
+      },
+      onError: () => {
+        alert("도토리 삭제를 실패했습니다. 잠시 후 다시 시도해 주세요");
+      },
+    }
+  );
+
   const { mutate: mutateClickCountDotori } = useMutation(
     (dotoriId: string) => clickCountDotoriAPI(dotoriId),
     {
@@ -31,5 +47,5 @@ export default function useDotoriMutation() {
     }
   );
 
-  return { mutateEditDotori, mutateClickCountDotori };
+  return { mutateEditDotori, mutateDeleteDotori, mutateClickCountDotori };
 }

@@ -1,4 +1,4 @@
-import { FilterMenu } from "types/dotori";
+import { FilterMenu, IDotoriItem } from "types/dotori";
 
 export const DOTORI_FILTER_TYPES = {
   LATEST_ORDER: "saveTime,desc" as const,
@@ -31,4 +31,23 @@ export const DOTORI_PAGE_SIZE = {
   folder: 9,
   trash: 12,
   search: 12,
+};
+
+export const initialDotoriState: IDotoriItem = {
+  id: "",
+  title: "",
+  checked: false,
+  saveTime: "",
+  clickCount: 0,
+  folderId: "",
+  folderName: "",
+  deleteTime: "",
+  deleted: false,
+  description: "",
+  folderEmoji: "",
+  image: "",
+  link: "",
+  remindTime: "",
+  userId: 0,
+  nickname: "",
 };

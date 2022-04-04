@@ -20,18 +20,18 @@ import useDotoriSelect from "./hooks/useDotoriSelect";
 import CheckBox from "components/common/CheckBox";
 import useDotoriMutation from "./hooks/useDotoriMutation";
 import DotoriItemMenu from "./DotoriItemMenu";
-import { ToggleModal } from "./DotoriList";
+import { ActiveDotori, ToggleModal } from "./DotoriList";
 
 interface DotoriListItemProps {
   dotori: IDotoriItem;
-  isActiveDotoriMenuId: string;
-  onActiveDotoriMenu: (dotoriId: string) => void;
+  isActiveDotoriMenu: ActiveDotori;
+  onActiveDotoriMenu: (dotori: IDotoriItem, isOpen: boolean) => void;
   onToggleModal: ToggleModal;
 }
 
 function DotoriListItem({
   dotori,
-  isActiveDotoriMenuId,
+  isActiveDotoriMenu,
   onActiveDotoriMenu,
   onToggleModal,
 }: DotoriListItemProps) {
@@ -141,15 +141,15 @@ function DotoriListItem({
 
               <OptionButton
                 onClick={(e) => {
-                  onActiveDotoriMenu(id);
+                  onActiveDotoriMenu(dotori, true);
                   e.stopPropagation();
                 }}
               >
                 <More24Icon />
-                {isActiveDotoriMenuId === id && (
+                {isActiveDotoriMenu.id === id && isActiveDotoriMenu.isOpen && (
                   <DotoriItemMenu
-                    isOpen={isActiveDotoriMenuId === id}
-                    onActiveDotoriMenu={onActiveDotoriMenu}
+                    isOpen={isActiveDotoriMenu.id === id}
+                    onClose={() => onActiveDotoriMenu(dotori, false)}
                     onToggleModal={onToggleModal}
                   />
                 )}
