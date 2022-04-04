@@ -18,7 +18,7 @@ export interface ToggleModal {
   onToggleMoveModal: () => void;
 }
 
-export interface ActiveDotori extends IDotoriItem {
+export interface ActiveDotoriMenu extends IDotoriItem {
   isOpen: boolean;
 }
 
@@ -36,10 +36,11 @@ function DotoriList({ path }: { path: DotoriPathTypes }) {
     onToggleMoveModal,
   };
 
-  const [isActiveDotoriMenu, setIsActiveDotoriMenu] = useState<ActiveDotori>({
-    ...initialDotoriState,
-    isOpen: false,
-  });
+  const [isActiveDotoriMenu, setIsActiveDotoriMenu] =
+    useState<ActiveDotoriMenu>({
+      ...initialDotoriState,
+      isOpen: false,
+    });
 
   const onActiveDotoriMenu = (dotori: IDotoriItem, isOpen: boolean) => {
     setIsActiveDotoriMenu({ ...dotori, isOpen });
@@ -64,6 +65,7 @@ function DotoriList({ path }: { path: DotoriPathTypes }) {
       {isEditModal && (
         <DotoriEditModal
           isOpen={isEditModal}
+          isActiveDotoriMenu={isActiveDotoriMenu}
           onToggleModal={onToggleEditModal}
         />
       )}

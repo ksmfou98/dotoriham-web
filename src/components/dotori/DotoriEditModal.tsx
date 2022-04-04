@@ -1,17 +1,42 @@
-import React from "react";
+import React, { useState } from "react";
 import ModalTemplate from "components/common/ModalTemplate";
 import styled from "styled-components";
 import TextareaAutosize from "react-textarea-autosize";
 import Button from "components/common/Button";
 import { palette } from "lib/styles/palette";
+import { ActiveDotoriMenu } from "./DotoriList";
+import useDotoriMutation from "./hooks/useDotoriMutation";
 
 interface DotoriEditModalProps {
   isOpen: boolean;
   onToggleModal: () => void;
+  isActiveDotoriMenu: ActiveDotoriMenu;
 }
 
-function DotoriEditModal({ isOpen, onToggleModal }: DotoriEditModalProps) {
-  const TEXT_MAX_LENGTH = 100;
+const TITLE_MAX_LENGTH = 100;
+
+function DotoriEditModal({
+  isOpen,
+  onToggleModal,
+  isActiveDotoriMenu,
+}: DotoriEditModalProps) {
+  const [title, setTitle] = useState(isActiveDotoriMenu.title);
+  const { mutateEditDotori } = useDotoriMutation();
+
+  const onChangeTitle = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    if (e.target.value.length > TITLE_MAX_LENGTH) return;
+    setTitle(e.target.value);
+  };
+
+  const onSubmitTitle = () => {
+    const requestData = {
+      dotoriId: isActiveDotoriMenu.id,
+      title,
+      remind: !!isActiveDotoriMenu.remindTime,
+    };
+    mutateEditDotori(requestData);
+    onToggleModal();
+  };
 
   return (
     <EditModalTemplate
@@ -25,9 +50,11 @@ function DotoriEditModal({ isOpen, onToggleModal }: DotoriEditModalProps) {
         <ModalContent>
           <InputInfo>
             <InputText>제목</InputText>
-            <InputCount active>3/{TEXT_MAX_LENGTH}</InputCount>
+            <InputCount active={title.length === TITLE_MAX_LENGTH}>
+              {title.length}/{TITLE_MAX_LENGTH}
+            </InputCount>
           </InputInfo>
-          <EditInput />
+          <EditInput value={title} onChange={onChangeTitle} />
         </ModalContent>
         <ModalButtonGroup>
           <CancelButton
@@ -44,6 +71,7 @@ function DotoriEditModal({ isOpen, onToggleModal }: DotoriEditModalProps) {
             width="206px"
             height="42px"
             borderRadius="8px"
+            onClick={onSubmitTitle}
           >
             편집
           </Button>
