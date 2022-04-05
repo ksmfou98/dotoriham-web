@@ -63,7 +63,7 @@ export interface DotoriUpdateRequest {
 }
 
 export interface DotoriMoveRequest {
-  dotoriIdList: string[];
+  bookmarkIdList: string[];
   nextFolderId: ItemId;
 }
 

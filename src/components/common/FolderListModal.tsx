@@ -19,7 +19,7 @@ import { DotoriPathTypes } from "types/dotori";
 interface FolderListModalProps {
   isModal: boolean;
   onToggleModal: () => void;
-  onMove: () => void;
+  onMove: (nextFolderId: ItemId) => void;
   path: DotoriPathTypes;
 }
 
@@ -102,7 +102,11 @@ function FolderListModal({
       <ModalInner>
         <ModalTitle>위치 선택</ModalTitle>
         <PathBox>
-          <PagePath isModal path={path} />
+          <PagePath
+            isModal
+            path={selectedFolderId ? "folder" : "main"}
+            folderId={selectedFolderId as string}
+          />
         </PathBox>
         <FolderListBox>
           <FolderListBlock>
@@ -129,8 +133,9 @@ function FolderListModal({
             variant="primary"
             width="63px"
             height="26px"
+            disabled={!selectedFolderId}
             onClick={() => {
-              onMove();
+              onMove(selectedFolderId!);
               onToggleModal();
             }}
           >

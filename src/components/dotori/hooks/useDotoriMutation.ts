@@ -1,11 +1,12 @@
 import {
   clickCountDotoriAPI,
   deleteDotoriAPI,
+  moveDotoriAPI,
   updateDotoriAPI,
 } from "lib/api/dotori";
 import { QueryKey } from "lib/queryKey";
 import { useMutation, useQueryClient } from "react-query";
-import { DotoriUpdateRequest } from "types/dotori";
+import { DotoriMoveRequest, DotoriUpdateRequest } from "types/dotori";
 
 export default function useDotoriMutation() {
   const queryClient = useQueryClient();
@@ -35,6 +36,18 @@ export default function useDotoriMutation() {
     }
   );
 
+  const { mutate: mutateMoveDotori } = useMutation(
+    (requestData: DotoriMoveRequest) => moveDotoriAPI(requestData),
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries(QueryKey.DOTORI_CONTENTS);
+      },
+      onError: () => {
+        alert("도토리 이동을 실패했습니다. 잠시 후 다시 시도해 주세요");
+      },
+    }
+  );
+
   const { mutate: mutateClickCountDotori } = useMutation(
     (dotoriId: string) => clickCountDotoriAPI(dotoriId),
     {
@@ -47,5 +60,10 @@ export default function useDotoriMutation() {
     }
   );
 
-  return { mutateEditDotori, mutateDeleteDotori, mutateClickCountDotori };
+  return {
+    mutateEditDotori,
+    mutateDeleteDotori,
+    mutateMoveDotori,
+    mutateClickCountDotori,
+  };
 }

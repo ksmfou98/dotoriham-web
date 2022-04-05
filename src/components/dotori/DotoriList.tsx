@@ -1,3 +1,4 @@
+import { ItemId } from "@atlaskit/tree";
 import FolderListModal from "components/common/FolderListModal";
 import SmallModal from "components/common/SmallModal";
 import useToggle from "hooks/useToggle";
@@ -28,7 +29,7 @@ function DotoriList({ path }: { path: DotoriPathTypes }) {
   const [isDeleteModal, onToggleDeleteModal] = useToggle();
   const [isEditModal, onToggleEditModal] = useToggle();
   const [isMoveModal, onToggleMoveModal] = useToggle();
-  const { mutateDeleteDotori } = useDotoriMutation();
+  const { mutateDeleteDotori, mutateMoveDotori } = useDotoriMutation();
 
   const onToggleModal = {
     onToggleDeleteModal,
@@ -47,6 +48,14 @@ function DotoriList({ path }: { path: DotoriPathTypes }) {
   };
 
   const onDeleteDotori = () => mutateDeleteDotori([isActiveDotoriMenu.id]);
+
+  const onMoveDotori = (nextFolderId: ItemId) => {
+    const requestData = {
+      bookmarkIdList: [isActiveDotoriMenu.id],
+      nextFolderId,
+    };
+    mutateMoveDotori(requestData);
+  };
 
   return (
     <DotoriListBlock>
@@ -85,7 +94,7 @@ function DotoriList({ path }: { path: DotoriPathTypes }) {
         <FolderListModal
           isModal={isMoveModal}
           onToggleModal={onToggleMoveModal}
-          onMove={() => console.log("옮기기")}
+          onMove={onMoveDotori}
           path={path}
         />
       )}

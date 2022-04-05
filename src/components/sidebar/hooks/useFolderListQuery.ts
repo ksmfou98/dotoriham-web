@@ -2,7 +2,7 @@ import { getFolderListAPI } from "lib/api/folder";
 import { ReactQueryKey } from "lib/queryKey";
 import { useQuery } from "react-query";
 
-export type FolderQueryKindTypes = "sidebar" | "modal" | "layer";
+export type FolderQueryKindTypes = "sidebar" | "modal";
 
 export default function useFolderListQuery(kind: FolderQueryKindTypes) {
   const query = useQuery(
