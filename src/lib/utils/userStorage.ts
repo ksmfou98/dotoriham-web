@@ -1,5 +1,6 @@
-import { USER_STORAGE_KEY } from "lib/constants";
 import { IUserState } from "stores/user";
+
+export const USER_STORAGE_KEY = "DOTORI_USER";
 
 const userStorage = {
   get() {
