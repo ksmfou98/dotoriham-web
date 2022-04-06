@@ -2,7 +2,7 @@ import { ItemId } from "@atlaskit/tree";
 import FolderListModal from "components/common/FolderListModal";
 import SmallModal from "components/common/SmallModal";
 import useToggle from "hooks/useToggle";
-import React, { useCallback, useState } from "react";
+import React, { memo, useCallback, useState } from "react";
 import { useSelector } from "react-redux";
 import { dotoriSelector } from "stores/dotori";
 import styled from "styled-components";
@@ -102,4 +102,4 @@ const DotoriListBlock = styled.div`
   flex-wrap: wrap;
 `;
 
-export default React.memo(DotoriList);
+export default memo(DotoriList);

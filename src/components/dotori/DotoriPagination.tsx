@@ -1,6 +1,6 @@
 import { ArrowLeft16Icon, ArrowSide16Icon } from "assets/icons";
 import { palette } from "lib/styles/palette";
-import React from "react";
+import React, { memo } from "react";
 import PaginationComponent from "react-js-pagination";
 import styled from "styled-components";
 
@@ -80,4 +80,4 @@ const PaginationBlock = styled.div`
   }
 `;
 
-export default React.memo(DotoriPagination);
+export default memo(DotoriPagination);

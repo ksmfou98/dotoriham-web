@@ -16,19 +16,10 @@ import SmallModal from "components/common/SmallModal";
 import FolderListModal from "components/common/FolderListModal";
 import useDotoriMutation from "./hooks/useDotoriMutation";
 
-// TODO: Props로 trash인지 serach인지 폴더id 인지 받아와야 함
-
 interface DotoriTemplateProps {
   path: DotoriPathTypes;
   keyword?: string;
   folderId?: ItemId;
-}
-
-export interface DotoriToggleModals {
-  onToggleDeleteModal: () => void;
-  onToggleMoveModal: () => void;
-  onToggleRestoreModal: () => void;
-  onToggleTruncateModal: () => void;
 }
 
 function DotoriTemplate({ path, keyword, folderId }: DotoriTemplateProps) {
@@ -54,13 +45,6 @@ function DotoriTemplate({ path, keyword, folderId }: DotoriTemplateProps) {
   const [isMoveModal, onToggleMoveModal] = useToggle();
   const [isRestoreModal, onToggleRestoreModal] = useToggle();
   const [isTruncateModal, onToggleTruncateModal] = useToggle();
-
-  const onToggleModal: DotoriToggleModals = {
-    onToggleDeleteModal,
-    onToggleMoveModal,
-    onToggleRestoreModal,
-    onToggleTruncateModal,
-  };
 
   const pageSize = getDotoriPageSize(path);
 
@@ -116,8 +100,11 @@ function DotoriTemplate({ path, keyword, folderId }: DotoriTemplateProps) {
     <>
       <DotoriNavBlock>
         <DotoriSelectNav
-          onToggleModal={onToggleModal}
           isTrashPage={path === "trash"}
+          onToggleDeleteModal={onToggleDeleteModal}
+          onToggleMoveModal={onToggleMoveModal}
+          onToggleTruncateModal={onToggleTruncateModal}
+          onToggleRestoreModal={onToggleRestoreModal}
         />
         <DotoriFilterNav
           isRemind={isRemind}

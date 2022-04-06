@@ -10,7 +10,7 @@ import FolderEmoji from "components/common/FolderEmoji";
 import useCopyUrl from "hooks/useCopyUrl";
 import { palette } from "lib/styles/palette";
 import { ellipsis } from "lib/styles/utilStyles";
-import React from "react";
+import React, { memo } from "react";
 import { Link } from "react-router-dom";
 import Path from "routes/Path";
 import styled from "styled-components";
@@ -334,4 +334,4 @@ const SelectedStyled = styled.div`
   border-radius: 8px;
 `;
 
-export default React.memo(DotoriListItem);
+export default memo(DotoriListItem);
