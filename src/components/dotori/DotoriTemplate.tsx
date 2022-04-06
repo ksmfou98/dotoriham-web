@@ -112,7 +112,6 @@ function DotoriTemplate({ path, keyword, folderId }: DotoriTemplateProps) {
     mutateTruncateDotori(checkedDotoris);
   };
 
-  if (!data) return null;
   return (
     <>
       <DotoriNavBlock>
@@ -132,12 +131,14 @@ function DotoriTemplate({ path, keyword, folderId }: DotoriTemplateProps) {
 
       <DotoriList path={path} />
 
-      <DotoriPagination
-        page={page}
-        onChangePage={onChangePage}
-        totalElements={data.totalElements}
-        pageSize={pageSize}
-      />
+      {data && data.totalElements > getDotoriPageSize(path) && (
+        <DotoriPagination
+          page={page}
+          onChangePage={onChangePage}
+          totalElements={data.totalElements}
+          pageSize={pageSize}
+        />
+      )}
 
       {isDeleteModal && (
         <SmallModal
