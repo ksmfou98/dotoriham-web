@@ -2,22 +2,22 @@ import useOutSideClick from "hooks/useOutSideClick";
 import { palette } from "lib/styles/palette";
 import React from "react";
 import styled from "styled-components";
-import { ToggleModal } from "./DotoriList";
 
 interface DotoriItemMenuProps {
   isOpen: boolean;
   onClose: () => void;
-  onToggleModal: ToggleModal;
+  onToggleDeleteModal: () => void;
+  onToggleEditModal: () => void;
+  onToggleMoveModal: () => void;
 }
 
 function DotoriItemMenu({
   isOpen,
   onClose,
-  onToggleModal,
+  onToggleDeleteModal,
+  onToggleEditModal,
+  onToggleMoveModal,
 }: DotoriItemMenuProps) {
-  const { onToggleDeleteModal, onToggleEditModal, onToggleMoveModal } =
-    onToggleModal;
-
   const { targetEl } = useOutSideClick(isOpen, onClose);
 
   const dotoriMenus = [

@@ -20,20 +20,23 @@ import useDotoriSelect from "./hooks/useDotoriSelect";
 import CheckBox from "components/common/CheckBox";
 import useDotoriMutation from "./hooks/useDotoriMutation";
 import DotoriItemMenu from "./DotoriItemMenu";
-import { ActiveDotoriMenu, ToggleModal } from "./DotoriList";
 
 interface DotoriListItemProps {
   dotori: IDotoriItem;
-  isActiveDotoriMenu: ActiveDotoriMenu;
+  isActiveDotoriMenu: boolean;
   onActiveDotoriMenu: (dotori: IDotoriItem, isOpen: boolean) => void;
-  onToggleModal: ToggleModal;
+  onToggleDeleteModal: () => void;
+  onToggleEditModal: () => void;
+  onToggleMoveModal: () => void;
 }
 
 function DotoriListItem({
   dotori,
   isActiveDotoriMenu,
   onActiveDotoriMenu,
-  onToggleModal,
+  onToggleDeleteModal,
+  onToggleEditModal,
+  onToggleMoveModal,
 }: DotoriListItemProps) {
   const {
     id,
@@ -141,16 +144,18 @@ function DotoriListItem({
 
               <OptionButton
                 onClick={(e) => {
-                  onActiveDotoriMenu(dotori, true);
                   e.stopPropagation();
+                  onActiveDotoriMenu(dotori, true);
                 }}
               >
                 <More24Icon />
-                {isActiveDotoriMenu.id === id && isActiveDotoriMenu.isOpen && (
+                {isActiveDotoriMenu && (
                   <DotoriItemMenu
-                    isOpen={isActiveDotoriMenu.id === id}
+                    isOpen={isActiveDotoriMenu}
                     onClose={() => onActiveDotoriMenu(dotori, false)}
-                    onToggleModal={onToggleModal}
+                    onToggleDeleteModal={onToggleDeleteModal}
+                    onToggleEditModal={onToggleEditModal}
+                    onToggleMoveModal={onToggleMoveModal}
                   />
                 )}
               </OptionButton>
@@ -329,4 +334,4 @@ const SelectedStyled = styled.div`
   border-radius: 8px;
 `;
 
-export default DotoriListItem;
+export default React.memo(DotoriListItem);

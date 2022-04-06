@@ -2,7 +2,7 @@ import { ItemId } from "@atlaskit/tree";
 import FolderListModal from "components/common/FolderListModal";
 import SmallModal from "components/common/SmallModal";
 import useToggle from "hooks/useToggle";
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import { useSelector } from "react-redux";
 import { dotoriSelector } from "stores/dotori";
 import styled from "styled-components";
@@ -12,12 +12,6 @@ import DotoriBlankSlate from "./DotoriBlankSlate";
 import DotoriEditModal from "./DotoriEditModal";
 import DotoriListItem from "./DotoriListItem";
 import useDotoriMutation from "./hooks/useDotoriMutation";
-
-export interface ToggleModal {
-  onToggleDeleteModal: () => void;
-  onToggleEditModal: () => void;
-  onToggleMoveModal: () => void;
-}
 
 export interface ActiveDotoriMenu extends IDotoriItem {
   isOpen: boolean;
@@ -31,21 +25,18 @@ function DotoriList({ path }: { path: DotoriPathTypes }) {
   const [isMoveModal, onToggleMoveModal] = useToggle();
   const { mutateDeleteDotori, mutateMoveDotori } = useDotoriMutation();
 
-  const onToggleModal = {
-    onToggleDeleteModal,
-    onToggleEditModal,
-    onToggleMoveModal,
-  };
-
   const [isActiveDotoriMenu, setIsActiveDotoriMenu] =
     useState<ActiveDotoriMenu>({
       ...initialDotoriState,
       isOpen: false,
     });
 
-  const onActiveDotoriMenu = (dotori: IDotoriItem, isOpen: boolean) => {
-    setIsActiveDotoriMenu({ ...dotori, isOpen });
-  };
+  const onActiveDotoriMenu = useCallback(
+    (dotori: IDotoriItem, isOpen: boolean) => {
+      setIsActiveDotoriMenu({ ...dotori, isOpen });
+    },
+    []
+  );
 
   const onDeleteDotori = () => mutateDeleteDotori([isActiveDotoriMenu.id]);
 
@@ -65,9 +56,13 @@ function DotoriList({ path }: { path: DotoriPathTypes }) {
         <DotoriListItem
           key={dotori.id}
           dotori={dotori}
-          isActiveDotoriMenu={isActiveDotoriMenu}
+          isActiveDotoriMenu={
+            isActiveDotoriMenu.id === dotori.id && isActiveDotoriMenu.isOpen
+          }
           onActiveDotoriMenu={onActiveDotoriMenu}
-          onToggleModal={onToggleModal}
+          onToggleDeleteModal={onToggleDeleteModal}
+          onToggleEditModal={onToggleEditModal}
+          onToggleMoveModal={onToggleMoveModal}
         />
       ))}
 
