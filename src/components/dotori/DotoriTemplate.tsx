@@ -35,7 +35,12 @@ function DotoriTemplate({ path, keyword, folderId }: DotoriTemplateProps) {
   const dotoris = useSelector(dotoriSelector);
   const dispatch = useDispatch();
 
-  const { mutateMoveDotori, mutateDeleteDotori } = useDotoriMutation();
+  const {
+    mutateMoveDotori,
+    mutateDeleteDotori,
+    mutateRestoreDotori,
+    mutateTruncateDotori,
+  } = useDotoriMutation();
 
   const [isRemind, onToggleRemind] = useToggle();
   const [page, setPage] = useState(1);
@@ -97,6 +102,16 @@ function DotoriTemplate({ path, keyword, folderId }: DotoriTemplateProps) {
     mutateDeleteDotori(checkedDotoris);
   };
 
+  const onRestoreDotori = () => {
+    if (checkedDotoris.length === 0) return;
+    mutateRestoreDotori(checkedDotoris);
+  };
+
+  const onTruncateDotori = () => {
+    if (checkedDotoris.length === 0) return;
+    mutateTruncateDotori(checkedDotoris);
+  };
+
   if (!data) return null;
   return (
     <>
@@ -149,7 +164,7 @@ function DotoriTemplate({ path, keyword, folderId }: DotoriTemplateProps) {
           title="선택한 도토리를 원래 위치로 복원할까요?"
           content="기존 보관 위치가 삭제된 도토리는 <br /> '모든 도토리'에서 확인할 수 있어요!"
           buttonName="복원"
-          onClick={() => console.log("복원")}
+          onClick={onRestoreDotori}
         />
       )}
 
@@ -161,7 +176,7 @@ function DotoriTemplate({ path, keyword, folderId }: DotoriTemplateProps) {
           content="삭제된 도토리는 완전히 사라져요!"
           buttonName="삭제"
           isOneLine
-          onClick={() => console.log("영구 삭제")}
+          onClick={onTruncateDotori}
         />
       )}
     </>
