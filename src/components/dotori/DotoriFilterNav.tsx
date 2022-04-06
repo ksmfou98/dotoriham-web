@@ -71,4 +71,4 @@ const FilterMenuButton = styled.div`
 
 const FilterMenuText = styled.span``;
 
-export default DotoriFilterNav;
+export default React.memo(DotoriFilterNav);

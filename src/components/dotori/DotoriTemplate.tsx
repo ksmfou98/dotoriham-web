@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import DotoriList from "./DotoriList";
 import DotoriPagination from "./DotoriPagination";
 import useDotoriQuery from "components/dotori/hooks/useDotoriQuery";
@@ -64,11 +64,11 @@ function DotoriTemplate({ path, keyword, folderId }: DotoriTemplateProps) {
 
   const pageSize = getDotoriPageSize(path);
 
-  const onChangeFilterType = (filterType: FilterMenu) => {
+  const onChangeFilterType = useCallback((filterType: FilterMenu) => {
     setFilterType(filterType);
-  };
+  }, []);
 
-  const onChangePage = (page: number) => setPage(page);
+  const onChangePage = useCallback((page: number) => setPage(page), []);
 
   const { data } = useDotoriQuery(
     path,
@@ -129,7 +129,9 @@ function DotoriTemplate({ path, keyword, folderId }: DotoriTemplateProps) {
           onChangeFilterType={onChangeFilterType}
         />
       </DotoriNavBlock>
+
       <DotoriList path={path} />
+
       <DotoriPagination
         page={page}
         onChangePage={onChangePage}

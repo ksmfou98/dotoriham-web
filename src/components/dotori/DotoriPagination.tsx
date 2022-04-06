@@ -80,4 +80,4 @@ const PaginationBlock = styled.div`
   }
 `;
 
-export default DotoriPagination;
+export default React.memo(DotoriPagination);

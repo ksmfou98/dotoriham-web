@@ -107,4 +107,4 @@ const DotoriListBlock = styled.div`
   flex-wrap: wrap;
 `;
 
-export default DotoriList;
+export default React.memo(DotoriList);
