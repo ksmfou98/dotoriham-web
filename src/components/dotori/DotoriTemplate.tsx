@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import DotoriList from "./DotoriList";
 import DotoriPagination from "./DotoriPagination";
 import useDotoriQuery from "components/dotori/hooks/useDotoriQuery";
@@ -35,7 +35,7 @@ function DotoriTemplate({ path, keyword, folderId }: DotoriTemplateProps) {
   const dotoris = useSelector(dotoriSelector);
   const dispatch = useDispatch();
 
-  const { mutateMoveDotori } = useDotoriMutation();
+  const { mutateMoveDotori, mutateDeleteDotori } = useDotoriMutation();
 
   const [isRemind, onToggleRemind] = useToggle();
   const [page, setPage] = useState(1);
@@ -82,12 +82,19 @@ function DotoriTemplate({ path, keyword, folderId }: DotoriTemplateProps) {
     );
   }, [data, dispatch]);
 
+  const checkedDotoris = useMemo(
+    () => dotoris.filter((dotori) => dotori.checked).map((dotori) => dotori.id),
+    [dotoris]
+  );
+
   const onMoveDotori = (nextFolderId: ItemId) => {
-    const checkedDotoris = dotoris
-      .filter((dotori) => dotori.checked)
-      .map((dotori) => dotori.id);
     if (checkedDotoris.length === 0) return;
     mutateMoveDotori({ bookmarkIdList: checkedDotoris, nextFolderId });
+  };
+
+  const onDeleteDotori = () => {
+    if (checkedDotoris.length === 0) return;
+    mutateDeleteDotori(checkedDotoris);
   };
 
   if (!data) return null;
@@ -122,7 +129,7 @@ function DotoriTemplate({ path, keyword, folderId }: DotoriTemplateProps) {
           title="선택한 도토리를 삭제할까요?"
           content="삭제된 도토리는 모두 <br /> 휴지통으로 들어가요!"
           buttonName="삭제"
-          onClick={() => console.log("삭제")}
+          onClick={onDeleteDotori}
         />
       )}
 
