@@ -24,7 +24,7 @@ function SearchBar() {
 
   return (
     <SearchBarStyled onSubmit={onSearch}>
-      <SearchIcon>
+      <SearchIcon type="submit">
         <Search24Icon />
       </SearchIcon>
       <SearchInput
@@ -47,9 +47,11 @@ const SearchBarStyled = styled.form`
   margin-right: 27px;
 `;
 
-const SearchIcon = styled.div`
+const SearchIcon = styled.button`
   cursor: pointer;
   margin-right: 6px;
+  display: flex;
+  margin-top: 2px;
 `;
 
 const SearchInput = styled.input`
