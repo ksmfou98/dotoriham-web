@@ -1,7 +1,6 @@
 import Header from "components/header";
 import { mediaSize } from "lib/styles/media";
 import React from "react";
-import { QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
 import styled from "styled-components";
 import GlobalStyles from "./lib/styles/globalStyles";
@@ -12,11 +11,10 @@ import useCheckLogin from "hooks/useCheckLogin";
 import Footer from "components/footer";
 
 function App() {
-  const queryClient = new QueryClient();
   useCheckLogin();
 
   return (
-    <QueryClientProvider client={queryClient}>
+    <>
       <AppWrapper>
         <GlobalStyles />
         <Header />
@@ -35,7 +33,7 @@ function App() {
         closeButton={false}
         theme="dark"
       />
-    </QueryClientProvider>
+    </>
   );
 }
 
