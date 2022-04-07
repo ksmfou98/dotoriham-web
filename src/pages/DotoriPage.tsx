@@ -4,6 +4,7 @@ import DotoriTemplate from "components/dotori/DotoriTemplate";
 import Reminder from "components/reminder";
 import { useLocation, useParams } from "react-router-dom";
 import Path from "routes/Path";
+import ChildFolders from "components/childFolder";
 
 function DotoriPage() {
   const { folderId } = useParams();
@@ -14,6 +15,7 @@ function DotoriPage() {
     <>
       {location.pathname === Path.DotoriPage && <Reminder />}
       <PagePath path={path} folderId={folderId} />
+      {path === "folder" && folderId && <ChildFolders folderId={folderId} />}
       <DotoriTemplate path={path} folderId={folderId} />
     </>
   );
