@@ -53,7 +53,8 @@ const ProfileImageBox = styled.div`
 const ProfileImage = styled.img`
   width: 100%;
   height: 100%;
-  border-radius: 50%;
+  border-radius: 40px;
+  background-color: ${palette.grayLight};
 `;
 
 const Nickname = styled.span`
