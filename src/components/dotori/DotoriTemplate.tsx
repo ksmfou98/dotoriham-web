@@ -106,14 +106,17 @@ function DotoriTemplate({ path, keyword, folderId }: DotoriTemplateProps) {
           onToggleTruncateModal={onToggleTruncateModal}
           onToggleRestoreModal={onToggleRestoreModal}
         />
-        <DotoriFilterNav
-          isRemind={isRemind}
-          onToggleRemind={onToggleRemind}
-          isOpenFilterMenu={isOpenFilterMenu}
-          onToggleFilterMenu={onToggleFilterMenu}
-          filterType={filterType}
-          onChangeFilterType={onChangeFilterType}
-        />
+
+        {path !== "trash" && (
+          <DotoriFilterNav
+            isRemind={isRemind}
+            onToggleRemind={onToggleRemind}
+            isOpenFilterMenu={isOpenFilterMenu}
+            onToggleFilterMenu={onToggleFilterMenu}
+            filterType={filterType}
+            onChangeFilterType={onChangeFilterType}
+          />
+        )}
       </DotoriNavBlock>
 
       <DotoriList path={path} />
