@@ -1,20 +1,20 @@
 import SmallBlackText from "components/common/SmallBlackText";
 import SwitchButton from "components/common/SwitchButton";
-import useToggle from "hooks/useToggle";
 import { palette } from "lib/styles/palette";
-import React, { useState } from "react";
-import { useSelector } from "react-redux";
-import { userSelector } from "stores/user";
+import React from "react";
 import styled from "styled-components";
 import { REMIND_CYCLE } from "./constants";
+import useRemindSetting from "./hooks/useRemindSetting";
 import MyPageHead from "./MyPageHead";
 import RemindChipButton from "./RemindChipButton";
 
 function MyPageConfiguration() {
-  const { remindToggle, remindCycle } = useSelector(userSelector);
-  const [isRemind, onToggleRemind] = useToggle(remindToggle);
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [selectedCycle, setSelectedCycle] = useState(remindCycle);
+  const {
+    isRemind,
+    selectedCycle,
+    mutateRemindSettingToggle,
+    mutateRemindCycleChange,
+  } = useRemindSetting();
 
   return (
     <>
@@ -24,7 +24,10 @@ function MyPageConfiguration() {
         <RemindToggleBox>
           <SmallBlackText width="297px" label="리마인드 알람 받기" />
           <div className="buttonBox">
-            <SwitchButton isChecked={isRemind} onToggle={onToggleRemind} />
+            <SwitchButton
+              isChecked={isRemind}
+              onToggle={() => mutateRemindSettingToggle()}
+            />
           </div>
         </RemindToggleBox>
 
@@ -37,6 +40,7 @@ function MyPageConfiguration() {
                 label={`${cycle}일`}
                 variant={cycle === selectedCycle ? "primary" : "secondary"}
                 disabled={!isRemind}
+                onClick={() => mutateRemindCycleChange(cycle)}
                 key={cycle}
               />
             ))}
