@@ -9,6 +9,7 @@ import Routing from "./routes/Routing";
 import "react-toastify/dist/ReactToastify.css";
 import ToastContainerStyled from "lib/styles/toastStyle";
 import useCheckLogin from "hooks/useCheckLogin";
+import Footer from "components/footer";
 
 function App() {
   const queryClient = new QueryClient();
@@ -22,6 +23,7 @@ function App() {
         <MainLayout>
           <Routing />
         </MainLayout>
+        <Footer />
       </AppWrapper>
       <ReactQueryDevtools />
       <ToastContainerStyled
