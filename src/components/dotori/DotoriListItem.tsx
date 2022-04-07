@@ -11,7 +11,7 @@ import useCopyUrl from "hooks/useCopyUrl";
 import { palette } from "lib/styles/palette";
 import { ellipsis } from "lib/styles/utilStyles";
 import React, { memo } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import Path from "routes/Path";
 import styled from "styled-components";
 import { IDotoriItem } from "types/dotori";
@@ -51,6 +51,7 @@ function DotoriListItem({
     checked,
   } = dotori;
 
+  const location = useLocation();
   const { copyUrlRef, onCopyUrl } = useCopyUrl();
   const { copyToast, remindSettingToast, remindDisabledToast } = useToast();
   const { mutateEditDotori, mutateClickCountDotori } = useDotoriMutation();
@@ -128,38 +129,40 @@ function DotoriListItem({
               </DotoriLink>
             </DotoriLinkBox>
 
-            <DotoriOption>
-              <OptionButton onClick={onRemindToggle}>
-                {remindTime ? <BellSelectedIcon /> : <BellUnSelectedIcon />}
-              </OptionButton>
+            {location.pathname !== Path.TrashPage && (
+              <DotoriOption>
+                <OptionButton onClick={onRemindToggle}>
+                  {remindTime ? <BellSelectedIcon /> : <BellUnSelectedIcon />}
+                </OptionButton>
 
-              <OptionButton
-                onClick={() => {
-                  onCopyUrl(link);
-                  copyToast();
-                }}
-              >
-                <Copy24Icon />
-              </OptionButton>
+                <OptionButton
+                  onClick={() => {
+                    onCopyUrl(link);
+                    copyToast();
+                  }}
+                >
+                  <Copy24Icon />
+                </OptionButton>
 
-              <OptionButton
-                onClick={(e) => {
-                  e.stopPropagation();
-                  onActiveDotoriMenu(dotori, true);
-                }}
-              >
-                <More24Icon />
-                {isActiveDotoriMenu && (
-                  <DotoriItemMenu
-                    isOpen={isActiveDotoriMenu}
-                    onClose={() => onActiveDotoriMenu(dotori, false)}
-                    onToggleDeleteModal={onToggleDeleteModal}
-                    onToggleEditModal={onToggleEditModal}
-                    onToggleMoveModal={onToggleMoveModal}
-                  />
-                )}
-              </OptionButton>
-            </DotoriOption>
+                <OptionButton
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    onActiveDotoriMenu(dotori, true);
+                  }}
+                >
+                  <More24Icon />
+                  {isActiveDotoriMenu && (
+                    <DotoriItemMenu
+                      isOpen={isActiveDotoriMenu}
+                      onClose={() => onActiveDotoriMenu(dotori, false)}
+                      onToggleDeleteModal={onToggleDeleteModal}
+                      onToggleEditModal={onToggleEditModal}
+                      onToggleMoveModal={onToggleMoveModal}
+                    />
+                  )}
+                </OptionButton>
+              </DotoriOption>
+            )}
           </DotoriBottomArea>
         </DotoriContent>
         {checked && <SelectedStyled />}
