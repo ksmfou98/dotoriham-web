@@ -23,6 +23,7 @@ function App() {
         </MainLayout>
         <Footer />
       </AppWrapper>
+
       <ReactQueryDevtools />
       <ToastContainerStyled
         hideProgressBar

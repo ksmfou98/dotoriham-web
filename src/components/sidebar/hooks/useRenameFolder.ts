@@ -1,7 +1,8 @@
 import { ItemId, mutateTree } from "@atlaskit/tree";
 import { updateFolderAPI } from "lib/api/folder";
+import { QueryKey } from "lib/queryKey";
 import React, { useState } from "react";
-import { useMutation } from "react-query";
+import { useMutation, useQueryClient } from "react-query";
 import { useDispatch, useSelector } from "react-redux";
 import { EmojiObject } from "react-twemoji-picker";
 import { folderSelector, setFolders } from "stores/folder";
@@ -9,6 +10,8 @@ import { folderSelector, setFolders } from "stores/folder";
 export default function useRenameFolder(folderId: ItemId) {
   const folders = useSelector(folderSelector);
   const dispatch = useDispatch();
+  const queryClient = useQueryClient();
+
   const { name, emoji } = folders.items[folderId].data;
 
   const [newFolderName, setNewFolderName] = useState(name);
@@ -39,6 +42,7 @@ export default function useRenameFolder(folderId: ItemId) {
             })
           )
         );
+        queryClient.invalidateQueries(QueryKey.CHILD_FOLDER_LIST);
       },
       onError: () => {
         alert("폴더 이름 변경에 실패했습니다. 잠시 후 다시 시도해 주세요");

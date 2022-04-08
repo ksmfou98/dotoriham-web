@@ -66,3 +66,11 @@ export const getChildFolderListAPI = async (folderId: ItemId) => {
   );
   return response.data;
 };
+
+// 자식 폴더 삭제
+export const deleteChildFolderAPI = async (deleteFolderIdList: ItemId[]) => {
+  const response = await client.post(`/api/v1/folder/deletes`, {
+    deleteFolderIdList,
+  });
+  return response.data;
+};

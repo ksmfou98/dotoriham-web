@@ -5,6 +5,7 @@ import useChildFoldersQuery from "./hooks/useChildFoldersQuery";
 import ChildFolderSelectNav from "./ChildFolderSelectNav";
 import { ChildFolderItem } from "types/folder";
 import ChildFolderList from "./ChildFolderList";
+import useChildFoldersMutation from "./hooks/useChildFoldersMutation";
 
 interface Props {
   folderId: ItemId;
@@ -18,6 +19,7 @@ function ChildFolders({ folderId }: Props) {
   const [childFolderList, setChildFolderList] = useState<ChildFolder[]>([]);
 
   const { data } = useChildFoldersQuery(folderId);
+  const { mutateChildFoldersDelete } = useChildFoldersMutation();
 
   useEffect(() => {
     if (!data) return;
@@ -54,6 +56,13 @@ function ChildFolders({ folderId }: Props) {
     );
   };
 
+  const onDeleteChildFolders = () => {
+    const checkedChildFolderIds = childFolderList
+      .filter((childFolder) => childFolder.checked)
+      .map((childFolder) => childFolder.folderId);
+    mutateChildFoldersDelete(checkedChildFolderIds);
+  };
+
   if (!data) return null;
   return (
     <ChildFoldersBlock>
@@ -61,6 +70,7 @@ function ChildFolders({ folderId }: Props) {
         onToggleAllChildFolder={onToggleAllChildFolder}
         isAllChecked={isAllCheckedChildFolder}
         isCheckedChildFolder={isCheckedChildFolder}
+        onDeleteChildFolders={onDeleteChildFolders}
       />
 
       <ChildFolderList
