@@ -15,6 +15,8 @@ import { getDotoriPageSize } from "lib/utils/dotori";
 import SmallModal from "components/common/SmallModal";
 import FolderListModal from "components/common/FolderListModal";
 import useDotoriMutation from "./hooks/useDotoriMutation";
+import { useNavigate } from "react-router-dom";
+import Path from "routes/Path";
 
 interface DotoriTemplateProps {
   path: DotoriPathTypes;
@@ -25,6 +27,7 @@ interface DotoriTemplateProps {
 function DotoriTemplate({ path, keyword, folderId }: DotoriTemplateProps) {
   const dotoris = useSelector(dotoriSelector);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const {
     mutateMoveDotori,
@@ -54,7 +57,7 @@ function DotoriTemplate({ path, keyword, folderId }: DotoriTemplateProps) {
 
   const onChangePage = useCallback((page: number) => setPage(page), []);
 
-  const { data } = useDotoriQuery(
+  const { data, error } = useDotoriQuery(
     path,
     page - 1,
     pageSize,
@@ -63,6 +66,14 @@ function DotoriTemplate({ path, keyword, folderId }: DotoriTemplateProps) {
     keyword,
     folderId
   );
+
+  useEffect(() => {
+    if (error instanceof Error) {
+      if (error.message === "개체가 존재하지 않습니다") {
+        navigate(Path.DotoriPage);
+      }
+    }
+  }, [error, navigate]);
 
   useEffect(() => {
     if (!data) return;
