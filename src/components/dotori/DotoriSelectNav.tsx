@@ -1,9 +1,23 @@
 import CheckBox from "components/common/CheckBox";
-import React from "react";
+import React, { memo } from "react";
 import styled from "styled-components";
 import useDotoriSelect from "./hooks/useDotoriSelect";
 
-function DotoriSelectNav() {
+interface DotoriSelectNavProps {
+  isTrashPage: boolean;
+  onToggleDeleteModal: () => void;
+  onToggleMoveModal: () => void;
+  onToggleTruncateModal: () => void;
+  onToggleRestoreModal: () => void;
+}
+
+function DotoriSelectNav({
+  isTrashPage,
+  onToggleDeleteModal,
+  onToggleMoveModal,
+  onToggleRestoreModal,
+  onToggleTruncateModal,
+}: DotoriSelectNavProps) {
   const { isDotoriAllChecked, onToggleDotoriAllChecked, isActiveSelectBox } =
     useDotoriSelect();
 
@@ -20,8 +34,25 @@ function DotoriSelectNav() {
 
       {isActiveSelectBox && (
         <SelectOption>
-          <div className="option">이동</div>
-          <div className="option">삭제</div>
+          {isTrashPage ? (
+            <>
+              <div className="option" onClick={onToggleRestoreModal}>
+                복원
+              </div>
+              <div className="option" onClick={onToggleTruncateModal}>
+                삭제
+              </div>
+            </>
+          ) : (
+            <>
+              <div className="option" onClick={onToggleMoveModal}>
+                이동
+              </div>
+              <div className="option" onClick={onToggleDeleteModal}>
+                삭제
+              </div>
+            </>
+          )}
         </SelectOption>
       )}
     </DotoriSelectNavBlock>
@@ -52,4 +83,4 @@ const SelectOption = styled.div`
   }
 `;
 
-export default DotoriSelectNav;
+export default memo(DotoriSelectNav);

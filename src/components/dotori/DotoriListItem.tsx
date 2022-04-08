@@ -10,8 +10,8 @@ import FolderEmoji from "components/common/FolderEmoji";
 import useCopyUrl from "hooks/useCopyUrl";
 import { palette } from "lib/styles/palette";
 import { ellipsis } from "lib/styles/utilStyles";
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { memo } from "react";
+import { Link, useLocation } from "react-router-dom";
 import Path from "routes/Path";
 import styled from "styled-components";
 import { IDotoriItem } from "types/dotori";
@@ -20,20 +20,23 @@ import useDotoriSelect from "./hooks/useDotoriSelect";
 import CheckBox from "components/common/CheckBox";
 import useDotoriMutation from "./hooks/useDotoriMutation";
 import DotoriItemMenu from "./DotoriItemMenu";
-import { ToggleModal } from "./DotoriList";
 
 interface DotoriListItemProps {
   dotori: IDotoriItem;
-  isActiveDotoriMenuId: string;
-  onActiveDotoriMenu: (dotoriId: string) => void;
-  onToggleModal: ToggleModal;
+  isActiveDotoriMenu: boolean;
+  onActiveDotoriMenu: (dotori: IDotoriItem, isOpen: boolean) => void;
+  onToggleDeleteModal: () => void;
+  onToggleEditModal: () => void;
+  onToggleMoveModal: () => void;
 }
 
 function DotoriListItem({
   dotori,
-  isActiveDotoriMenuId,
+  isActiveDotoriMenu,
   onActiveDotoriMenu,
-  onToggleModal,
+  onToggleDeleteModal,
+  onToggleEditModal,
+  onToggleMoveModal,
 }: DotoriListItemProps) {
   const {
     id,
@@ -48,6 +51,7 @@ function DotoriListItem({
     checked,
   } = dotori;
 
+  const location = useLocation();
   const { copyUrlRef, onCopyUrl } = useCopyUrl();
   const { copyToast, remindSettingToast, remindDisabledToast } = useToast();
   const { mutateEditDotori, mutateClickCountDotori } = useDotoriMutation();
@@ -55,7 +59,7 @@ function DotoriListItem({
 
   const onRemindToggle = () => {
     const requestData = {
-      bookmarkId: id,
+      dotoriId: id,
       title,
       remind: !remindTime,
     };
@@ -125,36 +129,40 @@ function DotoriListItem({
               </DotoriLink>
             </DotoriLinkBox>
 
-            <DotoriOption>
-              <OptionButton onClick={onRemindToggle}>
-                {remindTime ? <BellSelectedIcon /> : <BellUnSelectedIcon />}
-              </OptionButton>
+            {location.pathname !== Path.TrashPage && (
+              <DotoriOption>
+                <OptionButton onClick={onRemindToggle}>
+                  {remindTime ? <BellSelectedIcon /> : <BellUnSelectedIcon />}
+                </OptionButton>
 
-              <OptionButton
-                onClick={() => {
-                  onCopyUrl(link);
-                  copyToast();
-                }}
-              >
-                <Copy24Icon />
-              </OptionButton>
+                <OptionButton
+                  onClick={() => {
+                    onCopyUrl(link);
+                    copyToast();
+                  }}
+                >
+                  <Copy24Icon />
+                </OptionButton>
 
-              <OptionButton
-                onClick={(e) => {
-                  onActiveDotoriMenu(id);
-                  e.stopPropagation();
-                }}
-              >
-                <More24Icon />
-                {isActiveDotoriMenuId === id && (
-                  <DotoriItemMenu
-                    isOpen={isActiveDotoriMenuId === id}
-                    onActiveDotoriMenu={onActiveDotoriMenu}
-                    onToggleModal={onToggleModal}
-                  />
-                )}
-              </OptionButton>
-            </DotoriOption>
+                <OptionButton
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    onActiveDotoriMenu(dotori, true);
+                  }}
+                >
+                  <More24Icon />
+                  {isActiveDotoriMenu && (
+                    <DotoriItemMenu
+                      isOpen={isActiveDotoriMenu}
+                      onClose={() => onActiveDotoriMenu(dotori, false)}
+                      onToggleDeleteModal={onToggleDeleteModal}
+                      onToggleEditModal={onToggleEditModal}
+                      onToggleMoveModal={onToggleMoveModal}
+                    />
+                  )}
+                </OptionButton>
+              </DotoriOption>
+            )}
           </DotoriBottomArea>
         </DotoriContent>
         {checked && <SelectedStyled />}
@@ -275,6 +283,7 @@ const DotoriFolderName = styled(Link)`
   height: 16px;
   line-height: 16px;
   display: inline-block;
+  margin-left: 4px;
   max-width: 135px;
   ${ellipsis}
   &:hover {
@@ -328,4 +337,4 @@ const SelectedStyled = styled.div`
   border-radius: 8px;
 `;
 
-export default DotoriListItem;
+export default memo(DotoriListItem);

@@ -12,3 +12,19 @@ export const deleteRemindAPI = async (bookmarkId: string) => {
   const response = await client.delete(`/api/v1/remind/${bookmarkId}`);
   return response.data;
 };
+
+// @Note 유저 리마인드 설정 토글
+export const toggleRemindSettingAPI = async (remindToggle: boolean) => {
+  const response = await client.patch(`/api/v1/mypage/remind/toggle`, {
+    remindToggle,
+  });
+  return response.data;
+};
+
+// @Note 유저 리마인드 주기 설정
+export const setRemindCycleAPI = async (remindCycle: number) => {
+  const response = await client.post(`/api/v1/mypage/remind/cycle`, {
+    remindCycle,
+  });
+  return response.data;
+};

@@ -57,9 +57,14 @@ export type DotoriSortType =
   | "clickCount,asc";
 
 export interface DotoriUpdateRequest {
-  bookmarkId: string;
+  dotoriId: string;
   title: string;
   remind: boolean;
+}
+
+export interface DotoriMoveRequest {
+  bookmarkIdList: string[];
+  nextFolderId: ItemId;
 }
 
 export type FilterMenuTextType =

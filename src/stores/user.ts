@@ -39,10 +39,17 @@ const user = createSlice({
   initialState,
   reducers: {
     setUser: (_, action: PayloadAction<IUserState>) => action.payload,
+    setRemindToggle: (state, action: PayloadAction<boolean>) => {
+      state.remindToggle = action.payload;
+    },
+    setRemindCycle: (state, action: PayloadAction<number>) => {
+      state.remindCycle = action.payload;
+    },
     removeUser: () => initialState,
   },
 });
 
-export const { setUser, removeUser } = user.actions;
+export const { setUser, removeUser, setRemindCycle, setRemindToggle } =
+  user.actions;
 export const userSelector = (state: rootState) => state.user;
 export default user;

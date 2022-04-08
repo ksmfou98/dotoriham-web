@@ -25,6 +25,8 @@ import { findChildrenLengthById } from "lib/utils/atlaskitTreeFinder";
 import { moveFolderAPI } from "lib/api/folder";
 import { useLocation, useNavigate } from "react-router-dom";
 import Path from "routes/Path";
+import { useQueryClient } from "react-query";
+import { QueryKey } from "lib/queryKey";
 
 export interface IFolderMenuPosition {
   top: number;
@@ -37,6 +39,7 @@ function FolderList() {
   const navigate = useNavigate();
   const { pathname } = useLocation();
   const { data } = useFolderListQuery("sidebar");
+  const queryClient = useQueryClient();
 
   const folderBoxRef = useRef<HTMLDivElement>(null);
   const [draggingFolderId, setDraggingFolderId] = useState<ItemId | null>(null);
@@ -135,7 +138,7 @@ function FolderList() {
     dispatch(setFolders(newTree));
     try {
       await moveFolderAPI(body);
-      console.log("폴더 이동에 성공했습니다. 서브 폴더 갱신 invalid 추가 예정");
+      queryClient.invalidateQueries(QueryKey.CHILD_FOLDER_LIST);
     } catch (e) {
       console.log("폴더 이동에 실패했습니다.");
     }

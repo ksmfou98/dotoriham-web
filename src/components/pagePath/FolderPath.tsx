@@ -1,15 +1,16 @@
-import { ItemId } from "@atlaskit/tree";
 import { ArrowSide16Icon } from "assets/icons";
 import React from "react";
-import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import FolderEmojiAndName from "./FolderEmojiAndName";
 import FolderPathEllipsis from "./FolderPathEllipsis";
 import usePagePathQuery from "./hooks/usePagePathQuery";
 
-function FolderPath() {
-  const { folderId } = useParams();
-  const { data } = usePagePathQuery(folderId as ItemId);
+interface FolderPathProps {
+  folderId: string;
+}
+
+function FolderPath({ folderId }: FolderPathProps) {
+  const { data } = usePagePathQuery(folderId);
   if (!data) return null;
 
   const FIRST_FOLDER_INFO = data[0];

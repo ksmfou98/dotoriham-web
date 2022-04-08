@@ -1,6 +1,6 @@
 import { DropDownIcon } from "assets/icons";
 import SwitchButton from "components/common/SwitchButton";
-import React from "react";
+import React, { memo } from "react";
 import styled from "styled-components";
 import { FilterMenu } from "types/dotori";
 import DotoriFilterMenu from "./DotoriFilterMenu";
@@ -71,4 +71,4 @@ const FilterMenuButton = styled.div`
 
 const FilterMenuText = styled.span``;
 
-export default DotoriFilterNav;
+export default memo(DotoriFilterNav);

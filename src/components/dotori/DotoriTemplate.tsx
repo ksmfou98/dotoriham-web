@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import DotoriList from "./DotoriList";
 import DotoriPagination from "./DotoriPagination";
 import useDotoriQuery from "components/dotori/hooks/useDotoriQuery";
-import { useDispatch } from "react-redux";
-import { setDotoris } from "stores/dotori";
+import { useDispatch, useSelector } from "react-redux";
+import { dotoriSelector, setDotoris } from "stores/dotori";
 import { ItemId } from "@atlaskit/tree";
 import useToggle from "hooks/useToggle";
 import { DotoriPathTypes, FilterMenu } from "types/dotori";
@@ -12,8 +12,11 @@ import { palette } from "lib/styles/palette";
 import DotoriSelectNav from "./DotoriSelectNav";
 import DotoriFilterNav from "./DotoriFilterNav";
 import { getDotoriPageSize } from "lib/utils/dotori";
-
-// TODO: Props로 trash인지 serach인지 폴더id 인지 받아와야 함
+import SmallModal from "components/common/SmallModal";
+import FolderListModal from "components/common/FolderListModal";
+import useDotoriMutation from "./hooks/useDotoriMutation";
+import { useNavigate } from "react-router-dom";
+import Path from "routes/Path";
 
 interface DotoriTemplateProps {
   path: DotoriPathTypes;
@@ -22,23 +25,39 @@ interface DotoriTemplateProps {
 }
 
 function DotoriTemplate({ path, keyword, folderId }: DotoriTemplateProps) {
-  const [isRemind, onToggleRemind] = useToggle(false);
+  const dotoris = useSelector(dotoriSelector);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const {
+    mutateMoveDotori,
+    mutateDeleteDotori,
+    mutateRestoreDotori,
+    mutateTruncateDotori,
+  } = useDotoriMutation();
+
+  const [isRemind, onToggleRemind] = useToggle();
   const [page, setPage] = useState(1);
-  const [isOpenFilterMenu, onToggleFilterMenu] = useToggle(false);
+  const [isOpenFilterMenu, onToggleFilterMenu] = useToggle();
   const [filterType, setFilterType] = useState<FilterMenu>({
     text: "최신순",
     label: "saveTime,desc",
   });
 
+  const [isDeleteModal, onToggleDeleteModal] = useToggle();
+  const [isMoveModal, onToggleMoveModal] = useToggle();
+  const [isRestoreModal, onToggleRestoreModal] = useToggle();
+  const [isTruncateModal, onToggleTruncateModal] = useToggle();
+
   const pageSize = getDotoriPageSize(path);
 
-  const onChangeFilterType = (filterType: FilterMenu) => {
+  const onChangeFilterType = useCallback((filterType: FilterMenu) => {
     setFilterType(filterType);
-  };
+  }, []);
 
-  const onChangePage = (page: number) => setPage(page);
+  const onChangePage = useCallback((page: number) => setPage(page), []);
 
-  const { data } = useDotoriQuery(
+  const { data, error } = useDotoriQuery(
     path,
     page - 1,
     pageSize,
@@ -47,7 +66,14 @@ function DotoriTemplate({ path, keyword, folderId }: DotoriTemplateProps) {
     keyword,
     folderId
   );
-  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (error instanceof Error) {
+      if (error.message === "개체가 존재하지 않습니다") {
+        navigate(Path.DotoriPage);
+      }
+    }
+  }, [error, navigate]);
 
   useEffect(() => {
     if (!data) return;
@@ -56,28 +82,107 @@ function DotoriTemplate({ path, keyword, folderId }: DotoriTemplateProps) {
     );
   }, [data, dispatch]);
 
-  if (!data) return null;
+  const checkedDotoris = useMemo(
+    () => dotoris.filter((dotori) => dotori.checked).map((dotori) => dotori.id),
+    [dotoris]
+  );
+
+  const onMoveDotori = (nextFolderId: ItemId) => {
+    if (checkedDotoris.length === 0) return;
+    mutateMoveDotori({ bookmarkIdList: checkedDotoris, nextFolderId });
+  };
+
+  const onDeleteDotori = () => {
+    if (checkedDotoris.length === 0) return;
+    mutateDeleteDotori(checkedDotoris);
+  };
+
+  const onRestoreDotori = () => {
+    if (checkedDotoris.length === 0) return;
+    mutateRestoreDotori(checkedDotoris);
+  };
+
+  const onTruncateDotori = () => {
+    if (checkedDotoris.length === 0) return;
+    mutateTruncateDotori(checkedDotoris);
+  };
 
   return (
     <>
       <DotoriNavBlock>
-        <DotoriSelectNav />
-        <DotoriFilterNav
-          isRemind={isRemind}
-          onToggleRemind={onToggleRemind}
-          isOpenFilterMenu={isOpenFilterMenu}
-          onToggleFilterMenu={onToggleFilterMenu}
-          filterType={filterType}
-          onChangeFilterType={onChangeFilterType}
+        <DotoriSelectNav
+          isTrashPage={path === "trash"}
+          onToggleDeleteModal={onToggleDeleteModal}
+          onToggleMoveModal={onToggleMoveModal}
+          onToggleTruncateModal={onToggleTruncateModal}
+          onToggleRestoreModal={onToggleRestoreModal}
         />
+
+        {path !== "trash" && (
+          <DotoriFilterNav
+            isRemind={isRemind}
+            onToggleRemind={onToggleRemind}
+            isOpenFilterMenu={isOpenFilterMenu}
+            onToggleFilterMenu={onToggleFilterMenu}
+            filterType={filterType}
+            onChangeFilterType={onChangeFilterType}
+          />
+        )}
       </DotoriNavBlock>
+
       <DotoriList path={path} />
-      <DotoriPagination
-        page={page}
-        onChangePage={onChangePage}
-        totalElements={data.totalElements}
-        pageSize={pageSize}
-      />
+
+      {data && data.totalElements > getDotoriPageSize(path) && (
+        <DotoriPagination
+          page={page}
+          onChangePage={onChangePage}
+          totalElements={data.totalElements}
+          pageSize={pageSize}
+        />
+      )}
+
+      {isDeleteModal && (
+        <SmallModal
+          isModal={isDeleteModal}
+          onToggleModal={onToggleDeleteModal}
+          title="선택한 도토리를 삭제할까요?"
+          content="삭제된 도토리는 모두 <br /> 휴지통으로 들어가요!"
+          buttonName="삭제"
+          onClick={onDeleteDotori}
+        />
+      )}
+
+      {isMoveModal && (
+        <FolderListModal
+          isModal={isMoveModal}
+          onToggleModal={onToggleMoveModal}
+          onMove={onMoveDotori}
+          path={path}
+        />
+      )}
+
+      {isRestoreModal && (
+        <SmallModal
+          isModal={isRestoreModal}
+          onToggleModal={onToggleRestoreModal}
+          title="선택한 도토리를 원래 위치로 복원할까요?"
+          content="기존 보관 위치가 삭제된 도토리는 <br /> '모든 도토리'에서 확인할 수 있어요!"
+          buttonName="복원"
+          onClick={onRestoreDotori}
+        />
+      )}
+
+      {isTruncateModal && (
+        <SmallModal
+          isModal={isTruncateModal}
+          onToggleModal={onToggleTruncateModal}
+          title="선택한 도토리를 삭제할까요?"
+          content="삭제된 도토리는 완전히 사라져요!"
+          buttonName="삭제"
+          isOneLine
+          onClick={onTruncateDotori}
+        />
+      )}
     </>
   );
 }

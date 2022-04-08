@@ -7,6 +7,7 @@ export const QueryKey = {
   FOLDER_LIST: "folderList" as const,
   REMIND_LIST: "remindList" as const,
   PATH_PATH_LIST: "pathPathList" as const,
+  CHILD_FOLDER_LIST: "childfolderList" as const,
 };
 
 export const ReactQueryKey = {
@@ -23,4 +24,6 @@ export const ReactQueryKey = {
   remindList: () => [QueryKey.REMIND_LIST] as const,
   pathPathList: (folderId: ItemId) =>
     [QueryKey.PATH_PATH_LIST, folderId] as const,
+  childFolderList: (folderId: ItemId) =>
+    [QueryKey.CHILD_FOLDER_LIST, folderId] as const,
 };

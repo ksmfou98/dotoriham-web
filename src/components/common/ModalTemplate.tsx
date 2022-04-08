@@ -2,6 +2,7 @@ import { palette } from "lib/styles/palette";
 import transitions from "lib/styles/transitions";
 import React, { useEffect } from "react";
 import styled from "styled-components";
+import ModalProtal from "./ModalPortal";
 
 interface IModalInnerStyled {
   width: number;
@@ -32,18 +33,20 @@ function ModalTemplate({
   }, [isModal]);
 
   return (
-    <ModalTemplateBlock onMouseDown={onToggleModal} {...rest}>
-      <ModalInner
-        width={width}
-        height={height}
-        isModal={isModal}
-        className={className}
-        onMouseDown={(e) => e.stopPropagation()}
-      >
-        {children}
-      </ModalInner>
-      <ModalBackground />
-    </ModalTemplateBlock>
+    <ModalProtal>
+      <ModalTemplateBlock onMouseDown={onToggleModal} {...rest}>
+        <ModalInner
+          width={width}
+          height={height}
+          isModal={isModal}
+          className={className}
+          onMouseDown={(e) => e.stopPropagation()}
+        >
+          {children}
+        </ModalInner>
+        <ModalBackground />
+      </ModalTemplateBlock>
+    </ModalProtal>
   );
 }
 

@@ -12,6 +12,7 @@ import {
 } from "assets/icons";
 import { useLocation, useNavigate } from "react-router-dom";
 import Path from "routes/Path";
+import QuestionButton from "components/tutorial/QuestionButton";
 
 function Sidebar() {
   const { pathname } = useLocation();
@@ -39,6 +40,8 @@ function Sidebar() {
         activeIcon={<SelectedTrashIcon />}
         unActiveIcon={<UnselectedTrashIcon />}
       />
+
+      <QuestionButton />
     </SidebarBlock>
   );
 }

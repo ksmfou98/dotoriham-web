@@ -2,24 +2,23 @@ import useOutSideClick from "hooks/useOutSideClick";
 import { palette } from "lib/styles/palette";
 import React from "react";
 import styled from "styled-components";
-import { ToggleModal } from "./DotoriList";
 
 interface DotoriItemMenuProps {
   isOpen: boolean;
-  onActiveDotoriMenu: (dotoriId: string) => void;
-  onToggleModal: ToggleModal;
+  onClose: () => void;
+  onToggleDeleteModal: () => void;
+  onToggleEditModal: () => void;
+  onToggleMoveModal: () => void;
 }
 
 function DotoriItemMenu({
   isOpen,
-  onActiveDotoriMenu,
-  onToggleModal,
+  onClose,
+  onToggleDeleteModal,
+  onToggleEditModal,
+  onToggleMoveModal,
 }: DotoriItemMenuProps) {
-  const { onToggleDeleteModal, onToggleEditModal, onToggleMoveModal } =
-    onToggleModal;
-
-  const onCloseMenu = () => onActiveDotoriMenu("");
-  const { targetEl } = useOutSideClick(isOpen, onCloseMenu);
+  const { targetEl } = useOutSideClick(isOpen, onClose);
 
   const dotoriMenus = [
     { name: "이동", onClick: onToggleMoveModal },
@@ -35,7 +34,7 @@ function DotoriItemMenu({
             key={name}
             onClick={(e) => {
               e.stopPropagation();
-              onCloseMenu();
+              onClose();
               onClick();
             }}
           >

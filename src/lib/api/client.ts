@@ -75,6 +75,12 @@ client.interceptors.response.use(
         }
         break;
 
+      case 409:
+        throw new Error(error.response.data.message);
+
+      case 500:
+        throw new Error(error.response.data.message);
+
       default:
         throw new Error("Unknown Error");
     }

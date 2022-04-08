@@ -1,19 +1,20 @@
+import { ItemId } from "@atlaskit/tree";
 import FolderListModal from "components/common/FolderListModal";
 import SmallModal from "components/common/SmallModal";
 import useToggle from "hooks/useToggle";
-import React, { useState } from "react";
+import React, { memo, useCallback, useState } from "react";
 import { useSelector } from "react-redux";
 import { dotoriSelector } from "stores/dotori";
 import styled from "styled-components";
-import { DotoriPathTypes } from "types/dotori";
+import { DotoriPathTypes, IDotoriItem } from "types/dotori";
+import { initialDotoriState } from "./constants";
 import DotoriBlankSlate from "./DotoriBlankSlate";
 import DotoriEditModal from "./DotoriEditModal";
 import DotoriListItem from "./DotoriListItem";
+import useDotoriMutation from "./hooks/useDotoriMutation";
 
-export interface ToggleModal {
-  onToggleDeleteModal: () => void;
-  onToggleEditModal: () => void;
-  onToggleMoveModal: () => void;
+export interface ActiveDotoriMenu extends IDotoriItem {
+  isOpen: boolean;
 }
 
 function DotoriList({ path }: { path: DotoriPathTypes }) {
@@ -22,16 +23,29 @@ function DotoriList({ path }: { path: DotoriPathTypes }) {
   const [isDeleteModal, onToggleDeleteModal] = useToggle();
   const [isEditModal, onToggleEditModal] = useToggle();
   const [isMoveModal, onToggleMoveModal] = useToggle();
+  const { mutateDeleteDotori, mutateMoveDotori } = useDotoriMutation();
 
-  const onToggleModal = {
-    onToggleDeleteModal,
-    onToggleEditModal,
-    onToggleMoveModal,
-  };
+  const [isActiveDotoriMenu, setIsActiveDotoriMenu] =
+    useState<ActiveDotoriMenu>({
+      ...initialDotoriState,
+      isOpen: false,
+    });
 
-  const [isActiveDotoriMenuId, setIsActiveDotoriMenuId] = useState<string>("");
-  const onActiveDotoriMenu = (dotoriId: string) => {
-    setIsActiveDotoriMenuId(dotoriId);
+  const onActiveDotoriMenu = useCallback(
+    (dotori: IDotoriItem, isOpen: boolean) => {
+      setIsActiveDotoriMenu({ ...dotori, isOpen });
+    },
+    []
+  );
+
+  const onDeleteDotori = () => mutateDeleteDotori([isActiveDotoriMenu.id]);
+
+  const onMoveDotori = (nextFolderId: ItemId) => {
+    const requestData = {
+      bookmarkIdList: [isActiveDotoriMenu.id],
+      nextFolderId,
+    };
+    mutateMoveDotori(requestData);
   };
 
   return (
@@ -42,15 +56,20 @@ function DotoriList({ path }: { path: DotoriPathTypes }) {
         <DotoriListItem
           key={dotori.id}
           dotori={dotori}
-          isActiveDotoriMenuId={isActiveDotoriMenuId}
+          isActiveDotoriMenu={
+            isActiveDotoriMenu.id === dotori.id && isActiveDotoriMenu.isOpen
+          }
           onActiveDotoriMenu={onActiveDotoriMenu}
-          onToggleModal={onToggleModal}
+          onToggleDeleteModal={onToggleDeleteModal}
+          onToggleEditModal={onToggleEditModal}
+          onToggleMoveModal={onToggleMoveModal}
         />
       ))}
 
       {isEditModal && (
         <DotoriEditModal
           isOpen={isEditModal}
+          isActiveDotoriMenu={isActiveDotoriMenu}
           onToggleModal={onToggleEditModal}
         />
       )}
@@ -62,7 +81,7 @@ function DotoriList({ path }: { path: DotoriPathTypes }) {
           title="선택한 도토리를 삭제할까요?"
           content="삭제된 도토리는 모두 <br /> 휴지통으로 들어가요!"
           buttonName="삭제"
-          onClick={() => console.log("삭제")}
+          onClick={onDeleteDotori}
         />
       )}
 
@@ -70,7 +89,7 @@ function DotoriList({ path }: { path: DotoriPathTypes }) {
         <FolderListModal
           isModal={isMoveModal}
           onToggleModal={onToggleMoveModal}
-          onMove={() => console.log("옮기기")}
+          onMove={onMoveDotori}
           path={path}
         />
       )}
@@ -83,4 +102,4 @@ const DotoriListBlock = styled.div`
   flex-wrap: wrap;
 `;
 
-export default DotoriList;
+export default memo(DotoriList);

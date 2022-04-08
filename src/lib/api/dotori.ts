@@ -1,12 +1,13 @@
 import { ItemId } from "@atlaskit/tree";
 import {
+  DotoriMoveRequest,
   DotoriSortType,
   DotoriUpdateRequest,
   IDotoriListResponse,
 } from "types/dotori";
 import client from "./client";
 
-// 휴지통 북마크 조회
+// 휴지통 도토리 조회
 export const getTrashDotorisAPI = async (
   page: number,
   size: number,
@@ -19,7 +20,7 @@ export const getTrashDotorisAPI = async (
   return response.data;
 };
 
-// 검색 결과 북마크 조회
+// 검색 결과 도토리 조회
 export const getSearchDotorisAPI = async (
   keyword: string,
   page: number,
@@ -33,7 +34,7 @@ export const getSearchDotorisAPI = async (
   return response.data;
 };
 
-// 북마크 조회  folderId가 main 이면 모든 북마크 조회
+// 도토리 조회  folderId가 main 이면 모든 도토리 조회
 export const getDotorisAPI = async (
   folderId: ItemId,
   page: number,
@@ -47,19 +48,49 @@ export const getDotorisAPI = async (
   return response.data;
 };
 
-// 북마크 정보 수정
+// 도토리 정보 수정
 export const updateDotoriAPI = async (requestData: DotoriUpdateRequest) => {
-  const { bookmarkId } = requestData;
+  const { dotoriId } = requestData;
   const response = await client.patch(
-    `/api/v1/bookmark/${bookmarkId}`,
+    `/api/v1/bookmark/${dotoriId}`,
     requestData
   );
 
   return response.data;
 };
 
-// 북마크 클릭 수
+// 도토리 클릭 수
 export const clickCountDotoriAPI = async (dotoriId: string) => {
   const response = await client.get(`/api/v1/bookmark/click/${dotoriId}`);
+  return response.data;
+};
+
+// 도토리 삭제
+export const deleteDotoriAPI = async (dotoriIdList: string[]) => {
+  const response = await client.post(`/api/v1/bookmark/delete`, {
+    idList: dotoriIdList,
+  });
+  return response.data;
+};
+
+// 도토리 이동
+export const moveDotoriAPI = async (requestData: DotoriMoveRequest) => {
+  const response = await client.post(`/api/v1/bookmark/moveList`, requestData);
+  return response.data;
+};
+
+// @Note 도토리 복원
+export const restoreDotoriAPI = async (dotoriIdList: string[]) => {
+  const response = await client.patch(`/api/v1/trash/restore`, {
+    bookmarkIdList: dotoriIdList,
+  });
+  return response.data;
+};
+
+// @Note 도토리 영구 삭제
+export const truncateDotoriAPI = async (dotoriIdList: string[]) => {
+  const response = await client.post(`/api/v1/trash/truncate`, {
+    bookmarkIdList: dotoriIdList,
+  });
   return response.data;
 };

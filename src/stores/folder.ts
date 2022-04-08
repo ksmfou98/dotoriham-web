@@ -52,12 +52,26 @@ const folder = createSlice({
       state.items[parentId].children = state.items[parentId].children.filter(
         (id) => id !== folderId
       );
-
       delete state.items[folderId];
+    },
+    deleteFolders: (
+      state: TreeData,
+      action: PayloadAction<{ folderIdList: ItemId[] }>
+    ) => {
+      const { folderIdList } = action.payload;
+      folderIdList.forEach((folderId) => {
+        const parentId = findParentIdById(state, folderId);
+        if (!parentId) return;
+        state.items[parentId].children = state.items[parentId].children.filter(
+          (id) => id !== folderId
+        );
+        delete state.items[folderId];
+      });
     },
   },
 });
 
-export const { setFolders, addFolder, deleteFolder } = folder.actions;
+export const { setFolders, addFolder, deleteFolder, deleteFolders } =
+  folder.actions;
 export const folderSelector = (state: rootState) => state.folder;
 export default folder;

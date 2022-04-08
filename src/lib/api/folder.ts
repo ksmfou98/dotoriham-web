@@ -1,5 +1,6 @@
 import { ItemId, TreeData } from "@atlaskit/tree";
 import {
+  ChildFolderItem,
   ICreateFolderRequest,
   ICreateFolderResponse,
   IMoveFolderRequest,
@@ -55,5 +56,21 @@ export const getParentFolderListAPI = async (folderId: ItemId) => {
   const response = await client.get<ParentFoldersGetResponse>(
     `/api/v1/folder/${folderId}/parent`
   );
+  return response.data;
+};
+
+// 자식 폴더 리스트 조회
+export const getChildFolderListAPI = async (folderId: ItemId) => {
+  const response = await client.get<ChildFolderItem[]>(
+    `/api/v1/folder/${folderId}/children`
+  );
+  return response.data;
+};
+
+// 자식 폴더 삭제
+export const deleteChildFolderAPI = async (deleteFolderIdList: ItemId[]) => {
+  const response = await client.post(`/api/v1/folder/deletes`, {
+    deleteFolderIdList,
+  });
   return response.data;
 };

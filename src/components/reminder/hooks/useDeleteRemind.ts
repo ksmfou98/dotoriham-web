@@ -2,6 +2,8 @@ import { deleteRemindAPI } from "lib/api/remind";
 import { QueryKey } from "lib/queryKey";
 import { useMutation, useQueryClient } from "react-query";
 
+// @Todo 파일 이름을 useDotoriRemindMutation 으로 변경 해야 함
+
 export default function useDeleteRemind() {
   const queryClient = useQueryClient();
 

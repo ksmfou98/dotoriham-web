@@ -11,7 +11,7 @@ function RemindInfoButton() {
 }
 
 const RemindInfoButtonStyled = styled.div`
-  margin-right: 24px;
+  margin-right: 14px;
   cursor: pointer;
 `;
 

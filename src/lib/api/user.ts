@@ -1,8 +1,8 @@
 import client from "./client";
 
-export const nicknameCheckAPI = async (nickname: string) => {
+export const nicknameCheckAPI = async (nickName: string) => {
   const response = await client.post("/api/v1/user/nickNameCheck", {
-    nickname,
+    nickName,
   });
   return response.data;
 };
