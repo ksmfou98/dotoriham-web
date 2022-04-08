@@ -13,7 +13,7 @@ import {
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import Path from "routes/Path";
 import QuestionButton from "components/tutorial/QuestionButton";
-import useInitialFolderExpand from "hooks/useInitialFolderExpand";
+import useInitialFolderExpand from "components/sidebar/hooks/useInitialFolderExpand";
 
 function Sidebar() {
   const { pathname } = useLocation();
