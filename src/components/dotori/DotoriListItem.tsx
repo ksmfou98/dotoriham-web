@@ -20,6 +20,8 @@ import useDotoriSelect from "./hooks/useDotoriSelect";
 import CheckBox from "components/common/CheckBox";
 import useDotoriMutation from "./hooks/useDotoriMutation";
 import DotoriItemMenu from "./DotoriItemMenu";
+import { useSelector } from "react-redux";
+import { userSelector } from "stores/user";
 
 interface DotoriListItemProps {
   dotori: IDotoriItem;
@@ -50,14 +52,24 @@ function DotoriListItem({
     folderEmoji,
     checked,
   } = dotori;
-
+  const { remindToggle } = useSelector(userSelector);
   const location = useLocation();
   const { copyUrlRef, onCopyUrl } = useCopyUrl();
-  const { copyToast, remindSettingToast, remindDisabledToast } = useToast();
+  const {
+    copyToast,
+    remindSettingToast,
+    remindDisabledToast,
+    remindRecommendationToast,
+  } = useToast();
   const { mutateEditDotori, mutateClickCountDotori } = useDotoriMutation();
   const { isActiveSelectBox, onToggleDotoriChecked } = useDotoriSelect();
 
   const onRemindToggle = () => {
+    if (!remindToggle) {
+      remindRecommendationToast();
+      return;
+    }
+
     const requestData = {
       dotoriId: id,
       title,
