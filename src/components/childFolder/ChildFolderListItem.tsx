@@ -5,6 +5,7 @@ import { palette } from "lib/styles/palette";
 import { ellipsis } from "lib/styles/utilStyles";
 import React from "react";
 import { Link } from "react-router-dom";
+import Path from "routes/Path";
 import styled from "styled-components";
 import { ChildFolder } from ".";
 
@@ -31,7 +32,9 @@ function ChildFolderListItem({
 
       <FolderEmoji emoji={emoji} />
 
-      <ChildFolderName to={`/${folderId}`}>{name}</ChildFolderName>
+      <ChildFolderName to={`${Path.DotoriPage}/${folderId}`}>
+        {name}
+      </ChildFolderName>
       {checked && <SelectedStyled />}
     </ChildFolderItemBlock>
   );

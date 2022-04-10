@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { palette } from "lib/styles/palette";
 import styled from "styled-components";
 import FolderList from "./FolderList";
@@ -10,13 +10,24 @@ import {
   SelectedTrashIcon,
   UnselectedTrashIcon,
 } from "assets/icons";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import Path from "routes/Path";
 import QuestionButton from "components/tutorial/QuestionButton";
+import useInitialFolderExpand from "components/sidebar/hooks/useInitialFolderExpand";
 
 function Sidebar() {
   const { pathname } = useLocation();
   const navigate = useNavigate();
+  const params = useParams();
+  const [folderId, setFolderId] = useState("");
+
+  useEffect(() => {
+    if (params.folderId) setFolderId(params.folderId);
+    // @Note 첫 로딩 1번만 실행되야 하기 때문에 deps 비워줌
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useInitialFolderExpand(folderId);
 
   return (
     <SidebarBlock>

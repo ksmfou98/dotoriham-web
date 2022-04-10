@@ -63,7 +63,7 @@ function ChildFolders({ folderId }: Props) {
     mutateChildFoldersDelete(checkedChildFolderIds);
   };
 
-  if (!data) return null;
+  if (!data || data.length === 0) return null;
   return (
     <ChildFoldersBlock>
       <ChildFolderSelectNav

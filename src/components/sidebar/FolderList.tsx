@@ -90,7 +90,7 @@ function FolderList() {
   const onMouseDownFolder = () => {
     setIsDragging(true);
     if (folderBoxRef.current) {
-      setFolderBoxHeight(folderBoxRef.current.clientHeight + 10);
+      setFolderBoxHeight(folderBoxRef.current.clientHeight);
     }
   };
 
