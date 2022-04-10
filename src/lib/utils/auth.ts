@@ -16,3 +16,11 @@ export function logout() {
   userStorage.remove();
   window.location.replace("/login");
 }
+
+export function isLogin() {
+  const user = userStorage.get();
+  if (!user) return false;
+
+  const { accessToken } = user;
+  return !!accessToken;
+}

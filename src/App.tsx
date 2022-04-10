@@ -9,10 +9,11 @@ import "react-toastify/dist/ReactToastify.css";
 import ToastContainerStyled from "lib/styles/toastStyle";
 import useCheckLogin from "hooks/useCheckLogin";
 import Footer from "components/footer";
+import useLoggedInUserReplace from "hooks/useLoggedInUserReplace";
 
 function App() {
   useCheckLogin();
-
+  useLoggedInUserReplace();
   return (
     <>
       <AppWrapper>
