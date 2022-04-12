@@ -1,10 +1,14 @@
-import { palette } from "lib/styles/palette";
 import React from "react";
+import { palette } from "lib/styles/palette";
 import styled from "styled-components";
 import { mediaSize } from "lib/styles/media";
 import { SymbolGray22Icon } from "assets/icons";
+import { useToggle } from "hooks";
+import MakePeopleModal from "./MakePeopleModal";
 
 function Footer() {
+  const [makePeopleModal, onToggleMakePeopleModal] = useToggle();
+
   return (
     <FooterBlock>
       <FooterInner>
@@ -38,10 +42,23 @@ function Footer() {
             >
               피드백
             </FooterMenuItem>
+            <VerticalLine />
+            <div
+              style={{ cursor: "pointer" }}
+              onClick={onToggleMakePeopleModal}
+            >
+              만든 사람들
+            </div>
           </FooterMenu>
         </FooterLinkGroup>
         <CopyRightText>Copyright © Dotoriham All rights reserved</CopyRightText>
       </FooterInner>
+      {makePeopleModal && (
+        <MakePeopleModal
+          isModal={makePeopleModal}
+          onToggleModal={onToggleMakePeopleModal}
+        />
+      )}
     </FooterBlock>
   );
 }
@@ -65,7 +82,6 @@ const FooterInner = styled.div`
 const FooterLinkGroup = styled.div`
   display: flex;
   align-items: center;
-  width: 500px;
 `;
 
 const Logo = styled.div`
