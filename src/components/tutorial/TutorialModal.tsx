@@ -3,7 +3,7 @@ import SmallGreenText from "components/common/SmallGreenText";
 import { palette } from "lib/styles/palette";
 import React, { useState } from "react";
 import styled from "styled-components";
-import TutorialCloseButton from "./TutorialCloseButton";
+import ModalCloseButton from "../common/ModalCloseButton";
 import TutorialContents from "./TutorialContents";
 import TutorialSideButtons from "./TutorialSideButtons";
 
@@ -115,7 +115,7 @@ function TutorialModal({
       height={471}
     >
       <ModalInnerStyled>
-        <TutorialCloseButton
+        <ModalCloseButton
           visible={currentStep === stepLength}
           onClick={onToggleModal}
         />
