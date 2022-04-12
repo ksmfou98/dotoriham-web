@@ -1,6 +1,8 @@
 import { createGlobalStyle } from "styled-components";
+import { scrollbar } from "./utilStyles";
 
 const GlobalStyles = createGlobalStyle`
+${scrollbar}
 @font-face {
     font-family: 'Cafe24Ssurround';
     src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2105_2@1.0/Cafe24Ssurround.woff') format('woff');

@@ -46,7 +46,8 @@ const RemindListItemBlock = styled.a`
   border-radius: 10px;
   margin-right: 24px;
   margin-bottom: 2px;
-  border: 1px solid ${palette.grayLight};
+  margin-top: 1px;
+  box-shadow: 0 0 0px 1px ${palette.grayLight}; ;
 `;
 
 const RemindItemLeftBox = styled.div`
@@ -69,7 +70,7 @@ const RemindItemImage = styled.img`
   width: 100%;
   height: 100%;
   object-fit: cover;
-  border-radius: 9px 0 0 9px;
+  border-radius: 10px 0px 0px 10px;
 `;
 
 const RemindItemRightBox = styled.div`
