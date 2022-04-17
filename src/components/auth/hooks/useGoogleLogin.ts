@@ -3,14 +3,12 @@ import { GOOGLE_CLIENT_ID } from "lib/constants";
 import userStorage from "lib/utils/userStorage";
 import { useCallback } from "react";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
 import Path from "routes/Path";
 import { setUser } from "stores/user";
 import { ILoginRequest } from "types/auth";
 
 export default function useGoogleLogin() {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
 
   const onGoogleLogin = useCallback(
     async (response) => {
@@ -30,12 +28,12 @@ export default function useGoogleLogin() {
         const { data } = await loginAPI(loginRequest);
         userStorage.set(data);
         dispatch(setUser(data));
-        navigate(Path.DotoriPage);
+        window.location.replace(Path.DotoriPage);
       } catch (e) {
         console.log("로그인에 실패 하였습니다.");
       }
     },
-    [dispatch, navigate]
+    [dispatch]
   );
   return {
     onGoogleLogin,
