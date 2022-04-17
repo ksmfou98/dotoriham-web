@@ -1,8 +1,8 @@
-import { palette } from "lib/styles/palette";
-import transitions from "lib/styles/transitions";
-import React, { useEffect } from "react";
-import styled from "styled-components";
-import ModalProtal from "./ModalPortal";
+import { palette } from 'lib/styles/palette';
+import transitions from 'lib/styles/transitions';
+import React, { useEffect } from 'react';
+import styled from 'styled-components';
+import ModalPortal from './ModalPortal';
 
 interface IModalInnerStyled {
   width: number;
@@ -26,14 +26,14 @@ function ModalTemplate({
   ...rest
 }: ModalTemplateProps) {
   useEffect(() => {
-    if (isModal) window.document.body.style.overflow = "hidden";
+    if (isModal) window.document.body.style.overflow = 'hidden';
     return () => {
-      window.document.body.style.overflow = "unset";
+      window.document.body.style.overflow = 'unset';
     };
   }, [isModal]);
 
   return (
-    <ModalProtal>
+    <ModalPortal>
       <ModalTemplateBlock onMouseDown={onToggleModal} {...rest}>
         <ModalInner
           width={width}
@@ -46,7 +46,7 @@ function ModalTemplate({
         </ModalInner>
         <ModalBackground />
       </ModalTemplateBlock>
-    </ModalProtal>
+    </ModalPortal>
   );
 }
 
