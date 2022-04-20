@@ -116,7 +116,7 @@ function DotoriListItem({
             rel="noopener noreferrer"
             onClick={() => mutateClickCountDotori(id)}
           >
-            <div className="title">{title}</div>
+            <div className="title">{title || "제목없음"}</div>
             <div className="description">{description}</div>
           </InnerContent>
 
