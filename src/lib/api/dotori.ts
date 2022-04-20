@@ -68,7 +68,7 @@ export const clickCountDotoriAPI = async (dotoriId: string) => {
 // 도토리 삭제
 export const deleteDotoriAPI = async (dotoriIdList: string[]) => {
   const response = await client.post(`/api/v1/bookmark/delete`, {
-    idList: dotoriIdList,
+    dotoriIdList,
   });
   return response.data;
 };
