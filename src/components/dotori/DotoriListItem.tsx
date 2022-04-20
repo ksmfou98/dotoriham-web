@@ -58,13 +58,9 @@ function DotoriListItem({
   const { remindToggle } = useSelector(userSelector);
   const location = useLocation();
   const { copyUrlRef, onCopyUrl } = useCopyUrl();
-  const {
-    copyToast,
-    remindSettingToast,
-    remindDisabledToast,
-    remindRecommendationToast,
-  } = useToast();
-  const { mutateEditDotori, mutateClickCountDotori } = useDotoriMutation();
+  const { copyToast, remindRecommendationToast } = useToast();
+  const { mutateRemindToggleDotori, mutateClickCountDotori } =
+    useDotoriMutation();
   const { isActiveSelectBox, onToggleDotoriChecked } = useDotoriSelect();
 
   const onRemindToggle = () => {
@@ -75,15 +71,14 @@ function DotoriListItem({
 
     const requestData = {
       dotoriId: id,
-      title,
-      remind: !remindTime,
+      remind: !!remindTime,
     };
-    mutateEditDotori(requestData);
-    remindTime ? remindDisabledToast() : remindSettingToast();
+
+    console.log(requestData);
+    mutateRemindToggleDotori(requestData);
   };
 
   const onImageloadError = (e: SyntheticEvent<HTMLImageElement, Event>) => {
-    console.log("에러", e);
     setImageLoadError(true);
   };
 

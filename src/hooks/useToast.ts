@@ -5,6 +5,8 @@ export const ToastSize = {
   small: "small-toast" as const,
 };
 
+export type ToastSizeKeyTypes = keyof typeof ToastSize;
+
 export default function useToast() {
   const { big, small } = ToastSize;
 
@@ -58,6 +60,15 @@ export default function useToast() {
       className: small,
     });
 
+  const errorToast = (
+    message: string,
+    className: ToastSizeKeyTypes = "big"
+  ) => {
+    toast(`❗ ${message} ❗`, {
+      className: className,
+    });
+  };
+
   return {
     remindSettingToast,
     remindDisabledToast,
@@ -69,5 +80,6 @@ export default function useToast() {
     folderIsFull,
     editProfileToast,
     changePasswordToast,
+    errorToast,
   };
 }

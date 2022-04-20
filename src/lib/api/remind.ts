@@ -7,6 +7,12 @@ export const getRemindListAPI = async () => {
   return response.data;
 };
 
+// @Note  remind 설정 API
+export const setRemindAPI = async (dotoriId: string) => {
+  const response = await client.post(`/api/v1/remind/${dotoriId}`);
+  return response.data;
+};
+
 // 리마인드 삭제
 export const deleteRemindAPI = async (bookmarkId: string) => {
   const response = await client.delete(`/api/v1/remind/${bookmarkId}`);

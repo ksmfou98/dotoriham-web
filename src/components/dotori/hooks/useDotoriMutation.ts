@@ -1,3 +1,4 @@
+import { useToast } from "hooks";
 import {
   clickCountDotoriAPI,
   deleteDotoriAPI,
@@ -6,12 +7,42 @@ import {
   truncateDotoriAPI,
   updateDotoriAPI,
 } from "lib/api/dotori";
+import { deleteRemindAPI, setRemindAPI } from "lib/api/remind";
 import { QueryKey } from "lib/queryKey";
 import { useMutation, useQueryClient } from "react-query";
-import { DotoriMoveRequest, DotoriUpdateRequest } from "types/dotori";
+import {
+  DotoriMoveRequest,
+  DotoriRemindToggleRequest,
+  DotoriUpdateRequest,
+} from "types/dotori";
+
+function toggleRemindAPI({ dotoriId, remind }: DotoriRemindToggleRequest) {
+  switch (remind) {
+    case true:
+      return deleteRemindAPI(dotoriId);
+    case false:
+      return setRemindAPI(dotoriId);
+  }
+}
 
 export default function useDotoriMutation() {
   const queryClient = useQueryClient();
+  const { remindDisabledToast, remindSettingToast, errorToast } = useToast();
+
+  // @Note 도토리 리마인드 토글
+  const { mutate: mutateRemindToggleDotori } = useMutation(
+    (requestData: DotoriRemindToggleRequest) => toggleRemindAPI(requestData),
+    {
+      onSuccess: (_, variables) => {
+        queryClient.invalidateQueries(QueryKey.DOTORI_CONTENTS);
+        queryClient.invalidateQueries(QueryKey.REMIND_LIST);
+        variables.remind ? remindDisabledToast() : remindSettingToast();
+      },
+      onError: () => {
+        errorToast("도토리 리마인드 수정에 실패했습니다. 다시 시도해 주세요.");
+      },
+    }
+  );
 
   // @Note 도토리 수정
   const { mutate: mutateEditDotori } = useMutation(
@@ -22,7 +53,7 @@ export default function useDotoriMutation() {
         queryClient.invalidateQueries(QueryKey.REMIND_LIST);
       },
       onError: () => {
-        alert("도토리 수정을 실패했습니다. 잠시 후 다시 시도해 주세요");
+        errorToast("도토리 수정을 실패했습니다. 다시 시도해 주세요");
       },
     }
   );
@@ -35,7 +66,7 @@ export default function useDotoriMutation() {
         queryClient.invalidateQueries(QueryKey.DOTORI_CONTENTS);
       },
       onError: () => {
-        alert("도토리 삭제를 실패했습니다. 잠시 후 다시 시도해 주세요");
+        errorToast("도토리 삭제를 실패했습니다. 다시 시도해 주세요");
       },
     }
   );
@@ -48,7 +79,7 @@ export default function useDotoriMutation() {
         queryClient.invalidateQueries(QueryKey.DOTORI_CONTENTS);
       },
       onError: () => {
-        alert("도토리 이동을 실패했습니다. 잠시 후 다시 시도해 주세요");
+        errorToast("도토리 이동을 실패했습니다. 다시 시도해 주세요");
       },
     }
   );
@@ -61,7 +92,7 @@ export default function useDotoriMutation() {
         queryClient.invalidateQueries(QueryKey.DOTORI_CONTENTS);
       },
       onError: () => {
-        alert("도토리 조회수 증가를 실패했습니다. 잠시 후 다시 시도해 주세요");
+        errorToast("도토리 조회수 증가를 실패했습니다. 다시 시도해 주세요");
       },
     }
   );
@@ -74,7 +105,7 @@ export default function useDotoriMutation() {
         queryClient.invalidateQueries(QueryKey.DOTORI_CONTENTS);
       },
       onError: () => {
-        alert("도토리 복원을 실패했습니다. 잠시 후 다시 시도해 주세요");
+        errorToast("도토리 복원을 실패했습니다. 다시 시도해 주세요");
       },
     }
   );
@@ -87,7 +118,7 @@ export default function useDotoriMutation() {
         queryClient.invalidateQueries(QueryKey.DOTORI_CONTENTS);
       },
       onError: () => {
-        alert("도토리 영구 삭제를 실패했습니다. 잠시 후 다시 시도해 주세요");
+        errorToast("도토리 영구 삭제를 실패했습니다. 다시 시도해 주세요");
       },
     }
   );
@@ -99,5 +130,6 @@ export default function useDotoriMutation() {
     mutateClickCountDotori,
     mutateRestoreDotori,
     mutateTruncateDotori,
+    mutateRemindToggleDotori,
   };
 }

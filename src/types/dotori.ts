@@ -67,6 +67,11 @@ export interface DotoriMoveRequest {
   nextFolderId: ItemId;
 }
 
+export interface DotoriRemindToggleRequest {
+  remind: boolean;
+  dotoriId: string;
+}
+
 export type FilterMenuTextType =
   | "최신순"
   | "오래된 순"
