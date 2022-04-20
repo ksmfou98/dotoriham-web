@@ -10,7 +10,7 @@ import FolderEmoji from "components/common/FolderEmoji";
 import useCopyUrl from "hooks/useCopyUrl";
 import { palette } from "lib/styles/palette";
 import { ellipsis } from "lib/styles/utilStyles";
-import React, { memo } from "react";
+import React, { memo, SyntheticEvent, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import Path from "routes/Path";
 import styled from "styled-components";
@@ -52,6 +52,9 @@ function DotoriListItem({
     folderEmoji,
     checked,
   } = dotori;
+
+  const [imageLoadError, setImageLoadError] = useState(false);
+
   const { remindToggle } = useSelector(userSelector);
   const location = useLocation();
   const { copyUrlRef, onCopyUrl } = useCopyUrl();
@@ -79,6 +82,11 @@ function DotoriListItem({
     remindTime ? remindDisabledToast() : remindSettingToast();
   };
 
+  const onImageloadError = (e: SyntheticEvent<HTMLImageElement, Event>) => {
+    console.log("에러", e);
+    setImageLoadError(true);
+  };
+
   return (
     <DotoriItemBlock>
       <DotoriItemInner>
@@ -88,8 +96,12 @@ function DotoriListItem({
           rel="noopener noreferrer"
           onClick={() => mutateClickCountDotori(id)}
         >
-          {image ? (
-            <DotoriOGImage src={image} alt="og-image" />
+          {image && !imageLoadError ? (
+            <DotoriOGImage
+              src={image}
+              alt="og-image"
+              onError={onImageloadError}
+            />
           ) : (
             <DotoriDefaultImage>
               <SymbolIcon />
