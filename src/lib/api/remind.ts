@@ -9,7 +9,7 @@ export const getRemindListAPI = async () => {
 
 // @Note  remind 설정 API
 export const setRemindAPI = async (dotoriId: string) => {
-  const response = await client.post(`/api/v1/remind/${dotoriId}`);
+  const response = await client.post(`/api/v1/bookmark/remind/${dotoriId}`);
   return response.data;
 };
 

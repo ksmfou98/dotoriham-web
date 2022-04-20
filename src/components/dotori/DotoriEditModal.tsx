@@ -32,7 +32,7 @@ function DotoriEditModal({
     const requestData = {
       dotoriId: isActiveDotoriMenu.id,
       title,
-      remind: !!isActiveDotoriMenu.remindTime,
+      description: isActiveDotoriMenu.description,
     };
     mutateEditDotori(requestData);
     onToggleModal();

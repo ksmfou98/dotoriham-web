@@ -4,7 +4,7 @@ export interface IDotori {
   clickCount: number;
   deleteTime: string;
   deleted: boolean;
-  description: null | string;
+  description: string;
   nickname?: string;
   folder?: string;
   folderId: ItemId;
@@ -59,7 +59,7 @@ export type DotoriSortType =
 export interface DotoriUpdateRequest {
   dotoriId: string;
   title: string;
-  remind: boolean;
+  description: string;
 }
 
 export interface DotoriMoveRequest {
