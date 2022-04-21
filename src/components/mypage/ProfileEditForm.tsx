@@ -34,9 +34,12 @@ function ProfileEditForm() {
   const { nickname, profileImage, imageFileName } = form;
 
   // 닉네임 인풋 상태 변경
-  const onChangeNickname = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setForm({ ...form, nickname: e.target.value });
-  };
+  const onChangeNickname = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      setForm((prevForm) => ({ ...prevForm, nickname: e.target.value }));
+    },
+    []
+  );
 
   // 프로필 이미지, 이름 상태 변경
   const onChangeProfileImage = useCallback(
@@ -54,7 +57,7 @@ function ProfileEditForm() {
   );
 
   // 닉네임 인풋에서 초점을 벗어났을 시에 액션
-  const onBlurNickname = async () => {
+  const onBlurNickname = useCallback(async () => {
     if (nickname.length === 0) {
       setErrorMessage("닉네임을 입력해주세요");
       return;
@@ -69,7 +72,7 @@ function ProfileEditForm() {
         }
       }
     }
-  };
+  }, [nickname]);
 
   // 프로필 이미지 업로드
   const onImageUpload = useCallback(
