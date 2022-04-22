@@ -1,5 +1,5 @@
 import Header from "components/header";
-import { mediaSize } from "lib/styles/media";
+import { breakpoints } from "lib/styles/media";
 import React from "react";
 import { ReactQueryDevtools } from "react-query/devtools";
 import styled from "styled-components";
@@ -46,7 +46,7 @@ const AppWrapper = styled.div`
 `;
 
 const MainLayout = styled.main`
-  width: ${mediaSize.desktop}px;
+  width: ${breakpoints.desktop}px;
   margin: 0 auto;
   flex: 1 auto;
   display: flex;

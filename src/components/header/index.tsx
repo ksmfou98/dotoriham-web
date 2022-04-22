@@ -1,4 +1,4 @@
-import { mediaSize } from "lib/styles/media";
+import { breakpoints } from "lib/styles/media";
 import { palette } from "lib/styles/palette";
 import React from "react";
 import Logo from "components/common/Logo";
@@ -37,7 +37,7 @@ const HeaderBlock = styled.header`
 `;
 
 const HeaderInner = styled.div`
-  width: ${mediaSize.desktop}px;
+  width: ${breakpoints.desktop}px;
   height: 48px;
   margin: 0 auto;
   color: ${palette.black};

@@ -1,7 +1,7 @@
 import React from "react";
 import { palette } from "lib/styles/palette";
 import styled from "styled-components";
-import { mediaSize } from "lib/styles/media";
+import { breakpoints } from "lib/styles/media";
 import { SymbolGray22Icon } from "assets/icons";
 import { useToggle } from "hooks";
 import MakePeopleModal from "./MakePeopleModal";
@@ -72,7 +72,7 @@ const FooterBlock = styled.footer`
 
 const FooterInner = styled.div`
   height: 100%;
-  width: ${mediaSize.desktop}px;
+  width: ${breakpoints.desktop}px;
   margin: 0 auto;
   display: flex;
   align-items: center;
