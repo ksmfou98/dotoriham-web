@@ -1,7 +1,7 @@
 import Input from "components/common/Input";
 import SmallBlackText from "components/common/SmallBlackText";
 import { palette } from "lib/styles/palette";
-import React from "react";
+import React, { memo } from "react";
 import styled from "styled-components";
 
 interface Props {
@@ -54,4 +54,4 @@ const NicknameCheckError = styled.div`
   font-size: 12px;
 `;
 
-export default ProfileNicknameForm;
+export default memo(ProfileNicknameForm);

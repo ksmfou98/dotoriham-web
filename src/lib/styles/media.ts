@@ -1,11 +1,11 @@
 export const mediaQuery = (maxWidth: number) =>
   `@media (max-width: ${maxWidth}px)`;
 
-export const mediaSize = {
+export const breakpoints = {
   desktop: 1065,
 };
 
-const { desktop } = mediaSize;
+const { desktop } = breakpoints;
 
 const media = {
   desktop: mediaQuery(desktop),

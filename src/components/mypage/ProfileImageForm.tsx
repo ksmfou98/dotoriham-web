@@ -3,28 +3,25 @@ import { ColorizeIcon, X16BigIcon } from "assets/icons";
 import SmallBlackText from "components/common/SmallBlackText";
 import useToggle from "hooks/useToggle";
 import { palette } from "lib/styles/palette";
-import React from "react";
+import React, { memo } from "react";
 import styled from "styled-components";
 import ProfileColorPalette from "./ProfileColorPalette";
 
 interface ProfileImageFormProps {
-  form: {
-    profileImage: string;
-    imageFileName: string;
-    nickname: string;
-  };
+  profileImage: string;
+  imageFileName: string;
   onChangeProfileImage: (newImg: string, newFileName?: string) => void;
   onDeleteImage: () => void;
   onImageUpload: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 function ProfileImageForm({
-  form,
+  imageFileName,
+  profileImage,
   onChangeProfileImage,
   onDeleteImage,
   onImageUpload,
 }: ProfileImageFormProps) {
-  const { imageFileName, profileImage } = form;
   const [isPaletteOpen, onTogglePaletteOpen] = useToggle();
   return (
     <ProfileImageFormBlock>
@@ -136,4 +133,4 @@ const UploadFileName = styled.span`
   margin-right: 4px;
 `;
 
-export default ProfileImageForm;
+export default memo(ProfileImageForm);

@@ -10,7 +10,7 @@ import FolderEmoji from "components/common/FolderEmoji";
 import useCopyUrl from "hooks/useCopyUrl";
 import { palette } from "lib/styles/palette";
 import { ellipsis } from "lib/styles/utilStyles";
-import React, { memo } from "react";
+import React, { memo, SyntheticEvent, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import Path from "routes/Path";
 import styled from "styled-components";
@@ -52,16 +52,15 @@ function DotoriListItem({
     folderEmoji,
     checked,
   } = dotori;
+
+  const [imageLoadError, setImageLoadError] = useState(false);
+
   const { remindToggle } = useSelector(userSelector);
   const location = useLocation();
   const { copyUrlRef, onCopyUrl } = useCopyUrl();
-  const {
-    copyToast,
-    remindSettingToast,
-    remindDisabledToast,
-    remindRecommendationToast,
-  } = useToast();
-  const { mutateEditDotori, mutateClickCountDotori } = useDotoriMutation();
+  const { copyToast, remindRecommendationToast } = useToast();
+  const { mutateRemindToggleDotori, mutateClickCountDotori } =
+    useDotoriMutation();
   const { isActiveSelectBox, onToggleDotoriChecked } = useDotoriSelect();
 
   const onRemindToggle = () => {
@@ -72,11 +71,15 @@ function DotoriListItem({
 
     const requestData = {
       dotoriId: id,
-      title,
-      remind: !remindTime,
+      remind: !!remindTime,
     };
-    mutateEditDotori(requestData);
-    remindTime ? remindDisabledToast() : remindSettingToast();
+
+    console.log(requestData);
+    mutateRemindToggleDotori(requestData);
+  };
+
+  const onImageloadError = (e: SyntheticEvent<HTMLImageElement, Event>) => {
+    setImageLoadError(true);
   };
 
   return (
@@ -88,8 +91,12 @@ function DotoriListItem({
           rel="noopener noreferrer"
           onClick={() => mutateClickCountDotori(id)}
         >
-          {image ? (
-            <DotoriOGImage src={image} alt="og-image" />
+          {image && !imageLoadError ? (
+            <DotoriOGImage
+              src={image}
+              alt="og-image"
+              onError={onImageloadError}
+            />
           ) : (
             <DotoriDefaultImage>
               <SymbolIcon />
@@ -116,7 +123,7 @@ function DotoriListItem({
             rel="noopener noreferrer"
             onClick={() => mutateClickCountDotori(id)}
           >
-            <div className="title">{title}</div>
+            <div className="title">{title || "제목없음"}</div>
             <div className="description">{description}</div>
           </InnerContent>
 

@@ -23,10 +23,11 @@ import SmallModal from "components/common/SmallModal";
 import useDeleteFolder from "components/sidebar/hooks/useDeleteFolder";
 import { findChildrenLengthById } from "lib/utils/atlaskitTreeFinder";
 import { moveFolderAPI } from "lib/api/folder";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import Path from "routes/Path";
 import { useQueryClient } from "react-query";
 import { QueryKey } from "lib/queryKey";
+import useInitialFolderExpand from "./hooks/useInitialFolderExpand";
 
 export interface IFolderMenuPosition {
   top: number;
@@ -37,9 +38,11 @@ function FolderList() {
   const folders = useSelector(folderSelector);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const params = useParams();
   const { pathname } = useLocation();
   const { data } = useFolderListQuery("sidebar");
   const queryClient = useQueryClient();
+  const [urlFolderId, setUrlFolderId] = useState(""); // url folderid
 
   const folderBoxRef = useRef<HTMLDivElement>(null);
   const [draggingFolderId, setDraggingFolderId] = useState<ItemId | null>(null);
@@ -62,6 +65,14 @@ function FolderList() {
 
   const { onCreateFolder } = useCreateFolder();
   const { mutateDeleteFolder } = useDeleteFolder(isSelectedFolderId);
+
+  useEffect(() => {
+    if (params.folderId) setUrlFolderId(params.folderId);
+    // @Note 첫 로딩 1번만 실행되야 하기 때문에 deps 비워줌
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useInitialFolderExpand(urlFolderId);
 
   useEffect(() => {
     if (!data) return;

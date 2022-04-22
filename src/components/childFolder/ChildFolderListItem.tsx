@@ -84,6 +84,7 @@ const ChildFolderName = styled(Link)`
   ${ellipsis}
   display: inline-block;
   max-width: 85px;
+  margin-left: 4px;
   &:hover {
     text-decoration: underline;
   }
