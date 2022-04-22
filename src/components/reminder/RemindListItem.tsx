@@ -33,7 +33,7 @@ function RemindListItem({ remindData }: RemindListItemProps) {
             mutateDeleteRemind(id);
           }}
         />
-        <RightBoxText>{remindText}</RightBoxText>
+        <RightBoxText>{remindText || "제목 없음"}</RightBoxText>
       </RemindItemRightBox>
     </RemindListItemBlock>
   );

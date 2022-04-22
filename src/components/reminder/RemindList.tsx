@@ -1,10 +1,10 @@
 import React from "react";
-import { Back24Icon, Next24Icon } from "assets/icons";
 import useSlider from "hooks/useSlider";
 import styled, { css } from "styled-components";
 import useRemindQuery from "./hooks/useRemindQuery";
 import RemindListItem from "./RemindListItem";
 import RemindSettingMessage from "./RemindSettingMessage";
+import { Back24IMG, Next24IMG } from "assets/images";
 
 function RemindList() {
   const { data } = useRemindQuery();
@@ -31,7 +31,7 @@ function RemindList() {
         isShow={currentSlide !== SHOW_SLIDES_COUNT}
         onClick={onClickPrev}
       >
-        <Back24Icon />
+        <img src={Back24IMG} alt="뒤로가기" />
       </BackButton>
 
       <RemindListBox>
@@ -46,7 +46,7 @@ function RemindList() {
         isShow={TOTAL_SLIDES_COUNT - currentSlide > SHOW_SLIDES_COUNT}
         onClick={onClickNext}
       >
-        <Next24Icon />
+        <img src={Next24IMG} alt="다음으로" />
       </NextButton>
     </RemindListBlock>
   );
@@ -81,6 +81,7 @@ const NextButton = styled.div`
 const RemindListBox = styled.div`
   overflow: hidden;
   width: 100%;
+  padding-left: 2px;
   .box-inner {
     width: 100%;
     display: flex;
