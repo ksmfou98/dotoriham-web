@@ -3,6 +3,10 @@ import { useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import Path from "routes/Path";
 
+/**
+ * @description 로그인이 되어있으면 로그인, 회원가입 페이지에서 접근 막기
+ */
+
 export default function useLoggedInUserReplace() {
   const { pathname } = useLocation();
   const navigate = useNavigate();
