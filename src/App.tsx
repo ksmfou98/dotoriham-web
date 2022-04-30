@@ -10,10 +10,12 @@ import ToastContainerStyled from "lib/styles/toastStyle";
 import useCheckLogin from "hooks/useCheckLogin";
 import Footer from "components/footer";
 import useLoggedInUserReplace from "hooks/useLoggedInUserReplace";
+import useInitialRegisterEffect from "hooks/useInitialRegisterEffect";
 
 function App() {
   useCheckLogin();
   useLoggedInUserReplace();
+  useInitialRegisterEffect();
   return (
     <>
       <AppWrapper>

@@ -15,7 +15,7 @@ export interface IUserState extends IUserTokens {
   socialType: ISocialType;
   remindCycle: number;
   remindToggle: boolean;
-  isRegisterd: boolean;
+  isRegistered: boolean;
 }
 
 // TODO 리마인드 쪽은 지금 첫 로그인하면 모든 정보를 다 가져오게 되어 있는데 리마인드 정보 조회 api가 완성되면 이제 마이페이지
@@ -31,7 +31,7 @@ const initialState: IUserState = {
   remindToggle: false,
   accessToken: "",
   refreshToken: "",
-  isRegisterd: false,
+  isRegistered: false,
 };
 
 const user = createSlice({

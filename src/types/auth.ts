@@ -20,6 +20,6 @@ export interface ILoginResponse {
   remindToggle: boolean;
   accessToken: string;
   refreshToken: string;
-  isRegisterd: boolean;
+  isRegistered: boolean;
   fcmToken: string;
 }
