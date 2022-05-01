@@ -2,7 +2,13 @@ import React from "react";
 import styled from "styled-components";
 
 interface DividerLineProps {
+  /**
+   * Divider 길이
+   */
   width: string;
+  /**
+   * Divider 색상
+   */
   color: string;
 }
 

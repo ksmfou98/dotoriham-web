@@ -3,8 +3,17 @@ import React, { useEffect, useRef } from "react";
 import styled from "styled-components";
 
 interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
+  /**
+   * Input 가로 길이
+   */
   width: string;
+  /**
+   * Input 세로 길이
+   */
   height: string;
+  /**
+   * Input 둥글기
+   */
   borderRadius?: string;
 }
 

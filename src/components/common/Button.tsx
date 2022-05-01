@@ -3,9 +3,21 @@ import React from "react";
 import styled, { css } from "styled-components";
 
 interface ButtonStyledProps {
+  /**
+   * 버튼 타입
+   */
   variant: "primary" | "secondary" | "tertiary" | "quaternary";
+  /**
+   * 버튼 가로 길이
+   */
   width: string;
+  /**
+   * 버튼 세로 길이
+   */
   height: string;
+  /**
+   * 버튼 둥글기
+   */
   borderRadius?: string;
 }
 
