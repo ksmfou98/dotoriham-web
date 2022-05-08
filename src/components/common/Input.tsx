@@ -25,6 +25,7 @@ function Input({ width, height, borderRadius = "4px", ...rest }: InputProps) {
       inputRef.current.focus();
     }
   }, []);
+
   return (
     <InputStyled
       {...rest}
