@@ -28,6 +28,7 @@ export { ReactComponent as ToggleOffIcon } from "./Icons_Toggle_off.svg";
 export { ReactComponent as ToggleOnIcon } from "./Icons_Toggle_on.svg";
 export { ReactComponent as SelectedTrashIcon } from "./Icons_trash_selected.svg";
 export { ReactComponent as UnselectedTrashIcon } from "./Icons_trash_unselected.svg";
+export { ReactComponent as People18Icon } from "./Icons_People_18.svg";
 export { ReactComponent as X16Icon } from "./Icons_x_16.svg";
 export { ReactComponent as X16BigIcon } from "./Icons_x_16_big.svg";
 export { ReactComponent as X32Icon } from "./Icons_x_32.svg";

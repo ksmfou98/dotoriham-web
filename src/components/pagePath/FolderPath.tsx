@@ -1,4 +1,5 @@
 import { ArrowSide16Icon } from "assets/icons";
+import TopMemberBox from "components/topMemberBox";
 import React from "react";
 import styled from "styled-components";
 import FolderEmojiAndName from "./FolderEmojiAndName";
@@ -39,12 +40,15 @@ function FolderPath({ folderId }: FolderPathProps) {
           <FolderEmojiAndName folderInfo={LAST_FOLDER_INFO} />
         </>
       )}
+      <TopMemberBox />
     </FolderPathStyled>
   );
 }
 
 const FolderPathStyled = styled.div`
   display: flex;
+  align-items: center;
+  justify-content: space-between;
 `;
 
 export default FolderPath;
