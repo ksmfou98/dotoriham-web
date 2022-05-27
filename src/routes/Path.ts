@@ -1,4 +1,5 @@
 enum Path {
+  // logged In
   HomePage = "/",
   DotoriPage = "/dotori",
   DotoriFolderPage = "/dotori/:folderId",
