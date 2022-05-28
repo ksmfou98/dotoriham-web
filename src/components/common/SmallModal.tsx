@@ -43,7 +43,7 @@ function SmallModal({
         </ModalContent>
 
         <ModalButtonGroup>
-          <CancelButton
+          <Button
             variant="tertiary"
             width="136px"
             height="42px"
@@ -51,7 +51,7 @@ function SmallModal({
             onClick={onToggleModal}
           >
             취소
-          </CancelButton>
+          </Button>
           <Button
             variant="primary"
             width="136px"
@@ -84,11 +84,11 @@ const ModalContent = styled.div`
 
 const ModalButtonGroup = styled.div`
   display: flex;
-`;
-
-const CancelButton = styled(Button)`
-  color: ${palette.grayDark};
-  margin-right: 8px;
+  button {
+    &:first-child {
+      margin-right: 8px;
+    }
+  }
 `;
 
 export default SmallModal;

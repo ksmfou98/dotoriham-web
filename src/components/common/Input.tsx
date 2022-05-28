@@ -44,6 +44,7 @@ const InputStyled = styled.input<{ borderRadius: string }>`
   padding: 5.5px 12px 5.5px 10px;
   border-radius: ${({ borderRadius }) => borderRadius};
   outline: none;
+  font-size: 12px;
 `;
 
 export default Input;

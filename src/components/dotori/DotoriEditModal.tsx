@@ -41,7 +41,7 @@ function DotoriEditModal({
 
   return (
     <EditModalTemplate
-      width={486}
+      width={468}
       height={300}
       isModal={isOpen}
       onToggleModal={onToggleModal}
@@ -58,7 +58,7 @@ function DotoriEditModal({
           <EditInput value={title} onChange={onChangeTitle} />
         </ModalContent>
         <ModalButtonGroup>
-          <CancelButton
+          <Button
             variant="tertiary"
             width="206px"
             height="42px"
@@ -66,7 +66,7 @@ function DotoriEditModal({
             onClick={onToggleModal}
           >
             취소
-          </CancelButton>
+          </Button>
           <Button
             variant="primary"
             width="206px"
@@ -132,11 +132,11 @@ const ModalContent = styled.div`
 
 const ModalButtonGroup = styled.div`
   display: flex;
-`;
-
-const CancelButton = styled(Button)`
-  color: ${palette.grayDark};
-  margin-right: 8px;
+  button {
+    &:first-child {
+      margin-right: 8px;
+    }
+  }
 `;
 
 export default DotoriEditModal;

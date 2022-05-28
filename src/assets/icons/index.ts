@@ -41,3 +41,4 @@ export { ReactComponent as Peoples20Icon } from "./Peoples_20.svg";
 export { ReactComponent as PlusIcon } from "./Plus.svg";
 export { ReactComponent as QuestionActiveIcon } from "./Question_active.svg";
 export { ReactComponent as Symbol20Icon } from "./Symbol_character_20.svg";
+export { ReactComponent as PlusCircleIcon } from "./+btn.svg";

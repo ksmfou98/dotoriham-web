@@ -81,8 +81,8 @@ const ButtonStyled = styled.button<ButtonStyledProps>`
       case "tertiary":
         return css`
           background-color: ${palette.white};
-          color: ${palette.grayDarkest};
-          border: 1px solid ${palette.gray};
+          color: ${palette.grayDark};
+          border: 1px solid ${palette.grayLight};
         `;
       case "quaternary":
         return css`
