@@ -2,9 +2,11 @@ import { palette } from "lib/styles/palette";
 import React from "react";
 import styled from "styled-components";
 
-function DotoriAddButton() {
+interface Props extends React.HTMLAttributes<HTMLDivElement> {}
+
+function DotoriAddButton({ ...rest }: Props) {
   return (
-    <Container>
+    <Container {...rest}>
       <Content>
         <PlusIcon>+</PlusIcon>
         <AddText>URL 직접 등록</AddText>

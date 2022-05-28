@@ -6,6 +6,7 @@ import Button from "components/common/Button";
 import { palette } from "lib/styles/palette";
 import { ActiveDotoriMenu } from "./DotoriList";
 import useDotoriMutation from "./hooks/useDotoriMutation";
+import { ModalTitle } from "components/common/ModalTitle";
 
 interface DotoriEditModalProps {
   isOpen: boolean;
@@ -46,7 +47,7 @@ function DotoriEditModal({
       onToggleModal={onToggleModal}
     >
       <ModalStyled>
-        <ModalTitle>도토리 편집</ModalTitle>
+        <ModalTitle mb={14}>도토리 편집</ModalTitle>
         <ModalContent>
           <InputInfo>
             <InputText>제목</InputText>
@@ -93,16 +94,6 @@ const EditModalTemplate = styled(ModalTemplate)`
 const ModalStyled = styled.div`
   padding: 26px 24px 24px;
   height: 100%;
-`;
-
-const ModalTitle = styled.div`
-  text-align: center;
-  font-size: 16px;
-  font-weight: 500;
-  color: ${palette.black};
-  height: 23px;
-  line-height: normal;
-  margin-bottom: 14px;
 `;
 
 const InputInfo = styled.div`

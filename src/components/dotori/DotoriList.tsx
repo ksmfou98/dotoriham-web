@@ -9,6 +9,7 @@ import styled from "styled-components";
 import { DotoriPathTypes, IDotoriItem } from "types/dotori";
 import { initialDotoriState } from "./constants";
 import DotoriAddButton from "./DotoriAddButton";
+import DotoriAddModal from "./DotoriAddModal";
 import DotoriBlankSlate from "./DotoriBlankSlate";
 import DotoriEditModal from "./DotoriEditModal";
 import DotoriListItem from "./DotoriListItem";
@@ -24,6 +25,7 @@ function DotoriList({ path }: { path: DotoriPathTypes }) {
   const [isDeleteModal, onToggleDeleteModal] = useToggle();
   const [isEditModal, onToggleEditModal] = useToggle();
   const [isMoveModal, onToggleMoveModal] = useToggle();
+  const [isAddModal, onToggleAddModal] = useToggle();
   const { mutateDeleteDotori, mutateMoveDotori } = useDotoriMutation();
 
   const [isActiveDotoriMenu, setIsActiveDotoriMenu] =
@@ -53,7 +55,8 @@ function DotoriList({ path }: { path: DotoriPathTypes }) {
     <DotoriListBlock>
       {dotoris.length === 0 && <DotoriBlankSlate path={path} />}
 
-      <DotoriAddButton />
+      <DotoriAddButton onClick={onToggleAddModal} />
+
       {dotoris.map((dotori) => (
         <DotoriListItem
           key={dotori.id}
@@ -94,6 +97,10 @@ function DotoriList({ path }: { path: DotoriPathTypes }) {
           onMove={onMoveDotori}
           path={path}
         />
+      )}
+
+      {isAddModal && (
+        <DotoriAddModal isModal={isAddModal} onToggleModal={onToggleAddModal} />
       )}
     </DotoriListBlock>
   );

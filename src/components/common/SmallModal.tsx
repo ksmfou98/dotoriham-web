@@ -3,6 +3,7 @@ import React from "react";
 import styled from "styled-components";
 import Button from "./Button";
 import ModalTemplate from "./ModalTemplate";
+import { ModalTitle } from "./ModalTitle";
 
 interface SmallModalProps {
   isModal: boolean;
@@ -31,7 +32,7 @@ function SmallModal({
       onToggleModal={onToggleModal}
     >
       <SmallModalStyled>
-        <ModalTitle>{title}</ModalTitle>
+        <ModalTitle mb={18}>{title}</ModalTitle>
         <ModalContent>
           {content.split("<br />").map((txt) => (
             <React.Fragment key={txt + Math.random()}>
@@ -71,16 +72,6 @@ function SmallModal({
 
 const SmallModalStyled = styled.div`
   padding: 26px 24px 24px;
-`;
-
-const ModalTitle = styled.div`
-  text-align: center;
-  font-size: 16px;
-  font-weight: 500;
-  color: ${palette.black};
-  height: 23px;
-  line-height: normal;
-  margin-bottom: 18px;
 `;
 
 const ModalContent = styled.div`
