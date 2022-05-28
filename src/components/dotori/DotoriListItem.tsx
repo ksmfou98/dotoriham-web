@@ -192,13 +192,9 @@ function DotoriListItem({
 }
 
 const DotoriItemBlock = styled.div`
-  margin: 0 24px 40px 0;
   display: flex;
   flex-direction: column;
   position: relative;
-  &:nth-child(3n) {
-    margin-right: 0;
-  }
 `;
 
 const DotoriItemInner = styled.div`

@@ -8,6 +8,7 @@ import { dotoriSelector } from "stores/dotori";
 import styled from "styled-components";
 import { DotoriPathTypes, IDotoriItem } from "types/dotori";
 import { initialDotoriState } from "./constants";
+import DotoriAddButton from "./DotoriAddButton";
 import DotoriBlankSlate from "./DotoriBlankSlate";
 import DotoriEditModal from "./DotoriEditModal";
 import DotoriListItem from "./DotoriListItem";
@@ -52,6 +53,7 @@ function DotoriList({ path }: { path: DotoriPathTypes }) {
     <DotoriListBlock>
       {dotoris.length === 0 && <DotoriBlankSlate path={path} />}
 
+      <DotoriAddButton />
       {dotoris.map((dotori) => (
         <DotoriListItem
           key={dotori.id}
@@ -100,6 +102,12 @@ function DotoriList({ path }: { path: DotoriPathTypes }) {
 const DotoriListBlock = styled.div`
   display: flex;
   flex-wrap: wrap;
+  > div {
+    margin: 0 24px 40px 0;
+    &:nth-child(3n) {
+      margin-right: 0;
+    }
+  }
 `;
 
 export default memo(DotoriList);
