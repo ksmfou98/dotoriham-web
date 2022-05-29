@@ -3,16 +3,43 @@ import { Button } from "components/common";
 import ModalTemplate from "components/common/ModalTemplate";
 import { ModalTitle } from "components/common/ModalTitle";
 import { palette } from "lib/styles/palette";
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
+import { DotoriAddRequest } from "types/dotori";
 import DotoriAddForm from "./DotoriAddForm";
+import { v4 as uuidv4 } from "uuid";
 
 interface Props {
   isModal: boolean;
   onToggleModal: () => void;
 }
 
+interface DotoriForm extends DotoriAddRequest {
+  id: string;
+}
+
+const defaultDotoriAddFormState = {
+  id: uuidv4(),
+  url: "",
+  title: "",
+  remind: false,
+  folderId: 0,
+  description: "",
+  image: "",
+};
+
 function DotoriAddModal({ isModal, onToggleModal }: Props) {
+  const [dotoriFormList, setDotoriFormList] = useState<DotoriForm[]>([
+    defaultDotoriAddFormState,
+  ]);
+
+  const onAddFormList = () => {
+    setDotoriFormList([
+      ...dotoriFormList,
+      { ...defaultDotoriAddFormState, id: uuidv4() },
+    ]);
+  };
+
   return (
     <Container
       width={423}
@@ -22,8 +49,11 @@ function DotoriAddModal({ isModal, onToggleModal }: Props) {
     >
       <Inner>
         <ModalTitle mb={20}>도토리 추가</ModalTitle>
-        <DotoriAddForm />
-        <AddButton>
+        {dotoriFormList.map((dotoriForm) => (
+          <DotoriAddForm key={dotoriForm.id} />
+        ))}
+
+        <AddButton onClick={onAddFormList}>
           <PlusCircleIcon />
           추가
         </AddButton>
@@ -53,6 +83,8 @@ function DotoriAddModal({ isModal, onToggleModal }: Props) {
 
 const Container = styled(ModalTemplate)`
   height: auto;
+  max-height: 800px;
+  overflow-y: scroll;
   top: 50%;
   left: 50%;
   right: auto;
@@ -75,6 +107,10 @@ const AddButton = styled.div`
   padding: 8px 0;
   font-size: 10px;
   font-weight: 500;
+  cursor: pointer;
+  &:hover {
+    background-color: #f7f7f7;
+  }
   svg {
     margin-right: 4px;
   }

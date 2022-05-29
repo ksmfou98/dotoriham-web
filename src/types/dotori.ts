@@ -67,6 +67,15 @@ export interface DotoriMoveRequest {
   nextFolderId: ItemId;
 }
 
+export interface DotoriAddRequest {
+  folderId: ItemId;
+  url: string;
+  title: string;
+  remind: boolean;
+  image: string;
+  description: string;
+}
+
 export interface DotoriRemindToggleRequest {
   remind: boolean;
   dotoriId: string;
