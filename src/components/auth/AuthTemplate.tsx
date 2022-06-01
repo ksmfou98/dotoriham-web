@@ -17,7 +17,7 @@ function AuthTemplate({ AuthType }: AuthTemplateProps) {
       <AuthInner>
         <GoogleLoginButton />
         <AuthDivider />
-        <AuthForm />
+        <AuthForm AuthType={AuthType} />
       </AuthInner>
     </>
   );

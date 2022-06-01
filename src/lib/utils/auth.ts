@@ -1,3 +1,4 @@
+import Path from "routes/Path";
 import userStorage from "./userStorage";
 
 export function getTokens() {
@@ -14,7 +15,7 @@ export function getTokens() {
 
 export function logout() {
   userStorage.remove();
-  window.location.replace("/login");
+  window.location.replace(Path.LoginPage);
 }
 
 export function isLogin() {

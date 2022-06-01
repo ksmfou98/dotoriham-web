@@ -5,9 +5,14 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { authValidateSelector } from "stores/authValidate";
 import styled from "styled-components";
+import { AuthType } from "types/auth";
 import useAuthForm from "./hooks/useAuthForm";
 
-function AuthForm({ AuthType }: any) {
+interface Props {
+  AuthType: AuthType;
+}
+
+function AuthForm({ AuthType }: Props) {
   const [disabled, setDisabled] = useState(true);
   //   const AuthState = useRecoilValue(authState);
   const authValidateState = useSelector(authValidateSelector);
@@ -42,7 +47,7 @@ function AuthForm({ AuthType }: any) {
           name="email"
           onChange={onChangeForm}
           value={email}
-          onBlur={AuthType === "register" ? onBlur : undefined}
+          onBlur={AuthType === "signup" ? onBlur : undefined}
         />
         {/* {emailError && <ErrorText text={emailError} />} */}
       </AuthFormRow>
@@ -56,7 +61,7 @@ function AuthForm({ AuthType }: any) {
           name="password"
           onChange={onChangeForm}
           value={password}
-          onBlur={AuthType === "register" ? onBlur : undefined}
+          onBlur={AuthType === "signup" ? onBlur : undefined}
         />
         {/* {passwordError && <ErrorText text={passwordError} />} */}
         {/* {authError && <ErrorText text={authError} />} */}
@@ -70,7 +75,7 @@ function AuthForm({ AuthType }: any) {
           width="100%"
           height="56px"
           borderRadius="8px"
-          disabled={AuthType === "register" ? disabled : false}
+          disabled={AuthType === "signup" ? disabled : false}
         >
           {AuthType === "login" ? "로그인" : "회원가입"}
         </AuthButton>
