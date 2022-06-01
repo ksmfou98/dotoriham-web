@@ -10,13 +10,13 @@ import Path from "routes/Path";
 export default function useLoggedInUserReplace() {
   const { pathname } = useLocation();
   const navigate = useNavigate();
-  const { LoginPage, RegisterPage } = Path;
+  const { LoginPage, SignupPage } = Path;
 
   useEffect(() => {
     if (isLogin()) {
-      if (pathname === LoginPage || pathname === RegisterPage) {
+      if (pathname === LoginPage || pathname === SignupPage) {
         navigate(Path.HomePage);
       }
     }
-  }, [pathname, navigate, LoginPage, RegisterPage]);
+  }, [pathname, navigate, LoginPage, SignupPage]);
 }

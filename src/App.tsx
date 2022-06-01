@@ -4,16 +4,15 @@ import React from "react";
 import { ReactQueryDevtools } from "react-query/devtools";
 import styled from "styled-components";
 import GlobalStyles from "./lib/styles/globalStyles";
-import Routing from "./routes/Routing";
+import { PrivateRouting, PublicRouting } from "./routes/Routing";
 import "react-toastify/dist/ReactToastify.css";
 import ToastContainerStyled from "lib/styles/toastStyle";
-import useCheckLogin from "hooks/useCheckLogin";
 import Footer from "components/footer";
 import useLoggedInUserReplace from "hooks/useLoggedInUserReplace";
 import useInitialRegisterEffect from "hooks/useInitialRegisterEffect";
+import { isLogin } from "lib/utils/auth";
 
 function App() {
-  useCheckLogin();
   useLoggedInUserReplace();
   useInitialRegisterEffect();
   return (
@@ -22,7 +21,7 @@ function App() {
         <GlobalStyles />
         <Header />
         <MainLayout>
-          <Routing />
+          {isLogin() ? <PrivateRouting /> : <PublicRouting />}
         </MainLayout>
         <Footer />
       </AppWrapper>

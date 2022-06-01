@@ -10,7 +10,7 @@ enum Path {
 
   // no Logged In
   LoginPage = "/login",
-  RegisterPage = "/register",
+  SignupPage = "/signup",
   LandingPage = "https://dotoriham.kr/",
 }
 
