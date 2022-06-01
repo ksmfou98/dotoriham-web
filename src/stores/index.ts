@@ -1,5 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { combineReducers } from "redux";
+import authValidate from "./authValidate";
 import dotori from "./dotori";
 import folder from "./folder";
 import tutorial from "./tutorial";
@@ -10,6 +11,7 @@ const rootReducer = combineReducers({
   dotori: dotori.reducer,
   folder: folder.reducer,
   tutorial: tutorial.reducer,
+  authValidate: authValidate.reducer,
 });
 
 const store = configureStore({
