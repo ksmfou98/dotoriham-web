@@ -6,6 +6,7 @@ import { useSelector } from "react-redux";
 import { authValidateSelector } from "stores/authValidate";
 import styled from "styled-components";
 import { AuthType } from "types/auth";
+import AgreementForm from "./AgreementForm";
 import useAuthForm from "./hooks/useAuthForm";
 
 interface Props {
@@ -67,7 +68,7 @@ function AuthForm({ AuthType }: Props) {
         {/* {authError && <ErrorText text={authError} />} */}
       </AuthFormRow>
 
-      {/* {AuthType === "register" && <Agreement />} */}
+      {AuthType === "signup" && <AgreementForm />}
 
       <AuthFormRow>
         <AuthButton
