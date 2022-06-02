@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { AuthType } from "types/auth";
 import AuthDivider from "./AuthDivider";
 import AuthForm from "./AuthForm";
+import AuthLinked from "./AuthLinked";
 import AuthTitle from "./AuthTitle";
 import GoogleLoginButton from "./GoogleLoginButton";
 
@@ -18,6 +19,7 @@ function AuthTemplate({ AuthType }: AuthTemplateProps) {
         <GoogleLoginButton />
         <AuthDivider />
         <AuthForm AuthType={AuthType} />
+        <AuthLinked AuthType={AuthType} />
       </AuthInner>
     </>
   );
