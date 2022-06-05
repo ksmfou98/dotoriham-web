@@ -67,10 +67,15 @@ function AuthForm({ AuthType }: Props) {
           onBlur={AuthType === "signup" ? onBlur : undefined}
         />
         {passwordError && <AuthErrorText>{passwordError}</AuthErrorText>}
-        {authError && <AuthErrorText>{authError}</AuthErrorText>}
       </AuthFormRow>
 
       {AuthType === "signup" && <AgreementForm />}
+
+      {!authValidateState.isAgree && (
+        <AuthErrorText>
+          이용약관 및 개인정보 수집 이용에 동의해주세요.
+        </AuthErrorText>
+      )}
 
       <AuthFormRow>
         <Button
@@ -83,6 +88,7 @@ function AuthForm({ AuthType }: Props) {
         >
           {AuthType === "login" ? "로그인" : "회원가입"}
         </Button>
+        {authError && <AuthErrorText>{authError}</AuthErrorText>}
       </AuthFormRow>
     </AuthFormWrapper>
   );
@@ -96,6 +102,7 @@ const AuthFormWrapper = styled.form`
   }
   .auth-button {
     font-size: 16px;
+    margin-top: 20px;
   }
 `;
 

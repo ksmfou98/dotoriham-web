@@ -73,7 +73,6 @@ function AgreementForm() {
 }
 
 const AgreementWrapper = styled.div`
-  margin-bottom: 24px;
   margin-top: 8px;
   .agree-checkbox {
     margin-right: 12px;
