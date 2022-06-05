@@ -1,12 +1,13 @@
 import { Button } from "components/common";
 import Input from "components/common/Input";
 import { palette } from "lib/styles/palette";
-import { useEffect, useMemo, useState } from "react";
+import { useMemo } from "react";
 import { useSelector } from "react-redux";
 import { authValidateSelector } from "stores/authValidate";
 import styled from "styled-components";
 import { AuthType } from "types/auth";
 import AgreementForm from "./AgreementForm";
+import { AuthErrorText } from "./AuthErrorText";
 import useAuthForm from "./hooks/useAuthForm";
 
 interface Props {
@@ -48,9 +49,9 @@ function AuthForm({ AuthType }: Props) {
           value={email}
           autoFocus
           className="auth-input"
-          // onBlur={AuthType === "signup" ? onBlur : undefined}
+          onBlur={AuthType === "signup" ? onBlur : undefined}
         />
-        {/* {emailError && <ErrorText text={emailError} />} */}
+        {emailError && <AuthErrorText>{emailError}</AuthErrorText>}
       </AuthFormRow>
       <AuthFormRow>
         <Input
@@ -61,12 +62,12 @@ function AuthForm({ AuthType }: Props) {
           type="password"
           name="password"
           onChange={onChangeForm}
-          // value={password}
+          value={password}
           className="auth-input"
-          // onBlur={AuthType === "signup" ? onBlur : undefined}
+          onBlur={AuthType === "signup" ? onBlur : undefined}
         />
-        {/* {passwordError && <ErrorText text={passwordError} />} */}
-        {/* {authError && <ErrorText text={authError} />} */}
+        {passwordError && <AuthErrorText>{passwordError}</AuthErrorText>}
+        {authError && <AuthErrorText>{authError}</AuthErrorText>}
       </AuthFormRow>
 
       {AuthType === "signup" && <AgreementForm />}
