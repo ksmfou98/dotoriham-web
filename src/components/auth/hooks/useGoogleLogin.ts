@@ -1,5 +1,6 @@
 import { oauthLoginAPI } from "lib/api/auth";
 import { GOOGLE_CLIENT_ID } from "lib/constants";
+import { getFCMToken } from "lib/firebase";
 import userStorage from "lib/utils/userStorage";
 import { useCallback } from "react";
 import Path from "routes/Path";
@@ -11,12 +12,14 @@ export default function useGoogleLogin() {
       profileObj: { email, imageUrl, name },
     } = response;
 
+    const userFCMToken = await getFCMToken();
+
     const loginRequest: OAuthLoginRequest = {
       email,
       image: imageUrl,
       name,
       socialType: "google",
-      fcmToken: "null",
+      fcmToken: userFCMToken,
     };
 
     try {

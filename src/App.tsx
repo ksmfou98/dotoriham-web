@@ -1,6 +1,7 @@
 import Header from "components/header";
 import { breakpoints } from "lib/styles/media";
 import React from "react";
+import { initializeApp } from "firebase/app";
 import { ReactQueryDevtools } from "react-query/devtools";
 import styled from "styled-components";
 import GlobalStyles from "./lib/styles/globalStyles";
@@ -11,6 +12,9 @@ import Footer from "components/footer";
 import useLoggedInUserReplace from "hooks/useLoggedInUserReplace";
 import useInitialRegisterEffect from "hooks/useInitialRegisterEffect";
 import { isLogin } from "lib/utils/auth";
+import { firebaseConfig } from "lib/firebase";
+
+initializeApp(firebaseConfig);
 
 function App() {
   useLoggedInUserReplace();

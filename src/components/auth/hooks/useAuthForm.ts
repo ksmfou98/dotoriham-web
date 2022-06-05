@@ -1,5 +1,6 @@
 import { useToast } from "hooks";
 import { loginAPI } from "lib/api/auth";
+import { getFCMToken } from "lib/firebase";
 import { useCallback, useState } from "react";
 import { useDispatch } from "react-redux";
 import { setAuthValidate } from "stores/authValidate";
@@ -71,16 +72,20 @@ export default function useAuthForm() {
 
   const onRegister = async () => {
     // eslint-disable-next-line no-console
+    const userFCMToken = await getFCMToken();
     console.log(form, "register");
+    console.log("FCMTOKEN", userFCMToken);
+
     try {
       const loginForm = {
         ...form,
-        fcmToken: "null",
+        fcmToken: userFCMToken,
       };
       const response = await loginAPI(loginForm);
       console.log(response);
     } catch (e) {
       errorToast("회원가입에 실패했습니다. 다시 시도해주세요.");
+      console.log(e);
     }
     // @TODO(dohyun): API 생기면 작성
   };
