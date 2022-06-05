@@ -4,6 +4,7 @@ import { ToastContainer } from "react-toastify";
 const ToastContainerStyled = styled(ToastContainer)`
   &&&.Toastify__toast-container {
     width: auto;
+    bottom: 4em !important;
   }
   .small-toast {
     width: 273px;

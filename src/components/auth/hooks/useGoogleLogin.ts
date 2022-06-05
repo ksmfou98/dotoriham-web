@@ -1,9 +1,9 @@
-import { loginAPI } from "lib/api/auth";
+import { oauthLoginAPI } from "lib/api/auth";
 import { GOOGLE_CLIENT_ID } from "lib/constants";
 import userStorage from "lib/utils/userStorage";
 import { useCallback } from "react";
 import Path from "routes/Path";
-import { ILoginRequest } from "types/auth";
+import { OAuthLoginRequest } from "types/auth";
 
 export default function useGoogleLogin() {
   const onGoogleLogin = useCallback(async (response) => {
@@ -11,7 +11,7 @@ export default function useGoogleLogin() {
       profileObj: { email, imageUrl, name },
     } = response;
 
-    const loginRequest: ILoginRequest = {
+    const loginRequest: OAuthLoginRequest = {
       email,
       image: imageUrl,
       name,
@@ -20,7 +20,7 @@ export default function useGoogleLogin() {
     };
 
     try {
-      const { data } = await loginAPI(loginRequest);
+      const { data } = await oauthLoginAPI(loginRequest);
       userStorage.set(data);
       window.location.replace(Path.DotoriPage);
     } catch (e) {

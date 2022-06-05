@@ -1,3 +1,5 @@
+import { useToast } from "hooks";
+import { loginAPI } from "lib/api/auth";
 import { useCallback, useState } from "react";
 import { useDispatch } from "react-redux";
 import { setAuthValidate } from "stores/authValidate";
@@ -18,6 +20,7 @@ export default function useAuthForm() {
     errorMessage,
     onChangeErrorMessage,
   } = useAuthentication();
+  const { errorToast } = useToast();
 
   const onChangeForm = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     setForm((prev) => ({
@@ -66,9 +69,19 @@ export default function useAuthForm() {
     return true;
   };
 
-  const onRegister = () => {
+  const onRegister = async () => {
     // eslint-disable-next-line no-console
     console.log(form, "register");
+    try {
+      const loginForm = {
+        ...form,
+        fcmToken: "null",
+      };
+      const response = await loginAPI(loginForm);
+      console.log(response);
+    } catch (e) {
+      errorToast("회원가입에 실패했습니다. 다시 시도해주세요.");
+    }
     // @TODO(dohyun): API 생기면 작성
   };
 
