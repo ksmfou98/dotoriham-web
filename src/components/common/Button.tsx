@@ -1,5 +1,5 @@
 import { palette } from "lib/styles/palette";
-import React from "react";
+import React, { memo } from "react";
 import styled, { css } from "styled-components";
 
 interface ButtonStyledProps {
@@ -103,4 +103,4 @@ const ButtonStyled = styled.button<ButtonStyledProps>`
   }
 `;
 
-export default Button;
+export default memo(Button);

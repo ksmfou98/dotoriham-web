@@ -2,7 +2,7 @@ import { ArrowSideIcon } from "assets/icons";
 import CheckBox from "components/common/CheckBox";
 import DividerLine from "components/common/DividerLine";
 import { palette } from "lib/styles/palette";
-import React from "react";
+import React, { memo } from "react";
 import styled from "styled-components";
 import AgreementModal from "./AgreementModal";
 import useAgreementForm from "./hooks/useAgreementForm";
@@ -18,15 +18,15 @@ function AgreementForm() {
 
   return (
     <AgreementWrapper>
-      {AgreementList.map((item, index) => {
-        const { isChecked, text, onClick, option, essentialName } = item;
-        return (
+      {AgreementList.map(
+        ({ isChecked, text, onClick, option, essentialName }, index) => (
           <React.Fragment key={text}>
             <AgreeListRow>
               <AgreeListItem>
-                <AgreeCheckBox
+                <CheckBox
                   type="button"
                   variant="secondary"
+                  className="agree-checkbox"
                   isChecked={isChecked}
                   onClick={onClick}
                 />
@@ -48,8 +48,8 @@ function AgreementForm() {
             </AgreeListRow>
             {index === 0 && <Divider width="100%" color={palette.grayLight} />}
           </React.Fragment>
-        );
-      })}
+        )
+      )}
 
       {isTermsAndConditionsModal && (
         <AgreementModal
@@ -75,6 +75,11 @@ function AgreementForm() {
 const AgreementWrapper = styled.div`
   margin-bottom: 24px;
   margin-top: 8px;
+  .agree-checkbox {
+    margin-right: 12px;
+    display: flex;
+    align-items: center;
+  }
 `;
 
 const AgreeListRow = styled.div`
@@ -98,12 +103,6 @@ const AgreeListItem = styled.div`
 
 const AgreeItemButton = styled.button``;
 
-const AgreeCheckBox = styled(CheckBox)`
-  margin-right: 12px;
-  display: flex;
-  align-items: center;
-`;
-
 const AgreeOption = styled.div<{ isEssential: boolean }>`
   font-weight: 500;
   margin-right: 8px;
@@ -121,4 +120,4 @@ const Divider = styled(DividerLine)`
   margin-bottom: 12px;
 `;
 
-export default AgreementForm;
+export default memo(AgreementForm);

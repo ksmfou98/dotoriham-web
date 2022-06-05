@@ -1,5 +1,5 @@
 import { useToggle } from "hooks";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { useDispatch } from "react-redux";
 import { setAuthValidate } from "stores/authValidate";
 
@@ -48,14 +48,14 @@ export default function useAgreementForm() {
   );
 
   // 전체 체크되어있는지 확인
-  const onCheckIsAllSelect = useCallback(() => {
+  const isCheckedAllSelect = useMemo(() => {
     return termsAndConditions && privacyPolicy && remindState;
   }, [termsAndConditions, privacyPolicy, remindState]);
 
   // 전체 동의 토글 (전체 체크되어있으면 false(해제), 아니면 true(선택))
-  const onToggleAllAgree = () => {
-    return onChangeAllState(!onCheckIsAllSelect());
-  };
+  const onToggleAllAgree = useCallback(() => {
+    return onChangeAllState(!isCheckedAllSelect);
+  }, [onChangeAllState, isCheckedAllSelect]);
 
   // 동의 필수 요소 토글
   const onToggleEssentialState = useCallback(
@@ -96,7 +96,7 @@ export default function useAgreementForm() {
   const AgreementList: AgreementItem[] = [
     {
       text: "전체 동의",
-      isChecked: onCheckIsAllSelect(),
+      isChecked: isCheckedAllSelect,
       onClick: onToggleAllAgree,
     },
     {

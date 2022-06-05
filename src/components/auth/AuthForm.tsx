@@ -1,7 +1,7 @@
 import { Button } from "components/common";
 import Input from "components/common/Input";
 import { palette } from "lib/styles/palette";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useSelector } from "react-redux";
 import { authValidateSelector } from "stores/authValidate";
 import styled from "styled-components";
@@ -14,8 +14,6 @@ interface Props {
 }
 
 function AuthForm({ AuthType }: Props) {
-  const [disabled, setDisabled] = useState(true);
-  //   const AuthState = useRecoilValue(authState);
   const authValidateState = useSelector(authValidateSelector);
 
   const { form, onChangeForm, onLogin, onRegister, errorMessage, onBlur } =
@@ -23,12 +21,12 @@ function AuthForm({ AuthType }: Props) {
   const { email, password } = form;
   const { authError, passwordError, emailError } = errorMessage;
 
-  useEffect(() => {
-    const isDisabled =
+  const isDisabled = useMemo(() => {
+    return !(
       authValidateState.email &&
       authValidateState.isAgree &&
-      authValidateState.password;
-    setDisabled(!isDisabled);
+      authValidateState.password
+    );
   }, [authValidateState]);
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -39,7 +37,7 @@ function AuthForm({ AuthType }: Props) {
   return (
     <AuthFormWrapper onSubmit={onSubmit}>
       <AuthFormRow>
-        <AuthInput
+        <Input
           width="100%"
           height="56px"
           borderRadius="8px"
@@ -48,12 +46,14 @@ function AuthForm({ AuthType }: Props) {
           name="email"
           onChange={onChangeForm}
           value={email}
-          onBlur={AuthType === "signup" ? onBlur : undefined}
+          autoFocus
+          className="auth-input"
+          // onBlur={AuthType === "signup" ? onBlur : undefined}
         />
         {/* {emailError && <ErrorText text={emailError} />} */}
       </AuthFormRow>
       <AuthFormRow>
-        <AuthInput
+        <Input
           width="100%"
           height="56px"
           borderRadius="8px"
@@ -61,8 +61,9 @@ function AuthForm({ AuthType }: Props) {
           type="password"
           name="password"
           onChange={onChangeForm}
-          value={password}
-          onBlur={AuthType === "signup" ? onBlur : undefined}
+          // value={password}
+          className="auth-input"
+          // onBlur={AuthType === "signup" ? onBlur : undefined}
         />
         {/* {passwordError && <ErrorText text={passwordError} />} */}
         {/* {authError && <ErrorText text={authError} />} */}
@@ -71,37 +72,34 @@ function AuthForm({ AuthType }: Props) {
       {AuthType === "signup" && <AgreementForm />}
 
       <AuthFormRow>
-        <AuthButton
+        <Button
           variant="primary"
           width="100%"
           height="56px"
           borderRadius="8px"
-          disabled={AuthType === "signup" ? disabled : false}
+          className="auth-button"
+          disabled={AuthType === "signup" ? isDisabled : false}
         >
           {AuthType === "login" ? "로그인" : "회원가입"}
-        </AuthButton>
+        </Button>
       </AuthFormRow>
     </AuthFormWrapper>
   );
 }
 
-const AuthFormWrapper = styled.form``;
-
-const AuthFormRow = styled.div`
-  margin-bottom: 20px;
-`;
-
-const AuthInput = styled(Input)`
-  padding: 15px 0 18px 24px;
-  font-size: 16px;
-  color: ${palette.grayDarkest};
-  &::placeholder {
-    color: ${palette.grayDark};
+const AuthFormWrapper = styled.form`
+  .auth-input {
+    padding: 15px 0 18px 24px;
+    font-size: 16px;
+    color: ${palette.grayDarkest};
+  }
+  .auth-button {
+    font-size: 16px;
   }
 `;
 
-const AuthButton = styled(Button)`
-  font-size: 16px;
+const AuthFormRow = styled.div`
+  margin-bottom: 20px;
 `;
 
 export default AuthForm;
