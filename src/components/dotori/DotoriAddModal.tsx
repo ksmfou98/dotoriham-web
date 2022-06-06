@@ -42,13 +42,13 @@ function DotoriAddModal({ isModal, onToggleModal }: Props) {
 
   return (
     <Container
-      width={423}
-      height={307}
+      width={424}
+      height={354}
       isModal={isModal}
       onToggleModal={onToggleModal}
     >
       <Inner>
-        <ModalTitle mb={20}>도토리 추가</ModalTitle>
+        <ModalTitle mb={28}>도토리 추가</ModalTitle>
         {dotoriFormList.map((dotoriForm) => (
           <DotoriAddForm key={dotoriForm.id} />
         ))}
