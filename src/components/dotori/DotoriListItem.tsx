@@ -200,6 +200,7 @@ const DotoriItemBlock = styled.div`
 const DotoriItemInner = styled.div`
   flex: 1 auto;
   display: flex;
+  min-height: 350px;
   flex-direction: column;
   border-radius: 8px;
   position: relative;
