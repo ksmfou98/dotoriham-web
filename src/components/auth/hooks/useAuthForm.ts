@@ -1,8 +1,10 @@
 import { useToast } from "hooks";
-import { loginAPI } from "lib/api/auth";
+import { signupAPI } from "lib/api/auth";
 import { getFCMToken } from "lib/firebase";
+import userStorage from "lib/utils/userStorage";
 import { useCallback, useState } from "react";
 import { useDispatch } from "react-redux";
+import Path from "routes/Path";
 import { setAuthValidate } from "stores/authValidate";
 import useAuthentication from "./useAuthentication";
 
@@ -70,31 +72,31 @@ export default function useAuthForm() {
     return true;
   };
 
-  const onRegister = async () => {
-    // eslint-disable-next-line no-console
+  /**
+   * 이메일 회원가입
+   */
+  const onSignup = async () => {
     const userFCMToken = await getFCMToken();
-    console.log(form, "register");
-    console.log("FCMTOKEN", userFCMToken);
-
     try {
-      const loginForm = {
+      const signupRequest = {
         ...form,
         fcmToken: userFCMToken,
       };
-      const response = await loginAPI(loginForm);
-      console.log(response);
+      const { data } = await signupAPI(signupRequest);
+      userStorage.set(data);
+      window.location.replace(Path.DotoriPage);
+      console.log(data);
     } catch (e) {
-      errorToast("회원가입에 실패했습니다. 다시 시도해주세요.");
       console.log(e);
+      errorToast("회원가입에 실패했습니다. 다시 시도해주세요.");
     }
-    // @TODO(dohyun): API 생기면 작성
   };
 
   return {
     form,
     onChangeForm,
     onLogin,
-    onRegister,
+    onSignup,
     errorMessage,
     onBlur,
   };

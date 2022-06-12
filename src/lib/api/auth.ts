@@ -10,7 +10,7 @@ export const oauthLoginAPI = async (loginRequest: OAuthLoginRequest) => {
   return response;
 };
 
-export const loginAPI = async (loginRequest: LoginRequest) => {
+export const signupAPI = async (loginRequest: LoginRequest) => {
   const response = await axios.post<LoginResponse>(
     `${SERVER_URL}/api/v1/user/signUp`,
     loginRequest

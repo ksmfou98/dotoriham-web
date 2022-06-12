@@ -17,7 +17,7 @@ interface Props {
 function AuthForm({ AuthType }: Props) {
   const authValidateState = useSelector(authValidateSelector);
 
-  const { form, onChangeForm, onLogin, onRegister, errorMessage, onBlur } =
+  const { form, onChangeForm, onLogin, onSignup, errorMessage, onBlur } =
     useAuthForm();
   const { email, password } = form;
   const { authError, passwordError, emailError } = errorMessage;
@@ -32,7 +32,7 @@ function AuthForm({ AuthType }: Props) {
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    return AuthType === "login" ? onLogin() : onRegister();
+    return AuthType === "login" ? onLogin() : onSignup();
   };
 
   return (

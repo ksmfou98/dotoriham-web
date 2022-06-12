@@ -21,9 +21,9 @@ export const getFCMToken = async (): Promise<string> => {
       if (currentToken) {
         return currentToken;
       }
-      return "null"; // @Todo 지금 백앤드에서 fcmToken 타입이 string으로 되어있어서 "알림 거절 눌러도 null 타입으로 못보내고 string 타입으로 보내야함 " 나중에 null도 가능하도록 요청해야함
+      return "";
     })
     .catch(() => {
-      return "null";
+      return "";
     });
 };
