@@ -1,4 +1,3 @@
-import axios from "axios";
 import cheerio from "cheerio";
 
 export interface MetaData {
@@ -8,16 +7,8 @@ export interface MetaData {
   url: string;
 }
 
-export const getMetaDataByUrl = async (
-  url: string
-): Promise<{
-  title: string;
-  image: string;
-  url: string;
-  description: string;
-}> => {
-  const { data } = await axios.get(url);
-  const $ = cheerio.load(data as string);
+export const getMetaDataByUrl = async (html: string) => {
+  const $ = cheerio.load(html);
   const title = $("title").text() || "";
   const ogImage = $("meta[property='og:image']").attr("content") || "";
   const description =
@@ -25,7 +16,6 @@ export const getMetaDataByUrl = async (
   return {
     title,
     image: ogImage,
-    url,
     description,
   };
 };

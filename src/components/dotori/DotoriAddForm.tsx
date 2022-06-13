@@ -8,9 +8,25 @@ import { palette } from "lib/styles/palette";
 import TextareaAutosize from "react-textarea-autosize";
 import React, { useEffect, useRef } from "react";
 import styled from "styled-components";
+import axios from "axios";
+import { getMetaDataByUrl } from "lib/utils/getMetaData";
 
 function DotoriAddForm() {
   const heightRef = useRef<HTMLTextAreaElement>(null);
+  useEffect(() => {
+    const getData = async () => {
+      const { data } = await axios.post(
+        "https://dotoriham-crawling.netlify.app/",
+        {
+          url: "https://www.naver.com",
+        }
+      );
+      const test = await getMetaDataByUrl(data.html);
+      console.log(test);
+    };
+
+    getData();
+  }, []);
 
   useEffect(() => {
     if (heightRef.current) {
