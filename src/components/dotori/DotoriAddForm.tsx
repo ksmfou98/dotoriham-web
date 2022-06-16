@@ -10,17 +10,15 @@ import React, { useEffect, useRef } from "react";
 import styled from "styled-components";
 import axios from "axios";
 import { getMetaDataByUrl } from "lib/utils/getMetaData";
+import { CRAWLING_SERVER_URL } from "lib/constants";
 
 function DotoriAddForm() {
   const heightRef = useRef<HTMLTextAreaElement>(null);
   useEffect(() => {
     const getData = async () => {
-      const { data } = await axios.post(
-        "https://dotoriham-crawling.netlify.app/",
-        {
-          url: "https://www.naver.com",
-        }
-      );
+      const { data } = await axios.post(CRAWLING_SERVER_URL, {
+        url: "https://www.naver.com",
+      });
       const test = await getMetaDataByUrl(data.html);
       console.log(test);
     };
