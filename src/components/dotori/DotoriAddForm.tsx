@@ -11,8 +11,25 @@ import styled from "styled-components";
 import axios from "axios";
 import { getMetaDataByUrl } from "lib/utils/getMetaData";
 import { CRAWLING_SERVER_URL } from "lib/constants";
+import { DotoriForm } from "./DotoriAddModal";
 
-function DotoriAddForm() {
+interface Props {
+  dotoriForm: DotoriForm;
+  onChangeForm: (form: DotoriForm) => void;
+}
+
+function DotoriAddForm({ dotoriForm, onChangeForm }: Props) {
+  const { description, folderId, id, image, remind, title, url } = dotoriForm;
+
+  const onChangeNewForm = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    onChangeForm({
+      ...dotoriForm,
+      [e.target.name]: e.target.value,
+    });
+  };
+
   const heightRef = useRef<HTMLTextAreaElement>(null);
   useEffect(() => {
     const getData = async () => {
@@ -46,19 +63,36 @@ function DotoriAddForm() {
           height="28px"
           className="url-input"
           placeholder="URL을 입력하세요"
+          value={url}
+          name="url"
+          onChange={onChangeNewForm}
         />
 
         <OpenGraphBox>
           <ImageBox>
-            <Image
+            {/* <Image
               src="https://i.ibb.co/t8sxXnv/og-image.png"
               alt="여기다가 og title 넣자"
-            />
+            /> */}
+            <DefaultImage />
           </ImageBox>
 
           <InputBox>
-            <Input width="200px" height="28px" placeholder="og:title" />
-            <DescriptionInput placeholder="og:description" ref={heightRef} />
+            <Input
+              width="200px"
+              height="28px"
+              placeholder="og:title"
+              name="title"
+              value={title}
+              onChange={onChangeNewForm}
+            />
+            <DescriptionInput
+              placeholder="og:description"
+              ref={heightRef}
+              name="description"
+              value={description}
+              onChange={onChangeNewForm}
+            />
             <RemindBox>
               <div className="txt">리마인드 on/off</div>
 
@@ -98,14 +132,13 @@ const ProgressColumnBar = styled.div`
 
 const OpenGraphBox = styled.div`
   display: flex;
-  align-items: center;
   height: 100px;
-  margin-bottom: 16px;
+  margin-bottom: 24px;
 `;
 
 const ImageBox = styled.div`
   width: 100%;
-  height: 100%;
+  height: 81px;
   margin-right: 12px;
 `;
 
@@ -124,8 +157,18 @@ const InputBox = styled.div`
   }
 `;
 
+const DefaultImage = styled.div`
+  width: 100%;
+  height: 100%;
+  background-color: ${palette.primaryLight};
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+`;
+
 const DescriptionInput = styled(TextareaAutosize)`
-  margin-bottom: 24px;
+  margin-bottom: 6px;
   resize: none;
   outline: none;
   width: 100%;
@@ -137,7 +180,6 @@ const DescriptionInput = styled(TextareaAutosize)`
 `;
 
 const RemindBox = styled.div`
-  margin-top: 4px;
   display: flex;
   align-items: center;
   justify-content: space-between;

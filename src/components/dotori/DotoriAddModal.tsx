@@ -3,7 +3,7 @@ import { Button } from "components/common";
 import ModalTemplate from "components/common/ModalTemplate";
 import { ModalTitle } from "components/common/ModalTitle";
 import { palette } from "lib/styles/palette";
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import styled from "styled-components";
 import { DotoriAddRequest } from "types/dotori";
 import DotoriAddForm from "./DotoriAddForm";
@@ -14,7 +14,7 @@ interface Props {
   onToggleModal: () => void;
 }
 
-interface DotoriForm extends DotoriAddRequest {
+export interface DotoriForm extends DotoriAddRequest {
   id: string;
 }
 
@@ -40,6 +40,15 @@ function DotoriAddModal({ isModal, onToggleModal }: Props) {
     ]);
   };
 
+  const onChangeForm = useCallback(
+    (form: DotoriForm) => {
+      setDotoriFormList(
+        dotoriFormList.map((item) => (item.id === form.id ? form : item))
+      );
+    },
+    [dotoriFormList]
+  );
+
   return (
     <Container
       width={424}
@@ -50,7 +59,11 @@ function DotoriAddModal({ isModal, onToggleModal }: Props) {
       <Inner>
         <ModalTitle mb={28}>도토리 추가</ModalTitle>
         {dotoriFormList.map((dotoriForm) => (
-          <DotoriAddForm key={dotoriForm.id} />
+          <DotoriAddForm
+            key={dotoriForm.id}
+            dotoriForm={dotoriForm}
+            onChangeForm={onChangeForm}
+          />
         ))}
 
         <AddButton onClick={onAddFormList}>
@@ -64,6 +77,7 @@ function DotoriAddModal({ isModal, onToggleModal }: Props) {
             width="184px"
             height="42px"
             borderRadius="8px"
+            onClick={onToggleModal}
           >
             취소
           </Button>
@@ -72,6 +86,7 @@ function DotoriAddModal({ isModal, onToggleModal }: Props) {
             width="184px"
             height="42px"
             borderRadius="8px"
+            onClick={() => console.log(dotoriFormList)}
           >
             저장
           </Button>
