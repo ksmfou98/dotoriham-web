@@ -7,11 +7,12 @@ import Input from "components/common/Input";
 import { palette } from "lib/styles/palette";
 import TextareaAutosize from "react-textarea-autosize";
 import React, { useEffect, useRef, useState } from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import axios from "axios";
 import { getMetaDataByUrl } from "lib/utils/getMetaData";
 import { CRAWLING_SERVER_URL } from "lib/constants";
 import { DotoriForm } from "./DotoriAddModal";
+import _ from "lodash";
 
 interface Props {
   dotoriForm: DotoriForm;
@@ -21,6 +22,7 @@ interface Props {
 function DotoriAddForm({ dotoriForm, onChangeForm }: Props) {
   const { description, folderId, id, image, remind, title, url } = dotoriForm;
   const [isSuccessFetch, setIsSuccessFetch] = useState(false);
+  const heightRef = useRef<HTMLTextAreaElement>(null);
 
   const onChangeNewForm = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -31,23 +33,38 @@ function DotoriAddForm({ dotoriForm, onChangeForm }: Props) {
     });
   };
 
-  const heightRef = useRef<HTMLTextAreaElement>(null);
-  useEffect(() => {
-    const getData = async () => {
+  const getFetchBookmarkMetaData = async (value: string) => {
+    console.log(value);
+    try {
       const { data } = await axios.post(CRAWLING_SERVER_URL, {
-        url,
+        url: value,
       });
-      const metaData = await getMetaDataByUrl(data.html);
+      const metaData = await getMetaDataByUrl(data.html, value);
       onChangeForm({
         ...dotoriForm,
         description: metaData.description,
         image: metaData.image,
         title: metaData.title,
+        url: metaData.url,
       });
-    };
+      setIsSuccessFetch(true);
+    } catch (e) {
+      console.log(e);
+      setIsSuccessFetch(false);
+      onChangeForm({
+        ...dotoriForm,
+        description: "",
+        image: "",
+        title: "",
+        url: "",
+      });
+    }
+  };
 
-    if (url.length > 0) getData();
-  }, [url, dotoriForm, onChangeForm]);
+  const debounceFetchBookmarkMetaData = _.debounce(
+    getFetchBookmarkMetaData,
+    500
+  );
 
   useEffect(() => {
     if (heightRef.current) {
@@ -69,12 +86,11 @@ function DotoriAddForm({ dotoriForm, onChangeForm }: Props) {
           height="28px"
           className="url-input"
           placeholder="URL을 입력하세요"
-          value={url}
           name="url"
-          onChange={onChangeNewForm}
+          onChange={(e) => debounceFetchBookmarkMetaData(e.target.value)}
         />
 
-        <OpenGraphBox>
+        <OpenGraphBox isDisabled={!isSuccessFetch}>
           <ImageBox>
             {image ? (
               <Image src={image} alt="여기다가 og title 넣자" />
@@ -90,6 +106,7 @@ function DotoriAddForm({ dotoriForm, onChangeForm }: Props) {
               placeholder="og:title"
               name="title"
               value={title}
+              disabled={!isSuccessFetch}
               onChange={onChangeNewForm}
             />
             <DescriptionInput
@@ -97,6 +114,7 @@ function DotoriAddForm({ dotoriForm, onChangeForm }: Props) {
               ref={heightRef}
               name="description"
               value={description}
+              disabled={!isSuccessFetch}
               onChange={onChangeNewForm}
             />
             <RemindBox>
@@ -136,10 +154,15 @@ const ProgressColumnBar = styled.div`
   background-color: ${palette.primary};
 `;
 
-const OpenGraphBox = styled.div`
+const OpenGraphBox = styled.div<{ isDisabled: boolean }>`
   display: flex;
-  height: 100px;
   margin-bottom: 24px;
+  ${({ isDisabled }) =>
+    isDisabled &&
+    css`
+      opacity: 0.3;
+      cursor: not-allowed;
+    `}
 `;
 
 const ImageBox = styled.div`

@@ -7,7 +7,7 @@ export interface MetaData {
   url: string;
 }
 
-export const getMetaDataByUrl = async (html: string) => {
+export const getMetaDataByUrl = async (html: string, url: string) => {
   const $ = cheerio.load(html);
   const title = $("title").text() || "";
   const ogImage = $("meta[property='og:image']").attr("content") || "";
@@ -17,5 +17,6 @@ export const getMetaDataByUrl = async (html: string) => {
     title,
     image: ogImage,
     description,
+    url,
   };
 };
