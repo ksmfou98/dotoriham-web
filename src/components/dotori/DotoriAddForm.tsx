@@ -6,7 +6,7 @@ import {
 import Input from "components/common/Input";
 import { palette } from "lib/styles/palette";
 import TextareaAutosize from "react-textarea-autosize";
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import axios from "axios";
 import { getMetaDataByUrl } from "lib/utils/getMetaData";
@@ -20,6 +20,7 @@ interface Props {
 
 function DotoriAddForm({ dotoriForm, onChangeForm }: Props) {
   const { description, folderId, id, image, remind, title, url } = dotoriForm;
+  const [isSuccessFetch, setIsSuccessFetch] = useState(false);
 
   const onChangeNewForm = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -34,14 +35,19 @@ function DotoriAddForm({ dotoriForm, onChangeForm }: Props) {
   useEffect(() => {
     const getData = async () => {
       const { data } = await axios.post(CRAWLING_SERVER_URL, {
-        url: "https://www.naver.com",
+        url,
       });
-      const test = await getMetaDataByUrl(data.html);
-      console.log(test);
+      const metaData = await getMetaDataByUrl(data.html);
+      onChangeForm({
+        ...dotoriForm,
+        description: metaData.description,
+        image: metaData.image,
+        title: metaData.title,
+      });
     };
 
-    getData();
-  }, []);
+    if (url.length > 0) getData();
+  }, [url, dotoriForm, onChangeForm]);
 
   useEffect(() => {
     if (heightRef.current) {
@@ -70,11 +76,11 @@ function DotoriAddForm({ dotoriForm, onChangeForm }: Props) {
 
         <OpenGraphBox>
           <ImageBox>
-            {/* <Image
-              src="https://i.ibb.co/t8sxXnv/og-image.png"
-              alt="여기다가 og title 넣자"
-            /> */}
-            <DefaultImage />
+            {image ? (
+              <Image src={image} alt="여기다가 og title 넣자" />
+            ) : (
+              <DefaultImage />
+            )}
           </ImageBox>
 
           <InputBox>
