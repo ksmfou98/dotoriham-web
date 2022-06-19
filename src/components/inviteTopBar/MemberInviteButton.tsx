@@ -4,16 +4,16 @@ import React from "react";
 import styled from "styled-components";
 
 interface Props {
-  className?: string;
+  onClick: () => void;
 }
 
-function MemberInviteButton({ className }: Props) {
+function MemberInviteButton({ onClick }: Props) {
   return (
     <InviteButton
-      className={className}
       width="75px"
       height="28px"
       variant="primary"
+      onClick={onClick}
     >
       <People18Icon />
       초대
@@ -23,6 +23,7 @@ function MemberInviteButton({ className }: Props) {
 
 const InviteButton = styled(Button)`
   font-size: 12px;
+  margin-left: 24px;
   svg {
     margin-right: 4px;
   }

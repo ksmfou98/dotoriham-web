@@ -1,5 +1,5 @@
 import { ArrowSide16Icon } from "assets/icons";
-import TopMemberBox from "components/topMemberBox";
+import InviteTopBar from "components/inviteTopBar/InviteTopBar";
 import React from "react";
 import styled from "styled-components";
 import FolderEmojiAndName from "./FolderEmojiAndName";
@@ -21,16 +21,16 @@ function FolderPath({ folderId }: FolderPathProps) {
   return (
     <FolderPathStyled>
       {data.length <= 2 ? (
-        <>
+        <Container>
           {data.map((item, index) => (
             <React.Fragment key={item.folderId}>
               <FolderEmojiAndName folderInfo={item} />
               {LAST_FOLDER_INDEX !== index && <ArrowSide16Icon />}
             </React.Fragment>
           ))}
-        </>
+        </Container>
       ) : (
-        <>
+        <Container>
           <FolderEmojiAndName folderInfo={FIRST_FOLDER_INFO} />
           <ArrowSide16Icon />
 
@@ -38,12 +38,17 @@ function FolderPath({ folderId }: FolderPathProps) {
 
           <ArrowSide16Icon />
           <FolderEmojiAndName folderInfo={LAST_FOLDER_INFO} />
-        </>
+        </Container>
       )}
-      <TopMemberBox />
+      <InviteTopBar />
     </FolderPathStyled>
   );
 }
+
+const Container = styled.div`
+  display: flex;
+  align-items: center;
+`;
 
 const FolderPathStyled = styled.div`
   display: flex;

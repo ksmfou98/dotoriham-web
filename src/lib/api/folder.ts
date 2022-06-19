@@ -1,6 +1,7 @@
 import { ItemId, TreeData } from "@atlaskit/tree";
 import {
   ChildFolderItem,
+  FolderShareTokenResponse,
   ICreateFolderRequest,
   ICreateFolderResponse,
   IMoveFolderRequest,
@@ -72,5 +73,13 @@ export const deleteChildFolderAPI = async (deleteFolderIdList: ItemId[]) => {
   const response = await client.post(`/api/v1/folder/deletes`, {
     deleteFolderIdList,
   });
+  return response.data;
+};
+
+// 폴더 공유 토큰 발급
+export const getFolderShareTokenAPI = async (folderId: ItemId) => {
+  const response = await client.get<FolderShareTokenResponse>(
+    `/api/v1/folder/encrypt/${folderId}`
+  );
   return response.data;
 };
