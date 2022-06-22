@@ -12,6 +12,7 @@ enum Path {
   LoginPage = "/login",
   SignupPage = "/signup",
   LandingPage = "https://dotoriham.kr/",
+  SharePage = "/share/:shareToken",
 }
 
 export default Path;

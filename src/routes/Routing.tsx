@@ -11,10 +11,12 @@ import SidebarRouteLayout from "components/common/SidebarRouteLayout";
 import ProfileEditPage from "pages/ProfileEditPage";
 import SignupPage from "pages/SignupPage";
 import { useCheckLogin } from "hooks";
+import SharePage from "pages/SharePage";
 
 export function PublicRouting() {
   return (
     <Routes>
+      <Route path={Path.SharePage} element={<SharePage />} />
       <Route path={Path.LoginPage} element={<LoginPage />} />
       <Route path={Path.SignupPage} element={<SignupPage />} />
       <Route path="*" element={<Navigate replace to={Path.LoginPage} />} />
