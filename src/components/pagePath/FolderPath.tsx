@@ -1,6 +1,9 @@
 import { ArrowSide16Icon } from "assets/icons";
 import InviteTopBar from "components/inviteTopBar/InviteTopBar";
+import { isRootFolder } from "lib/utils/atlaskitTreeFinder";
 import React from "react";
+import { useSelector } from "react-redux";
+import { folderSelector } from "stores/folder";
 import styled from "styled-components";
 import FolderEmojiAndName from "./FolderEmojiAndName";
 import FolderPathEllipsis from "./FolderPathEllipsis";
@@ -12,6 +15,7 @@ interface FolderPathProps {
 
 function FolderPath({ folderId }: FolderPathProps) {
   const { data } = usePagePathQuery(folderId);
+  const folders = useSelector(folderSelector);
   if (!data) return null;
 
   const FIRST_FOLDER_INFO = data[0];
@@ -40,7 +44,10 @@ function FolderPath({ folderId }: FolderPathProps) {
           <FolderEmojiAndName folderInfo={LAST_FOLDER_INFO} />
         </Container>
       )}
-      <InviteTopBar />
+
+      {folders.rootId === "root" && isRootFolder(folders, Number(folderId)) && (
+        <InviteTopBar />
+      )}
     </FolderPathStyled>
   );
 }
