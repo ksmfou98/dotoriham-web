@@ -53,6 +53,8 @@ function DotoriAddModal({ isModal, onToggleModal }: Props) {
     const res = await addDotoriAPI({ folderId, addBookmarkList });
   }, [dotoriFormList, folderId]);
 
+  console.log(dotoriFormList);
+
   const onChangeForm = useCallback(
     (form: DotoriForm) => {
       setDotoriFormList(

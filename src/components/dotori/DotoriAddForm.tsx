@@ -1,4 +1,5 @@
 import {
+  BellSelectedIcon,
   BellUnSelectedIcon,
   ProgressDisabled16Icon,
   ProgressFocused16Icon,
@@ -67,7 +68,7 @@ function useDotoriAddQuery(value: string) {
   };
 }
 function DotoriAddForm({ dotoriForm, onChangeForm }: Props) {
-  const { description, image, title } = dotoriForm;
+  const { description, image, title, remind } = dotoriForm;
   const heightRef = useRef<HTMLTextAreaElement>(null);
   const [linkValue, onChangeLinkValue] = useInput("");
 
@@ -111,6 +112,13 @@ function DotoriAddForm({ dotoriForm, onChangeForm }: Props) {
       heightRef.current.style.height = "45px"; // textarea 라이브러리가 초기 값을 인라인 css로 강제로 설정해논걸 없애기 위해서 이 방식 썼음
     }
   }, []);
+
+  const onRemindToggle = () => {
+    onChangeForm({
+      ...dotoriForm,
+      remind: !dotoriForm.remind,
+    });
+  };
 
   return (
     <Container>
@@ -166,9 +174,18 @@ function DotoriAddForm({ dotoriForm, onChangeForm }: Props) {
                 <RemindBox>
                   <div className="txt">리마인드 on/off</div>
 
-                  <div className="ico">
-                    <BellUnSelectedIcon />
-                    off
+                  <div className="ico" onClick={onRemindToggle}>
+                    {remind ? (
+                      <>
+                        <BellSelectedIcon />
+                        on
+                      </>
+                    ) : (
+                      <>
+                        <BellUnSelectedIcon />
+                        off
+                      </>
+                    )}
                   </div>
                 </RemindBox>
               </InputBox>
@@ -288,6 +305,7 @@ const RemindBox = styled.div`
     align-items: center;
     color: ${palette.gray};
     font-weight: 500;
+    cursor: pointer;
     svg {
       margin-right: 3px;
     }
