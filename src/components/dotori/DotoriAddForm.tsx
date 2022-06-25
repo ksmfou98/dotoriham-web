@@ -11,8 +11,8 @@ import styled, { css } from "styled-components";
 import axios from "axios";
 import { getMetaDataByUrl } from "lib/utils/getMetaData";
 import { CRAWLING_SERVER_URL } from "lib/constants";
-import { DotoriForm } from "./DotoriAddModal";
 import _ from "lodash";
+import { DotoriForm } from "types/dotori";
 
 interface Props {
   dotoriForm: DotoriForm;
@@ -34,7 +34,6 @@ function DotoriAddForm({ dotoriForm, onChangeForm }: Props) {
   };
 
   const getFetchBookmarkMetaData = async (value: string) => {
-    console.log(value);
     try {
       const { data } = await axios.post(CRAWLING_SERVER_URL, {
         url: value,
@@ -45,7 +44,7 @@ function DotoriAddForm({ dotoriForm, onChangeForm }: Props) {
         description: metaData.description,
         image: metaData.image,
         title: metaData.title,
-        url: metaData.url,
+        link: metaData.url,
       });
       setIsSuccessFetch(true);
     } catch (e) {
@@ -56,7 +55,7 @@ function DotoriAddForm({ dotoriForm, onChangeForm }: Props) {
         description: "",
         image: "",
         title: "",
-        url: "",
+        link: "",
       });
     }
   };
@@ -86,7 +85,7 @@ function DotoriAddForm({ dotoriForm, onChangeForm }: Props) {
           height="28px"
           className="url-input"
           placeholder="URL을 입력하세요"
-          name="url"
+          name="link"
           onChange={(e) => debounceFetchBookmarkMetaData(e.target.value)}
         />
 

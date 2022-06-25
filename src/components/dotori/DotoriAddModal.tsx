@@ -5,30 +5,28 @@ import { ModalTitle } from "components/common/ModalTitle";
 import { palette } from "lib/styles/palette";
 import React, { useCallback, useState } from "react";
 import styled from "styled-components";
-import { DotoriAddRequest } from "types/dotori";
+import { DotoriForm } from "types/dotori";
 import DotoriAddForm from "./DotoriAddForm";
 import { v4 as uuidv4 } from "uuid";
+import { useParams } from "react-router-dom";
+import { addDotoriAPI } from "lib/api/dotori";
 
 interface Props {
   isModal: boolean;
   onToggleModal: () => void;
 }
 
-export interface DotoriForm extends DotoriAddRequest {
-  id: string;
-}
-
 const defaultDotoriAddFormState = {
   id: uuidv4(),
-  url: "",
+  link: "",
   title: "",
   remind: false,
-  folderId: 0,
   description: "",
   image: "",
 };
 
 function DotoriAddModal({ isModal, onToggleModal }: Props) {
+  const { folderId = "" } = useParams<"folderId">();
   const [dotoriFormList, setDotoriFormList] = useState<DotoriForm[]>([
     defaultDotoriAddFormState,
   ]);
@@ -39,6 +37,20 @@ function DotoriAddModal({ isModal, onToggleModal }: Props) {
       { ...defaultDotoriAddFormState, id: uuidv4() },
     ]);
   };
+
+  const onSaveDotoriFormList = useCallback(async () => {
+    const addBookmarkList = dotoriFormList.map(
+      ({ title, link, remind, image, description }) => ({
+        title,
+        link,
+        remind,
+        image,
+        description,
+      })
+    );
+
+    const res = await addDotoriAPI({ folderId, addBookmarkList });
+  }, [dotoriFormList, folderId]);
 
   const onChangeForm = useCallback(
     (form: DotoriForm) => {
@@ -86,7 +98,7 @@ function DotoriAddModal({ isModal, onToggleModal }: Props) {
             width="184px"
             height="42px"
             borderRadius="8px"
-            onClick={() => console.log(dotoriFormList)}
+            onClick={onSaveDotoriFormList}
           >
             저장
           </Button>
