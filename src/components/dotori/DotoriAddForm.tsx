@@ -20,7 +20,7 @@ interface Props {
 }
 
 function DotoriAddForm({ dotoriForm, onChangeForm }: Props) {
-  const { description, folderId, id, image, remind, title, url } = dotoriForm;
+  const { description, image, title } = dotoriForm;
   const [isSuccessFetch, setIsSuccessFetch] = useState(false);
   const heightRef = useRef<HTMLTextAreaElement>(null);
 
