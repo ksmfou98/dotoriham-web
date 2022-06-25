@@ -28,6 +28,7 @@ export function PrivateRouting() {
   useCheckLogin();
   return (
     <Routes>
+      <Route path={Path.SharePage} element={<SharePage />} />
       <Route
         path={Path.HomePage}
         element={<Navigate replace to={Path.DotoriPage} />}
