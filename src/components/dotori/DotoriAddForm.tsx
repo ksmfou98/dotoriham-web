@@ -2,12 +2,13 @@ import {
   BellSelectedIcon,
   BellUnSelectedIcon,
   ProgressDisabled16Icon,
+  ProgressFinish16Icon,
   ProgressFocused16Icon,
 } from "assets/icons";
 import Input from "components/common/Input";
 import { palette } from "lib/styles/palette";
 import TextareaAutosize from "react-textarea-autosize";
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useMemo, useRef } from "react";
 import styled, { css } from "styled-components";
 import axios from "axios";
 import { getMetaDataByUrl } from "lib/utils/getMetaData";
@@ -120,12 +121,32 @@ function DotoriAddForm({ dotoriForm, onChangeForm }: Props) {
     });
   };
 
+  const isDisabledForm = useMemo(
+    () => _linkValue.length === 0 || isLoading,
+    [_linkValue, isLoading]
+  );
+
   return (
     <Container>
       <ProgressSection>
-        <ProgressFocused16Icon />
-        <ProgressColumnBar />
-        <ProgressDisabled16Icon />
+        {_linkValue.length === 0 ? (
+          <ProgressFocused16Icon />
+        ) : (
+          <ProgressFinish16Icon />
+        )}
+
+        <ProgressColumnBar isDisabled={isDisabledForm} />
+
+        {(function () {
+          switch (true) {
+            case isDisabledForm === true:
+              return <ProgressDisabled16Icon />;
+            case !isDisabledForm && title.length > 0 && description.length > 0:
+              return <ProgressFinish16Icon />;
+            default:
+              return <ProgressFocused16Icon />;
+          }
+        })()}
       </ProgressSection>
 
       <Content>
@@ -160,7 +181,7 @@ function DotoriAddForm({ dotoriForm, onChangeForm }: Props) {
                   placeholder="og:title"
                   name="title"
                   value={title}
-                  disabled={_linkValue.length === 0 || isLoading}
+                  disabled={isDisabledForm}
                   onChange={onChangeNewForm}
                 />
                 <DescriptionInput
@@ -168,7 +189,7 @@ function DotoriAddForm({ dotoriForm, onChangeForm }: Props) {
                   ref={heightRef}
                   name="description"
                   value={description}
-                  disabled={_linkValue.length === 0 || isLoading}
+                  disabled={isDisabledForm}
                   onChange={onChangeNewForm}
                 />
                 <RemindBox>
@@ -215,12 +236,13 @@ const ProgressSection = styled.div`
   margin-right: 16px;
 `;
 
-const ProgressColumnBar = styled.div`
+const ProgressColumnBar = styled.div<{ isDisabled: boolean }>`
   width: 2px;
   height: 24px;
   border-radius: 2px;
   margin: 4px 0;
-  background-color: ${palette.primary};
+  background-color: ${({ isDisabled }) =>
+    isDisabled ? palette.grayLightest : palette.primary};
 `;
 
 const LoadingIconBox = styled.div`
