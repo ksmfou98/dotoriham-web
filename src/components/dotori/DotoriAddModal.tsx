@@ -1,15 +1,16 @@
-import { PlusCircleIcon } from "assets/icons";
+import { PlusCircleIcon, X16BigIcon } from "assets/icons";
 import { Button } from "components/common";
 import ModalTemplate from "components/common/ModalTemplate";
 import { ModalTitle } from "components/common/ModalTitle";
 import { palette } from "lib/styles/palette";
-import React, { useCallback, useState } from "react";
+import React, { Fragment, useCallback, useState } from "react";
 import styled from "styled-components";
 import { DotoriForm } from "types/dotori";
 import DotoriAddForm from "./DotoriAddForm";
 import { v4 as uuidv4 } from "uuid";
 import { useParams } from "react-router-dom";
 import { addDotoriAPI } from "lib/api/dotori";
+import DividerLine from "components/common/DividerLine";
 
 interface Props {
   isModal: boolean;
@@ -61,6 +62,10 @@ function DotoriAddModal({ isModal, onToggleModal }: Props) {
     [dotoriFormList]
   );
 
+  const onCloseAddForm = useCallback((id: string) => {
+    setDotoriFormList((prevForm) => prevForm.filter((item) => item.id !== id));
+  }, []);
+
   return (
     <Container
       width={424}
@@ -70,12 +75,21 @@ function DotoriAddModal({ isModal, onToggleModal }: Props) {
     >
       <Inner>
         <ModalTitle mb={28}>도토리 추가</ModalTitle>
-        {dotoriFormList.map((dotoriForm) => (
-          <DotoriAddForm
-            key={dotoriForm.id}
-            dotoriForm={dotoriForm}
-            onChangeForm={onChangeForm}
-          />
+        {dotoriFormList.map((dotoriForm, index) => (
+          <Fragment key={dotoriForm.id}>
+            {index !== 0 && (
+              <CloseButtonBox>
+                <X16BigIcon onClick={() => onCloseAddForm(dotoriForm.id)} />
+              </CloseButtonBox>
+            )}
+            <DotoriAddForm
+              dotoriForm={dotoriForm}
+              onChangeForm={onChangeForm}
+            />
+            {index !== dotoriFormList.length - 1 && (
+              <DividerLine width="100%" color={palette.grayLightest} mb={16} />
+            )}
+          </Fragment>
         ))}
 
         {dotoriFormList.length < 3 && (
@@ -112,7 +126,7 @@ function DotoriAddModal({ isModal, onToggleModal }: Props) {
 
 const Container = styled(ModalTemplate)`
   height: auto;
-  max-height: 800px;
+  max-height: 80%;
   overflow-y: scroll;
   top: 50%;
   left: 50%;
@@ -123,6 +137,15 @@ const Container = styled(ModalTemplate)`
 
 const Inner = styled.div`
   padding: 26px 24px 24px 24px;
+`;
+
+const CloseButtonBox = styled.div`
+  margin-bottom: 19px;
+  overflow: hidden;
+  svg {
+    float: right;
+    cursor: pointer;
+  }
 `;
 
 const AddButton = styled.div`
