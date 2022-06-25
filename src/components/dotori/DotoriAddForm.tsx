@@ -6,23 +6,70 @@ import {
 import Input from "components/common/Input";
 import { palette } from "lib/styles/palette";
 import TextareaAutosize from "react-textarea-autosize";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef } from "react";
 import styled, { css } from "styled-components";
 import axios from "axios";
 import { getMetaDataByUrl } from "lib/utils/getMetaData";
 import { CRAWLING_SERVER_URL } from "lib/constants";
-import _ from "lodash";
 import { DotoriForm } from "types/dotori";
+import { useQuery } from "react-query";
+import { useInput } from "hooks";
+import useQueryDebounce from "hooks/useQueryDebounce";
+import LoadingIcon from "assets/images/loading.gif";
 
 interface Props {
   dotoriForm: DotoriForm;
   onChangeForm: (form: DotoriForm) => void;
 }
 
+const getCrawlingData = async (value: string) => {
+  const { data } = await axios.post(CRAWLING_SERVER_URL, {
+    url: value,
+  });
+  return data;
+};
+
+function useDotoriAddQuery(value: string) {
+  const {
+    data = { html: "" },
+    isFetching: isCrawlingDataFetching,
+    isError: isCrawlingDataError,
+    isSuccess: isCrawlingDataSuccess,
+  } = useQuery(["test", value], () => getCrawlingData(value), {
+    cacheTime: Infinity,
+    staleTime: Infinity,
+    retry: false,
+    enabled: value.length > 0,
+  });
+
+  const {
+    data: metaData,
+    isFetching: isMetaDataFetching,
+    isError: isMetaDataError,
+    isSuccess: isMetaDataSuccess,
+  } = useQuery(["test1", value], () => getMetaDataByUrl(data.html, value), {
+    cacheTime: Infinity,
+    staleTime: Infinity,
+    retry: false,
+    keepPreviousData: true,
+    enabled: data && !!data.html,
+  });
+
+  const isLoading = isCrawlingDataFetching || isMetaDataFetching;
+  const isError = isCrawlingDataError || isMetaDataError;
+  const isSuccess = isCrawlingDataSuccess && isMetaDataSuccess;
+
+  return {
+    metaData,
+    isSuccess,
+    isLoading,
+    isError,
+  };
+}
 function DotoriAddForm({ dotoriForm, onChangeForm }: Props) {
   const { description, image, title } = dotoriForm;
-  const [isSuccessFetch, setIsSuccessFetch] = useState(false);
   const heightRef = useRef<HTMLTextAreaElement>(null);
+  const [linkValue, onChangeLinkValue] = useInput("");
 
   const onChangeNewForm = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -33,23 +80,13 @@ function DotoriAddForm({ dotoriForm, onChangeForm }: Props) {
     });
   };
 
-  const getFetchBookmarkMetaData = async (value: string) => {
-    try {
-      const { data } = await axios.post(CRAWLING_SERVER_URL, {
-        url: value,
-      });
-      const metaData = await getMetaDataByUrl(data.html, value);
-      onChangeForm({
-        ...dotoriForm,
-        description: metaData.description,
-        image: metaData.image,
-        title: metaData.title,
-        link: metaData.url,
-      });
-      setIsSuccessFetch(true);
-    } catch (e) {
-      console.log(e);
-      setIsSuccessFetch(false);
+  const _linkValue = useQueryDebounce(linkValue, 1000);
+
+  const { metaData, isLoading, isError, isSuccess } =
+    useDotoriAddQuery(_linkValue);
+
+  useEffect(() => {
+    if (isError) {
       onChangeForm({
         ...dotoriForm,
         description: "",
@@ -57,13 +94,17 @@ function DotoriAddForm({ dotoriForm, onChangeForm }: Props) {
         title: "",
         link: "",
       });
+    } else if (!isLoading) {
+      onChangeForm({
+        ...dotoriForm,
+        description: metaData?.description || "",
+        image: metaData?.image || "",
+        title: metaData?.title || "",
+        link: metaData?.url || "",
+      });
     }
-  };
-
-  const debounceFetchBookmarkMetaData = _.debounce(
-    getFetchBookmarkMetaData,
-    500
-  );
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [metaData, isError, isSuccess]);
 
   useEffect(() => {
     if (heightRef.current) {
@@ -79,54 +120,62 @@ function DotoriAddForm({ dotoriForm, onChangeForm }: Props) {
         <ProgressDisabled16Icon />
       </ProgressSection>
 
-      <div>
+      <Content>
         <Input
           width="100%"
           height="28px"
           className="url-input"
           placeholder="URL을 입력하세요"
           name="link"
-          onChange={(e) => debounceFetchBookmarkMetaData(e.target.value)}
+          onChange={onChangeLinkValue}
         />
 
-        <OpenGraphBox isDisabled={!isSuccessFetch}>
-          <ImageBox>
-            {image ? (
-              <Image src={image} alt="여기다가 og title 넣자" />
-            ) : (
-              <DefaultImage />
-            )}
-          </ImageBox>
+        <OpenGraphBox isDisabled={_linkValue.length === 0}>
+          {isLoading ? (
+            <LoadingIconBox>
+              <img src={LoadingIcon} width="70" alt="loading" />
+            </LoadingIconBox>
+          ) : (
+            <>
+              <ImageBox>
+                {image ? (
+                  <Image src={image} alt="여기다가 og title 넣자" />
+                ) : (
+                  <DefaultImage />
+                )}
+              </ImageBox>
 
-          <InputBox>
-            <Input
-              width="200px"
-              height="28px"
-              placeholder="og:title"
-              name="title"
-              value={title}
-              disabled={!isSuccessFetch}
-              onChange={onChangeNewForm}
-            />
-            <DescriptionInput
-              placeholder="og:description"
-              ref={heightRef}
-              name="description"
-              value={description}
-              disabled={!isSuccessFetch}
-              onChange={onChangeNewForm}
-            />
-            <RemindBox>
-              <div className="txt">리마인드 on/off</div>
+              <InputBox>
+                <Input
+                  width="200px"
+                  height="28px"
+                  placeholder="og:title"
+                  name="title"
+                  value={title}
+                  disabled={_linkValue.length === 0 || isLoading}
+                  onChange={onChangeNewForm}
+                />
+                <DescriptionInput
+                  placeholder="og:description"
+                  ref={heightRef}
+                  name="description"
+                  value={description}
+                  disabled={_linkValue.length === 0 || isLoading}
+                  onChange={onChangeNewForm}
+                />
+                <RemindBox>
+                  <div className="txt">리마인드 on/off</div>
 
-              <div className="ico">
-                <BellUnSelectedIcon />
-                off
-              </div>
-            </RemindBox>
-          </InputBox>
+                  <div className="ico">
+                    <BellUnSelectedIcon />
+                    off
+                  </div>
+                </RemindBox>
+              </InputBox>
+            </>
+          )}
         </OpenGraphBox>
-      </div>
+      </Content>
     </Container>
   );
 }
@@ -136,6 +185,10 @@ const Container = styled.div`
   .url-input {
     margin-bottom: 20px;
   }
+`;
+
+const Content = styled.div`
+  width: 335px;
 `;
 
 const ProgressSection = styled.div`
@@ -151,6 +204,18 @@ const ProgressColumnBar = styled.div`
   border-radius: 2px;
   margin: 4px 0;
   background-color: ${palette.primary};
+`;
+
+const LoadingIconBox = styled.div`
+  width: 100%;
+  height: 115px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  img {
+    margin-right: 15px;
+    z-index: 999;
+  }
 `;
 
 const OpenGraphBox = styled.div<{ isDisabled: boolean }>`

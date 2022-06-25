@@ -78,10 +78,12 @@ function DotoriAddModal({ isModal, onToggleModal }: Props) {
           />
         ))}
 
-        <AddButton onClick={onAddFormList}>
-          <PlusCircleIcon />
-          추가
-        </AddButton>
+        {dotoriFormList.length < 3 && (
+          <AddButton onClick={onAddFormList}>
+            <PlusCircleIcon />
+            추가
+          </AddButton>
+        )}
 
         <ModalButtonGroup>
           <Button
