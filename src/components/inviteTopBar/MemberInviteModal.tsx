@@ -3,10 +3,10 @@ import DividerLine from "components/common/DividerLine";
 import Input from "components/common/Input";
 import ModalTemplate from "components/common/ModalTemplate";
 import SwitchButton from "components/common/SwitchButton";
-import { useToggle } from "hooks";
+import { useCopyUrl, useToast, useToggle } from "hooks";
 import { getFolderShareTokenAPI } from "lib/api/folder";
 import { palette } from "lib/styles/palette";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
 
@@ -20,6 +20,10 @@ function MemberInviteModal({ isModal, onToggleModal }: Props) {
   const [folderToken, setFolderToken] = useState("");
   const [isEditToggle, onToggleEditToggle] = useToggle(false);
 
+  const { onCopyUrl } = useCopyUrl();
+
+  const { copyToast } = useToast();
+
   useEffect(() => {
     const getToken = async () => {
       const { folderIdToken } = await getFolderShareTokenAPI(folderId);
@@ -29,6 +33,16 @@ function MemberInviteModal({ isModal, onToggleModal }: Props) {
 
     getToken();
   }, [folderId]);
+
+  const inviteLink = useMemo(
+    () => `${window.location.origin}/share/${folderToken}`,
+    [folderToken]
+  );
+
+  const onCopyInviteLink = () => {
+    onCopyUrl(inviteLink);
+    copyToast();
+  };
 
   return (
     <ModalTemplate
@@ -41,13 +55,13 @@ function MemberInviteModal({ isModal, onToggleModal }: Props) {
         <Title>초대 링크</Title>
 
         <LinkBlock>
-          <Input
+          <Input height="32px" width="404px" readOnly value={inviteLink} />
+          <Button
+            width="72px"
             height="32px"
-            width="404px"
-            readOnly
-            value={`${window.location.origin}/share/${folderToken}`}
-          />
-          <Button width="72px" height="32px" variant="primary">
+            variant="primary"
+            onClick={onCopyInviteLink}
+          >
             복사
           </Button>
         </LinkBlock>
