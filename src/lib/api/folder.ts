@@ -1,6 +1,7 @@
 import { ItemId, TreeData } from "@atlaskit/tree";
 import {
   ChildFolderItem,
+  FolderBelongUserListResponse,
   FolderShareTokenResponse,
   ICreateFolderRequest,
   ICreateFolderResponse,
@@ -80,6 +81,14 @@ export const deleteChildFolderAPI = async (deleteFolderIdList: ItemId[]) => {
 export const getFolderShareTokenAPI = async (folderId: ItemId) => {
   const response = await client.get<FolderShareTokenResponse>(
     `/api/v1/folder/encrypt/${folderId}`
+  );
+  return response.data;
+};
+
+// 폴더에 가입한 유저 목록 조회
+export const getFolderBelongUserListAPI = async (folderId: ItemId) => {
+  const response = await client.get<FolderBelongUserListResponse>(
+    `/api/v1/folder/belong/${folderId}`
   );
   return response.data;
 };

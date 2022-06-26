@@ -29,3 +29,11 @@ export type ParentFoldersGetResponse = ChildFolderItem[];
 export interface FolderShareTokenResponse {
   folderIdToken: string;
 }
+
+export interface FolderBelongUserListResponse {
+  list: {
+    id: number;
+    name: string;
+    profileImage: string;
+  }[];
+}
