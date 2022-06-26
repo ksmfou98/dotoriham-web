@@ -1,5 +1,6 @@
+import axios from "axios";
 import DotoriList from "components/dotori/DotoriList";
-import client from "lib/api/client";
+import { SERVER_URL } from "lib/constants";
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
@@ -13,8 +14,8 @@ function ShareTemplate() {
   useEffect(() => {
     const getData = async () => {
       try {
-        const { data } = await client.get<IDotoriListResponse>(
-          `/api/v1/page/open/${shareToken}`
+        const { data } = await axios.get<IDotoriListResponse>(
+          `${SERVER_URL}/api/v1/page/open/${shareToken}`
         );
         console.log(data);
         dispatch(

@@ -71,7 +71,7 @@ function AuthForm({ AuthType }: Props) {
 
       {AuthType === "signup" && <AgreementForm />}
 
-      {!authValidateState.isAgree && (
+      {AuthType === "signup" && !authValidateState.isAgree && (
         <AuthErrorText>
           이용약관 및 개인정보 수집 이용에 동의해주세요.
         </AuthErrorText>

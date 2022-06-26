@@ -17,3 +17,23 @@ export const signupAPI = async (loginRequest: LoginRequest) => {
   );
   return response;
 };
+
+export const loginAPI = async (email: string, password: string) => {
+  const response = await axios.post(`${SERVER_URL}/api/v1/user/signIn`, {
+    email,
+    password,
+  });
+
+  return response.data;
+};
+
+export const emailCheckAPI = async (email: string) => {
+  const response = await axios.post(
+    `${SERVER_URL}/api/v1/user/signUp/emailCheck`,
+    {
+      email,
+    }
+  );
+
+  return response.data;
+};
