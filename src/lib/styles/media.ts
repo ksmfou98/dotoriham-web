@@ -3,6 +3,7 @@ export const mediaQuery = (maxWidth: number) =>
 
 export const breakpoints = {
   desktop: 1065,
+  share: 900,
 };
 
 const { desktop } = breakpoints;

@@ -13,6 +13,7 @@ import useLoggedInUserReplace from "hooks/useLoggedInUserReplace";
 import useInitialRegisterEffect from "hooks/useInitialRegisterEffect";
 import { isLogin } from "lib/utils/auth";
 import { firebaseConfig } from "lib/firebase";
+import { isSharePage } from "lib/utils/checkRoutePath";
 
 initializeApp(firebaseConfig);
 
@@ -24,7 +25,7 @@ function App() {
       <AppWrapper>
         <GlobalStyles />
         <Header />
-        <MainLayout>
+        <MainLayout isSharePage={isSharePage()}>
           {isLogin() ? <PrivateRouting /> : <PublicRouting />}
         </MainLayout>
         <Footer />
@@ -50,8 +51,9 @@ const AppWrapper = styled.div`
   min-height: 100%;
 `;
 
-const MainLayout = styled.main`
-  width: ${breakpoints.desktop}px;
+const MainLayout = styled.main<{ isSharePage: boolean }>`
+  width: ${({ isSharePage }) =>
+    isSharePage ? breakpoints.share : breakpoints.desktop}px;
   margin: 0 auto;
   flex: 1 auto;
   display: flex;

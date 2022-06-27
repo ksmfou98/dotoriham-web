@@ -5,7 +5,12 @@ import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import { setDotoris } from "stores/dotori";
+import styled from "styled-components";
 import { IDotoriListResponse } from "types/dotori";
+
+/**
+ * @description 나중에 완전 싹 다 리팩토링 해야함.
+ */
 
 function ShareTemplate() {
   const { shareToken = "" } = useParams<"shareToken">();
@@ -32,10 +37,14 @@ function ShareTemplate() {
   }, [shareToken, dispatch]);
 
   return (
-    <div>
-      <DotoriList path="main" />
-    </div>
+    <Wrapper>
+      <DotoriList path="search" />
+    </Wrapper>
   );
 }
+
+const Wrapper = styled.div`
+  margin-top: 40px;
+`;
 
 export default ShareTemplate;
