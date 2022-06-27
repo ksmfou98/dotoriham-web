@@ -5,22 +5,20 @@ import Logo from "components/common/Logo";
 import styled from "styled-components";
 import SearchBar from "./SearchBar";
 import RemindInfoButton from "./RemindInfoButton";
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Path from "routes/Path";
 import { useSelector } from "react-redux";
 import { userSelector } from "stores/user";
+import { isSharePage } from "lib/utils/checkRoutePath";
 
 function Header() {
   const { image, accessToken } = useSelector(userSelector);
-  const location = useLocation();
-
-  const isSharePage = location.pathname.includes("/share/");
 
   return (
     <HeaderBlock>
       <HeaderInner>
         <Logo />
-        {accessToken && !isSharePage && (
+        {accessToken && !isSharePage() && (
           <HeaderRightBox>
             <SearchBar />
             <RemindInfoButton />
