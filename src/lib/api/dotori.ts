@@ -1,5 +1,6 @@
 import { ItemId } from "@atlaskit/tree";
 import {
+  DotoriAddRequest,
   DotoriMoveRequest,
   DotoriSortType,
   DotoriUpdateRequest,
@@ -92,5 +93,15 @@ export const truncateDotoriAPI = async (dotoriIdList: string[]) => {
   const response = await client.post(`/api/v1/trash/truncate`, {
     bookmarkIdList: dotoriIdList,
   });
+  return response.data;
+};
+
+// @Note 북마크 추가
+export const addDotoriAPI = async (requestData: DotoriAddRequest) => {
+  const response = await client.post(
+    `/api/v1/bookmarkInterface?folderId=${requestData.folderId}`,
+    requestData
+  );
+
   return response.data;
 };

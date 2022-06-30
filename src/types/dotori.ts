@@ -67,6 +67,22 @@ export interface DotoriMoveRequest {
   nextFolderId: ItemId;
 }
 
+export interface DotoriForm {
+  id: string;
+  link: string;
+  title: string;
+  remind: boolean;
+  image: string;
+  description: string;
+}
+
+export type DotoriFormRequestType = Omit<DotoriForm, "id">;
+
+export interface DotoriAddRequest {
+  folderId: ItemId;
+  addBookmarkList: DotoriFormRequestType[];
+}
+
 export interface DotoriRemindToggleRequest {
   remind: boolean;
   dotoriId: string;

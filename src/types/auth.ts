@@ -2,7 +2,7 @@ export type AuthType = "login" | "signup";
 
 export type ISocialType = "google" | null;
 
-export interface ILoginRequest {
+export interface OAuthLoginRequest {
   email: string;
   image: string;
   name: string;
@@ -10,7 +10,13 @@ export interface ILoginRequest {
   fcmToken: string;
 }
 
-export interface ILoginResponse {
+export interface LoginRequest {
+  email: string;
+  password: string;
+  fcmToken: string;
+}
+
+export interface LoginResponse {
   name: string;
   nickname: string;
   email: string;
@@ -20,6 +26,6 @@ export interface ILoginResponse {
   remindToggle: boolean;
   accessToken: string;
   refreshToken: string;
-  isRegisterd: boolean;
+  isRegistered: boolean;
   fcmToken: string;
 }

@@ -9,6 +9,7 @@ import { Link } from "react-router-dom";
 import Path from "routes/Path";
 import { useSelector } from "react-redux";
 import { userSelector } from "stores/user";
+import { isSharePage } from "lib/utils/checkRoutePath";
 
 function Header() {
   const { image, accessToken } = useSelector(userSelector);
@@ -17,7 +18,7 @@ function Header() {
     <HeaderBlock>
       <HeaderInner>
         <Logo />
-        {accessToken && (
+        {accessToken && !isSharePage() && (
           <HeaderRightBox>
             <SearchBar />
             <RemindInfoButton />

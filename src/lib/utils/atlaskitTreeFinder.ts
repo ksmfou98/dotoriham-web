@@ -15,3 +15,8 @@ export const findParentIdById = (folders: TreeData, itemId: ItemId) => {
   }
   return null;
 };
+
+// 해당 폴더가 최상위 폴더인지 구하기
+export const isRootFolder = (folders: TreeData, itemId: ItemId) => {
+  return folders.items.root.children.includes(itemId);
+};

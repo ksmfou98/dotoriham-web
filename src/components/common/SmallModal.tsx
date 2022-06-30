@@ -3,6 +3,7 @@ import React from "react";
 import styled from "styled-components";
 import Button from "./Button";
 import ModalTemplate from "./ModalTemplate";
+import { ModalTitle } from "./ModalTitle";
 
 interface SmallModalProps {
   isModal: boolean;
@@ -31,7 +32,7 @@ function SmallModal({
       onToggleModal={onToggleModal}
     >
       <SmallModalStyled>
-        <ModalTitle>{title}</ModalTitle>
+        <ModalTitle mb={18}>{title}</ModalTitle>
         <ModalContent>
           {content.split("<br />").map((txt) => (
             <React.Fragment key={txt + Math.random()}>
@@ -42,7 +43,7 @@ function SmallModal({
         </ModalContent>
 
         <ModalButtonGroup>
-          <CancelButton
+          <Button
             variant="tertiary"
             width="136px"
             height="42px"
@@ -50,7 +51,7 @@ function SmallModal({
             onClick={onToggleModal}
           >
             취소
-          </CancelButton>
+          </Button>
           <Button
             variant="primary"
             width="136px"
@@ -73,16 +74,6 @@ const SmallModalStyled = styled.div`
   padding: 26px 24px 24px;
 `;
 
-const ModalTitle = styled.div`
-  text-align: center;
-  font-size: 16px;
-  font-weight: 500;
-  color: ${palette.black};
-  height: 23px;
-  line-height: normal;
-  margin-bottom: 18px;
-`;
-
 const ModalContent = styled.div`
   font-size: 14px;
   line-height: 1.5;
@@ -93,11 +84,11 @@ const ModalContent = styled.div`
 
 const ModalButtonGroup = styled.div`
   display: flex;
-`;
-
-const CancelButton = styled(Button)`
-  color: ${palette.grayDark};
-  margin-right: 8px;
+  button {
+    &:first-child {
+      margin-right: 8px;
+    }
+  }
 `;
 
 export default SmallModal;

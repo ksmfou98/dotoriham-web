@@ -2,12 +2,14 @@ import { ItemId } from "@atlaskit/tree";
 import FolderListModal from "components/common/FolderListModal";
 import SmallModal from "components/common/SmallModal";
 import useToggle from "hooks/useToggle";
-import React, { memo, useCallback, useState } from "react";
+import React, { memo, useCallback, useMemo, useState } from "react";
 import { useSelector } from "react-redux";
 import { dotoriSelector } from "stores/dotori";
 import styled from "styled-components";
 import { DotoriPathTypes, IDotoriItem } from "types/dotori";
 import { initialDotoriState } from "./constants";
+import DotoriAddButton from "./DotoriAddButton";
+import DotoriAddModal from "./DotoriAddModal";
 import DotoriBlankSlate from "./DotoriBlankSlate";
 import DotoriEditModal from "./DotoriEditModal";
 import DotoriListItem from "./DotoriListItem";
@@ -23,6 +25,7 @@ function DotoriList({ path }: { path: DotoriPathTypes }) {
   const [isDeleteModal, onToggleDeleteModal] = useToggle();
   const [isEditModal, onToggleEditModal] = useToggle();
   const [isMoveModal, onToggleMoveModal] = useToggle();
+  const [isAddModal, onToggleAddModal] = useToggle();
   const { mutateDeleteDotori, mutateMoveDotori } = useDotoriMutation();
 
   const [isActiveDotoriMenu, setIsActiveDotoriMenu] =
@@ -48,9 +51,22 @@ function DotoriList({ path }: { path: DotoriPathTypes }) {
     mutateMoveDotori(requestData);
   };
 
+  /**
+   * true: main 페이지 or folder 페이지
+   * false: trash 페이지 or search 페이지
+   */
+  const isDotoriPage = useMemo(
+    () => path === "folder" || path === "main",
+    [path]
+  );
+
   return (
     <DotoriListBlock>
-      {dotoris.length === 0 && <DotoriBlankSlate path={path} />}
+      {!isDotoriPage && dotoris.length === 0 && (
+        <DotoriBlankSlate path={path} />
+      )}
+
+      {isDotoriPage && <DotoriAddButton onClick={onToggleAddModal} />}
 
       {dotoris.map((dotori) => (
         <DotoriListItem
@@ -93,6 +109,10 @@ function DotoriList({ path }: { path: DotoriPathTypes }) {
           path={path}
         />
       )}
+
+      {isAddModal && (
+        <DotoriAddModal isModal={isAddModal} onToggleModal={onToggleAddModal} />
+      )}
     </DotoriListBlock>
   );
 }
@@ -100,6 +120,12 @@ function DotoriList({ path }: { path: DotoriPathTypes }) {
 const DotoriListBlock = styled.div`
   display: flex;
   flex-wrap: wrap;
+  > div {
+    margin: 0 24px 40px 0;
+    &:nth-child(3n) {
+      margin-right: 0;
+    }
+  }
 `;
 
 export default memo(DotoriList);

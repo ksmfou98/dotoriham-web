@@ -4,7 +4,7 @@ import {
   CheckBoxSelected24Icon,
   CheckBoxSelected36Icon,
 } from "assets/icons";
-import React from "react";
+import React, { memo } from "react";
 import styled from "styled-components";
 
 interface IChecked {
@@ -39,4 +39,4 @@ function CheckBox({ isChecked, variant, ...rest }: CheckBoxProps) {
 
 const CheckBoxStyled = styled.button``;
 
-export default CheckBox;
+export default memo(CheckBox);

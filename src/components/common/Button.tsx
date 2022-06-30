@@ -1,11 +1,23 @@
 import { palette } from "lib/styles/palette";
-import React from "react";
+import React, { memo } from "react";
 import styled, { css } from "styled-components";
 
 interface ButtonStyledProps {
+  /**
+   * 버튼 타입
+   */
   variant: "primary" | "secondary" | "tertiary" | "quaternary";
+  /**
+   * 버튼 가로 길이
+   */
   width: string;
+  /**
+   * 버튼 세로 길이
+   */
   height: string;
+  /**
+   * 버튼 둥글기
+   */
   borderRadius?: string;
 }
 
@@ -69,8 +81,8 @@ const ButtonStyled = styled.button<ButtonStyledProps>`
       case "tertiary":
         return css`
           background-color: ${palette.white};
-          color: ${palette.grayDarkest};
-          border: 1px solid ${palette.gray};
+          color: ${palette.grayDark};
+          border: 1px solid ${palette.grayLight};
         `;
       case "quaternary":
         return css`
@@ -91,4 +103,4 @@ const ButtonStyled = styled.button<ButtonStyledProps>`
   }
 `;
 
-export default Button;
+export default memo(Button);

@@ -4,18 +4,31 @@ import LoginPage from "pages/LoginPage";
 import MyPage from "pages/MyPage";
 import NotFoundPage from "pages/NotFoundPage";
 import SearchPage from "pages/SearchPage";
-import RegisterPage from "pages/RegisterPage";
 import TrashPage from "pages/TrashPage";
 import { Routes, Route, Navigate } from "react-router-dom";
 import Path from "./Path";
 import SidebarRouteLayout from "components/common/SidebarRouteLayout";
 import ProfileEditPage from "pages/ProfileEditPage";
+import SignupPage from "pages/SignupPage";
+import { useCheckLogin } from "hooks";
+import SharePage from "pages/SharePage";
 
-function Routing() {
+export function PublicRouting() {
   return (
     <Routes>
+      <Route path={Path.SharePage} element={<SharePage />} />
       <Route path={Path.LoginPage} element={<LoginPage />} />
-      <Route path={Path.RegisterPage} element={<RegisterPage />} />
+      <Route path={Path.SignupPage} element={<SignupPage />} />
+      <Route path="*" element={<Navigate replace to={Path.LoginPage} />} />
+    </Routes>
+  );
+}
+
+export function PrivateRouting() {
+  useCheckLogin();
+  return (
+    <Routes>
+      <Route path={Path.SharePage} element={<SharePage />} />
       <Route
         path={Path.HomePage}
         element={<Navigate replace to={Path.DotoriPage} />}
@@ -33,5 +46,3 @@ function Routing() {
     </Routes>
   );
 }
-
-export default Routing;

@@ -22,6 +22,7 @@ import useDotoriMutation from "./hooks/useDotoriMutation";
 import DotoriItemMenu from "./DotoriItemMenu";
 import { useSelector } from "react-redux";
 import { userSelector } from "stores/user";
+import { isSharePage } from "lib/utils/checkRoutePath";
 
 interface DotoriListItemProps {
   dotori: IDotoriItem;
@@ -127,18 +128,21 @@ function DotoriListItem({
             <div className="description">{description}</div>
           </InnerContent>
 
-          <DotoriFolderInfo>
-            <FolderEmoji emoji={folderEmoji} />
-            <DotoriFolderName to={`${Path.DotoriPage}/${folderId}`}>
-              {folderName}
-            </DotoriFolderName>
-          </DotoriFolderInfo>
+          {!isSharePage() && (
+            <DotoriFolderInfo>
+              <FolderEmoji emoji={folderEmoji} />
+              <DotoriFolderName to={`${Path.DotoriPage}/${folderId}`}>
+                {folderName}
+              </DotoriFolderName>
+            </DotoriFolderInfo>
+          )}
 
           <DividerLine color={palette.grayLightest} width="100%" />
 
           <DotoriBottomArea>
             <DotoriLinkBox>
               <DotoriLink
+                isFullWidth={isSharePage()}
                 href={link}
                 target="_blank"
                 rel="noopener noreferrer"
@@ -148,7 +152,7 @@ function DotoriListItem({
               </DotoriLink>
             </DotoriLinkBox>
 
-            {location.pathname !== Path.TrashPage && (
+            {location.pathname !== Path.TrashPage && !isSharePage() && (
               <DotoriOption>
                 <OptionButton onClick={onRemindToggle}>
                   {remindTime ? <BellSelectedIcon /> : <BellUnSelectedIcon />}
@@ -192,18 +196,15 @@ function DotoriListItem({
 }
 
 const DotoriItemBlock = styled.div`
-  margin: 0 24px 40px 0;
   display: flex;
   flex-direction: column;
   position: relative;
-  &:nth-child(3n) {
-    margin-right: 0;
-  }
 `;
 
 const DotoriItemInner = styled.div`
   flex: 1 auto;
   display: flex;
+  min-height: 350px;
   flex-direction: column;
   border-radius: 8px;
   position: relative;
@@ -319,10 +320,11 @@ const DotoriBottomArea = styled.div`
 const DotoriLinkBox = styled.div`
   display: flex;
   align-items: center;
+  overflow: hidden;
 `;
 
-const DotoriLink = styled.a`
-  width: 110px;
+const DotoriLink = styled.a<{ isFullWidth: boolean }>`
+  width: ${({ isFullWidth }) => (isFullWidth ? "100%" : "100px")};
   font-size: 12px;
   line-height: 1.42;
   color: ${palette.gray};

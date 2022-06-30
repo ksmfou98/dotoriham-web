@@ -1,4 +1,5 @@
 enum Path {
+  // logged In
   HomePage = "/",
   DotoriPage = "/dotori",
   DotoriFolderPage = "/dotori/:folderId",
@@ -9,8 +10,9 @@ enum Path {
 
   // no Logged In
   LoginPage = "/login",
-  RegisterPage = "/register",
+  SignupPage = "/signup",
   LandingPage = "https://dotoriham.kr/",
+  SharePage = "/share/:shareToken",
 }
 
 export default Path;

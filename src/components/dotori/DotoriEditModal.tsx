@@ -6,6 +6,7 @@ import Button from "components/common/Button";
 import { palette } from "lib/styles/palette";
 import { ActiveDotoriMenu } from "./DotoriList";
 import useDotoriMutation from "./hooks/useDotoriMutation";
+import { ModalTitle } from "components/common/ModalTitle";
 
 interface DotoriEditModalProps {
   isOpen: boolean;
@@ -40,13 +41,13 @@ function DotoriEditModal({
 
   return (
     <EditModalTemplate
-      width={486}
+      width={468}
       height={300}
       isModal={isOpen}
       onToggleModal={onToggleModal}
     >
       <ModalStyled>
-        <ModalTitle>도토리 편집</ModalTitle>
+        <ModalTitle mb={14}>도토리 편집</ModalTitle>
         <ModalContent>
           <InputInfo>
             <InputText>제목</InputText>
@@ -57,7 +58,7 @@ function DotoriEditModal({
           <EditInput value={title} onChange={onChangeTitle} />
         </ModalContent>
         <ModalButtonGroup>
-          <CancelButton
+          <Button
             variant="tertiary"
             width="206px"
             height="42px"
@@ -65,7 +66,7 @@ function DotoriEditModal({
             onClick={onToggleModal}
           >
             취소
-          </CancelButton>
+          </Button>
           <Button
             variant="primary"
             width="206px"
@@ -93,16 +94,6 @@ const EditModalTemplate = styled(ModalTemplate)`
 const ModalStyled = styled.div`
   padding: 26px 24px 24px;
   height: 100%;
-`;
-
-const ModalTitle = styled.div`
-  text-align: center;
-  font-size: 16px;
-  font-weight: 500;
-  color: ${palette.black};
-  height: 23px;
-  line-height: normal;
-  margin-bottom: 14px;
 `;
 
 const InputInfo = styled.div`
@@ -141,11 +132,11 @@ const ModalContent = styled.div`
 
 const ModalButtonGroup = styled.div`
   display: flex;
-`;
-
-const CancelButton = styled(Button)`
-  color: ${palette.grayDark};
-  margin-right: 8px;
+  button {
+    &:first-child {
+      margin-right: 8px;
+    }
+  }
 `;
 
 export default DotoriEditModal;

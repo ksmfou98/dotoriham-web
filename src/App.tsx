@@ -1,26 +1,32 @@
 import Header from "components/header";
 import { breakpoints } from "lib/styles/media";
 import React from "react";
+import { initializeApp } from "firebase/app";
 import { ReactQueryDevtools } from "react-query/devtools";
 import styled from "styled-components";
 import GlobalStyles from "./lib/styles/globalStyles";
-import Routing from "./routes/Routing";
+import { PrivateRouting, PublicRouting } from "./routes/Routing";
 import "react-toastify/dist/ReactToastify.css";
 import ToastContainerStyled from "lib/styles/toastStyle";
-import useCheckLogin from "hooks/useCheckLogin";
 import Footer from "components/footer";
 import useLoggedInUserReplace from "hooks/useLoggedInUserReplace";
+import useInitialRegisterEffect from "hooks/useInitialRegisterEffect";
+import { isLogin } from "lib/utils/auth";
+import { firebaseConfig } from "lib/firebase";
+import { isSharePage } from "lib/utils/checkRoutePath";
+
+initializeApp(firebaseConfig);
 
 function App() {
-  useCheckLogin();
   useLoggedInUserReplace();
+  useInitialRegisterEffect();
   return (
     <>
       <AppWrapper>
         <GlobalStyles />
         <Header />
-        <MainLayout>
-          <Routing />
+        <MainLayout isSharePage={isSharePage()}>
+          {isLogin() ? <PrivateRouting /> : <PublicRouting />}
         </MainLayout>
         <Footer />
       </AppWrapper>
@@ -45,8 +51,9 @@ const AppWrapper = styled.div`
   min-height: 100%;
 `;
 
-const MainLayout = styled.main`
-  width: ${breakpoints.desktop}px;
+const MainLayout = styled.main<{ isSharePage: boolean }>`
+  width: ${({ isSharePage }) =>
+    isSharePage ? breakpoints.share : breakpoints.desktop}px;
   margin: 0 auto;
   flex: 1 auto;
   display: flex;

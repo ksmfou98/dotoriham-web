@@ -41,7 +41,9 @@ function Sidebar() {
         unActiveIcon={<UnselectedTrashIcon />}
       />
 
-      <QuestionButton />
+      <QuestionButtonBox>
+        <QuestionButton />
+      </QuestionButtonBox>
     </SidebarBlock>
   );
 }
@@ -52,12 +54,18 @@ const SidebarBlock = styled.aside`
   background-color: ${palette.white};
   z-index: 2;
   padding: 20px 0;
+  display: flex;
+  flex-direction: column;
 `;
 
 const FolderListBox = styled.div`
-  flex: 1 auto;
   margin-bottom: 24px;
   width: 170px;
+`;
+
+const QuestionButtonBox = styled.div`
+  flex: 1 0 auto;
+  position: relative;
 `;
 
 export default Sidebar;

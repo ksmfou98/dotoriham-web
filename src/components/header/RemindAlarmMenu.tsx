@@ -52,7 +52,7 @@ const Container = styled.div`
   height: 295px;
   background: ${palette.white};
   top: 35px;
-  z-index: 1;
+  z-index: 1000;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
