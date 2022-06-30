@@ -11,6 +11,8 @@ import { v4 as uuidv4 } from "uuid";
 import { useParams } from "react-router-dom";
 import { addDotoriAPI } from "lib/api/dotori";
 import DividerLine from "components/common/DividerLine";
+import { useQueryClient } from "react-query";
+import { QueryKey } from "lib/queryKey";
 
 interface Props {
   isModal: boolean;
@@ -28,6 +30,7 @@ const defaultDotoriAddFormState = {
 
 function DotoriAddModal({ isModal, onToggleModal }: Props) {
   const { folderId = "" } = useParams<"folderId">();
+  const queryClient = useQueryClient();
   const [dotoriFormList, setDotoriFormList] = useState<DotoriForm[]>([
     defaultDotoriAddFormState,
   ]);
@@ -50,8 +53,14 @@ function DotoriAddModal({ isModal, onToggleModal }: Props) {
       })
     );
 
-    const res = await addDotoriAPI({ folderId, addBookmarkList });
-  }, [dotoriFormList, folderId]);
+    try {
+      await addDotoriAPI({ folderId, addBookmarkList });
+      queryClient.invalidateQueries(QueryKey.DOTORI_CONTENTS);
+      onToggleModal();
+    } catch (e) {
+      console.log(e);
+    }
+  }, [dotoriFormList, folderId, onToggleModal, queryClient]);
 
   console.log(dotoriFormList);
 

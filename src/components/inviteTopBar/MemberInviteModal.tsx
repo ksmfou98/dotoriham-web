@@ -18,11 +18,12 @@ interface Props {
 function MemberInviteModal({ isModal, onToggleModal }: Props) {
   const { folderId = "" } = useParams<"folderId">();
   const [folderToken, setFolderToken] = useState("");
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [isEditToggle, onToggleEditToggle] = useToggle(false);
 
   const { onCopyUrl } = useCopyUrl();
 
-  const { copyToast } = useToast();
+  const { copyToast, errorToast } = useToast();
 
   useEffect(() => {
     const getToken = async () => {
@@ -73,7 +74,7 @@ function MemberInviteModal({ isModal, onToggleModal }: Props) {
             <span>편집 옵션</span>
             <SwitchButton
               isChecked={isEditToggle}
-              onToggle={onToggleEditToggle}
+              onToggle={() => errorToast("편집 옵션은 아직 준비중이에요!")}
             />
           </ToggleOption>
 

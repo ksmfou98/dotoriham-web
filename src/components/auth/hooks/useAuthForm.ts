@@ -1,5 +1,5 @@
 import { useToast } from "hooks";
-import { emailCheckAPI, loginAPI, signupAPI } from "lib/api/auth";
+import { loginAPI, signupAPI } from "lib/api/auth";
 import { getFCMToken } from "lib/firebase";
 import userStorage from "lib/utils/userStorage";
 import { useCallback, useState } from "react";
@@ -64,7 +64,10 @@ export default function useAuthForm() {
     // 만약 실패했으면 onChangeAuthError("계정을 찾을 수 없습니다. 이메일 또는 비밀번호를 다시 확인해주세요") 호출
     // 아래는 테스트용
     try {
-      await loginAPI(email, password);
+      const { data } = await loginAPI(email, password);
+      userStorage.set(data);
+      console.log(data);
+      // window.location.replace(Path.DotoriPage);
     } catch (e) {
       onChangeErrorMessage(
         "authError",
@@ -90,7 +93,6 @@ export default function useAuthForm() {
       const { data } = await signupAPI(signupRequest);
       userStorage.set(data);
       window.location.replace(Path.DotoriPage);
-      console.log(data);
     } catch (e) {
       console.log(e);
       errorToast("회원가입에 실패했습니다. 다시 시도해주세요.");

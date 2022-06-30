@@ -19,12 +19,15 @@ export const signupAPI = async (loginRequest: LoginRequest) => {
 };
 
 export const loginAPI = async (email: string, password: string) => {
-  const response = await axios.post(`${SERVER_URL}/api/v1/user/signIn`, {
-    email,
-    password,
-  });
+  const response = await axios.post<LoginResponse>(
+    `${SERVER_URL}/api/v1/user/signIn`,
+    {
+      email,
+      password,
+    }
+  );
 
-  return response.data;
+  return response;
 };
 
 export const emailCheckAPI = async (email: string) => {

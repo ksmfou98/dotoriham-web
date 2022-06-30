@@ -320,6 +320,7 @@ const DotoriBottomArea = styled.div`
 const DotoriLinkBox = styled.div`
   display: flex;
   align-items: center;
+  overflow: hidden;
 `;
 
 const DotoriLink = styled.a<{ isFullWidth: boolean }>`

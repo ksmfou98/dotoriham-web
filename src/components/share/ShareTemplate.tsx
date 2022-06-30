@@ -20,9 +20,9 @@ function ShareTemplate() {
     const getData = async () => {
       try {
         const { data } = await axios.get<IDotoriListResponse>(
-          `${SERVER_URL}/api/v1/page/open/${shareToken}`
+          `${SERVER_URL}/api/v1/page/open/${encodeURIComponent(shareToken)}`
         );
-        console.log(data);
+
         dispatch(
           setDotoris(
             data.content.map((dotori) => ({ ...dotori, checked: false }))

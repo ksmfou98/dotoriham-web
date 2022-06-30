@@ -14,6 +14,7 @@ export default function useInitialRegisterEffect() {
   useEffect(() => {
     if (!user) return;
     if (user.isRegistered) return;
+    console.log(user);
     dispatch(toggleTutorialGuide({}));
     userStorage.set({ ...user, isRegistered: true });
   }, [user, dispatch]);
