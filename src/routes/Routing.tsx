@@ -7,7 +7,7 @@ import SearchPage from "pages/SearchPage";
 import TrashPage from "pages/TrashPage";
 import { Routes, Route, Navigate } from "react-router-dom";
 import Path from "./Path";
-import SidebarRouteLayout from "components/common/SidebarRouteLayout";
+import SidebarRouteLayout from "domains/common/SidebarRouteLayout";
 import ProfileEditPage from "pages/ProfileEditPage";
 import SignupPage from "pages/SignupPage";
 import { useCheckLogin } from "hooks";

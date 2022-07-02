@@ -1,8 +1,8 @@
 import React from "react";
-import MyPageConfiguration from "components/mypage/MyPageConfiguration";
-import MyPageProfile from "components/mypage/MyPageProfile";
-import MyPageTemplate from "components/mypage/MyPageTemplate";
-import MyPageAccountSetting from "components/mypage/MyPageAccountSetting";
+import MyPageConfiguration from "domains/mypage/MyPageConfiguration";
+import MyPageProfile from "domains/mypage/MyPageProfile";
+import MyPageTemplate from "domains/mypage/MyPageTemplate";
+import MyPageAccountSetting from "domains/mypage/MyPageAccountSetting";
 
 function MyPage() {
   return (

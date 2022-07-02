@@ -1,4 +1,4 @@
-import AuthTemplate from "components/auth/AuthTemplate";
+import AuthTemplate from "domains/auth/AuthTemplate";
 import React from "react";
 
 function SignupPage() {
