@@ -7,6 +7,7 @@ import { useParams } from "react-router-dom";
 import { setDotoris } from "stores/dotori";
 import styled from "styled-components";
 import { IDotoriListResponse } from "types/dotori";
+import { ShareFolderName } from "../ShareFolderName";
 
 /**
  * @description 나중에 완전 싹 다 리팩토링 해야함.
@@ -38,6 +39,7 @@ function ShareTemplate() {
 
   return (
     <Wrapper>
+      <ShareFolderName />
       <DotoriList path="search" />
     </Wrapper>
   );
