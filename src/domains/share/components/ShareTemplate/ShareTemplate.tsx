@@ -1,5 +1,5 @@
 import axios from "axios";
-import DotoriList from "modules/dotori/DotoriList";
+import DotoriList from "domains/dotori/DotoriList";
 import { SERVER_URL } from "lib/constants";
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";

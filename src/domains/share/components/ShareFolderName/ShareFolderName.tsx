@@ -1,5 +1,5 @@
 import FolderEmoji from "components/Folder/FolderEmoji";
-import { useShareFolderNameQuery } from "modules/share/services";
+import { useShareFolderNameQuery } from "domains/share/services";
 import React from "react";
 import styled from "styled-components";
 

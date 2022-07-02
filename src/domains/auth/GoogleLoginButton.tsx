@@ -1,5 +1,5 @@
 import { GoogleIMG, GoogleIMG2x, GoogleIMG3x } from "assets/images";
-import useGoogleLogin from "modules/auth/hooks/useGoogleLogin";
+import useGoogleLogin from "domains/auth/hooks/useGoogleLogin";
 import { palette } from "lib/styles/palette";
 import React from "react";
 import GoogleLogin from "react-google-login";

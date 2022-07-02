@@ -1,4 +1,4 @@
-import { ShareTemplate } from "modules/share/components/ShareTemplate";
+import { ShareTemplate } from "domains/share/components/ShareTemplate";
 import React from "react";
 
 function SharePage() {

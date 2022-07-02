@@ -1,4 +1,4 @@
-import Sidebar from "modules/sidebar";
+import Sidebar from "domains/global/sidebar";
 import { scrollbar } from "lib/styles/utilStyles";
 import React from "react";
 import { Outlet } from "react-router-dom";

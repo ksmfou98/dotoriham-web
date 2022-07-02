@@ -4,16 +4,16 @@ import Tree, {
   RenderItemParams,
   TreeData,
 } from "@atlaskit/tree";
-import FolderItemIcon from "modules/sidebar/FolderItemIcon";
-import useFolderListQuery from "modules/sidebar/hooks/useFolderListQuery";
+import FolderItemIcon from "domains/global/sidebar/FolderItemIcon";
+import useFolderListQuery from "domains/global/sidebar/hooks/useFolderListQuery";
 import { palette } from "lib/styles/palette";
 import { scrollbar } from "lib/styles/utilStyles";
 import React, { useEffect, useState } from "react";
 import { initialFolderState } from "stores/folder";
 import styled, { css } from "styled-components";
-import Button from "../../components/Button/Button";
-import ModalTemplate from "../../components/Modal/ModalTemplate";
-import PagePath from "../pagePath/PagePath";
+import Button from "../../../components/Button/Button";
+import ModalTemplate from "../../../components/Modal/ModalTemplate";
+import PagePath from "../../pagePath/PagePath";
 import { DotoriPathTypes } from "types/dotori";
 
 interface FolderListModalProps {

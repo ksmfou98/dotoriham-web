@@ -1,4 +1,4 @@
-import DotoriTemplate from "modules/dotori/DotoriTemplate";
+import DotoriTemplate from "domains/dotori/DotoriTemplate";
 import React, { useMemo } from "react";
 import qs from "qs";
 import { useLocation } from "react-router-dom";

@@ -8,19 +8,19 @@ import Tree, {
   TreeSourcePosition,
 } from "@atlaskit/tree";
 import styled from "styled-components";
-import FolderItemIcon from "modules/sidebar/FolderItemIcon";
+import FolderItemIcon from "domains/global/sidebar/FolderItemIcon";
 import { palette } from "lib/styles/palette";
 import { scrollbar } from "lib/styles/utilStyles";
-import useFolderListQuery from "modules/sidebar/hooks/useFolderListQuery";
+import useFolderListQuery from "domains/global/sidebar/hooks/useFolderListQuery";
 import { useDispatch, useSelector } from "react-redux";
 import { folderSelector, setFolders } from "stores/folder";
 import { More16Icon, PlusIcon } from "assets/icons";
 import FolderMenu from "./FolderMenu";
 import useToggle from "hooks/useToggle";
 import FolderRenameModal from "./FolderRenameModal";
-import useCreateFolder from "modules/sidebar/hooks/useCreateFolder";
+import useCreateFolder from "domains/global/sidebar/hooks/useCreateFolder";
 import SmallModal from "components/Modal/SmallModal";
-import useDeleteFolder from "modules/sidebar/hooks/useDeleteFolder";
+import useDeleteFolder from "domains/global/sidebar/hooks/useDeleteFolder";
 import { findChildrenLengthById } from "lib/utils/atlaskitTreeFinder";
 import { moveFolderAPI } from "lib/api/folder";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
