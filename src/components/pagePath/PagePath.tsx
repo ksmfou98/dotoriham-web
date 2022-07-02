@@ -19,7 +19,7 @@ function PagePath({ isModal, path, folderId }: PagePathProps) {
   return (
     <PagePathBlock isModal={isModal}>
       {path === "folder" && folderId ? (
-        <FolderPath folderId={folderId} />
+        <FolderPath folderId={folderId} isModal={isModal} />
       ) : (
         <GlobalPath path={path} isModal={isModal} />
       )}
