@@ -5,7 +5,7 @@ import {
   ProgressFinish16Icon,
   ProgressFocused16Icon,
 } from "assets/icons";
-import Input from "domains/common/Input";
+import Input from "components/Input";
 import { palette } from "lib/styles/palette";
 import TextareaAutosize from "react-textarea-autosize";
 import React, { useEffect, useMemo, useRef } from "react";

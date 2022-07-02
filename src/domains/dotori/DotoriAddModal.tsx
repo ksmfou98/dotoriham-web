@@ -1,7 +1,7 @@
 import { PlusCircleIcon, X16BigIcon } from "assets/icons";
-import { Button } from "domains/common";
-import ModalTemplate from "domains/common/ModalTemplate";
-import { ModalTitle } from "domains/common/ModalTitle";
+import { Button } from "components";
+import ModalTemplate from "components/ModalTemplate";
+import { ModalTitle } from "components/ModalTitle";
 import { palette } from "lib/styles/palette";
 import React, { Fragment, useCallback, useState } from "react";
 import styled from "styled-components";
@@ -10,7 +10,7 @@ import DotoriAddForm from "./DotoriAddForm";
 import { v4 as uuidv4 } from "uuid";
 import { useParams } from "react-router-dom";
 import { addDotoriAPI } from "lib/api/dotori";
-import DividerLine from "domains/common/DividerLine";
+import DividerLine from "components/DividerLine";
 import { useQueryClient } from "react-query";
 import { QueryKey } from "lib/queryKey";
 

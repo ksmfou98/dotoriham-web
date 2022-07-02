@@ -15,7 +15,7 @@ import ProfileNicknameForm from "./ProfileNicknameForm";
 import { setUser } from "stores/user";
 import userStorage from "lib/utils/userStorage";
 import Path from "routes/Path";
-import Button from "domains/common/Button";
+import Button from "components/Button";
 import { useToast } from "hooks";
 
 function ProfileEditForm() {

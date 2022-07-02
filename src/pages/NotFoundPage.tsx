@@ -1,5 +1,5 @@
 import { SymbolGray96Icon } from "assets/icons";
-import Button from "domains/common/Button";
+import Button from "components/Button";
 import { palette } from "lib/styles/palette";
 import React from "react";
 import { useNavigate } from "react-router-dom";

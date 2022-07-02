@@ -1,6 +1,6 @@
 import React from "react";
-import ModalTemplate from "domains/common/ModalTemplate";
-import ModalCloseButton from "domains/common/ModalCloseButton";
+import ModalTemplate from "components/ModalTemplate";
+import ModalCloseButton from "components/ModalCloseButton";
 import styled from "styled-components";
 import { palette } from "lib/styles/palette";
 import { MakePeopleIMG } from "assets/images";

@@ -1,7 +1,7 @@
 import { breakpoints } from "lib/styles/media";
 import { palette } from "lib/styles/palette";
 import React from "react";
-import Logo from "domains/common/Logo";
+import Logo from "components/Logo";
 import styled from "styled-components";
 import SearchBar from "./SearchBar";
 import RemindInfoButton from "./RemindInfoButton";

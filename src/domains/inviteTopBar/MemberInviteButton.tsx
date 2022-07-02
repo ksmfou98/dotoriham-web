@@ -1,5 +1,5 @@
 import { People18Icon } from "assets/icons";
-import { Button } from "domains/common";
+import { Button } from "components";
 import React from "react";
 import styled from "styled-components";
 

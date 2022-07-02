@@ -1,6 +1,6 @@
 import { ItemId } from "@atlaskit/tree";
-import CheckBox from "domains/common/CheckBox";
-import FolderEmoji from "domains/common/FolderEmoji";
+import CheckBox from "components/CheckBox";
+import FolderEmoji from "components/FolderEmoji";
 import { palette } from "lib/styles/palette";
 import { ellipsis } from "lib/styles/utilStyles";
 import React from "react";

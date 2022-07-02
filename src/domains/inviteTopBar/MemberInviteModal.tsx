@@ -1,8 +1,8 @@
-import { Button } from "domains/common";
-import DividerLine from "domains/common/DividerLine";
-import Input from "domains/common/Input";
-import ModalTemplate from "domains/common/ModalTemplate";
-import SwitchButton from "domains/common/SwitchButton";
+import { Button } from "components";
+import DividerLine from "components/DividerLine";
+import Input from "components/Input";
+import ModalTemplate from "components/ModalTemplate";
+import SwitchButton from "components/SwitchButton";
 import { useCopyUrl, useToast, useToggle } from "hooks";
 import { getFolderShareTokenAPI } from "lib/api/folder";
 import { palette } from "lib/styles/palette";

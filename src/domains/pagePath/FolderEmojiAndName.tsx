@@ -1,4 +1,4 @@
-import FolderEmoji from "domains/common/FolderEmoji";
+import FolderEmoji from "components/FolderEmoji";
 import { ellipsis } from "lib/styles/utilStyles";
 import React from "react";
 import { Link } from "react-router-dom";

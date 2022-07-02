@@ -1,5 +1,5 @@
-import SmallBlackText from "domains/common/SmallBlackText";
-import SwitchButton from "domains/common/SwitchButton";
+import SmallBlackText from "components/SmallBlackText";
+import SwitchButton from "components/SwitchButton";
 import { palette } from "lib/styles/palette";
 import React from "react";
 import styled from "styled-components";

@@ -1,5 +1,5 @@
-import Button from "domains/common/Button";
-import SmallBlackText from "domains/common/SmallBlackText";
+import Button from "components/Button";
+import SmallBlackText from "components/SmallBlackText";
 import { palette } from "lib/styles/palette";
 import { logout } from "lib/utils/auth";
 import React from "react";

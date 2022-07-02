@@ -1,5 +1,5 @@
-import { Button } from "domains/common";
-import Input from "domains/common/Input";
+import { Button } from "components";
+import Input from "components/Input";
 import { palette } from "lib/styles/palette";
 import { useMemo } from "react";
 import { useSelector } from "react-redux";

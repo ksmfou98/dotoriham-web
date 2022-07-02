@@ -5,8 +5,8 @@ import {
   More24Icon,
   Symbol36Icon,
 } from "assets/icons";
-import DividerLine from "domains/common/DividerLine";
-import FolderEmoji from "domains/common/FolderEmoji";
+import DividerLine from "components/DividerLine";
+import FolderEmoji from "components/FolderEmoji";
 import useCopyUrl from "hooks/useCopyUrl";
 import { palette } from "lib/styles/palette";
 import { ellipsis } from "lib/styles/utilStyles";
@@ -17,7 +17,7 @@ import styled from "styled-components";
 import { IDotoriItem } from "types/dotori";
 import useToast from "hooks/useToast";
 import useDotoriSelect from "./hooks/useDotoriSelect";
-import CheckBox from "domains/common/CheckBox";
+import CheckBox from "components/CheckBox";
 import useDotoriMutation from "./hooks/useDotoriMutation";
 import DotoriItemMenu from "./DotoriItemMenu";
 import { useSelector } from "react-redux";

@@ -19,7 +19,7 @@ import FolderMenu from "./FolderMenu";
 import useToggle from "hooks/useToggle";
 import FolderRenameModal from "./FolderRenameModal";
 import useCreateFolder from "domains/sidebar/hooks/useCreateFolder";
-import SmallModal from "domains/common/SmallModal";
+import SmallModal from "components/SmallModal";
 import useDeleteFolder from "domains/sidebar/hooks/useDeleteFolder";
 import { findChildrenLengthById } from "lib/utils/atlaskitTreeFinder";
 import { moveFolderAPI } from "lib/api/folder";

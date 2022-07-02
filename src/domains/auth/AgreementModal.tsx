@@ -1,5 +1,5 @@
-import { Button } from "domains/common";
-import ModalTemplate from "domains/common/ModalTemplate";
+import { Button } from "components";
+import ModalTemplate from "components/ModalTemplate";
 import { palette } from "lib/styles/palette";
 import styled from "styled-components";
 import {

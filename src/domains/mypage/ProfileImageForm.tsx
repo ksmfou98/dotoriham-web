@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { ColorizeIcon, X16BigIcon } from "assets/icons";
-import SmallBlackText from "domains/common/SmallBlackText";
+import SmallBlackText from "components/SmallBlackText";
 import useToggle from "hooks/useToggle";
 import { palette } from "lib/styles/palette";
 import React, { memo } from "react";

@@ -1,5 +1,5 @@
 import { DropDownIcon } from "assets/icons";
-import SwitchButton from "domains/common/SwitchButton";
+import SwitchButton from "components/SwitchButton";
 import React, { memo } from "react";
 import styled from "styled-components";
 import { FilterMenu } from "types/dotori";

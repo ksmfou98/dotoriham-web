@@ -1,5 +1,5 @@
-import Input from "domains/common/Input";
-import SmallBlackText from "domains/common/SmallBlackText";
+import Input from "components/Input";
+import SmallBlackText from "components/SmallBlackText";
 import { palette } from "lib/styles/palette";
 import React, { memo } from "react";
 import styled from "styled-components";

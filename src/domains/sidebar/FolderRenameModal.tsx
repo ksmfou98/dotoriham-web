@@ -1,7 +1,7 @@
 import { ItemId } from "@atlaskit/tree";
 import { X16Icon } from "assets/icons";
-import Button from "domains/common/Button";
-import Input from "domains/common/Input";
+import Button from "components/Button";
+import Input from "components/Input";
 import { palette } from "lib/styles/palette";
 import React, { useState } from "react";
 import EmojiData from "react-twemoji-picker/data/twemoji.json";
@@ -9,7 +9,7 @@ import "react-twemoji-picker/dist/EmojiPicker.css";
 import { EmojiObject, EmojiPicker } from "react-twemoji-picker";
 import styled from "styled-components";
 import { IFolderMenuPosition } from "./FolderList";
-import FolderEmoji from "domains/common/FolderEmoji";
+import FolderEmoji from "components/FolderEmoji";
 import useRenameFolder from "domains/sidebar/hooks/useRenameFolder";
 
 interface FolderRenameModalProps {

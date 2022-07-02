@@ -1,6 +1,6 @@
 import { ArrowSideIcon } from "assets/icons";
-import CheckBox from "domains/common/CheckBox";
-import DividerLine from "domains/common/DividerLine";
+import CheckBox from "components/CheckBox";
+import DividerLine from "components/DividerLine";
 import { palette } from "lib/styles/palette";
 import React, { memo } from "react";
 import styled from "styled-components";

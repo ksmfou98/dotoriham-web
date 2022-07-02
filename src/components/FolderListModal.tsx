@@ -13,7 +13,7 @@ import { initialFolderState } from "stores/folder";
 import styled, { css } from "styled-components";
 import Button from "./Button";
 import ModalTemplate from "./ModalTemplate";
-import PagePath from "../pagePath/PagePath";
+import PagePath from "../domains/pagePath/PagePath";
 import { DotoriPathTypes } from "types/dotori";
 
 interface FolderListModalProps {

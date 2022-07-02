@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-import ModalTemplate from "domains/common/ModalTemplate";
+import ModalTemplate from "components/ModalTemplate";
 import styled from "styled-components";
 import TextareaAutosize from "react-textarea-autosize";
-import Button from "domains/common/Button";
+import Button from "components/Button";
 import { palette } from "lib/styles/palette";
 import { ActiveDotoriMenu } from "./DotoriList";
 import useDotoriMutation from "./hooks/useDotoriMutation";
-import { ModalTitle } from "domains/common/ModalTitle";
+import { ModalTitle } from "components/ModalTitle";
 
 interface DotoriEditModalProps {
   isOpen: boolean;

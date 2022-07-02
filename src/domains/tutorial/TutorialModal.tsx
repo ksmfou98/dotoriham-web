@@ -1,9 +1,9 @@
-import ModalTemplate from "domains/common/ModalTemplate";
-import SmallGreenText from "domains/common/SmallGreenText";
+import ModalTemplate from "components/ModalTemplate";
+import SmallGreenText from "components/SmallGreenText";
 import { palette } from "lib/styles/palette";
 import React, { useState } from "react";
 import styled from "styled-components";
-import ModalCloseButton from "../common/ModalCloseButton";
+import ModalCloseButton from "../../components/ModalCloseButton";
 import TutorialContents from "./TutorialContents";
 import TutorialSideButtons from "./TutorialSideButtons";
 

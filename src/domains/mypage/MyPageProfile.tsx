@@ -1,4 +1,4 @@
-import Button from "domains/common/Button";
+import Button from "components/Button";
 import { palette } from "lib/styles/palette";
 import React from "react";
 import { useSelector } from "react-redux";

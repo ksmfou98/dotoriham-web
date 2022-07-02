@@ -1,5 +1,5 @@
-import DividerLine from "domains/common/DividerLine";
-import LargeBlackText from "domains/common/LargeBlackText";
+import DividerLine from "components/DividerLine";
+import LargeBlackText from "components/LargeBlackText";
 import { palette } from "lib/styles/palette";
 import React from "react";
 import styled from "styled-components";

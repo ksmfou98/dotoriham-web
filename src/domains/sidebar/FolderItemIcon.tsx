@@ -1,6 +1,6 @@
 import { ItemId, TreeItem } from "@atlaskit/tree";
 import { ArrowDownIcon, ArrowSideIcon } from "assets/icons";
-import FolderEmoji from "domains/common/FolderEmoji";
+import FolderEmoji from "components/FolderEmoji";
 import React from "react";
 import styled from "styled-components";
 
