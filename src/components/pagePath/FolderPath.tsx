@@ -11,9 +11,10 @@ import usePagePathQuery from "./hooks/usePagePathQuery";
 
 interface FolderPathProps {
   folderId: string;
+  isModal?: boolean;
 }
 
-function FolderPath({ folderId }: FolderPathProps) {
+function FolderPath({ folderId, isModal }: FolderPathProps) {
   const { data } = usePagePathQuery(folderId);
   const folders = useSelector(folderSelector);
   if (!data) return null;
@@ -45,9 +46,9 @@ function FolderPath({ folderId }: FolderPathProps) {
         </Container>
       )}
 
-      {folders.rootId === "root" && isRootFolder(folders, Number(folderId)) && (
-        <InviteTopBar />
-      )}
+      {folders.rootId === "root" &&
+        isRootFolder(folders, Number(folderId)) &&
+        !isModal && <InviteTopBar />}
     </FolderPathStyled>
   );
 }

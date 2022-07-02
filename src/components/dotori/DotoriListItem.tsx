@@ -75,7 +75,6 @@ function DotoriListItem({
       remind: !!remindTime,
     };
 
-    console.log(requestData);
     mutateRemindToggleDotori(requestData);
   };
 
@@ -128,7 +127,7 @@ function DotoriListItem({
             <div className="description">{description}</div>
           </InnerContent>
 
-          {!isSharePage() && (
+          {!isSharePage() && folderName && (
             <DotoriFolderInfo>
               <FolderEmoji emoji={folderEmoji} />
               <DotoriFolderName to={`${Path.DotoriPage}/${folderId}`}>
