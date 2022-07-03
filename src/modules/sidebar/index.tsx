@@ -12,7 +12,7 @@ import {
 } from "assets/icons";
 import { useLocation, useNavigate } from "react-router-dom";
 import Path from "routes/Path";
-import QuestionButton from "domains/tutorial/QuestionButton";
+import QuestionButton from "modules/tutorial/QuestionButton";
 
 function Sidebar() {
   const { pathname } = useLocation();

@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 import DotoriList from "./DotoriList";
 import DotoriPagination from "./DotoriPagination";
-import useDotoriQuery from "domains/dotori/hooks/useDotoriQuery";
+import useDotoriQuery from "modules/dotori/hooks/useDotoriQuery";
 import { useDispatch, useSelector } from "react-redux";
 import { dotoriSelector, setDotoris } from "stores/dotori";
 import { ItemId } from "@atlaskit/tree";
@@ -13,7 +13,7 @@ import DotoriSelectNav from "./DotoriSelectNav";
 import DotoriFilterNav from "./DotoriFilterNav";
 import { getDotoriPageSize } from "lib/utils/dotori";
 import SmallModal from "components/Modal/SmallModal";
-import FolderListModal from "domains/global/sidebar/FolderListModal";
+import FolderListModal from "modules/sidebar/FolderListModal";
 import useDotoriMutation from "./hooks/useDotoriMutation";
 import { useNavigate } from "react-router-dom";
 import Path from "routes/Path";

@@ -10,7 +10,7 @@ import { EmojiObject, EmojiPicker } from "react-twemoji-picker";
 import styled from "styled-components";
 import { IFolderMenuPosition } from "./FolderList";
 import FolderEmoji from "components/Folder/FolderEmoji";
-import useRenameFolder from "domains/global/sidebar/hooks/useRenameFolder";
+import useRenameFolder from "modules/sidebar/hooks/useRenameFolder";
 
 interface FolderRenameModalProps {
   position: IFolderMenuPosition;

@@ -1,5 +1,5 @@
 import { ItemId } from "@atlaskit/tree";
-import { FolderQueryKindTypes } from "domains/global/sidebar/hooks/useFolderListQuery";
+import { FolderQueryKindTypes } from "modules/sidebar/hooks/useFolderListQuery";
 import { DotoriPathTypes, DotoriSortType } from "types/dotori";
 
 export const QueryKey = {

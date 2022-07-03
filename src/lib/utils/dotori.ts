@@ -1,4 +1,4 @@
-import { DOTORI_PAGE_SIZE } from "domains/dotori/constants";
+import { DOTORI_PAGE_SIZE } from "modules/dotori/constants";
 import { DotoriPathTypes } from "types/dotori";
 
 // @Note 페이지에 노출 될 도토리 개수

@@ -1,5 +1,5 @@
 import { ItemId } from "@atlaskit/tree";
-import FolderListModal from "domains/global/sidebar/FolderListModal";
+import FolderListModal from "modules/sidebar/FolderListModal";
 import SmallModal from "components/Modal/SmallModal";
 import useToggle from "hooks/useToggle";
 import React, { memo, useCallback, useMemo, useState } from "react";
