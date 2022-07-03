@@ -5,24 +5,19 @@ import {
   More24Icon,
   Symbol36Icon,
 } from "assets/icons";
-import DividerLine from "components/DividerLine/DividerLine";
-import FolderEmoji from "components/Folder/FolderEmoji";
-import useCopyUrl from "hooks/useCopyUrl";
-import { palette } from "lib/styles/palette";
-import { ellipsis } from "lib/styles/utilStyles";
 import React, { memo, SyntheticEvent, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import Path from "routes/Path";
 import styled from "styled-components";
 import { IDotoriItem } from "types/dotori";
-import useToast from "hooks/useToast";
 import useDotoriSelect from "./hooks/useDotoriSelect";
-import CheckBox from "components/CheckBox/CheckBox";
 import useDotoriMutation from "./hooks/useDotoriMutation";
 import DotoriItemMenu from "./DotoriItemMenu";
 import { useSelector } from "react-redux";
 import { userSelector } from "stores/user";
-import { isSharePage } from "lib/utils/checkRoutePath";
+import { ellipsis, palette } from "lib/styles";
+import { CheckBox, DividerLine, FolderEmoji } from "components";
+import { useCopyUrl, useToast } from "hooks";
 
 interface DotoriListItemProps {
   dotori: IDotoriItem;
@@ -127,7 +122,7 @@ function DotoriListItem({
             <div className="description">{description}</div>
           </InnerContent>
 
-          {!isSharePage() && folderName && (
+          {folderName && (
             <DotoriFolderInfo>
               <FolderEmoji emoji={folderEmoji} />
               <DotoriFolderName to={`${Path.DotoriPage}/${folderId}`}>
@@ -141,7 +136,6 @@ function DotoriListItem({
           <DotoriBottomArea>
             <DotoriLinkBox>
               <DotoriLink
-                isFullWidth={isSharePage()}
                 href={link}
                 target="_blank"
                 rel="noopener noreferrer"
@@ -151,7 +145,7 @@ function DotoriListItem({
               </DotoriLink>
             </DotoriLinkBox>
 
-            {location.pathname !== Path.TrashPage && !isSharePage() && (
+            {location.pathname !== Path.TrashPage && (
               <DotoriOption>
                 <OptionButton onClick={onRemindToggle}>
                   {remindTime ? <BellSelectedIcon /> : <BellUnSelectedIcon />}
@@ -320,8 +314,8 @@ const DotoriLinkBox = styled.div`
   overflow: hidden;
 `;
 
-const DotoriLink = styled.a<{ isFullWidth: boolean }>`
-  width: ${({ isFullWidth }) => (isFullWidth ? "100%" : "100px")};
+const DotoriLink = styled.a`
+  width: 100px;
   font-size: 12px;
   line-height: 1.42;
   color: ${palette.gray};
