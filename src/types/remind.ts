@@ -1,7 +1,7 @@
-import { IDotori } from "./dotori";
+import { Dotori } from "./dotori";
 
 export interface IRemindListResponse {
-  remindBookmarkList: IDotori[];
+  remindBookmarkList: Dotori[];
 }
 
 export interface RemindAlarm {

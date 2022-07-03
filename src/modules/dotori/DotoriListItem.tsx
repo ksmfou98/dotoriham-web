@@ -58,8 +58,8 @@ function DotoriListItem({
 
   const { remindToggle } = useSelector(userSelector);
   const location = useLocation();
-  const { copyUrlRef, onCopyUrl } = useCopyUrl();
-  const { copyToast, remindRecommendationToast } = useToast();
+  const { onCopyUrl } = useCopyUrl();
+  const { remindRecommendationToast } = useToast();
   const { mutateRemindToggleDotori, mutateClickCountDotori } =
     useDotoriMutation();
   const { isActiveSelectBox, onToggleDotoriChecked } = useDotoriSelect();
@@ -160,7 +160,6 @@ function DotoriListItem({
                 <OptionButton
                   onClick={() => {
                     onCopyUrl(link);
-                    copyToast();
                   }}
                 >
                   <Copy24Icon />
@@ -188,7 +187,6 @@ function DotoriListItem({
           </DotoriBottomArea>
         </DotoriContent>
         {checked && <SelectedStyled />}
-        <UrlCopyInput ref={copyUrlRef} readOnly value={link} />
       </DotoriItemInner>
     </DotoriItemBlock>
   );
@@ -338,10 +336,6 @@ const DotoriOption = styled.div`
 
 const OptionButton = styled.button`
   position: relative;
-`;
-
-const UrlCopyInput = styled.input`
-  display: none;
 `;
 
 const SelectedStyled = styled.div`

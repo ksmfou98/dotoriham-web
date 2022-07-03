@@ -8,8 +8,6 @@ export const breakpoints = {
 
 const { desktop } = breakpoints;
 
-const media = {
+export const media = {
   desktop: mediaQuery(desktop),
 };
-
-export default media;

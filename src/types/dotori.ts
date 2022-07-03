@@ -1,6 +1,6 @@
 import { ItemId } from "@atlaskit/tree";
 
-export interface IDotori {
+export interface Dotori {
   clickCount: number;
   deleteTime: string;
   deleted: boolean;
@@ -19,7 +19,7 @@ export interface IDotori {
   folderEmoji: string;
 }
 
-export interface IDotoriItem extends IDotori {
+export interface IDotoriItem extends Dotori {
   checked: boolean;
 }
 
@@ -37,7 +37,7 @@ export type DotoriPageableType = {
 };
 
 export interface IDotoriListResponse {
-  content: IDotori[];
+  content: Dotori[];
   empty: boolean;
   first: true;
   last: boolean;

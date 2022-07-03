@@ -2,11 +2,11 @@ import { Symbol36Icon, X16Icon } from "assets/icons";
 import { palette } from "lib/styles/palette";
 import React from "react";
 import styled from "styled-components";
-import { IDotori } from "types/dotori";
+import { Dotori } from "types/dotori";
 import useDeleteRemind from "./hooks/useDeleteRemind";
 
 interface RemindListItemProps {
-  remindData: IDotori;
+  remindData: Dotori;
 }
 
 function RemindListItem({ remindData }: RemindListItemProps) {

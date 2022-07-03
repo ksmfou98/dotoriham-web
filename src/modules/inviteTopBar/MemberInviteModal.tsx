@@ -23,12 +23,11 @@ function MemberInviteModal({ isModal, onToggleModal }: Props) {
 
   const { onCopyUrl } = useCopyUrl();
 
-  const { copyToast, errorToast } = useToast();
+  const { errorToast } = useToast();
 
   useEffect(() => {
     const getToken = async () => {
       const { folderIdToken } = await getFolderShareTokenAPI(folderId);
-      console.log(folderIdToken);
       setFolderToken(folderIdToken);
     };
 
@@ -42,7 +41,6 @@ function MemberInviteModal({ isModal, onToggleModal }: Props) {
 
   const onCopyInviteLink = () => {
     onCopyUrl(inviteLink);
-    copyToast();
   };
 
   return (

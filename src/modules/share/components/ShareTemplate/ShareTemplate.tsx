@@ -1,48 +1,19 @@
-import axios from "axios";
-import DotoriList from "modules/dotori/DotoriList";
-import { SERVER_URL } from "lib/constants";
-import React, { useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { useParams } from "react-router-dom";
-import { setDotoris } from "stores/dotori";
+import React from "react";
+
 import styled from "styled-components";
-import { IDotoriListResponse } from "types/dotori";
 import { ShareFolderName } from "../ShareFolderName";
+import { useShareDotoriListQuery } from "modules/share/services";
 import { ShareDotoriList } from "../ShareDotoriList";
 
-/**
- * @description 나중에 완전 싹 다 리팩토링 해야함.
- */
-
 function ShareTemplate() {
-  const { shareToken = "" } = useParams<"shareToken">();
-  const dispatch = useDispatch();
+  const { data } = useShareDotoriListQuery();
 
-  useEffect(() => {
-    const getData = async () => {
-      try {
-        const { data } = await axios.get<IDotoriListResponse>(
-          `${SERVER_URL}/api/v1/page/open/${encodeURIComponent(shareToken)}`
-        );
-
-        dispatch(
-          setDotoris(
-            data.content.map((dotori) => ({ ...dotori, checked: false }))
-          )
-        );
-      } catch (e) {
-        console.log("북마크를 불러오는데 실패했습니다");
-      }
-    };
-
-    getData();
-  }, [shareToken, dispatch]);
+  if (!data) return null;
 
   return (
     <Wrapper>
       <ShareFolderName />
-      <DotoriList path="search" />
-      <ShareDotoriList />
+      <ShareDotoriList dotoris={data.content} />
     </Wrapper>
   );
 }
