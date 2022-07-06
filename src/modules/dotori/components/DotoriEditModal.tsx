@@ -5,7 +5,7 @@ import TextareaAutosize from "react-textarea-autosize";
 import Button from "components/Button/Button";
 import { palette } from "lib/styles/palette";
 import { ActiveDotoriMenu } from "./DotoriList";
-import useDotoriMutation from "./hooks/useDotoriMutation";
+import useDotoriMutation from "../hooks/useDotoriMutation";
 import { ModalTitle } from "components/Modal/ModalTitle";
 
 interface DotoriEditModalProps {

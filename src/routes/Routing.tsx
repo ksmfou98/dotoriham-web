@@ -12,7 +12,7 @@ const MyPage = lazy(() => import("pages/MyPage"));
 const NotFoundPage = lazy(() => import("pages/NotFoundPage"));
 const TrashPage = lazy(() => import("pages/TrashPage"));
 const SearchPage = lazy(() => import("pages/SearchPage"));
-const DotoriPage = lazy(() => import("pages/DotoriPage"));
+const DotoriPage = lazy(() => import("modules/dotori/pages/DotoriPage"));
 
 export function PublicRouting() {
   return (

@@ -7,13 +7,13 @@ import { useSelector } from "react-redux";
 import { dotoriSelector } from "stores/dotori";
 import styled from "styled-components";
 import { DotoriPathTypes, IDotoriItem } from "types/dotori";
-import { initialDotoriState } from "./constants";
+import { initialDotoriState } from "../utils/constants";
 import DotoriAddButton from "./DotoriAddButton";
 import DotoriAddModal from "./DotoriAddModal";
 import DotoriBlankSlate from "./DotoriBlankSlate";
 import DotoriEditModal from "./DotoriEditModal";
 import DotoriListItem from "./DotoriListItem";
-import useDotoriMutation from "./hooks/useDotoriMutation";
+import useDotoriMutation from "../hooks/useDotoriMutation";
 
 export interface ActiveDotoriMenu extends IDotoriItem {
   isOpen: boolean;
