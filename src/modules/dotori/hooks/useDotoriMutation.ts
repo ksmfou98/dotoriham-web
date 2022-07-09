@@ -6,7 +6,7 @@ import {
   restoreDotoriAPI,
   truncateDotoriAPI,
   updateDotoriAPI,
-} from "lib/api/dotori";
+} from "modules/dotori/apis/dotori";
 import { deleteRemindAPI, setRemindAPI } from "lib/api/remind";
 import { QueryKey } from "lib/queryKey";
 import { useMutation, useQueryClient } from "react-query";

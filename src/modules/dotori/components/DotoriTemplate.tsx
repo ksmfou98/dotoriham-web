@@ -11,7 +11,7 @@ import styled from "styled-components";
 import { palette } from "lib/styles/palette";
 import DotoriSelectNav from "./DotoriSelectNav";
 import DotoriFilterNav from "./DotoriFilterNav";
-import { getDotoriPageSize } from "lib/utils/dotori";
+import { getDotoriPageSize } from "modules/dotori/utils/dotori";
 import SmallModal from "components/Modal/SmallModal";
 import FolderListModal from "modules/sidebar/FolderListModal";
 import useDotoriMutation from "../hooks/useDotoriMutation";

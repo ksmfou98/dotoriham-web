@@ -6,7 +6,7 @@ import {
   DotoriUpdateRequest,
   IDotoriListResponse,
 } from "types/dotori";
-import client from "./client";
+import client from "../../../lib/api/client";
 
 // 휴지통 도토리 조회
 export const getTrashDotorisAPI = async (

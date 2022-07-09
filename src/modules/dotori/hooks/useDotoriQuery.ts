@@ -3,7 +3,7 @@ import {
   getDotorisAPI,
   getSearchDotorisAPI,
   getTrashDotorisAPI,
-} from "lib/api/dotori";
+} from "modules/dotori/apis/dotori";
 import { ReactQueryKey } from "lib/queryKey";
 import { useQuery } from "react-query";
 import { DotoriPathTypes, DotoriSortType } from "types/dotori";
