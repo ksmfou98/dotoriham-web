@@ -51,7 +51,7 @@ function DotoriListItem({
 
   const [imageLoadError, setImageLoadError] = useState(false);
 
-  const { remindToggle } = useSelector(userSelector);
+  const { remindToggle, name, image: profileImage } = useSelector(userSelector);
   const location = useLocation();
   const { onCopyUrl } = useCopyUrl();
   const { remindRecommendationToast } = useToast();
@@ -134,16 +134,10 @@ function DotoriListItem({
           <DividerLine color={palette.grayLightest} width="100%" />
 
           <DotoriBottomArea>
-            <DotoriLinkBox>
-              <DotoriLink
-                href={link}
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={() => mutateClickCountDotori(id)}
-              >
-                {link}
-              </DotoriLink>
-            </DotoriLinkBox>
+            <DotoriAuthor>
+              <ProfileImg src={profileImage} alt="프로필 이미지" />
+              {name}
+            </DotoriAuthor>
 
             {location.pathname !== Path.TrashPage && (
               <DotoriOption>
@@ -305,21 +299,28 @@ const DotoriFolderName = styled(Link)`
 const DotoriBottomArea = styled.div`
   display: flex;
   justify-content: space-between;
+  align-items: center;
   margin-top: 13px;
 `;
 
-const DotoriLinkBox = styled.div`
-  display: flex;
-  align-items: center;
-  overflow: hidden;
-`;
-
-const DotoriLink = styled.a`
+const DotoriAuthor = styled.div`
   width: 100px;
   font-size: 12px;
   line-height: 1.42;
-  color: ${palette.gray};
+  color: ${palette.grayDarker};
   ${ellipsis}
+  display: flex;
+  align-items: center;
+`;
+
+const ProfileImg = styled.img`
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  margin-right: 6px;
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 const DotoriOption = styled.div`
