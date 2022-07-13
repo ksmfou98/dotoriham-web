@@ -204,7 +204,7 @@ const DotoriItemInner = styled.div`
 
 const DotoriThumbnail = styled.a`
   width: 273px;
-  height: 152px;
+  height: 150px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -266,13 +266,17 @@ const InnerContent = styled.a`
     -webkit-box-orient: vertical;
   }
   .description {
-    font-size: 14px;
+    font-size: 12px;
     font-weight: normal;
     line-height: 1.42;
     width: 233px;
-    color: ${palette.grayDarkest};
+    color: ${palette.grayDark};
     margin-bottom: 23.5px;
-    ${ellipsis};
+    text-overflow: ellipsis;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
   }
 `;
 

@@ -99,7 +99,7 @@ export const truncateDotoriAPI = async (dotoriIdList: string[]) => {
 // @Note 북마크 추가
 export const addDotoriAPI = async (requestData: DotoriAddRequest) => {
   const response = await client.post(
-    `/api/v1/bookmarkInterface?folderId=${requestData.folderId}`,
+    `/api/v1/bookmark/list?folderId=${requestData.folderId}`,
     requestData
   );
 
