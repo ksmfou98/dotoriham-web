@@ -1,7 +1,7 @@
 import CheckBox from "components/CheckBox/CheckBox";
 import React, { memo } from "react";
 import styled from "styled-components";
-import useDotoriSelect from "./hooks/useDotoriSelect";
+import useDotoriSelect from "../hooks/useDotoriSelect";
 
 interface DotoriSelectNavProps {
   isTrashPage: boolean;

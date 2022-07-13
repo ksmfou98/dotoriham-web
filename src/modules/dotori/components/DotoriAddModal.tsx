@@ -9,7 +9,7 @@ import { DotoriForm } from "types/dotori";
 import DotoriAddForm from "./DotoriAddForm";
 import { v4 as uuidv4 } from "uuid";
 import { useParams } from "react-router-dom";
-import { addDotoriAPI } from "lib/api/dotori";
+import { addDotoriAPI } from "modules/dotori/apis/dotori";
 import DividerLine from "components/DividerLine/DividerLine";
 import { useQueryClient } from "react-query";
 import { QueryKey } from "lib/queryKey";

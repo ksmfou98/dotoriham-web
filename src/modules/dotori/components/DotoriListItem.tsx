@@ -10,8 +10,8 @@ import { Link, useLocation } from "react-router-dom";
 import Path from "routes/Path";
 import styled from "styled-components";
 import { IDotoriItem } from "types/dotori";
-import useDotoriSelect from "./hooks/useDotoriSelect";
-import useDotoriMutation from "./hooks/useDotoriMutation";
+import useDotoriSelect from "../hooks/useDotoriSelect";
+import useDotoriMutation from "../hooks/useDotoriMutation";
 import DotoriItemMenu from "./DotoriItemMenu";
 import { useSelector } from "react-redux";
 import { userSelector } from "stores/user";
@@ -51,7 +51,7 @@ function DotoriListItem({
 
   const [imageLoadError, setImageLoadError] = useState(false);
 
-  const { remindToggle } = useSelector(userSelector);
+  const { remindToggle, name, image: profileImage } = useSelector(userSelector);
   const location = useLocation();
   const { onCopyUrl } = useCopyUrl();
   const { remindRecommendationToast } = useToast();
@@ -134,16 +134,10 @@ function DotoriListItem({
           <DividerLine color={palette.grayLightest} width="100%" />
 
           <DotoriBottomArea>
-            <DotoriLinkBox>
-              <DotoriLink
-                href={link}
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={() => mutateClickCountDotori(id)}
-              >
-                {link}
-              </DotoriLink>
-            </DotoriLinkBox>
+            <DotoriAuthor>
+              <ProfileImg src={profileImage} alt="프로필 이미지" />
+              {name}
+            </DotoriAuthor>
 
             {location.pathname !== Path.TrashPage && (
               <DotoriOption>
@@ -210,7 +204,7 @@ const DotoriItemInner = styled.div`
 
 const DotoriThumbnail = styled.a`
   width: 273px;
-  height: 152px;
+  height: 150px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -272,13 +266,17 @@ const InnerContent = styled.a`
     -webkit-box-orient: vertical;
   }
   .description {
-    font-size: 14px;
+    font-size: 12px;
     font-weight: normal;
     line-height: 1.42;
     width: 233px;
-    color: ${palette.grayDarkest};
+    color: ${palette.grayDark};
     margin-bottom: 23.5px;
-    ${ellipsis};
+    text-overflow: ellipsis;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
   }
 `;
 
@@ -305,21 +303,28 @@ const DotoriFolderName = styled(Link)`
 const DotoriBottomArea = styled.div`
   display: flex;
   justify-content: space-between;
+  align-items: center;
   margin-top: 13px;
 `;
 
-const DotoriLinkBox = styled.div`
-  display: flex;
-  align-items: center;
-  overflow: hidden;
-`;
-
-const DotoriLink = styled.a`
+const DotoriAuthor = styled.div`
   width: 100px;
   font-size: 12px;
   line-height: 1.42;
-  color: ${palette.gray};
+  color: ${palette.grayDarker};
   ${ellipsis}
+  display: flex;
+  align-items: center;
+`;
+
+const ProfileImg = styled.img`
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  margin-right: 6px;
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 const DotoriOption = styled.div`

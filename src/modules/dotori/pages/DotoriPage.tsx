@@ -1,6 +1,6 @@
 import React from "react";
 import PagePath from "modules/pagePath/PagePath";
-import DotoriTemplate from "modules/dotori/DotoriTemplate";
+import DotoriTemplate from "modules/dotori/components/DotoriTemplate";
 import Reminder from "modules/reminder";
 import { useLocation, useParams } from "react-router-dom";
 import Path from "routes/Path";

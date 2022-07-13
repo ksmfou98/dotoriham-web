@@ -5,7 +5,7 @@ import TextareaAutosize from "react-textarea-autosize";
 import Button from "components/Button/Button";
 import { palette } from "lib/styles/palette";
 import { ActiveDotoriMenu } from "./DotoriList";
-import useDotoriMutation from "./hooks/useDotoriMutation";
+import useDotoriMutation from "../hooks/useDotoriMutation";
 import { ModalTitle } from "components/Modal/ModalTitle";
 
 interface DotoriEditModalProps {
@@ -14,14 +14,25 @@ interface DotoriEditModalProps {
   isActiveDotoriMenu: ActiveDotoriMenu;
 }
 
-const TITLE_MAX_LENGTH = 100;
+const TITLE_MAX_LENGTH = 37;
+const DESCRIPTION_MAX_LENGTH = 63;
 
 function DotoriEditModal({
   isOpen,
   onToggleModal,
   isActiveDotoriMenu,
 }: DotoriEditModalProps) {
-  const [title, setTitle] = useState(isActiveDotoriMenu.title);
+  const [title, setTitle] = useState(
+    isActiveDotoriMenu.title.length >= TITLE_MAX_LENGTH
+      ? isActiveDotoriMenu.title.substring(0, TITLE_MAX_LENGTH)
+      : isActiveDotoriMenu.title
+  );
+  const [description, setDescription] = useState(
+    isActiveDotoriMenu.description.length >= DESCRIPTION_MAX_LENGTH
+      ? isActiveDotoriMenu.description.slice(0, DESCRIPTION_MAX_LENGTH)
+      : isActiveDotoriMenu.description
+  );
+
   const { mutateEditDotori } = useDotoriMutation();
 
   const onChangeTitle = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -29,11 +40,16 @@ function DotoriEditModal({
     setTitle(e.target.value);
   };
 
+  const onChangeDescription = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    if (e.target.value.length > DESCRIPTION_MAX_LENGTH) return;
+    setDescription(e.target.value);
+  };
+
   const onSubmitTitle = () => {
     const requestData = {
       dotoriId: isActiveDotoriMenu.id,
       title,
-      description: isActiveDotoriMenu.description,
+      description,
     };
     mutateEditDotori(requestData);
     onToggleModal();
@@ -51,11 +67,21 @@ function DotoriEditModal({
         <ModalContent>
           <InputInfo>
             <InputText>제목</InputText>
-            <InputCount active={title.length === TITLE_MAX_LENGTH}>
+            <InputCount active={title.length >= TITLE_MAX_LENGTH}>
               {title.length}/{TITLE_MAX_LENGTH}
             </InputCount>
           </InputInfo>
           <EditInput value={title} onChange={onChangeTitle} />
+        </ModalContent>
+
+        <ModalContent>
+          <InputInfo>
+            <InputText>내용</InputText>
+            <InputCount active={description.length >= DESCRIPTION_MAX_LENGTH}>
+              {description.length}/{DESCRIPTION_MAX_LENGTH}
+            </InputCount>
+          </InputInfo>
+          <EditInput value={description} onChange={onChangeDescription} />
         </ModalContent>
         <ModalButtonGroup>
           <Button
@@ -114,11 +140,11 @@ const InputCount = styled.div<{ active: boolean }>`
 `;
 
 const EditInput = styled(TextareaAutosize)`
-  margin-bottom: 24px;
   resize: none;
   outline: none;
   width: 100%;
   border-radius: 4px;
+  margin-bottom: 20px;
   border: solid 1px ${palette.grayLight};
   padding: 6px 10px;
 `;
