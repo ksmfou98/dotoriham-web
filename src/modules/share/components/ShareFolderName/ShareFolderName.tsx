@@ -1,10 +1,10 @@
 import FolderEmoji from "components/Folder/FolderEmoji";
-import { useShareFolderNameQuery } from "modules/share/services";
+import { useShareFolderNameService } from "modules/share/services";
 import React from "react";
 import styled from "styled-components";
 
 function ShareFolderName() {
-  const { data } = useShareFolderNameQuery();
+  const { data } = useShareFolderNameService();
 
   if (!data) return null;
 

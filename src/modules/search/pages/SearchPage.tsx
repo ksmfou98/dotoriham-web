@@ -2,6 +2,7 @@ import DotoriTemplate from "modules/dotori/components/DotoriTemplate";
 import React, { useMemo } from "react";
 import qs from "qs";
 import { useLocation } from "react-router-dom";
+import SearchDotoriListContainer from "../containers/SearchDotoriListContainer";
 
 function SearchPage() {
   const location = useLocation();
@@ -13,7 +14,12 @@ function SearchPage() {
     return parsed;
   }, [location.search]);
 
-  return <DotoriTemplate path="search" keyword={query.q} />;
+  return (
+    <>
+      <DotoriTemplate path="search" keyword={query.q} />;
+      <SearchDotoriListContainer />
+    </>
+  );
 }
 
 export default SearchPage;

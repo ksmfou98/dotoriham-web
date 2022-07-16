@@ -1,2 +1,2 @@
-export { default as useShareFolderNameQuery } from "./useShareFolderNameQuery";
-export { default as useShareDotoriListQuery } from "./useShareDotoriListQuery";
+export { default as useShareFolderNameService } from "./useShareFolderNameService";
+export { default as useShareDotoriListService } from "./useShareDotoriListService";

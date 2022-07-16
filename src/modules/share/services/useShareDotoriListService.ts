@@ -1,15 +1,15 @@
 import { useQuery } from "react-query";
 import { useParams } from "react-router-dom";
-import { getShareFolderName } from "../apis";
+import { getShareDotoriList } from "../apis";
 
-const QUERY_KEY = "shareFolderName";
+const QUERY_KEY = "shareDotoriList";
 
-export default function useShareFolderNameQuery() {
+export default function useShareDotoriListService() {
   const { shareToken = "" } = useParams<"shareToken">();
 
   return useQuery(
     [QUERY_KEY, shareToken],
-    () => getShareFolderName(shareToken),
+    () => getShareDotoriList(shareToken),
     {
       enabled: shareToken !== "",
       cacheTime: 5 * 60 * 1000,

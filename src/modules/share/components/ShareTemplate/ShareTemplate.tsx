@@ -2,11 +2,11 @@ import React from "react";
 
 import styled from "styled-components";
 import { ShareFolderName } from "../ShareFolderName";
-import { useShareDotoriListQuery } from "modules/share/services";
+import { useShareDotoriListService } from "modules/share/services";
 import { ShareDotoriList } from "../ShareDotoriList";
 
 function ShareTemplate() {
-  const { data } = useShareDotoriListQuery();
+  const { data } = useShareDotoriListService();
 
   if (!data) return null;
 

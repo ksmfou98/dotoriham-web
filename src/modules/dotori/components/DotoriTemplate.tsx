@@ -107,8 +107,6 @@ function DotoriTemplate({ path, keyword, folderId }: DotoriTemplateProps) {
     mutateTruncateDotori(checkedDotoris);
   };
 
-  console.log({ data });
-
   return (
     <>
       <DotoriNavBlock>
