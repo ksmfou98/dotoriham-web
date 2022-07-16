@@ -19,6 +19,9 @@ export interface Dotori {
   folderEmoji: string;
 }
 
+/**
+ * @deprecated 리팩토링 끝나면 삭제 예정
+ */
 export interface IDotoriItem extends Dotori {
   checked: boolean;
 }

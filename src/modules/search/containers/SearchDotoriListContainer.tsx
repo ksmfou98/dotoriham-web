@@ -1,9 +1,14 @@
+import { SearchDotoriList } from "../components";
 import { useSearchDotoriListService } from "../services";
 
 function SearchDotoriListContainer() {
-  useSearchDotoriListService();
+  const { dotoriList } = useSearchDotoriListService();
 
-  return <div>SearchDotoriListContianer</div>;
+  return (
+    <div>
+      <SearchDotoriList dotoriList={dotoriList} />
+    </div>
+  );
 }
 
 export default SearchDotoriListContainer;

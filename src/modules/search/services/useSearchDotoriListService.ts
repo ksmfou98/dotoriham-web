@@ -1,7 +1,8 @@
-import { DotoriSortType } from "types/dotori";
+import { DotoriSortType, IDotoriItem } from "types/dotori";
 import { useQueryString } from "modules/@shared/hooks";
 import { useQuery } from "react-query";
 import { getSearchDotoriList } from "../apis";
+import { toDotoriUiModel } from "../models/dotori.model";
 
 interface QueryParams {
   keyword: string;
@@ -29,13 +30,11 @@ export default function useSearchDotoriListService() {
       cacheTime: 5 * 60 * 1000,
       staleTime: 5 * 60 * 1000,
       retry: false,
-      select: (data) => data.content,
+      select: (data) => toDotoriUiModel(data.content),
     }
   );
 
-  console.log({ data });
-
   return {
-    data,
+    dotoriList: data,
   };
 }
