@@ -1,5 +1,5 @@
 import FolderEmoji from "components/Folder/FolderEmoji";
-import useToggle from "hooks/useToggle";
+import useToggle from "modules/@shared/hooks/useToggle";
 import { palette } from "lib/styles/palette";
 import { ellipsis } from "lib/styles/utilStyles";
 import React from "react";

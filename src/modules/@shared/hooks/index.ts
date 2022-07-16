@@ -6,3 +6,4 @@ export { default as useResizeWidth } from "./useResizeWidth";
 export { default as useSlider } from "./useSlider";
 export { default as useToast } from "./useToast";
 export { default as useToggle } from "./useToggle";
+export { default as useQueryString } from "./useQueryString";

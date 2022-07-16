@@ -1,6 +1,6 @@
 import React from "react";
 import { QuestionActiveIcon, QuestionIcon } from "assets/icons";
-import useToggle from "hooks/useToggle";
+import useToggle from "modules/@shared/hooks/useToggle";
 import { palette } from "lib/styles/palette";
 import transitions from "lib/styles/transitions";
 import { useDispatch, useSelector } from "react-redux";
@@ -10,7 +10,7 @@ import {
   tutorialSelector,
 } from "stores/tutorial";
 import styled, { css } from "styled-components";
-import { useOutSideClick } from "hooks";
+import { useOutSideClick } from "modules/@shared/hooks";
 import TutorialModal from "./TutorialModal";
 
 function QuestionButton() {

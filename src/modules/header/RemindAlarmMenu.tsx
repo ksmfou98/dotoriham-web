@@ -1,4 +1,4 @@
-import { useOutSideClick } from "hooks";
+import { useOutSideClick } from "modules/@shared/hooks";
 import { palette } from "lib/styles/palette";
 import { scrollbar } from "lib/styles/utilStyles";
 import { getLastTimeString } from "lib/utils/remind";

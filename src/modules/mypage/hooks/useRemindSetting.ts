@@ -1,4 +1,4 @@
-import { useToggle } from "hooks";
+import { useToggle } from "modules/@shared/hooks";
 import { setRemindCycleAPI, toggleRemindSettingAPI } from "lib/api/remind";
 import {
   changeRemindCycleLocalInfo,

@@ -1,4 +1,4 @@
-import { useToggle } from "hooks";
+import { useToggle } from "modules/@shared/hooks";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { useDispatch } from "react-redux";
 import { setAuthValidate } from "stores/authValidate";

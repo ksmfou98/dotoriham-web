@@ -15,8 +15,8 @@ import { getMetaDataByUrl } from "lib/utils/getMetaData";
 import { CRAWLING_SERVER_URL } from "lib/constants";
 import { DotoriForm } from "types/dotori";
 import { useQuery } from "react-query";
-import { useInput } from "hooks";
-import useQueryDebounce from "hooks/useQueryDebounce";
+import { useInput } from "modules/@shared/hooks";
+import useQueryDebounce from "modules/@shared/hooks/useQueryDebounce";
 import LoadingIcon from "assets/images/loading.gif";
 
 interface Props {

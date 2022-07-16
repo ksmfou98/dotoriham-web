@@ -1,4 +1,4 @@
-import { useToggle } from "hooks";
+import { useToggle } from "modules/@shared/hooks";
 import React from "react";
 
 import styled from "styled-components";

@@ -1,7 +1,7 @@
 import { ItemId } from "@atlaskit/tree";
 import FolderListModal from "modules/sidebar/FolderListModal";
 import SmallModal from "components/Modal/SmallModal";
-import useToggle from "hooks/useToggle";
+import useToggle from "modules/@shared/hooks/useToggle";
 import React, { memo, useCallback, useMemo, useState } from "react";
 import { useSelector } from "react-redux";
 import { dotoriSelector } from "stores/dotori";

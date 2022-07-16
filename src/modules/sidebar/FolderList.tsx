@@ -16,7 +16,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { folderSelector, setFolders } from "stores/folder";
 import { More16Icon, PlusIcon } from "assets/icons";
 import FolderMenu from "./FolderMenu";
-import useToggle from "hooks/useToggle";
+import useToggle from "modules/@shared/hooks/useToggle";
 import FolderRenameModal from "./FolderRenameModal";
 import useCreateFolder from "modules/sidebar/hooks/useCreateFolder";
 import SmallModal from "components/Modal/SmallModal";

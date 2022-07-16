@@ -1,5 +1,5 @@
 import { renderHook, act } from "@testing-library/react-hooks";
-import { useInput } from "hooks";
+import { useInput } from "modules/@shared/hooks";
 
 describe("useInput", () => {
   test("useInput은 길이가 3인 배열을 리턴한다. (value, onChange, setValue)", () => {

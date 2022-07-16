@@ -1,11 +1,11 @@
 import { Search24Icon } from "assets/icons";
-import useInput from "hooks/useInput";
+import useInput from "modules/@shared/hooks/useInput";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import Path from "routes/Path";
 import { toast } from "react-toastify";
-import { ToastSize } from "hooks/useToast";
+import { ToastSize } from "modules/@shared/hooks/useToast";
 
 function SearchBar() {
   const navigate = useNavigate();
