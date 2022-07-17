@@ -1,3 +1,4 @@
+import { ReactQueryKey } from "lib/queryKey";
 import { useQuery } from "react-query";
 import { getSearchDotoriList } from "../apis";
 import useSearchQueryParams from "../hooks/useSearchQueryParams";
@@ -8,7 +9,7 @@ export default function useSearchDotoriListService() {
   const { keyword, page, remind, sort } = useSearchQueryParams();
 
   const { data } = useQuery(
-    ["searchDotoriList", keyword, page, remind, SearchDotoriListSize, sort],
+    ReactQueryKey.dotoriContents("search", keyword, page, remind, sort),
     () =>
       getSearchDotoriList({
         keyword,

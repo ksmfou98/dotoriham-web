@@ -4,6 +4,8 @@ import styled from "styled-components";
 interface Props {
   isDotoriAllChecked: boolean;
   onToggleDotoriAllChecked: () => void;
+  onToggleDeleteModal: () => void;
+  onToggleMoveModal: () => void;
   isActiveSelectBox: boolean;
 }
 
@@ -11,6 +13,8 @@ function SearchDotoriSelect({
   isActiveSelectBox,
   isDotoriAllChecked,
   onToggleDotoriAllChecked,
+  onToggleDeleteModal,
+  onToggleMoveModal,
 }: Props) {
   return (
     <Block>
@@ -25,8 +29,12 @@ function SearchDotoriSelect({
 
       {isActiveSelectBox && (
         <SelectOption>
-          <div className="option">이동</div>
-          <div className="option">삭제</div>
+          <div className="option" onClick={onToggleMoveModal}>
+            이동
+          </div>
+          <div className="option" onClick={onToggleDeleteModal}>
+            삭제
+          </div>
         </SelectOption>
       )}
     </Block>

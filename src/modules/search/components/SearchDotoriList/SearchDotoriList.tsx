@@ -4,19 +4,20 @@ import { useToggle } from "modules/@shared/hooks";
 import DotoriBlankSlate from "modules/dotori/components/DotoriBlankSlate";
 import DotoriEditModal from "modules/dotori/components/DotoriEditModal";
 import { ActiveDotoriMenu } from "modules/dotori/components/DotoriList";
-import DotoriListItem from "modules/dotori/components/DotoriListItem";
 import useDotoriMutation from "modules/dotori/hooks/useDotoriMutation";
 import { initialDotoriState } from "modules/dotori/utils/constants";
 import { DotoriUiModel } from "modules/search/models/dotori.model";
 import FolderListModal from "modules/sidebar/FolderListModal";
 import { useCallback, useState } from "react";
 import styled from "styled-components";
+import { SearchDotoriListItem } from "../SearchDotoriListItem";
 
 interface Props {
   dotoriList: DotoriUiModel[];
+  onToggleDotoriChecked: (dotoriId: string) => void;
 }
 
-function SearchDotoriList({ dotoriList }: Props) {
+function SearchDotoriList({ dotoriList, onToggleDotoriChecked }: Props) {
   const [isDeleteModal, onToggleDeleteModal] = useToggle();
   const [isEditModal, onToggleEditModal] = useToggle();
   const [isMoveModal, onToggleMoveModal] = useToggle();
@@ -50,7 +51,7 @@ function SearchDotoriList({ dotoriList }: Props) {
       {dotoriList.length === 0 && <DotoriBlankSlate path="search" />}
 
       {dotoriList.map((dotori) => (
-        <DotoriListItem
+        <SearchDotoriListItem
           key={dotori.id}
           dotori={dotori}
           isActiveDotoriMenu={
@@ -60,6 +61,7 @@ function SearchDotoriList({ dotoriList }: Props) {
           onToggleDeleteModal={onToggleDeleteModal}
           onToggleEditModal={onToggleEditModal}
           onToggleMoveModal={onToggleMoveModal}
+          onToggleDotoriChecked={onToggleDotoriChecked}
         />
       ))}
 
