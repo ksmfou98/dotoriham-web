@@ -3,11 +3,7 @@ import qs from "qs";
 const searchKeys = ["keyword", "page", "remind", "size", "sort"];
 const searchKeysSet = new Set(searchKeys);
 
-interface Props {
-  [key: string]: string;
-}
-
-export const mergeQsParserWithSearchKeys = (search: Props) => {
+export const mergeQsParserWithSearchKeys = (search: any) => {
   const preserveParams = Object.entries(
     qs.parse(window.location.search, { ignoreQueryPrefix: true })
   ).reduce((prev, [key, value]) => {

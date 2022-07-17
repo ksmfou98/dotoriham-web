@@ -18,8 +18,9 @@ export default function useSearchQueryParams() {
 
   return {
     keyword,
-    page,
-    remind,
+    page: Number(page),
+    remind:
+      typeof remind === "string" ? (JSON.parse(remind) as boolean) : remind,
     sort,
   };
 }

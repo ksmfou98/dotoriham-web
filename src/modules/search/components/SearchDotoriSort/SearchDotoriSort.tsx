@@ -1,20 +1,34 @@
 import { DropDownIcon } from "assets/icons";
+import { SwitchButton } from "components";
 import { useToggle } from "modules/@shared/hooks";
 import { getSortText } from "modules/@shared/utils";
 import { useSearchQueryParams } from "modules/search/hooks";
+import { mergeQsParserWithSearchKeys } from "modules/search/utils";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { SearchDotoriSortMenu } from "../SearchDotoriSortMenu";
 
 function SearchDotoriSort() {
   const [isOpenSortMenu, onToggleSortMenu] = useToggle(false);
-  const { sort } = useSearchQueryParams();
+  const { sort, remind } = useSearchQueryParams();
   const isActiveSortText = getSortText(sort);
+  const navigate = useNavigate();
 
   return (
     <Block>
       <RemindToggleStyled>
         <RemindToggleText>리마인드 도토리</RemindToggleText>
-        {/* <SwitchButton isChecked onToggle={onToggleRemind} /> */}
+        <SwitchButton
+          isChecked={remind}
+          onToggle={() => {
+            navigate({
+              pathname: "/search",
+              search: mergeQsParserWithSearchKeys({
+                remind: !remind,
+              }),
+            });
+          }}
+        />
       </RemindToggleStyled>
 
       <FilterMenuButton onClick={onToggleSortMenu}>

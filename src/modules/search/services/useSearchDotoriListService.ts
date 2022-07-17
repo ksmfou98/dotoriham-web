@@ -1,6 +1,5 @@
 import { useQuery } from "react-query";
 import { getSearchDotoriList } from "../apis";
-import { toDotoriUiModel } from "../models/dotori.model";
 import useSearchQueryParams from "../hooks/useSearchQueryParams";
 
 const SearchDotoriListSize = 12;
@@ -8,7 +7,7 @@ const SearchDotoriListSize = 12;
 export default function useSearchDotoriListService() {
   const { keyword, page, remind, sort } = useSearchQueryParams();
 
-  const { data = [] } = useQuery(
+  const { data } = useQuery(
     ["searchDotoriList", keyword, page, remind, SearchDotoriListSize, sort],
     () =>
       getSearchDotoriList({
@@ -22,7 +21,6 @@ export default function useSearchDotoriListService() {
       cacheTime: 5 * 60 * 1000,
       staleTime: 5 * 60 * 1000,
       retry: false,
-      select: (data) => toDotoriUiModel(data.content),
     }
   );
 
