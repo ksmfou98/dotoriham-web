@@ -10,13 +10,13 @@ function SearchPage() {
   const query = useMemo(() => {
     const parsed = qs.parse(location.search, {
       ignoreQueryPrefix: true,
-    }) as { q: string };
+    }) as { keyword: string };
     return parsed;
   }, [location.search]);
 
   return (
     <>
-      <DotoriTemplate path="search" keyword={query.q} />;
+      <DotoriTemplate path="search" keyword={query.keyword} />;
       <SearchDotoriListContainer />
     </>
   );

@@ -19,7 +19,7 @@ function SearchBar() {
       });
       return;
     }
-    navigate(`${Path.SearchPage}?q=${searchForm}`);
+    navigate(`${Path.SearchPage}?keyword=${searchForm}`);
   };
 
   return (

@@ -1,4 +1,4 @@
-import { DotoriSortType, IDotoriItem } from "types/dotori";
+import { DotoriSortType } from "types/dotori";
 import { useQueryString } from "modules/@shared/hooks";
 import { useQuery } from "react-query";
 import { getSearchDotoriList } from "../apis";
