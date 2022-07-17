@@ -1,13 +1,14 @@
-import { SearchDotoriList } from "../components";
+import { SearchDotoriList, SearchDotoriNavigation } from "../components";
 import { useSearchDotoriListService } from "../services";
 
 function SearchDotoriListContainer() {
-  const { dotoriList } = useSearchDotoriListService();
+  const { data } = useSearchDotoriListService();
 
   return (
-    <div>
-      <SearchDotoriList dotoriList={dotoriList} />
-    </div>
+    <>
+      <SearchDotoriNavigation />
+      <SearchDotoriList dotoriList={data} />
+    </>
   );
 }
 
