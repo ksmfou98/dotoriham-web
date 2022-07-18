@@ -1,5 +1,5 @@
 import Header from "modules/header";
-import { breakpoints } from "lib/styles/media";
+import { breakpoints, media } from "lib/styles/media";
 import React from "react";
 import { initializeApp } from "firebase/app";
 import { ReactQueryDevtools } from "react-query/devtools";
@@ -58,6 +58,9 @@ const MainLayout = styled.main<{ isSharePage: boolean }>`
   flex: 1 auto;
   display: flex;
   flex-direction: column;
+  ${media.large} {
+    width: ${breakpoints.medium}px;
+  }
 `;
 
 export default App;
