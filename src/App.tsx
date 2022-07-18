@@ -53,7 +53,7 @@ const AppWrapper = styled.div`
 
 const MainLayout = styled.main<{ isSharePage: boolean }>`
   width: ${({ isSharePage }) =>
-    isSharePage ? breakpoints.share : breakpoints.desktop}px;
+    isSharePage ? breakpoints.share : breakpoints.large}px;
   margin: 0 auto;
   flex: 1 auto;
   display: flex;

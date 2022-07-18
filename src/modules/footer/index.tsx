@@ -72,7 +72,7 @@ const FooterBlock = styled.footer`
 
 const FooterInner = styled.div`
   height: 100%;
-  width: ${breakpoints.desktop}px;
+  width: ${breakpoints.large}px;
   margin: 0 auto;
   display: flex;
   align-items: center;
