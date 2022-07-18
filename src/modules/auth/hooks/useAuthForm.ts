@@ -1,4 +1,4 @@
-import { useToast } from "hooks";
+import { useToast } from "modules/@shared/hooks";
 import { loginAPI, signupAPI } from "lib/api/auth";
 import { getFCMToken } from "lib/firebase";
 import userStorage from "lib/utils/userStorage";

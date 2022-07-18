@@ -1,7 +1,7 @@
 import { ItemId } from "@atlaskit/tree";
 import FolderListModal from "modules/sidebar/FolderListModal";
 import SmallModal from "components/Modal/SmallModal";
-import useToggle from "hooks/useToggle";
+import useToggle from "modules/@shared/hooks/useToggle";
 import React, { memo, useCallback, useMemo, useState } from "react";
 import { useSelector } from "react-redux";
 import { dotoriSelector } from "stores/dotori";
@@ -14,6 +14,7 @@ import DotoriBlankSlate from "./DotoriBlankSlate";
 import DotoriEditModal from "./DotoriEditModal";
 import DotoriListItem from "./DotoriListItem";
 import useDotoriMutation from "../hooks/useDotoriMutation";
+import { media } from "lib/styles";
 
 export interface ActiveDotoriMenu extends IDotoriItem {
   isOpen: boolean;
@@ -118,13 +119,14 @@ function DotoriList({ path }: { path: DotoriPathTypes }) {
 }
 
 const DotoriListBlock = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  > div {
-    margin: 0 24px 40px 0;
-    &:nth-child(3n) {
-      margin-right: 0;
-    }
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  margin: 0 auto;
+  gap: 24px;
+  row-gap: 28px;
+
+  ${media.large} {
+    grid-template-columns: repeat(2, 1fr);
   }
 `;
 

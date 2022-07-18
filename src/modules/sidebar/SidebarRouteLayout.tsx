@@ -3,6 +3,7 @@ import { scrollbar } from "lib/styles/utilStyles";
 import React from "react";
 import { Outlet } from "react-router-dom";
 import styled from "styled-components";
+import { media } from "lib/styles";
 
 function SidebarRouteLayout() {
   return (
@@ -31,6 +32,9 @@ const MainContent = styled.div`
 
 const ContentInner = styled.div`
   width: 867px;
+  ${media.large} {
+    width: auto;
+  }
 `;
 
 export default SidebarRouteLayout;

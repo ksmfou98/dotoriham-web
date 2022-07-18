@@ -1,4 +1,4 @@
-import { useToast } from "hooks";
+import { useToast } from "modules/@shared/hooks";
 import {
   clickCountDotoriAPI,
   deleteDotoriAPI,

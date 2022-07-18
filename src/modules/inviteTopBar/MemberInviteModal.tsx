@@ -3,7 +3,7 @@ import DividerLine from "components/DividerLine/DividerLine";
 import Input from "components/Input/Input";
 import ModalTemplate from "components/Modal/ModalTemplate";
 import SwitchButton from "components/Button/SwitchButton";
-import { useCopyUrl, useToast, useToggle } from "hooks";
+import { useCopyUrl, useToast, useToggle } from "modules/@shared/hooks";
 import { getFolderShareTokenAPI } from "lib/api/folder";
 import { palette } from "lib/styles/palette";
 import React, { useEffect, useMemo, useState } from "react";

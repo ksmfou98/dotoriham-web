@@ -1,4 +1,4 @@
-import useOutSideClick from "hooks/useOutSideClick";
+import useOutSideClick from "modules/@shared/hooks/useOutSideClick";
 import { palette } from "lib/styles/palette";
 import React from "react";
 import styled from "styled-components";

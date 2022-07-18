@@ -2,7 +2,7 @@ import React, { lazy, Suspense } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import Path from "./Path";
 import SidebarRouteLayout from "modules/sidebar/SidebarRouteLayout";
-import { useCheckLogin } from "hooks";
+import { useCheckLogin } from "modules/@shared/hooks";
 
 const SharePage = lazy(() => import("modules/share/pages/SharePage"));
 const ProfileEditPage = lazy(() => import("pages/ProfileEditPage"));
@@ -11,7 +11,7 @@ const LoginPage = lazy(() => import("pages/LoginPage"));
 const MyPage = lazy(() => import("pages/MyPage"));
 const NotFoundPage = lazy(() => import("pages/NotFoundPage"));
 const TrashPage = lazy(() => import("pages/TrashPage"));
-const SearchPage = lazy(() => import("pages/SearchPage"));
+const SearchPage = lazy(() => import("modules/search/pages/SearchPage"));
 const DotoriPage = lazy(() => import("modules/dotori/pages/DotoriPage"));
 
 export function PublicRouting() {

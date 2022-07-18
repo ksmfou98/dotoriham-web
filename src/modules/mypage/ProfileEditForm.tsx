@@ -16,7 +16,7 @@ import { setUser } from "stores/user";
 import userStorage from "lib/utils/userStorage";
 import Path from "routes/Path";
 import Button from "components/Button/Button";
-import { useToast } from "hooks";
+import { useToast } from "modules/@shared/hooks";
 
 function ProfileEditForm() {
   const navigate = useNavigate();

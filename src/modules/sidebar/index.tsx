@@ -8,11 +8,13 @@ import {
   ListSelectedIcon,
   ListUnSelectedIcon,
   SelectedTrashIcon,
+  TrashBallonIcon,
   UnselectedTrashIcon,
 } from "assets/icons";
 import { useLocation, useNavigate } from "react-router-dom";
 import Path from "routes/Path";
 import QuestionButton from "modules/tutorial/QuestionButton";
+import { transitions } from "lib/styles";
 
 function Sidebar() {
   const { pathname } = useLocation();
@@ -33,13 +35,22 @@ function Sidebar() {
 
       <AddFolderButton />
 
-      <SidebarIconName
-        isActive={pathname === Path.TrashPage}
-        onClick={() => navigate(Path.TrashPage)}
-        name="휴지통"
-        activeIcon={<SelectedTrashIcon />}
-        unActiveIcon={<UnselectedTrashIcon />}
-      />
+      <TrashBoxWrapper>
+        <SidebarIconName
+          isActive={pathname === Path.TrashPage}
+          onClick={() => navigate(Path.TrashPage)}
+          name="휴지통"
+          activeIcon={<SelectedTrashIcon />}
+          unActiveIcon={<UnselectedTrashIcon />}
+        />
+        <TrashBallonBox>
+          <TrashBallonIcon />
+          <TrashBallonText>
+            휴지통의 도토리는
+            <br /> 30일 뒤 완전히 사라져요!
+          </TrashBallonText>
+        </TrashBallonBox>
+      </TrashBoxWrapper>
 
       <QuestionButtonBox>
         <QuestionButton />
@@ -66,6 +77,27 @@ const FolderListBox = styled.div`
 const QuestionButtonBox = styled.div`
   flex: 1 0 auto;
   position: relative;
+`;
+
+const TrashBallonBox = styled.div`
+  position: relative;
+  display: none;
+  animation: ${transitions.fadeIn} 0.4s ease-in-out;
+`;
+
+const TrashBallonText = styled.span`
+  position: absolute;
+  top: 17px;
+  left: 13px;
+  font-size: 10px;
+  line-height: normal;
+  color: ${palette.grayDarkest};
+`;
+
+const TrashBoxWrapper = styled.div`
+  &:hover ${TrashBallonBox} {
+    display: block;
+  }
 `;
 
 export default Sidebar;

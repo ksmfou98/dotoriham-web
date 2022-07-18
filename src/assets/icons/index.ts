@@ -45,3 +45,4 @@ export { ReactComponent as PlusCircleIcon } from "./+btn.svg";
 export { ReactComponent as ProgressDisabled16Icon } from "./progress_disabled_16.svg";
 export { ReactComponent as ProgressFocused16Icon } from "./progress_focused_16.svg";
 export { ReactComponent as ProgressFinish16Icon } from "./progress_finish_16.svg";
+export { ReactComponent as TrashBallonIcon } from "./TrashBallonIcon.svg";

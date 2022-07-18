@@ -3,7 +3,7 @@ import { palette } from "lib/styles/palette";
 import styled from "styled-components";
 import { breakpoints } from "lib/styles/media";
 import { SymbolGray22Icon } from "assets/icons";
-import { useToggle } from "hooks";
+import { useToggle } from "modules/@shared/hooks";
 import MakePeopleModal from "./MakePeopleModal";
 
 function Footer() {
@@ -72,7 +72,7 @@ const FooterBlock = styled.footer`
 
 const FooterInner = styled.div`
   height: 100%;
-  width: ${breakpoints.desktop}px;
+  width: ${breakpoints.large}px;
   margin: 0 auto;
   display: flex;
   align-items: center;

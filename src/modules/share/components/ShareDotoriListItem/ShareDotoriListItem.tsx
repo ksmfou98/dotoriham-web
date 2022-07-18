@@ -1,6 +1,6 @@
 import { Copy24Icon, Symbol36Icon } from "assets/icons";
 import { DividerLine, FolderEmoji } from "components";
-import { useCopyUrl } from "hooks";
+import { useCopyUrl } from "modules/@shared/hooks";
 import { ellipsis, palette } from "lib/styles";
 import React, { SyntheticEvent, useState } from "react";
 import styled from "styled-components";

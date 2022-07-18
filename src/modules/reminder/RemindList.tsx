@@ -1,5 +1,5 @@
 import React from "react";
-import useSlider from "hooks/useSlider";
+import useSlider from "modules/@shared/hooks/useSlider";
 import styled, { css } from "styled-components";
 import useRemindQuery from "./hooks/useRemindQuery";
 import RemindListItem from "./RemindListItem";

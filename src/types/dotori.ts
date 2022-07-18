@@ -19,6 +19,9 @@ export interface Dotori {
   folderEmoji: string;
 }
 
+/**
+ * @deprecated 리팩토링 끝나면 삭제 예정
+ */
 export interface IDotoriItem extends Dotori {
   checked: boolean;
 }
@@ -36,7 +39,25 @@ export type DotoriPageableType = {
   unpaged: boolean;
 };
 
+/**
+ * @deprecated  리팩토링 끝나면 삭제 예정
+ * @see DotoriList
+ */
 export interface IDotoriListResponse {
+  content: Dotori[];
+  empty: boolean;
+  first: true;
+  last: boolean;
+  number: number;
+  numberOfElements: number;
+  pageable: DotoriPageableType;
+  size: number;
+  sort: DotoriSortType;
+  totalElements: number;
+  totalPages: number;
+}
+
+export interface DotoriList {
   content: Dotori[];
   empty: boolean;
   first: true;

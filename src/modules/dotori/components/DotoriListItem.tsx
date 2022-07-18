@@ -17,7 +17,7 @@ import { useSelector } from "react-redux";
 import { userSelector } from "stores/user";
 import { ellipsis, palette } from "lib/styles";
 import { CheckBox, DividerLine, FolderEmoji } from "components";
-import { useCopyUrl, useToast } from "hooks";
+import { useCopyUrl, useToast } from "modules/@shared/hooks";
 
 interface DotoriListItemProps {
   dotori: IDotoriItem;

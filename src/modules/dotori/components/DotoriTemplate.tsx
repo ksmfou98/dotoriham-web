@@ -5,7 +5,7 @@ import useDotoriQuery from "modules/dotori/hooks/useDotoriQuery";
 import { useDispatch, useSelector } from "react-redux";
 import { dotoriSelector, setDotoris } from "stores/dotori";
 import { ItemId } from "@atlaskit/tree";
-import useToggle from "hooks/useToggle";
+import useToggle from "modules/@shared/hooks/useToggle";
 import { DotoriPathTypes, FilterMenu } from "types/dotori";
 import styled from "styled-components";
 import { palette } from "lib/styles/palette";
@@ -106,8 +106,6 @@ function DotoriTemplate({ path, keyword, folderId }: DotoriTemplateProps) {
     if (checkedDotoris.length === 0) return;
     mutateTruncateDotori(checkedDotoris);
   };
-
-  console.log({ data });
 
   return (
     <>

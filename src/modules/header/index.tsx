@@ -38,7 +38,7 @@ const HeaderBlock = styled.header`
 `;
 
 const HeaderInner = styled.div`
-  width: ${breakpoints.desktop}px;
+  width: ${breakpoints.large}px;
   height: 48px;
   margin: 0 auto;
   color: ${palette.black};

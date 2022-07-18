@@ -1,5 +1,5 @@
 import { act, renderHook } from "@testing-library/react-hooks";
-import useToggle from "hooks/useToggle";
+import useToggle from "modules/@shared/hooks/useToggle";
 
 describe("useToggle", () => {
   test("useToggle은 길이가 3인 배열을 리턴한다. (state, onToggle, setState)", () => {
