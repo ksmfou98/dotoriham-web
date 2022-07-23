@@ -62,8 +62,6 @@ function DotoriAddModal({ isModal, onToggleModal }: Props) {
     }
   }, [dotoriFormList, folderId, onToggleModal, queryClient]);
 
-  console.log(dotoriFormList);
-
   const onChangeForm = useCallback(
     (form: DotoriForm) => {
       setDotoriFormList(

@@ -1,8 +1,8 @@
-import { Symbol36Icon } from "assets/icons";
 import { CheckBox, DividerLine } from "components";
 import { ellipsis, palette } from "lib/styles";
 import { ReactNode, useState } from "react";
 import styled from "styled-components";
+import { DotoriDefaultImage } from "../DotoriDefaultImage";
 
 interface Props {
   title?: string;
@@ -50,9 +50,7 @@ function DotoriCard({
               onError={onImageloadError}
             />
           ) : (
-            <DotoriDefaultImage>
-              <SymbolIcon />
-            </DotoriDefaultImage>
+            <DotoriDefaultImage width={60} height={60} />
           )}
 
           {isActiveSelectBox && (
@@ -137,20 +135,6 @@ const DotoriImage = styled.img`
   left: 0px;
   object-fit: cover;
   border-radius: 8px 8px 0 0;
-`;
-
-const DotoriDefaultImage = styled.div`
-  width: 100%;
-  height: 100%;
-  background-color: ${palette.primaryLight};
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`;
-
-const SymbolIcon = styled(Symbol36Icon)`
-  width: 60px;
-  height: 60px;
 `;
 
 const SelectButton = styled(CheckBox)`
