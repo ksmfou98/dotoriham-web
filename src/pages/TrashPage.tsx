@@ -1,5 +1,5 @@
-import PagePath from "modules/pagePath/PagePath";
-import DotoriTemplate from "modules/dotori/components/DotoriTemplate";
+import PagePath from "domains/pagePath/PagePath";
+import DotoriTemplate from "domains/dotori/components/DotoriTemplate";
 import React from "react";
 
 function TrashPage() {
