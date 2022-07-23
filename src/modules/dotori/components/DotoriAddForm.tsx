@@ -4,11 +4,12 @@ import {
   ProgressDisabled16Icon,
   ProgressFinish16Icon,
   ProgressFocused16Icon,
+  Symbol36Icon,
 } from "assets/icons";
 import Input from "components/Input/Input";
 import { palette } from "lib/styles/palette";
 import TextareaAutosize from "react-textarea-autosize";
-import React, { useEffect, useMemo, useRef } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import styled, { css } from "styled-components";
 import axios from "axios";
 import { getMetaDataByUrl } from "lib/utils/getMetaData";
@@ -72,6 +73,8 @@ function DotoriAddForm({ dotoriForm, onChangeForm }: Props) {
   const { description, image, title, remind } = dotoriForm;
   const heightRef = useRef<HTMLTextAreaElement>(null);
   const [linkValue, onChangeLinkValue] = useInput("");
+  const [imageLoadError, setImageLoadError] = useState(false);
+  const onImageLoadError = () => setImageLoadError(true);
 
   const onChangeNewForm = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -167,10 +170,16 @@ function DotoriAddForm({ dotoriForm, onChangeForm }: Props) {
           ) : (
             <>
               <ImageBox>
-                {image ? (
-                  <Image src={image} alt="여기다가 og title 넣자" />
+                {image && !imageLoadError ? (
+                  <Image
+                    src={image}
+                    alt="og-title"
+                    onError={onImageLoadError}
+                  />
                 ) : (
-                  <DefaultImage />
+                  <DefaultImage>
+                    <Symbol36Icon />
+                  </DefaultImage>
                 )}
               </ImageBox>
 

@@ -1,6 +1,6 @@
 import { Symbol36Icon, X16Icon } from "assets/icons";
 import { palette } from "lib/styles/palette";
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { Dotori } from "types/dotori";
 import useDeleteRemind from "./hooks/useDeleteRemind";
@@ -12,14 +12,16 @@ interface RemindListItemProps {
 function RemindListItem({ remindData }: RemindListItemProps) {
   const { title, description, image, link, id } = remindData;
   const remindText = title || description;
+  const [imageLoadError, setImageLoadError] = useState(false);
+  const onImageLoadError = () => setImageLoadError(true);
 
   const { mutateDeleteRemind } = useDeleteRemind();
 
   return (
     <RemindListItemBlock href={link} target="_blank" rel="noopener noreferrer">
       <RemindItemLeftBox>
-        {image ? (
-          <RemindItemImage src={image} />
+        {image && !imageLoadError ? (
+          <RemindItemImage src={image} alt={title} onError={onImageLoadError} />
         ) : (
           <RemindItemDefaultImage>
             <Symbol36Icon />
