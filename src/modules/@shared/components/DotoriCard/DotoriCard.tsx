@@ -1,7 +1,7 @@
 import { Symbol36Icon } from "assets/icons";
-import { DividerLine } from "components";
+import { CheckBox, DividerLine } from "components";
 import { ellipsis, palette } from "lib/styles";
-import { useState } from "react";
+import { ReactNode, useState } from "react";
 import styled from "styled-components";
 
 interface Props {
@@ -11,6 +11,11 @@ interface Props {
   imageSrc?: string;
   profileImageSrc?: string;
   profileName?: string;
+  bottomMenu?: ReactNode;
+  checked?: boolean;
+  isActiveSelectBox?: boolean;
+  onToggleChecked?: () => void;
+  onClickLink?: () => void;
 }
 
 function DotoriCard({
@@ -20,16 +25,26 @@ function DotoriCard({
   profileImageSrc,
   profileName,
   title,
+  bottomMenu,
+  isActiveSelectBox,
+  onToggleChecked,
+  checked,
+  onClickLink,
 }: Props) {
   const [imageLoadError, setImageLoadError] = useState(false);
   const onImageloadError = () => setImageLoadError(true);
 
   return (
-    <DotoriItemBlock>
-      <DotoriItemInner>
-        <DotoriThumbnail href={link} target="_blank" rel="noopener noreferrer">
+    <Container>
+      <Inner>
+        <ImageBox
+          href={link}
+          target="_blank"
+          rel="noopener noreferrer"
+          onClick={onClickLink}
+        >
           {imageSrc && !imageLoadError ? (
-            <DotoriOGImage
+            <DotoriImage
               src={imageSrc}
               alt="og-image"
               onError={onImageloadError}
@@ -39,37 +54,60 @@ function DotoriCard({
               <SymbolIcon />
             </DotoriDefaultImage>
           )}
-        </DotoriThumbnail>
 
-        <DotoriContent>
-          <InnerContent href={link} target="_blank" rel="noopener noreferrer">
-            <div className="title">{title || "제목없음"}</div>
-            <div className="description">{description}</div>
-          </InnerContent>
+          {isActiveSelectBox && (
+            <SelectButton
+              onClick={(e) => {
+                e.stopPropagation();
+                e.preventDefault();
+                onToggleChecked && onToggleChecked();
+              }}
+              variant="primary"
+              isChecked={checked || false}
+            />
+          )}
+        </ImageBox>
+
+        <Content>
+          <ContentLinked
+            href={link}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={onClickLink}
+          >
+            <Title>{title || "제목없음"}</Title>
+            <Description>{description}</Description>
+          </ContentLinked>
 
           <DividerLine color={palette.grayLightest} width="100%" />
 
           <DotoriBottomArea>
-            <DotoriLink href={link} target="_blank" rel="noopener noreferrer">
-              {link}
-            </DotoriLink>
+            <Author>
+              {profileImageSrc && (
+                <ProfileImg src={profileImageSrc} alt="프로필 이미지" />
+              )}
+              {profileName && <>{profileName}</>}
+            </Author>
+
+            {bottomMenu}
           </DotoriBottomArea>
-        </DotoriContent>
-      </DotoriItemInner>
-    </DotoriItemBlock>
+        </Content>
+        {checked && <SelectedStyled />}
+      </Inner>
+    </Container>
   );
 }
 
-const DotoriItemBlock = styled.div`
+const Container = styled.div`
   display: flex;
   flex-direction: column;
   position: relative;
 `;
 
-const DotoriItemInner = styled.div`
+const Inner = styled.div`
   flex: 1 auto;
   display: flex;
-  min-height: 350px;
+  min-height: 331px;
   flex-direction: column;
   border-radius: 8px;
   position: relative;
@@ -82,7 +120,7 @@ const DotoriItemInner = styled.div`
   }
 `;
 
-const DotoriThumbnail = styled.a`
+const ImageBox = styled.a`
   width: 273px;
   height: 152px;
   display: flex;
@@ -91,7 +129,7 @@ const DotoriThumbnail = styled.a`
   position: relative;
 `;
 
-const DotoriOGImage = styled.img`
+const DotoriImage = styled.img`
   height: 100%;
   width: 100%;
   position: absolute;
@@ -115,7 +153,14 @@ const SymbolIcon = styled(Symbol36Icon)`
   height: 60px;
 `;
 
-const DotoriContent = styled.div`
+const SelectButton = styled(CheckBox)`
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  z-index: 100;
+`;
+
+const Content = styled.div`
   padding: 14px 20px 15px;
   width: 273px;
   display: flex;
@@ -123,70 +168,77 @@ const DotoriContent = styled.div`
   flex: 1 auto;
 `;
 
-const InnerContent = styled.a`
+const ContentLinked = styled.a`
   flex: 1 auto;
-  .title {
-    font-size: 16px;
-    font-weight: 500;
-    line-height: 1.5;
-    width: 233px;
-    color: ${palette.black};
-    margin-bottom: 8px;
-    text-overflow: ellipsis;
-    overflow: hidden;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-  }
-  .description {
-    font-size: 14px;
-    font-weight: normal;
-    line-height: 1.42;
-    width: 233px;
-    color: ${palette.grayDarkest};
-    margin-bottom: 23.5px;
-    ${ellipsis};
-  }
 `;
 
-const DotoriFolderInfo = styled.div`
-  margin-bottom: 11px;
-  display: flex;
-  align-items: center;
+const Title = styled.div`
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.5;
+  width: 233px;
+  color: ${palette.black};
+  margin-bottom: 8px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
 `;
 
-const DotoriFolderName = styled.span`
-  font-size: 10px;
-  color: ${palette.gray};
-  height: 16px;
-  line-height: 16px;
-  display: inline-block;
-  margin-left: 4px;
-  max-width: 135px;
-  ${ellipsis}
+const Description = styled.div`
+  font-size: 12px;
+  font-weight: normal;
+  line-height: 1.42;
+  width: 233px;
+  color: ${palette.grayDark};
+  margin-bottom: 23.5px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
 `;
 
 const DotoriBottomArea = styled.div`
   display: flex;
   justify-content: space-between;
+  width: 100%;
   align-items: center;
   margin-top: 13px;
 `;
 
-const DotoriLink = styled.a`
-  width: 100%;
+const Author = styled.div`
+  width: 100px;
   font-size: 12px;
   line-height: 1.42;
-  color: ${palette.gray};
+  color: ${palette.grayDarker};
   ${ellipsis}
-`;
-
-const OptionButton = styled.button`
   display: flex;
   align-items: center;
-  justify-content: center;
-  margin-left: 0px;
-  margin: 0 2px;
+`;
+
+const ProfileImg = styled.img`
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  margin-right: 6px;
+  &:hover {
+    cursor: pointer;
+  }
+`;
+
+const SelectedStyled = styled.div`
+  width: 100%;
+  height: 100%;
+  border: solid 1px ${palette.primary};
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: ${palette.shadow1};
+  border-radius: 8px;
 `;
 
 export default DotoriCard;
