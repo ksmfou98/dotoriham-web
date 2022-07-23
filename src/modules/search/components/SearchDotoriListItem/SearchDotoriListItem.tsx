@@ -3,7 +3,6 @@ import {
   BellUnSelectedIcon,
   Copy24Icon,
   More24Icon,
-  Symbol36Icon,
 } from "assets/icons";
 import React, { memo, SyntheticEvent, useState } from "react";
 import { Link } from "react-router-dom";
@@ -18,6 +17,7 @@ import { CheckBox, DividerLine, FolderEmoji } from "components";
 import { useCopyUrl, useToast } from "modules/@shared/hooks";
 import useDotoriMutation from "modules/dotori/hooks/useDotoriMutation";
 import DotoriItemMenu from "modules/dotori/components/DotoriItemMenu";
+import { DotoriDefaultImage } from "modules/@shared/components";
 
 interface Props {
   dotori: IDotoriItem;
@@ -93,9 +93,7 @@ function SearchDotoriListItem({
               onError={onImageloadError}
             />
           ) : (
-            <DotoriDefaultImage>
-              <SymbolIcon />
-            </DotoriDefaultImage>
+            <DotoriDefaultImage width={60} height={60} />
           )}
 
           {checked && (
@@ -217,20 +215,6 @@ const DotoriOGImage = styled.img`
   left: 0px;
   object-fit: cover;
   border-radius: 8px 8px 0 0;
-`;
-
-const DotoriDefaultImage = styled.div`
-  width: 100%;
-  height: 100%;
-  background-color: ${palette.primaryLight};
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`;
-
-const SymbolIcon = styled(Symbol36Icon)`
-  width: 60px;
-  height: 60px;
 `;
 
 const SelectButton = styled(CheckBox)`

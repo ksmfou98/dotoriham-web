@@ -21,7 +21,10 @@ import FolderRenameModal from "./FolderRenameModal";
 import useCreateFolder from "modules/sidebar/hooks/useCreateFolder";
 import SmallModal from "components/Modal/SmallModal";
 import useDeleteFolder from "modules/sidebar/hooks/useDeleteFolder";
-import { findChildrenLengthById } from "lib/utils/atlaskitTreeFinder";
+import {
+  findChildrenLengthById,
+  isRootFolder,
+} from "lib/utils/atlaskitTreeFinder";
 import { moveFolderAPI } from "lib/api/folder";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import Path from "routes/Path";
@@ -253,8 +256,16 @@ function FolderList() {
         <SmallModal
           isModal={isDeleteModal}
           onToggleModal={onToggleDeleteModal}
-          title="이 폴더를 삭제할까요?"
-          content="폴더에 있는 모든 내용들이 <br /> 휴지통으로 들어가요!"
+          title={
+            isRootFolder(folders, isSelectedFolderId)
+              ? `이 보관함을 삭제할까요?`
+              : `이 폴더를 삭제할까요?`
+          }
+          content={
+            isRootFolder(folders, isSelectedFolderId)
+              ? `보관함에 있는 모든 내용이 <br /> 휴지통으로 들어가고, 30일 뒤 사라져요!`
+              : `폴더에 있는 모든 내용이 <br /> 휴지통으로 들어가고, 30일 뒤 사라져요!`
+          }
           buttonName="삭제"
           onClick={() => mutateDeleteFolder()}
         />

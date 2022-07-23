@@ -20,7 +20,7 @@ const Container = styled.div`
   border-radius: 8px;
   border: 0.7px dashed ${palette.grayLight};
   display: flex;
-  min-height: 350px;
+  min-height: 331px;
   align-items: center;
   justify-content: center;
   cursor: pointer;

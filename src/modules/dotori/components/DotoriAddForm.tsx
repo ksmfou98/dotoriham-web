@@ -4,7 +4,6 @@ import {
   ProgressDisabled16Icon,
   ProgressFinish16Icon,
   ProgressFocused16Icon,
-  Symbol36Icon,
 } from "assets/icons";
 import Input from "components/Input/Input";
 import { palette } from "lib/styles/palette";
@@ -19,6 +18,7 @@ import { useQuery } from "react-query";
 import { useInput } from "modules/@shared/hooks";
 import useQueryDebounce from "modules/@shared/hooks/useQueryDebounce";
 import LoadingIcon from "assets/images/loading.gif";
+import { DotoriDefaultImage } from "modules/@shared/components";
 
 interface Props {
   dotoriForm: DotoriForm;
@@ -177,9 +177,7 @@ function DotoriAddForm({ dotoriForm, onChangeForm }: Props) {
                     onError={onImageLoadError}
                   />
                 ) : (
-                  <DefaultImage>
-                    <Symbol36Icon />
-                  </DefaultImage>
+                  <DotoriDefaultImage />
                 )}
               </ImageBox>
 
@@ -296,16 +294,6 @@ const InputBox = styled.div`
   input {
     margin-bottom: 8px;
   }
-`;
-
-const DefaultImage = styled.div`
-  width: 100%;
-  height: 100%;
-  background-color: ${palette.primaryLight};
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 8px;
 `;
 
 const DescriptionInput = styled(TextareaAutosize)`
