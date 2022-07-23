@@ -146,7 +146,7 @@ function DotoriTemplate({ path, keyword, folderId }: DotoriTemplateProps) {
           isModal={isDeleteModal}
           onToggleModal={onToggleDeleteModal}
           title="선택한 도토리를 삭제할까요?"
-          content="삭제된 도토리는 모두 <br /> 휴지통으로 들어가요!"
+          content="휴지통의 도토리는 <br /> 30일 뒤 완전히 사라져요!"
           buttonName="삭제"
           onClick={onDeleteDotori}
         />
