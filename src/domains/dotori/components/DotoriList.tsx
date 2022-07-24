@@ -1,7 +1,4 @@
 import { ItemId } from "@atlaskit/tree";
-import FolderListModal from "domains/sidebar/FolderListModal";
-import SmallModal from "components/Modal/SmallModal";
-import useToggle from "domains/@shared/hooks/useToggle";
 import React, { memo, useCallback, useMemo, useState } from "react";
 import { useSelector } from "react-redux";
 import { dotoriSelector } from "stores/dotori";
@@ -11,18 +8,10 @@ import { initialDotoriState } from "../utils/constants";
 import DotoriAddButton from "./DotoriAddButton";
 import DotoriAddModal from "./DotoriAddModal";
 import DotoriBlankSlate from "./DotoriBlankSlate";
-import DotoriEditModal from "./DotoriEditModal";
 import useDotoriMutation from "../hooks/useDotoriMutation";
 import { media } from "lib/styles";
-import { DotoriCard } from "domains/@shared/components";
-import {
-  BellSelectedIcon,
-  BellUnSelectedIcon,
-  Copy24Icon,
-  More24Icon,
-} from "assets/icons";
-import DotoriItemMenu from "./DotoriItemMenu";
-import { useCopyUrl, useToast } from "domains/@shared/hooks";
+import { DotoriCard, DotoriCardOptionButton } from "domains/@shared/components";
+import { useToast, useToggle } from "domains/@shared/hooks";
 import { userSelector } from "stores/user";
 import useDotoriSelect from "../hooks/useDotoriSelect";
 
@@ -33,9 +22,6 @@ export interface ActiveDotoriMenu extends IDotoriItem {
 function DotoriList({ path }: { path: DotoriPathTypes }) {
   const dotoris = useSelector(dotoriSelector);
 
-  const [isDeleteModal, onToggleDeleteModal] = useToggle();
-  const [isEditModal, onToggleEditModal] = useToggle();
-  const [isMoveModal, onToggleMoveModal] = useToggle();
   const [isAddModal, onToggleAddModal] = useToggle();
   const {
     mutateDeleteDotori,
@@ -43,7 +29,6 @@ function DotoriList({ path }: { path: DotoriPathTypes }) {
     mutateRemindToggleDotori,
     mutateClickCountDotori,
   } = useDotoriMutation();
-  const { onCopyUrl } = useCopyUrl();
   const { remindRecommendationToast } = useToast();
   const { remindToggle } = useSelector(userSelector);
   const { isActiveSelectBox, onToggleDotoriChecked } = useDotoriSelect();
@@ -116,70 +101,26 @@ function DotoriList({ path }: { path: DotoriPathTypes }) {
             onToggleChecked={() => onToggleDotoriChecked(id)}
             isActiveSelectBox={isActiveSelectBox}
             onClickLink={() => mutateClickCountDotori(id)}
-            bottomMenu={
-              <DotoriOption>
-                <OptionButton onClick={() => onRemindToggle(id, remindTime)}>
-                  {remindTime ? <BellSelectedIcon /> : <BellUnSelectedIcon />}
-                </OptionButton>
-
-                <OptionButton onClick={() => onCopyUrl(link)}>
-                  <Copy24Icon />
-                </OptionButton>
-
-                <OptionButton
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    onActiveDotoriMenu(dotori, true);
-                  }}
-                >
-                  <More24Icon />
-                  {isActiveDotoriMenu.id === dotori.id &&
-                    isActiveDotoriMenu.isOpen && (
-                      <DotoriItemMenu
-                        isOpen={
-                          isActiveDotoriMenu.id === dotori.id &&
-                          isActiveDotoriMenu.isOpen
-                        }
-                        onClose={() => onActiveDotoriMenu(dotori, false)}
-                        onToggleDeleteModal={onToggleDeleteModal}
-                        onToggleEditModal={onToggleEditModal}
-                        onToggleMoveModal={onToggleMoveModal}
-                      />
-                    )}
-                </OptionButton>
-              </DotoriOption>
+            optionButton={
+              <DotoriCardOptionButton
+                isActiveDotoriMenu={isActiveDotoriMenu}
+                isOpenDotoriMenu={
+                  isActiveDotoriMenu.id === dotori.id &&
+                  isActiveDotoriMenu.isOpen
+                }
+                isRemind={!!remindTime}
+                link={link}
+                onActiveDotoriMenu={(isOpen: boolean) =>
+                  onActiveDotoriMenu(dotori, isOpen)
+                }
+                onDeleteDotori={onDeleteDotori}
+                onMoveDotori={onMoveDotori}
+                onRemindToggle={() => onRemindToggle(id, remindTime)}
+              />
             }
           />
         );
       })}
-
-      {isEditModal && (
-        <DotoriEditModal
-          isOpen={isEditModal}
-          isActiveDotoriMenu={isActiveDotoriMenu}
-          onToggleModal={onToggleEditModal}
-        />
-      )}
-
-      {isDeleteModal && (
-        <SmallModal
-          isModal={isDeleteModal}
-          onToggleModal={onToggleDeleteModal}
-          title="선택한 도토리를 삭제할까요?"
-          content="휴지통의 도토리는 <br /> 30일 뒤 완전히 사라져요!"
-          buttonName="삭제"
-          onClick={onDeleteDotori}
-        />
-      )}
-
-      {isMoveModal && (
-        <FolderListModal
-          isModal={isMoveModal}
-          onToggleModal={onToggleMoveModal}
-          onMove={onMoveDotori}
-          path={path}
-        />
-      )}
 
       {isAddModal && (
         <DotoriAddModal isModal={isAddModal} onToggleModal={onToggleAddModal} />
@@ -198,16 +139,6 @@ const DotoriListBlock = styled.div`
   ${media.large} {
     grid-template-columns: repeat(2, 1fr);
   }
-`;
-
-const DotoriOption = styled.div`
-  display: flex;
-  justify-content: space-between;
-  width: 90px;
-`;
-
-const OptionButton = styled.button`
-  position: relative;
 `;
 
 export default memo(DotoriList);

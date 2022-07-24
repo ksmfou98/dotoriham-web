@@ -89,7 +89,6 @@ function SearchDotoriList({ dotoriList, onToggleDotoriChecked }: Props) {
           isModal={isMoveModal}
           onToggleModal={onToggleMoveModal}
           onMove={onMoveDotori}
-          path="search"
         />
       )}
     </DotoriListBlock>

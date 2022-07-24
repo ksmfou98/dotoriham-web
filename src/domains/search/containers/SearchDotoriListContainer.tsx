@@ -106,7 +106,6 @@ function SearchDotoriListContainer() {
           isModal={isMoveModal}
           onToggleModal={onToggleMoveModal}
           onMove={onMoveDotori}
-          path="search"
         />
       )}
     </>

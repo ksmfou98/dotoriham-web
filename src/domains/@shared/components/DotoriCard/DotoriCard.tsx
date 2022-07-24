@@ -11,7 +11,7 @@ interface Props {
   imageSrc?: string;
   profileImageSrc?: string;
   profileName?: string;
-  bottomMenu?: ReactNode;
+  optionButton?: ReactNode;
   checked?: boolean;
   isActiveSelectBox?: boolean;
   onToggleChecked?: () => void;
@@ -25,7 +25,7 @@ function DotoriCard({
   profileImageSrc,
   profileName,
   title,
-  bottomMenu,
+  optionButton,
   isActiveSelectBox,
   onToggleChecked,
   checked,
@@ -87,7 +87,7 @@ function DotoriCard({
               {profileName && <>{profileName}</>}
             </Author>
 
-            {bottomMenu}
+            {optionButton}
           </DotoriBottomArea>
         </Content>
         {checked && <SelectedStyled />}

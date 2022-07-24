@@ -157,7 +157,6 @@ function DotoriTemplate({ path, keyword, folderId }: DotoriTemplateProps) {
           isModal={isMoveModal}
           onToggleModal={onToggleMoveModal}
           onMove={onMoveDotori}
-          path={path}
         />
       )}
 
