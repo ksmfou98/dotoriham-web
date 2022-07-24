@@ -13,7 +13,7 @@ interface Props {
   profileName?: string;
   optionButton?: ReactNode;
   checked?: boolean;
-  isActiveSelectBox?: boolean;
+  isActiveSelectButton?: boolean;
   onToggleChecked?: () => void;
   onClickLink?: () => void;
 }
@@ -26,7 +26,7 @@ function DotoriCard({
   profileName,
   title,
   optionButton,
-  isActiveSelectBox,
+  isActiveSelectButton,
   onToggleChecked,
   checked,
   onClickLink,
@@ -53,7 +53,7 @@ function DotoriCard({
             <DotoriDefaultImage width={60} height={60} />
           )}
 
-          {isActiveSelectBox && (
+          {isActiveSelectButton && (
             <SelectButton
               onClick={(e) => {
                 e.stopPropagation();

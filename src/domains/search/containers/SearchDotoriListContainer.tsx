@@ -87,6 +87,7 @@ function SearchDotoriListContainer() {
 
       <SearchDotoriList
         dotoriList={dotoriList}
+        isActiveSelectButton={isDotoriChecked}
         onToggleDotoriChecked={onToggleDotoriChecked}
       />
 

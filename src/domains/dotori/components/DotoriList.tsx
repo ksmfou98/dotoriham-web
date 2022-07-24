@@ -99,7 +99,7 @@ function DotoriList({ path }: { path: DotoriPathTypes }) {
             imageSrc={image}
             checked={checked}
             onToggleChecked={() => onToggleDotoriChecked(id)}
-            isActiveSelectBox={isActiveSelectBox}
+            isActiveSelectButton={isActiveSelectBox}
             onClickLink={() => mutateClickCountDotori(id)}
             optionButton={
               <DotoriCardOptionButton
