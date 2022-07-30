@@ -24,6 +24,7 @@ function RemindInfoButton() {
 
 const Container = styled.div`
   position: relative;
+  display: inline-block;
 `;
 
 const RemindInfoButtonStyled = styled.div`

@@ -1,4 +1,4 @@
-import { breakpoints } from "lib/styles/media";
+import { breakpoints, media } from "lib/styles/media";
 import { palette } from "lib/styles/palette";
 import React from "react";
 import Logo from "components/Logo/Logo";
@@ -17,14 +17,18 @@ function Header() {
   return (
     <HeaderBlock>
       <HeaderInner>
-        <Logo />
+        <LogoBlock>
+          <Logo />
+        </LogoBlock>
         {accessToken && !isSharePage() && (
           <HeaderRightBox>
             <SearchBar />
-            <RemindInfoButton />
-            <Link to={Path.MyPage}>
-              <ProfileImg src={image} alt="프로필 이미지" />
-            </Link>
+            <div>
+              <RemindInfoButton />
+              <Link to={Path.MyPage}>
+                <ProfileImg src={image} alt="프로필 이미지" />
+              </Link>
+            </div>
           </HeaderRightBox>
         )}
       </HeaderInner>
@@ -45,11 +49,22 @@ const HeaderInner = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  ${media.large} {
+    width: ${breakpoints.medium}px;
+  }
+`;
+
+const LogoBlock = styled.div`
+  width: 200px;
 `;
 
 const HeaderRightBox = styled.div`
   display: flex;
   align-items: center;
+  ${media.large} {
+    flex: 1;
+    justify-content: space-between;
+  }
 `;
 
 const ProfileImg = styled.img`

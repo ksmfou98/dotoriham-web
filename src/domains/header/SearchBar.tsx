@@ -6,6 +6,7 @@ import styled from "styled-components";
 import Path from "routes/Path";
 import { toast } from "react-toastify";
 import { ToastSize } from "domains/@shared/hooks/useToast";
+import { media } from "lib/styles";
 
 function SearchBar() {
   const navigate = useNavigate();
@@ -45,6 +46,9 @@ const SearchBarStyled = styled.form`
   height: 32px;
   padding: 4px 8px;
   margin-right: 27px;
+  ${media.large} {
+    width: 370px;
+  }
 `;
 
 const SearchIcon = styled.button`
