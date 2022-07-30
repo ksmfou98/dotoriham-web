@@ -60,24 +60,17 @@ export default function useAuthForm() {
 
   const onLogin = async () => {
     if (!onEmptyValidate(email, password)) return false;
-    // @TODO(dohyun): API 생기면 작성
-    // 만약 실패했으면 onChangeAuthError("계정을 찾을 수 없습니다. 이메일 또는 비밀번호를 다시 확인해주세요") 호출
-    // 아래는 테스트용
     try {
       const { data } = await loginAPI(email, password);
       userStorage.set(data);
       console.log(data);
-      // window.location.replace(Path.DotoriPage);
+      window.location.replace(Path.DotoriPage);
     } catch (e) {
       onChangeErrorMessage(
         "authError",
         "계정을 찾을 수 없습니다. 이메일 또는 비밀번호를 다시 확인해주세요"
       );
     }
-
-    // eslint-disable-next-line no-console
-    console.log(form, "login");
-    return true;
   };
 
   /**
