@@ -14,14 +14,14 @@ import {
 import { useLocation, useNavigate } from "react-router-dom";
 import Path from "routes/Path";
 import QuestionButton from "domains/tutorial/QuestionButton";
-import { transitions } from "lib/styles";
+import { media, transitions } from "lib/styles";
 
 function Sidebar() {
   const { pathname } = useLocation();
   const navigate = useNavigate();
 
   return (
-    <SidebarBlock>
+    <Container>
       <SidebarIconName
         isActive={pathname === Path.DotoriPage}
         onClick={() => navigate(Path.DotoriPage)}
@@ -55,11 +55,11 @@ function Sidebar() {
       <QuestionButtonBox>
         <QuestionButton />
       </QuestionButtonBox>
-    </SidebarBlock>
+    </Container>
   );
 }
 
-const SidebarBlock = styled.aside`
+const Container = styled.aside`
   position: relative;
   width: 170px;
   background-color: ${palette.white};
@@ -67,6 +67,9 @@ const SidebarBlock = styled.aside`
   padding: 20px 0;
   display: flex;
   flex-direction: column;
+  ${media.large} {
+    display: none;
+  }
 `;
 
 const FolderListBox = styled.div`
