@@ -15,7 +15,7 @@ function Header() {
   const { image, accessToken } = useSelector(userSelector);
 
   return (
-    <HeaderBlock>
+    <Container>
       <HeaderInner>
         <LogoBlock>
           <Logo />
@@ -32,13 +32,16 @@ function Header() {
           </HeaderRightBox>
         )}
       </HeaderInner>
-    </HeaderBlock>
+    </Container>
   );
 }
 
-const HeaderBlock = styled.header`
+const Container = styled.header`
   width: 100%;
   border-bottom: 1px solid ${palette.grayLight};
+  ${media.medium} {
+    display: none;
+  }
 `;
 
 const HeaderInner = styled.div`

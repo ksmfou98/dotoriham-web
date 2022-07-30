@@ -67,7 +67,7 @@ const Container = styled.aside`
   padding: 20px 0;
   display: flex;
   flex-direction: column;
-  ${media.large} {
+  ${media.medium} {
     display: none;
   }
 `;

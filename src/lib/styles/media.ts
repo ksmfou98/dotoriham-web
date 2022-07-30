@@ -7,8 +7,9 @@ export const breakpoints = {
   share: 900,
 };
 
-const { large } = breakpoints;
+const { large, medium } = breakpoints;
 
 export const media = {
   large: mediaQuery(large),
+  medium: mediaQuery(medium),
 };
