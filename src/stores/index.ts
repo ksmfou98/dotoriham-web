@@ -3,6 +3,7 @@ import { combineReducers } from "redux";
 import authValidate from "./authValidate";
 import dotori from "./dotori";
 import folder from "./folder";
+import mobileHeader from "./mobileHeader";
 import tutorial from "./tutorial";
 import user from "./user";
 
@@ -12,6 +13,7 @@ const rootReducer = combineReducers({
   folder: folder.reducer,
   tutorial: tutorial.reducer,
   authValidate: authValidate.reducer,
+  mobileHeader: mobileHeader.reducer,
 });
 
 const store = configureStore({

@@ -46,3 +46,6 @@ export { ReactComponent as ProgressDisabled16Icon } from "./progress_disabled_16
 export { ReactComponent as ProgressFocused16Icon } from "./progress_focused_16.svg";
 export { ReactComponent as ProgressFinish16Icon } from "./progress_finish_16.svg";
 export { ReactComponent as TrashBallonIcon } from "./TrashBallonIcon.svg";
+export { ReactComponent as Search24MobileIcon } from "./Icons_Search_24_mobile.svg";
+export { ReactComponent as HamburgerMobileIcon } from "./Icon_Hamburger_mobile.svg";
+export { ReactComponent as ArrowPre24Icon } from "./Icon_arrow_pre_24.svg";

@@ -14,16 +14,19 @@ import useInitialRegisterEffect from "domains/@shared/hooks/useInitialRegisterEf
 import { isLogin } from "lib/utils/auth";
 import { firebaseConfig } from "lib/firebase";
 import { isSharePage } from "lib/utils/checkRoutePath";
+import { MobileHeader } from "domains/@global/header";
 
 initializeApp(firebaseConfig);
 
 function App() {
   useLoggedInUserReplace();
   useInitialRegisterEffect();
+
   return (
     <>
       <AppWrapper>
         <GlobalStyles />
+        <MobileHeader />
         <Header />
         <MainLayout isSharePage={isSharePage()}>
           {isLogin() ? <PrivateRouting /> : <PublicRouting />}
