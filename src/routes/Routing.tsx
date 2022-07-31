@@ -1,7 +1,7 @@
 import React, { lazy, Suspense } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import Path from "./Path";
-import SidebarRouteLayout from "domains/sidebar/SidebarRouteLayout";
+import SidebarRouteLayout from "domains/@global/sidebar/SidebarRouteLayout";
 import { useCheckLogin } from "domains/@shared/hooks";
 
 const SharePage = lazy(() => import("domains/share/pages/SharePage"));

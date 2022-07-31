@@ -3,7 +3,7 @@ import { SmallModal } from "components";
 import { palette } from "lib/styles";
 import { useToggle } from "domains/@shared/hooks";
 import useDotoriMutation from "domains/dotori/hooks/useDotoriMutation";
-import FolderListModal from "domains/sidebar/FolderListModal";
+import FolderListModal from "domains/@global/sidebar/FolderListModal";
 import { useEffect, useMemo, useState } from "react";
 import styled from "styled-components";
 import {

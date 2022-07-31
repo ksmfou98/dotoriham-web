@@ -3,7 +3,7 @@ import SmallGreenText from "components/Text/SmallGreenText";
 import { palette } from "lib/styles/palette";
 import React, { useState } from "react";
 import styled from "styled-components";
-import ModalCloseButton from "../../components/Modal/ModalCloseButton";
+import ModalCloseButton from "../../../components/Modal/ModalCloseButton";
 import TutorialContents from "./TutorialContents";
 import TutorialSideButtons from "./TutorialSideButtons";
 

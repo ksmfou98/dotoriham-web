@@ -1,4 +1,4 @@
-import Header from "domains/header";
+import Header from "domains/@global/header/Header";
 import { breakpoints, media } from "lib/styles/media";
 import React from "react";
 import { initializeApp } from "firebase/app";
@@ -8,7 +8,7 @@ import GlobalStyles from "./lib/styles/globalStyles";
 import { PrivateRouting, PublicRouting } from "./routes/Routing";
 import "react-toastify/dist/ReactToastify.css";
 import ToastContainerStyled from "lib/styles/toastStyle";
-import Footer from "domains/footer";
+import Footer from "domains/@global/footer";
 import useLoggedInUserReplace from "domains/@shared/hooks/useLoggedInUserReplace";
 import useInitialRegisterEffect from "domains/@shared/hooks/useInitialRegisterEffect";
 import { isLogin } from "lib/utils/auth";

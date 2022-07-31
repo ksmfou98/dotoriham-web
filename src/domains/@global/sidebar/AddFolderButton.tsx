@@ -1,6 +1,6 @@
 import { PlusIcon } from "assets/icons";
 import Button from "components/Button/Button";
-import useHandleFolder from "domains/sidebar/hooks/useCreateFolder";
+import useHandleFolder from "domains/@global/sidebar/hooks/useCreateFolder";
 import React from "react";
 import styled from "styled-components";
 

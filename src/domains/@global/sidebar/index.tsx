@@ -13,7 +13,7 @@ import {
 } from "assets/icons";
 import { useLocation, useNavigate } from "react-router-dom";
 import Path from "routes/Path";
-import QuestionButton from "domains/tutorial/QuestionButton";
+import QuestionButton from "domains/@global/tutorial/QuestionButton";
 import { media, transitions } from "lib/styles";
 
 function Sidebar() {
